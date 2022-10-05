@@ -6,14 +6,14 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author }) {
     return (
-        <Box bg={'#f5f5f5'} rounded='xl' shadow='sm' overflow={'hidden'}>
+        <Box bg={'#f2f2f2'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
             <Box w='full' bg='#f2f2f2' py={2} px={4}>
                 <Box fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
-                        <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' />
+                        {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
                         <Box>
-                            <Text fontWeight={'semibold'}><a href='#'>{author.name}</a></Text>
+                            <Text>লিখেছেন <Text as='span' fontWeight={'semibold'}><a href='#'>{author.name}</a></Text></Text>
                             <Text fontSize={'13px'}>{createdAt}</Text>
                         </Box>
                     </Flex>

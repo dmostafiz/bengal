@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function MainLeftSidebar() {
     return (
-        <Box w='full' bg='yellow.100' shadow={'sm'} rounded='lg' overflow={'hidden'}>
+        <Box w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
             <Center p={3} bg='yellow.200'>
                 <Title order={3}>নোটিস বোর্ড</Title>
             </Center>

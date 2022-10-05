@@ -7,6 +7,7 @@ import SelectedPostsCarousel from '../Components/HomePage/SelectedPostsCarousel'
 import MainLeftSidebar from '../Layouts/Common/MainLeftSidebar'
 import MainRightSidebar from '../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../Layouts/HomeLayout'
+import ImageBanner from '../Layouts/HomeLayout/inc/ImageBanner'
 import ThreeColumn from '../Layouts/HomeLayout/ThreeColumn'
 
 export default function Home() {
@@ -18,10 +19,13 @@ export default function Home() {
         rightSide={<MainRightSidebar />}
       >
 
+        {/* <ImageBanner src='/banner.png' /> */}
+
+        {/* <Box mb={8}></Box> */}
 
         <Box mb={8}>
           <Box py={2} rounded='none' shadow='sm'>
-            <Title order={3}>নির্বাচিত পোস্ট</Title>
+            <Title order={3}>বাছাইকৃত পোস্ট</Title>
           </Box>
 
           {/* <Spacer h={5} /> */}
