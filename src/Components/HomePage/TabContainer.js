@@ -14,7 +14,6 @@ export default function TabContainer({ childrens }) {
                 {childrens.map((item, index) => <TabPanel key={index}>
                     {item.component}
                 </TabPanel>)}
-
             </TabPanels>
         </Tabs>
     )
