@@ -5,12 +5,12 @@ import React from 'react'
 export default function TabContainer({ childrens }) {
     return (
         <Tabs variant='enclosed' rounded={{base: 'sm', md:'sm'}} overflow='hidden' shadow='sm'>
-            <TabList>
-                {childrens.map((item, index) => <Tab _selected={{ bg: 'blackAlpha.50', rounded: 'none' }} p={{base: 2, md: 3}} key={index}>
+            <TabList border={'none'}>
+                {childrens.map((item, index) => <Tab _selected={{ bg: 'gray.100', rounded: 'none' }} p={{base: 2, md: 3}} key={index}>
                    <Title order={6}>{item.title}</Title>  
                 </Tab>)}
             </TabList>
-            <TabPanels bg='blackAlpha.50'>
+            <TabPanels bg='gray.100'>
                 {childrens.map((item, index) => <TabPanel key={index}>
                     {item.component}
                 </TabPanel>)}

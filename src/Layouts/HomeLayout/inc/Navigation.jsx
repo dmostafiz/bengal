@@ -10,7 +10,7 @@ export default function Navigation() {
             <Box py={2} color={'gray.900'} fontWeight='semibold'>
                 <Carousel
                     // withIndicators
-                    slideSize="50px"
+                    slideSize="px"
                     slideGap="lg"
                     // dragFree={false}
                     loop={false}
@@ -58,7 +58,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                   <Text as='p'>বিজ্ঞান ও প্রযুক্তি</Text>
+                                   <Text overflowWrap={'anywhere'} flexWrap='wrap' noOfLines={2} as='p'>বিজ্ঞান ও প্রযুক্তি</Text>
                                 </Box>
                             </a>
                         </Link>
