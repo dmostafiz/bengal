@@ -6,9 +6,9 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author }) {
     return (
-        <Box bg={'blackAlpha.100'} rounded='sm' shadow='sm' overflow={'hidden'}>
+        <Box bg={'blackAlpha.5'} border='2px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
-            <Box w='full' bg='blackAlpha.5' py={2} px={4}>
+            <Box w='full' bg='blackAlpha.50' py={2} px={4}>
                 <Box fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
                         {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
@@ -27,7 +27,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Divider borderColor={'blackAlpha.200'} mb={2} />
+            <Divider borderColor={'blackAlpha.100'} mb={2} />
 
             <Box py={2} px={4}>
                 <Title order={4}>{title}</Title>
@@ -42,9 +42,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Divider borderColor={'blackAlpha.200'} mt={2} />
+            <Divider borderColor={'blackAlpha.100'} mt={2} />
 
-            <Box w='full' bg='blackAlpha.50' py={1} px={3} fontSize='12px' fontWeight={'semibold'}>
+            <Box w='full' bg='blackAlpha' py={1} px={3} fontSize='12px' fontWeight={'semibold'}>
                 <Flex gap={2} justify='flex-end' alignItems={'center'}>
                     <Text>{states.read} বার পড়া হয়েছে</Text>
                     <Divider orientation='vertical' borderColor={'gray.300'} h='10px' />
