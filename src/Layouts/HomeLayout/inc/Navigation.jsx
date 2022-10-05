@@ -18,8 +18,8 @@ export default function Navigation() {
                     // withControls={false}
                     controlsOffset={0}
                     controlSize={24}
-                    skipSnaps={true}
-                    containScroll='trimSnaps'
+                    // skipSnaps={true}
+                    // containScroll='trimSnaps'
                     styles={{
                         control: {
                             '&[data-inactive]': {
@@ -32,7 +32,7 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderBottom='1px' borderColor='gray.900'>
+                                <Box width='max-content' borderBottom='1px' borderColor='gray.900'>
                                     নীড়পাতা
                                 </Box>
                             </a>
@@ -41,22 +41,22 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box borderColor='white'>
+                                <Box  borderColor='white'>
                                     কবিতা
                                 </Box>
                             </a>
                         </Link>
                     </Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>গল্প</Box></Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>উপন্যাস</Box></Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>সাহিত্য</Box></Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>সমসাময়িক</Box></Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>মুক্তিযুদ্ধ</Box></Carousel.Slide>
-                    <Carousel.Slide><Box minWidth='max-content'>লেখাপড়া</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>গল্প</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>উপন্যাস</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>সাহিত্য</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>সমসাময়িক</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>মুক্তিযুদ্ধ</Box></Carousel.Slide>
+                    <Carousel.Slide><Box width='max-content'>লেখাপড়া</Box></Carousel.Slide>
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderColor='white'>
+                                <Box width='max-content' borderColor='white'>
                                     বিজ্ঞান ও প্রযুক্তি
                                 </Box>
                             </a>
@@ -66,7 +66,7 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderColor='white'>
+                                <Box width='max-content' borderColor='white'>
                                     ইতিহাস
                                 </Box>
                             </a>
@@ -76,7 +76,7 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderColor='white'>
+                                <Box width='max-content' borderColor='white'>
                                     রাজনীতি
                                 </Box>
                             </a>
@@ -86,7 +86,7 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderColor='white'>
+                                <Box width='max-content' borderColor='white'>
                                     ভ্রমণ
                                 </Box>
                             </a>
@@ -96,7 +96,7 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box minWidth='max-content' borderColor='white'>
+                                <Box width='max-content' borderColor='white'>
                                     দেশ-বিদেশ
                                 </Box>
                             </a>
