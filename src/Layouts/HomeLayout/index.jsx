@@ -7,16 +7,27 @@ import TopBar from './inc/TopBar'
 export default function HomeLayout({ children }) {
     return (
         <Box bg={'#303030'} minH='100vh'>
-            <Container maxW={'container.xl'} px={{base:0, md:3}} bg='#e8e8e8'>
-                <Box w='full' shadow={'none'}>
-                    <TopBar />
-                    <Navigation />
-                    <ImageBanner src='/village.jpg'/>
-                    {/* <Spacer h={1} /> */}
+            <Container maxW={'container.xl'} px={{ base: 0, md: 3 }} bg='gray.200'>
+
+
+                <TopBar />
+
+                <Navigation />
+
+                <Box roundedTop={{base: 'none', md: '2xl'}} roundedBottom='md' overflow={'hidden'}>
+
+                    <ImageBanner src='/village.jpg' />
 
                     {children}
+                    
+                </Box>
+
+
+                <Box minH='70px'>
+
 
                 </Box>
+
             </Container>
         </Box>
     )

@@ -79,7 +79,6 @@ export default function TopBar() {
                     </Box>
                 </SectionContainer>
             </Affix>
-
         </Box>
 
     )

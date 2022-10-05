@@ -6,15 +6,20 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author }) {
     return (
-        <Box bg={'#f2f2f2'} rounded='sm' shadow='sm' overflow={'hidden'}>
+        <Box bg={'blackAlpha.100'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
-            <Box w='full' bg='#f2f2f2' py={2} px={4}>
+            <Box w='full' bg='blackAlpha.5' py={2} px={4}>
                 <Box fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
                         {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
                         <Box>
-                            <Text>লিখেছেন <Text as='span' fontWeight={'semibold'}><a href='#'>{author.name}</a></Text></Text>
-                            <Text fontSize={'13px'}>{createdAt}</Text>
+                            <Text>
+                                {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
+                                লিখেছেন <Text as='span' fontWeight={'semibold'}>
+                                    <a href='#'>{author.name}</a></Text>, <Text as='span' fontSize={'13px'}>
+                                    {createdAt}
+                                </Text>
+                            </Text>
                         </Box>
                     </Flex>
 
@@ -22,7 +27,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Divider borderColor={'gray.300'} mb={2}/>
+            <Divider borderColor={'blackAlpha.200'} mb={2} />
 
             <Box py={2} px={4}>
                 <Title order={4}>{title}</Title>
@@ -37,9 +42,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Divider borderColor={'gray.300'} mt={2}/>
+            <Divider borderColor={'blackAlpha.200'} mt={2} />
 
-            <Box w='full' bg='#f2f2f2' py={1} px={3} fontSize='12px' fontWeight={'semibold'}>
+            <Box w='full' bg='blackAlpha.50' py={1} px={3} fontSize='12px' fontWeight={'semibold'}>
                 <Flex gap={2} justify='flex-end' alignItems={'center'}>
                     <Text>{states.read} বার পড়া হয়েছে</Text>
                     <Divider orientation='vertical' borderColor={'gray.300'} h='10px' />

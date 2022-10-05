@@ -4,6 +4,7 @@ import { ThumbUp } from 'tabler-icons-react'
 import PostCard from '../Components/Common/PostCard'
 import SectionContainer from '../Components/Common/SectionContainer'
 import SelectedPostsCarousel from '../Components/HomePage/SelectedPostsCarousel'
+import TabContainer from '../Components/HomePage/TabContainer'
 import MainLeftSidebar from '../Layouts/Common/MainLeftSidebar'
 import MainRightSidebar from '../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../Layouts/HomeLayout'
@@ -24,13 +25,31 @@ export default function Home() {
         {/* <Box mb={8}></Box> */}
 
         <Box mb={8}>
-          <Box py={2} rounded='none' shadow='sm'>
+          {/* <Box py={2} rounded='none' shadow='sm'>
             <Title order={3}>বাছাইকৃত পোস্ট</Title>
-          </Box>
+          </Box> */}
 
           {/* <Spacer h={5} /> */}
 
-          <SelectedPostsCarousel />
+          <TabContainer childrens={[
+            {
+              title: 'বাছাইকৃত পোস্ট',
+              component: <SelectedPostsCarousel />
+            },
+
+            {
+              title: 'ধারাবাহিক লেখা সমূহ',
+              component: <SelectedPostsCarousel />
+            },
+
+            {
+              title: 'মাসের সেরা লেখক',
+              component: <SelectedPostsCarousel />
+            },
+
+          ]} />
+
+
         </Box>
 
 
