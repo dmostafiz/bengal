@@ -33,7 +33,7 @@ export default function ThreeColumn({ children, leftSide = '', rightSide = '' })
                             px={{ base: 0, md: 2, lg: 3 }}
                             borderX={{ base: '0px', md: '1px', lg: '2px' }}
                             borderColor={{ base: 'none', md: '#f0f0f0', lg: '#f0f0f0' }}
-                            bg={'#f9f9f9'}
+                            bg={{base: 'white', md:'#f9f9f9'}}
                             pt={{ base: 1, md: 3 }}
                             mb={{ base: 1, md: 10 }}
                         >
