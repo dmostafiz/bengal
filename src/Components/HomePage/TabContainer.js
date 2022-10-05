@@ -12,7 +12,7 @@ export default function TabContainer({ childrens }) {
                 </Tab>)}
             </TabList> 
 
-            <TabPanels bg='gray.100'>
+            <TabPanels bg='gray.100' w='full'>
                 {childrens.map((item, index) => <TabPanel key={index}>
                     {item.component}
                 </TabPanel>)} 

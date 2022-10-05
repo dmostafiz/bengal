@@ -11,11 +11,11 @@ export default function Navigation() {
                 <Carousel
                     // withIndicators
                     slideSize="px"
-                    slideGap="lg"
+                    slideGap="md"
                     // dragFree={false}
                     loop={false}
                     align="start"
-                    // withControls={false}
+                    withControls={false}
                     controlsOffset={0}
                     controlSize={24}
                     // skipSnaps={true}
@@ -34,7 +34,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderBottom='1px' borderColor='gray.900'>
-                                    নীড়পাতা
+                                    <Text whiteSpace={'nowrap'}>নীড়পাতা</Text>
                                 </Box>
                             </a>
                         </Link>
@@ -42,23 +42,47 @@ export default function Navigation() {
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
-                                <Box  borderColor='white'>
-                                    কবিতা
+                                <Box borderColor='white'>
+                                    <Text whiteSpace={'nowrap'}>কবিতা</Text>
                                 </Box>
                             </a>
                         </Link>
                     </Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>গল্প</Box></Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>উপন্যাস</Box></Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>সাহিত্য</Box></Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>সমসাময়িক</Box></Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>মুক্তিযুদ্ধ</Box></Carousel.Slide>
-                    <Carousel.Slide><Box width='max-content'>লেখাপড়া</Box></Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>গল্প</Text>
+                        </Box>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>উপন্যাস</Text>
+                        </Box>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>সাহিত্য</Text>
+                        </Box>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>সমসাময়িক</Text>
+                        </Box>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>মুক্তিযুদ্ধ</Text>
+                        </Box>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <Box width='max-content'>
+                            <Text whiteSpace={'nowrap'}>লেখাপড়া</Text>
+                        </Box>
+                    </Carousel.Slide>
                     <Carousel.Slide>
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                   <Text overflowWrap={'anywhere'} flexWrap='nowrap' noOfLines={1} as='p'>বিজ্ঞান ও প্রযুক্তি</Text>
+                                    <Text whiteSpace={'nowrap'}>বিজ্ঞান ও প্রযুক্তি</Text>
                                 </Box>
                             </a>
                         </Link>
@@ -68,7 +92,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                    ইতিহাস
+                                    <Text whiteSpace={'nowrap'}>ইতিহাস</Text>
                                 </Box>
                             </a>
                         </Link>
@@ -78,7 +102,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                    রাজনীতি
+                                    <Text whiteSpace={'nowrap'}>রাজনীতি</Text>
                                 </Box>
                             </a>
                         </Link>
@@ -88,7 +112,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                    ভ্রমণ
+                                    <Text whiteSpace={'nowrap'}>ভ্রমণ</Text>
                                 </Box>
                             </a>
                         </Link>
@@ -98,7 +122,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                    দেশ-বিদেশ
+                                    <Text whiteSpace={'nowrap'}>দেশ-বিদেশ</Text>
                                 </Box>
                             </a>
                         </Link>

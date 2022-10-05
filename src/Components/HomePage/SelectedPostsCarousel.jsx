@@ -3,6 +3,17 @@ import { Carousel } from '@mantine/carousel';
 import { Button, createStyles, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import React from 'react'
+import { useBreakpointValue } from '@chakra-ui/react'
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css/pagination';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
+
+
+import { Navigation, Pagination, Scrollbar } from 'swiper';
 
 
 const useStyles = createStyles((theme) => ({
@@ -77,22 +88,25 @@ export default function SelectedPostsCarousel() {
 
     const theme = useMantineTheme();
 
-    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-
     const { classes } = useStyles();
+
 
     return (
         <Box w='full'>
-            <Carousel
-                slideSize="50%"
-                breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
-                slideGap="sm"
-                align="start"
-                slidesToScroll={mobile ? 1 : 1}
-                containScroll='trimSnaps'
+            <Swiper
+                spaceBetween={10}
+                slidesPerView={useBreakpointValue({
+                    base: 1,
+                    md: 1,
+                    lg: 2
+                })}
+                navigation
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                modules={[Navigation, Scrollbar]}
             >
                 {data.map((item) => (
-                    <Carousel.Slide key={item.title}>
+                    <SwiperSlide key={item.title}>
                         <Paper
                             shadow="lg"
                             p="xl"
@@ -112,9 +126,11 @@ export default function SelectedPostsCarousel() {
                                 বিস্তারিত পড়ুন
                             </Button>
                         </Paper>
-                    </Carousel.Slide>
+                    </SwiperSlide>
                 ))}
-            </Carousel>
+
+                {/* <span slot="container-start">Container Start</span> */}
+            </Swiper>
         </Box>
     );
 
