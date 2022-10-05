@@ -58,7 +58,7 @@ export default function Navigation() {
                         <Link href='#'>
                             <a href='#'>
                                 <Box width='max-content' borderColor='white'>
-                                   <Text overflowWrap={'anywhere'} flexWrap='wrap' noOfLines={2} as='p'>বিজ্ঞান ও প্রযুক্তি</Text>
+                                   <Text overflowWrap={'anywhere'} flexWrap='nowrap' noOfLines={1} as='p'>বিজ্ঞান ও প্রযুক্তি</Text>
                                 </Box>
                             </a>
                         </Link>

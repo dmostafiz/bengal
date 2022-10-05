@@ -38,12 +38,12 @@ export default function Home() {
             },
 
             {
-              title: 'ধারাবাহিক লেখা সমূহ',
+              title: 'ধারাবাহিক প্রকাশনী',
               component: <SelectedPostsCarousel />
             },
 
             {
-              title: 'মাসের সেরা লেখক',
+              title: 'মাস সেরা ব্লগার',
               component: <SelectedPostsCarousel />
             },
 

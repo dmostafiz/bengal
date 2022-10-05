@@ -8,7 +8,7 @@ export default function TabContainer({ childrens }) {
           
             <TabList border={'none'}>
                 {childrens.map((item, index) => <Tab _selected={{ bg: 'gray.100', rounded: 'none' }} p={{base: 2, md: 3}} key={index}>
-                   <Text as={'h6'} fontSize={{base:'12px', md: '17px'}} fontWeight='semibold'>{item.title}</Text>  
+                   <Text as={'h6'} fontSize={{base:'14px', md: '17px'}} fontWeight='semibold'>{item.title}</Text>  
                 </Tab>)}
             </TabList> 
 
