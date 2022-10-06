@@ -26,7 +26,7 @@ export default function HomeLayout({ children }) {
                     </Box>
 
 
-                    <Box minH='70px'>
+                    <Box minH='50px'>
 
 
                     </Box>

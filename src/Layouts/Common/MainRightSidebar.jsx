@@ -8,9 +8,9 @@ export default function MainRightSidebar() {
         <Box>
             <Box w='full' bg='' mb={5}>
 
-                <Center bg='blackAlpha.50' p={2}>
-                    <Title order={4}>ব্লগারদের কথন</Title>
-                </Center>
+                <Box bg='blackAlpha.50' p={2}>
+                    <Title order={5}>ব্লগারদের কথন</Title>
+                </Box>
 
 
                 <Box p={2} color={'gray.700'} fontWeight='normal'>
@@ -21,9 +21,9 @@ export default function MainRightSidebar() {
 
             <Box w='full' bg='' mb={5}>
 
-                <Center bg='blackAlpha.50' p={2}>
-                    <Title order={4}>জনপ্রিয় ক্যাটাগরি</Title>
-                </Center>
+                <Box bg='blackAlpha.50' p={2}>
+                    <Title order={5}>জনপ্রিয় ক্যাটাগরি</Title>
+                </Box>
 
 
                 <Box p={2} color={'gray.700'} fontWeight='normal'>

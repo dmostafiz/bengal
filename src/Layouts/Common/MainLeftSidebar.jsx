@@ -1,4 +1,4 @@
-import { Box, Center, Divider, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, FormControl, FormHelperText, FormLabel, Input, Spacer, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
 import React from 'react'
@@ -53,10 +53,27 @@ export default function MainLeftSidebar() {
             </Box>
 
 
+            <Box mb={5} bg='blue.100'>
+                {/* <Center p={3} bg='blackAlpha.50'>
+                    <Title order={5}>ব্লগে প্রবেশ করুন</Title>
+                </Center> */}
 
-            <Box w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
+                <Box p={3}>
+                    <Input border={'none'} _focus={{ring: '0', border: 'none'}} _hover={{ring: '0', border: 'none'}} bg={'whiteAlpha.700'} size={'sm'} placeholder='ইমেইল এড্রেস / ইউগারনেম' type='email' />
+                    <Spacer h={2} />
+                    <Input border={'none'} _focus={{ring: '0', border: 'none'}} _hover={{ring: '0', border: 'none'}} _autofill={false} bg={'whiteAlpha.700'} size={'sm'} placeholder='পাসওয়ার্ড' type='password' />
+                    <Spacer h={2} />
+                    <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a>
+                    <Spacer h={2} />
+                    <Button color='black' colorScheme={'whiteAlpha'} shadow='sm' size={'sm'}>প্রবেশ করুন</Button>
+                </Box>
+            </Box>
+
+
+
+            <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
                 <Center p={3} bg='yellow.200'>
-                    <Title order={3}>নোটিস বোর্ড</Title>
+                    <Title order={5}>নোটিস বোর্ড</Title>
                 </Center>
 
                 <Divider color={'yellow.500'} />
@@ -66,11 +83,9 @@ export default function MainLeftSidebar() {
                 </Box>
             </Box>
 
-            <Box>
 
-            </Box>
 
-            
+
         </Box>
     )
 }

@@ -21,7 +21,7 @@ export default function ThreeColumn({ children, leftSide = '', rightSide = '' })
                         <Box
                             h='100vh' 
                             w={{ base: '100%', md: '30%' }}
-                            // pr={{ base: 0, md: 2, lg: 2 }}
+                            pr={{ base: 0, md: 2, lg: 2}}
                             py={{ base: 3, md: 3 }}
                             >
                             {leftSide}
