@@ -16,8 +16,11 @@ export default function Home() {
     <HomeLayout>
 
       <ThreeColumn
+
         leftSide={<MainLeftSidebar />}
+
         rightSide={<MainRightSidebar />}
+
       >
 
         {/* <ImageBanner src='/banner.png' /> */}
@@ -55,7 +58,7 @@ export default function Home() {
 
         <Box mb={8}>
           <Box py={2} bg={''} fontWeight='bold' rounded='sm'>
-            <Title order={3}>সাম্প্রতিক লেখা (ক্রমানুসারে)</Title>
+            <Title order={3}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Title>
           </Box>
 
           <VStack gap={1}>

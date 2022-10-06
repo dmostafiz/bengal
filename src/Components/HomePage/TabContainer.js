@@ -4,11 +4,11 @@ import React from 'react'
 
 export default function TabContainer({ childrens }) {
     return (
-        <Tabs variant='enclosed' rounded={{base: 'sm', md:'sm'}} overflow='hidden' shadow='sm'>
+        <Tabs variant='enclosed' rounded={{base: 'sm', md:'lg'}} overflow='hidden' shadow='sm'>
           
             <TabList border={'none'}>
-                {childrens.map((item, index) => <Tab _selected={{ bg: 'gray.100', rounded: 'none' }} p={{base: 2, md: 3}} key={index}>
-                   <Text as={'h6'} fontSize={{base:'14px', md: '17px'}} fontWeight='semibold'>{item.title}</Text>  
+                {childrens.map((item, index) => <Tab role="group" _selected={{ bg: 'gray.100', rounded: 'none', fontWeight: 'semibold' }} px={{base: 2, md: 3}} key={index}>
+                   <Text as={'h6'} _groupActive={{}} fontSize={{base:'14px', md: '17px'}}>{item.title}</Text>  
                 </Tab>)}
             </TabList> 
 

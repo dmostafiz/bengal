@@ -6,7 +6,7 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author }) {
     return (
-        <Box bg={'blackAlpha.5'} border='2px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
+        <Box bg={'gray.50'} border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
             <Box w='full' bg='blackAlpha.50' py={2} px={4}>
                 <Box fontSize={'15px'}>

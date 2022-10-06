@@ -2,6 +2,8 @@ import { Box, Center, Divider, Spacer, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
 import React from 'react'
+import { FaBlog, FaMicroblog } from 'react-icons/fa'
+import { MdOutlineForum } from 'react-icons/md'
 import { ListDetails } from 'tabler-icons-react'
 
 export default function MainLeftSidebar() {
@@ -12,7 +14,7 @@ export default function MainLeftSidebar() {
 
                 <Box bg={'blackAlpha.100'}>
                     <NavLink
-                        label="সকল পোস্ট"
+                        label={<Text fontSize={'16px'}>সকল ব্লগ পোস্ট</Text>}
                         // description={'সকল পোস্ট দেখুন'}
                         icon={<IconListDetails size={32} stroke={2} />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
@@ -26,7 +28,7 @@ export default function MainLeftSidebar() {
                 <Box>
                     <NavLink
 
-                        label="বাছাইকৃত পোস্ট"
+                        label={<Text fontSize={'16px'}>বাছাইকৃত পোস্ট সমূহ</Text>}
                         // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
                         icon={<IconListCheck size={32} stroke={2} />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
@@ -39,9 +41,9 @@ export default function MainLeftSidebar() {
                 <Box>
                     <NavLink
 
-                        label="নোটিস বোর্ড"
-                        // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
-                        icon={<IconListCheck size={32} stroke={2} />}
+                        label={<Text fontSize={'16px'} fontWeight={700}>কমিউনিটি ফোরাম</Text>}
+                        description={'ব্লগ এর যেকোনো সমস্যা পোস্ট করুন এবং অন্যদের সমস্যা সমাধান করতে সাহায্য করুন'}
+                        icon={<MdOutlineForum size={32} color='orange' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
                         active
                         variant="subtle"
@@ -63,6 +65,12 @@ export default function MainLeftSidebar() {
                     <Text>সরকারি চাকরিতে আবেদন ফি বাড়ানো হইছে আজ থেকে সাত দিন পূর্বে । তেরো এবং ষোল গ্রেডের আবেদন ফি দ্বিগুণ করা হয়েছে । এগারো ও বারো গ্রেডে পূর্বে আবেদন ফি নির্ধারণ করা না থাকলে সেটা এখন তিনশো টাকা করা হয়েছে... <a href='#'>বিস্তারিত পড়ুন</a> </Text>
                 </Box>
             </Box>
+
+            <Box>
+
+            </Box>
+
+            
         </Box>
     )
 }
