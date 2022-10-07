@@ -10,7 +10,7 @@ export default function HomeLayout({ children }) {
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
-                bgSize={'550px'}
+                bgSize={'800px'}
                 backgroundImage='/bg.png'
             >
                 <Box bgColor={'.700'} opacity=''>
