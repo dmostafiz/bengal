@@ -1,8 +1,8 @@
-import { Box, Flex, Text, Wrap } from '@chakra-ui/react'
+import { Box, Flex, Link, Text, Wrap } from '@chakra-ui/react'
 import React from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { Carousel } from '@mantine/carousel';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 export default function Navigation() {
     return (
@@ -31,22 +31,22 @@ export default function Navigation() {
                     }}
                 >
                     <Carousel.Slide>
-                        <Link href='/'>
-                            <a href='/'>
+                        <NextLink href='/'>
+                            <Link href='/'>
                                 <Box width='max-content'>
                                     <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.900'>নীড়পাতা</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>কবিতা</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
                     <Carousel.Slide>
                         <Box width='max-content'>
@@ -79,96 +79,96 @@ export default function Navigation() {
                         </Box>
                     </Carousel.Slide>
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>বিজ্ঞান-প্রযুক্তি</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ইতিহাস</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>বই রিভিউ</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>চিন্তাধারা</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>সংস্কৃতি</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ছবি ব্লগ</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
 
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>রাজনীতি</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ভ্রমণ</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <NextLink href='#'>
+                            <Link href='#'>
                                 <Box width='max-content' borderColor='white'>
                                     <Text whiteSpace={'nowrap'} color='blackAlpha.900'>দেশ-বিদেশ</Text>
                                 </Box>
-                            </a>
-                        </Link>
+                            </Link>
+                        </NextLink>
                     </Carousel.Slide>
 
                     {/* ...other slides */}

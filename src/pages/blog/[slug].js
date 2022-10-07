@@ -43,7 +43,7 @@ export default function SingleBlogDetails() {
 
 
                     <Center py={5}>
-                        <Image maxW='full' maxH='400px' shadow='sm' src={'https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'} />
+                        <Image maxW='full' maxH='400px' shadow='sm' src={'https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'} alt='name' />
                     </Center>
 
                     <Box mb={5} px={2} lineHeight={'28px'} fontSize={'18px'}>
@@ -85,6 +85,7 @@ export default function SingleBlogDetails() {
                         <Box bg='blackAlpha.0'>
                             <Title order={5}>লেখক পরিচিতি</Title>
                         </Box>
+                        <Divider my={1} />
                         <Box p={3}>
                             <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
                                 <Box>
@@ -92,7 +93,6 @@ export default function SingleBlogDetails() {
                                 </Box>
                                 <Box>
                                     <Title order={3}>লিমন লস্কর</Title>
-                                    {/* <Divider my={1} /> */}
                                     <Box px={0}>
                                         <Text>রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে</Text>
                                     </Box>
