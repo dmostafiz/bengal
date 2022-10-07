@@ -6,7 +6,7 @@ import TopBar from './inc/TopBar'
 // #303030
 export default function HomeLayout({ children }) {
     return (
-        <Box bg={'whatsapp.500'} minH='100vh'>
+        <Box bg={'facebook.900'} minH='100vh'>
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
@@ -14,7 +14,13 @@ export default function HomeLayout({ children }) {
                 backgroundImage='/bg.png'
             >
                 <Box bgColor={'.700'} opacity=''>
-                    <Container maxW={'container.xl'} px={{ base: 0, md: 3 }} bg='whiteAlpha.800'>
+                    <Container
+                        maxW={'container.xl'}
+                        px={{ base: 0, md: 3 }}
+                        bg='whiteAlpha.700'
+                        backdropFilter='auto'
+                        backdropBlur='7px'
+                    >
 
                         <TopBar />
 
