@@ -6,7 +6,7 @@ import TopBar from './inc/TopBar'
 // #303030
 export default function HomeLayout({ children }) {
     return (
-        <Box bg={'facebook.900'} minH='100vh'>
+        <Box bg={'linkedin.900'} minH='100vh'>
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
@@ -26,9 +26,9 @@ export default function HomeLayout({ children }) {
 
                         <Navigation />
 
-                        <Box bg={{ base: 'white', md: 'whiteAlpha.700' }} roundedTop={{ base: 'none', md: '2xl' }} roundedBottom='md' overflow={'hidden'}>
+                        <Box bg={{ base: 'white', md: 'whiteAlpha.700' }} roundedTop={{ base: 'none', md: 'xl' }} roundedBottom='md' overflow={'hidden'}>
 
-                            <ImageBanner src='/banner.png' />
+                            <ImageBanner src='/village.jpg' />
 
                             {children}
 

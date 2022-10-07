@@ -1,21 +1,29 @@
 import { Avatar, Box, Button, Center, Divider, Flex, HStack, Image, Text, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
+import BlogRightSidebar from '../../Components/Blog/BlogRightSidebar'
 import TabContainer from '../../Components/HomePage/TabContainer'
 import MainLeftSidebar from '../../Layouts/Common/MainLeftSidebar'
 import MainRightSidebar from '../../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 
+
+// import CommentInput from '../../Components/Blog/CommentInput'
+const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
+
+
 export default function SingleBlogDetails() {
     return (
         <HomeLayout>
 
             <LayoutColumn
-
+                // leftColumnWidth={24}
                 leftSide={<MainLeftSidebar />}
-            // rightSide={<MainRightSidebar />}
+                rightSide={< BlogRightSidebar />}
+                // rightColumnWidth={2}
             >
 
                 <Box mb={8} px={{ base: 0, md: 5 }}>
@@ -42,7 +50,7 @@ export default function SingleBlogDetails() {
                     </Box>
 
 
-                    <Center py={5}>
+                    <Center w={'full'} py={5}>
                         <Image maxW='full' maxH='400px' shadow='sm' src={'https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'} alt='name' />
                     </Center>
 
@@ -81,32 +89,11 @@ export default function SingleBlogDetails() {
                     </Box>
 
 
-                    <Box bg='.100' mb={10}>
-                        <Box bg='blackAlpha.0'>
-                            <Title order={5}>লেখক পরিচিতি</Title>
-                        </Box>
-                        <Divider my={1} />
-                        <Box p={3}>
-                            <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
-                                <Box>
-                                    <Avatar size='xl' rounded={'md'} shadow name='লিমন লস্কর' />
-                                </Box>
-                                <Box>
-                                    <Title order={3}>লিমন লস্কর</Title>
-                                    <Box px={0}>
-                                        <Text>রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে</Text>
-                                    </Box>
-                                    {/* <Divider my={1} /> */}
 
-                                    <Box bg={'blackAlpha.5'} py={2} fontSize={'13px'}>
-                                        <Wrap spacing={2} alignItems='flex-end'>
-                                            <Text><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
-                                            <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                                        </Wrap>
-                                    </Box>
-                                </Box>
-                            </Flex>
-                        </Box>
+
+
+                    <Box pb={10}>
+                        <CommentInput />
                     </Box>
 
                 </Box>

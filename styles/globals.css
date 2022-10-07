@@ -43,3 +43,7 @@ body {
 a {
  color: rgb(106, 106, 211) !important;
 }
+
+#fr-logo{
+  display: none !important;
+}

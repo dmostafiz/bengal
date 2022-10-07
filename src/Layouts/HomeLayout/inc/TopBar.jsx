@@ -11,7 +11,7 @@ export default function TopBar() {
         <Box w='full' h='70px'>
             <Affix position={{ top: 0, right: 0, left: 0 }}>
                 <SectionContainer as='header' px={0}>
-                    <Box bg={'white'} borderBottom='2px' borderColor={'gray.200'} shadow='sm'>
+                    <Box bg={'white'} borderBottom='2px' roundedBottom={{base: 'none', md: 'none'}} overflow='hidden' borderColor={'gray.200'} shadow='sm'>
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
                             <Flex alignItems={'center'} justify={'space-between'} gap={3}>
