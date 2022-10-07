@@ -31,8 +31,8 @@ export default function Navigation() {
                     }}
                 >
                     <Carousel.Slide>
-                        <Link href='#'>
-                            <a href='#'>
+                        <Link href='/'>
+                            <a href='/'>
                                 <Box width='max-content'>
                                     <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.900'>নীড়পাতা</Text>
                                 </Box>

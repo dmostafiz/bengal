@@ -9,13 +9,13 @@ import MainRightSidebar from '../Layouts/Common/MainRightSidebar'
 import SelectedPostsCarousel from '../Components/HomePage/SelectedPostsCarousel'
 import HomeLayout from '../Layouts/HomeLayout'
 import ImageBanner from '../Layouts/HomeLayout/inc/ImageBanner'
-import ThreeColumn from '../Layouts/HomeLayout/ThreeColumn'
+import LayoutColumn from '../Layouts/HomeLayout/LayoutColumn'
 
 export default function Home() {
   return (
     <HomeLayout>
 
-      <ThreeColumn
+      <LayoutColumn
 
         leftSide={<MainLeftSidebar />}
 
@@ -148,7 +148,7 @@ export default function Home() {
         </Box>
 
 
-      </ThreeColumn>
+      </LayoutColumn>
 
     </HomeLayout>
   )

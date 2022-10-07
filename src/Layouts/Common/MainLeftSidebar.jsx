@@ -1,6 +1,7 @@
 import { Box, Button, Center, Divider, FormControl, FormHelperText, FormLabel, Input, Spacer, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
+import Link from 'next/link'
 import React from 'react'
 import { FaBlog, FaMicroblog } from 'react-icons/fa'
 import { MdOutlineForum } from 'react-icons/md'
@@ -13,29 +14,33 @@ export default function MainLeftSidebar() {
             <Box mb={5} bg=''>
 
                 <Box bg={'blackAlpha.100'}>
-                    <NavLink
-                        label={<Text fontSize={'16px'}>সকল ব্লগ পোস্ট</Text>}
-                        // description={'সকল পোস্ট দেখুন'}
-                        icon={<IconListDetails size={32} stroke={2} />}
-                        // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                        active
-                        variant="subtle"
-                        color={'dark'}
-                    />
+                    <Link href='/'>
+                        <NavLink
+                            label={<Text fontSize={'16px'}>ব্লগ প্রথম পাতা</Text>}
+                            // description={'সকল পোস্ট দেখুন'}
+                            icon={<IconListDetails size={32} stroke={2} />}
+                            // rightSection={<IconChevronRight size={12} stroke={1.5} />}
+                            active
+                            variant="subtle"
+                            color={'dark'}
+                        />
+                    </Link>
 
                 </Box>
 
                 <Box>
-                    <NavLink
+                    <Link href='/selected_posts'>
+                        <NavLink
+                            label={<Text fontSize={'16px'}>বাছাইকৃত পোস্ট সমূহ</Text>}
+                            // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
+                            icon={<IconListCheck size={32} stroke={2} />}
+                            // rightSection={<IconChevronRight size={12} stroke={1.5} />}
+                            active
+                            variant="subtle"
+                            color={'dark'}
+                        />
+                    </Link>
 
-                        label={<Text fontSize={'16px'}>বাছাইকৃত পোস্ট সমূহ</Text>}
-                        // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
-                        icon={<IconListCheck size={32} stroke={2} />}
-                        // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                        active
-                        variant="subtle"
-                        color={'dark'}
-                    />
                 </Box>
 
                 <Box>
@@ -59,9 +64,9 @@ export default function MainLeftSidebar() {
                 </Center> */}
 
                 <Box p={3}>
-                    <Input border={'none'} _focus={{ring: '0', border: 'none'}} _hover={{ring: '0', border: 'none'}} bg={'whiteAlpha.700'} size={'sm'} placeholder='ইমেইল এড্রেস / ইউগারনেম' type='email' />
+                    <Input border={'none'} _focus={{ ring: '0', border: 'none' }} _hover={{ ring: '0', border: 'none' }} bg={'whiteAlpha.700'} size={'sm'} placeholder='ইমেইল এড্রেস / ইউগারনেম' type='email' />
                     <Spacer h={2} />
-                    <Input border={'none'} _focus={{ring: '0', border: 'none'}} _hover={{ring: '0', border: 'none'}} _autofill={false} bg={'whiteAlpha.700'} size={'sm'} placeholder='পাসওয়ার্ড' type='password' />
+                    <Input border={'none'} _focus={{ ring: '0', border: 'none' }} _hover={{ ring: '0', border: 'none' }} _autofill={false} bg={'whiteAlpha.700'} size={'sm'} placeholder='পাসওয়ার্ড' type='password' />
                     <Spacer h={2} />
                     <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a>
                     <Spacer h={2} />

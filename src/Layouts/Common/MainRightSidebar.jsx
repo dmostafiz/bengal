@@ -9,7 +9,7 @@ export default function MainRightSidebar() {
             <Box w='full' bg='' mb={5}>
 
                 <Box bg='blackAlpha.50' p={2}>
-                    <Title order={5}>ব্লগারদের কথন</Title>
+                    <Title order={5}>ব্লগার কথন</Title>
                 </Box>
 
 
@@ -59,6 +59,13 @@ export default function MainRightSidebar() {
                 </Box>
             </Box>
 
+
+            <Box w='full' bg='' mb={5}>
+
+                <Box bg='blackAlpha.50' p={2}>
+                    <Title order={5}>সাম্প্রতিক মন্তব্য</Title>
+                </Box>
+            </Box>
         </Box>
     )
 }

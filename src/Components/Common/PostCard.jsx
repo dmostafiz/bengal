@@ -1,10 +1,11 @@
 import { Avatar, Box, Center, Divider, Flex, Image, Spacer, Text } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
+import Link from 'next/link'
 import React from 'react'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({ title, image, content, createdAt, states, author }) {
+export default function PostCard({ title, image, content, createdAt, states, author, slug = 'বান্দুরা-রানী-পবিত্র-জপমালা-গীর্জা' }) {
     return (
         <Box bg={'gray.50'} border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
@@ -30,14 +31,22 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Divider borderColor={'blackAlpha.100'} mb={2} />
 
             <Box py={2} px={4}>
-                <Title order={4}>{title}</Title>
+                <Link href={`/blog/${slug}`}>
+                    <a href={`/blog/${slug}`}>
+                        <Title order={4}><Text color='gray.900'>{title}</Text></Title>
+                    </a>
+                </Link>
+
 
                 {image ? <Center py={5}>
                     <Image maxW='full' maxH='300px' shadow='sm' src={image} />
                 </Center> : <Spacer h={2} />}
 
 
-                <Box>{content} <a href='#'>বাকিটুকু পড়ুন</a>
+                <Box>{content}    <Link href={`/blog/${slug}`}>
+                    <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                </Link>
+
                 </Box>
 
             </Box>
