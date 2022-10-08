@@ -25,7 +25,7 @@ export default function selected_posts() {
             >
 
                 <Box mb={8}>
-                    <Box py={1} mb='10' bg={''} fontWeight='bold' borderBottom={'2px'} borderColor='blackAlpha.100' rounded='sm'>
+                    <Box py={3} mb='10' bg={''} fontWeight='bold' borderBottom={'1px'} borderColor='blackAlpha.100' rounded='sm'>
                         <Title order={3}>বাছাইকৃত পোস্ট</Title>
                     </Box>
 

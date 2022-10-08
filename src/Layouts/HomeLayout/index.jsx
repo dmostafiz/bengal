@@ -6,7 +6,7 @@ import TopBar from './inc/TopBar'
 // #303030
 export default function HomeLayout({ children }) {
     return (
-        <Box bg={'blue.900'} minH='100vh'>
+        <Box bg={'gray.800'} minH='100vh'>
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
@@ -14,10 +14,11 @@ export default function HomeLayout({ children }) {
                 backgroundImage='/bg.png'
             >
                 <Box bgColor={'.700'} opacity=''>
+
                     <Container
                         maxW={'container.xl'}
                         px={{ base: 0, md: '10px' }}
-                        bg='whiteAlpha.800'
+                        bg='whiteAlpha.900'
                         backdropFilter='auto'
                         backdropBlur='2px'
                     >
@@ -26,11 +27,20 @@ export default function HomeLayout({ children }) {
 
                         <Navigation />
 
-                        <Box bg={{ base: 'white', md: 'whiteAlpha.900' }} roundedTop={{ base: 'none', md: '2xl' }} roundedBottom='md' overflow={'hidden'}>
+                        <Box
+                            bg={{ base: 'white', md: 'whiteAlpha.800' }}
+                            roundedTop={{ base: 'none', md: 'md' }}
+                            roundedBottom='md'
+                            overflow={'hidden'}
+                            border='1px'
+                            borderColor={'blackAlpha.200'}
+                        >
 
-                            <ImageBanner src='/banner.jpg' />
+                            <ImageBanner src='/banner.png' />
 
-                            {children}
+                            <Box px={{base: 0, md:1}} py={{base: 0, md:1}}>
+                                {children}
+                            </Box>
 
                         </Box>
 
@@ -40,6 +50,7 @@ export default function HomeLayout({ children }) {
                         </Box>
 
                     </Container>
+
                 </Box>
             </Box>
         </Box>
