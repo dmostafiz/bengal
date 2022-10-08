@@ -26,7 +26,7 @@ export default function HomeLayout({ children }) {
 
                         <Navigation />
 
-                        <Box bg={{ base: 'white', md: 'whiteAlpha.800' }} roundedTop={{ base: 'none', md: '2xl' }} roundedBottom='md' overflow={'hidden'}>
+                        <Box bg={{ base: 'white', md: 'whiteAlpha.900' }} roundedTop={{ base: 'none', md: '2xl' }} roundedBottom='md' overflow={'hidden'}>
 
                             <ImageBanner src='/banner.jpg' />
 

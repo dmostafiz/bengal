@@ -21,10 +21,10 @@ export default function SingleBlogDetails() {
         <HomeLayout>
 
             <LayoutColumn
-                leftColumnWidth={26}
+                // leftColumnWidth={26}
                 leftSide={<BlogLeftSidebar />}
-                // rightSide={< BlogRightSidebar />}
-                // rightColumnWidth={0}
+                rightSide={< BlogRightSidebar />}
+                rightColumnWidth={12}
             >
 
                 <Box mb={8} px={{ base: 0, md: 0 }}>
