@@ -1,4 +1,4 @@
-import { Box, Container, Spacer } from '@chakra-ui/react'
+import { Box, Center, Container, Spacer, Text } from '@chakra-ui/react'
 import React from 'react'
 import ImageBanner from './inc/ImageBanner'
 import Navigation from './inc/Navigation'
@@ -13,7 +13,12 @@ export default function HomeLayout({ children }) {
                 bgSize={'800px'}
                 backgroundImage='/bg.png'
             >
-                <Box bgColor={'.700'} opacity=''>
+                <Box
+                    bgColor={'blackAlpha.200'}
+                    backdropFilter='auto'
+                    backdropInvert='100%'
+                    backdropBlur='2px'
+                >
 
                     <Container
                         maxW={'container.xl'}
@@ -38,16 +43,16 @@ export default function HomeLayout({ children }) {
 
                             <ImageBanner src='/banner.png' />
 
-                            <Box px={{base: 0, md:1}} py={{base: 0, md:1}}>
+                            <Box px={{ base: 0, md: 1 }} py={{ base: 0, md: 1 }}>
                                 {children}
                             </Box>
 
                         </Box>
 
 
-                        <Box minH='10px'>
-
-                        </Box>
+                        <Center py='5'>
+                            <Text>2022 @ nogorshoily.com all rights reserved</Text>
+                        </Center>
 
                     </Container>
 

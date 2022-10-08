@@ -29,7 +29,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                                     <Avatar size='md' rounded={'md'} shadow name='লিমন লস্কর' />
                                                 </Box>
                                                 <Box>
-                                                    <Title order={4}><Text noOfLines={1}>লিমন লস্কর </Text></Title>
+                                                    <Title order={4}><Text noOfLines={1}>লিমন লস্কর</Text></Title>
                                                     <Text fontSize={'12px'}>@limon_lashkar</Text>
                                                 </Box>
                                             </Flex>
@@ -44,7 +44,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                                 <Box bg={'blackAlpha.5'} fontSize={'13px'}>
                                                     <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
                                                     <Wrap spacing={2} alignItems='flex-end'>
-                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                        <Link href={'/blogger/limon_lashkar'}>
+                                                            <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                        </Link>
                                                         <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
                                                     </Wrap>
                                                 </Box>

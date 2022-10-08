@@ -40,89 +40,113 @@ export default function Navigation() {
                         </NextLink>
                     </Carousel.Slide>
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/কবিতা'>
+                            <Link href='/category/কবিতা'>
                                 <Box borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>কবিতা</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>কবিতা</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
                     <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>গল্প</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>উপন্যাস</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>সাহিত্য</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>সমসাময়িক</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>মুক্তিযুদ্ধ</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <Box width='max-content'>
-                            <Text whiteSpace={'nowrap'} color='blackAlpha.900'>লেখাপড়া</Text>
-                        </Box>
-                    </Carousel.Slide>
-                    <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
-                                <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>বিজ্ঞান-প্রযুক্তি</Text>
+                        <NextLink href='/category/গল্প'>
+                            <Link href='/category/গল্প'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>গল্প</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
-
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
-                                <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ইতিহাস</Text>
+                        <NextLink href='/category/উপন্যাস'>
+                            <Link href='/category/উপন্যাস'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>উপন্যাস</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
-
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
-                                <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>বই রিভিউ</Text>
+                        <NextLink href='/category/সাহিত্য'>
+                            <Link href='/category/সাহিত্য'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>সাহিত্য</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
-
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/সমসাময়িক'>
+                            <Link href='/category/সমসাময়িক'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>সমসাময়িক</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <NextLink href='/category/মুক্তিযুদ্ধ'>
+                            <Link href='/category/মুক্তিযুদ্ধ'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>মুক্তিযুদ্ধ</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <NextLink href='/category/লেখাপড়া'>
+                            <Link href='/category/লেখাপড়া'>
+                                <Box width='max-content'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>লেখাপড়া</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+                    <Carousel.Slide>
+                        <NextLink href='/category/বিজ্ঞান-প্রযুক্তি'>
+                            <Link href='/category/বিজ্ঞান-প্রযুক্তি'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>চিন্তাধারা</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>বিজ্ঞান-প্রযুক্তি</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/ইতিহাস'>
+                            <Link href='/category/ইতিহাস'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>সংস্কৃতি</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>ইতিহাস</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+
+                    <Carousel.Slide>
+                        <NextLink href='/category/বই রিভিউ'>
+                            <Link href='/category/বই রিভিউ'>
+                                <Box width='max-content' borderColor='white'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>বই রিভিউ</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+
+                    <Carousel.Slide>
+                        <NextLink href='/category/চিন্তাধারা'>
+                            <Link href='/category/চিন্তাধারা'>
+                                <Box width='max-content' borderColor='white'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>চিন্তাধারা</Text>
+                                </Box>
+                            </Link>
+                        </NextLink>
+                    </Carousel.Slide>
+
+                    <Carousel.Slide>
+                        <NextLink href='/category/সংস্কৃতি'>
+                            <Link href='/category/সংস্কৃতি'>
+                                <Box width='max-content' borderColor='white'>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>সংস্কৃতি</Text>
                                 </Box>
                             </Link>
                         </NextLink>
@@ -130,10 +154,10 @@ export default function Navigation() {
 
 
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/ছবি ব্লগ'>
+                            <Link href='/category/ছবি ব্লগ'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ছবি ব্লগ</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>ছবি ব্লগ</Text>
                                 </Box>
                             </Link>
                         </NextLink>
@@ -142,30 +166,30 @@ export default function Navigation() {
 
 
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/রাজনীতি'>
+                            <Link href='/category/রাজনীতি'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>রাজনীতি</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>রাজনীতি</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/ভ্রমণ'>
+                            <Link href='/category/ভ্রমণ'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>ভ্রমণ</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>ভ্রমণ</Text>
                                 </Box>
                             </Link>
                         </NextLink>
                     </Carousel.Slide>
 
                     <Carousel.Slide>
-                        <NextLink href='#'>
-                            <Link href='#'>
+                        <NextLink href='/category/দেশ-বিদেশ'>
+                            <Link href='/category/দেশ-বিদেশ'>
                                 <Box width='max-content' borderColor='white'>
-                                    <Text whiteSpace={'nowrap'} color='blackAlpha.900'>দেশ-বিদেশ</Text>
+                                    <Text whiteSpace={'nowrap'} fontWeight='semibold' color='blackAlpha.600'>দেশ-বিদেশ</Text>
                                 </Box>
                             </Link>
                         </NextLink>
