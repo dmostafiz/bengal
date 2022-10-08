@@ -1,4 +1,4 @@
-import { Avatar, Box, Center, Divider, Flex, Image, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, Box, Center, Divider, Flex, Image, Spacer, Text, Tooltip } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
@@ -13,7 +13,9 @@ export default function SidebarPostCard({ title, image, content, createdAt, stat
 
                 <Link href={`/blog/${slug}`}>
                     <a href={`/blog/${slug}`}>
-                        <Title order={6}><Text color='gray.900'>{title}</Text></Title>
+                        <Tooltip hasArrow label={title} bg='gray.800'>
+                            <Title order={6}><Text noOfLines={1} color='gray.900'>{title}</Text></Title>
+                        </Tooltip>
                     </a>
                 </Link>
 
@@ -24,7 +26,7 @@ export default function SidebarPostCard({ title, image, content, createdAt, stat
                 <Flex gap={2}>
                     {image && <Box w={'30%'}>
                         <Image maxW='full' maxH='100px' shadow='sm' src={image} alt='image' />
-                    </Box> }
+                    </Box>}
 
 
                     <Box flex='1' fontSize={'13px'}><Text noOfLines={2}>{content}</Text>

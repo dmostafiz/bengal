@@ -1,5 +1,5 @@
-import { Avatar, Box, Center, Divider, Flex, Image, Spacer, Text } from '@chakra-ui/react'
-import { Title } from '@mantine/core'
+import { Avatar, Box, Button, Center, Divider, Flex, Image, Spacer, Text, Wrap } from '@chakra-ui/react'
+import { HoverCard, Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
 import React from 'react'
@@ -16,8 +16,44 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         <Box>
                             <Text>
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
-                                লিখেছেন <Text as='span' fontWeight={'semibold'}>
-                                    <a href='#'>{author.name}</a></Text>, <Text as='span' fontSize={'13px'}>
+                                লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={0}>
+                                    <HoverCard.Target>
+                                        <Text as='span' fontWeight={'semibold'}>
+                                            <a >{author.name}</a></Text>
+                                    </HoverCard.Target>
+                                    <HoverCard.Dropdown p={10}>
+
+                                        <Box bg='blackAlpha.5'>
+                                            <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
+                                                <Box>
+                                                    <Avatar size='md' rounded={'md'} shadow name='লিমন লস্কর' />
+                                                </Box>
+                                                <Box>
+                                                    <Title order={4}><Text noOfLines={1}>লিমন লস্কর </Text></Title>
+                                                    <Text fontSize={'12px'}>@limon_lashkar</Text>
+                                                </Box>
+                                            </Flex>
+
+                                            <Box>
+                                                <Box px={0}>
+                                                    <Text noOfLines={2} fontSize='13px'>রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে</Text>
+                                                </Box>
+
+                                                <Divider my={1} />
+
+                                                <Box bg={'blackAlpha.5'} fontSize={'13px'}>
+                                                    <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
+                                                    <Wrap spacing={2} alignItems='flex-end'>
+                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                        <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+                                                    </Wrap>
+                                                </Box>
+                                            </Box>
+                                            {/* <Divider my={1} /> */}
+                                        </Box>
+
+                                    </HoverCard.Dropdown>
+                                </HoverCard>, <Text as='span' fontSize={'13px'}>
                                     {createdAt}
                                 </Text>
                             </Text>

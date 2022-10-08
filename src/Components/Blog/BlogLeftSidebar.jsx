@@ -60,7 +60,7 @@ export default function BlogLeftSidebar() {
             <Box w='full' mb={5}>
 
                 <Box bg='blackAlpha.50' p={2}>
-                    <Title order={5}>লেখক পরিচিতি</Title>
+                    <Title order={5}>পোস্টটি লিখেছেন</Title>
                 </Box>
 
                 <Box bg='whiteAlpha.900' p={3}>
