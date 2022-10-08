@@ -3,7 +3,7 @@ import { Title } from '@mantine/core'
 import React from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 
-export default function LayoutColumn({ children, leftSide = '', rightSide = '', leftColumnWidth=28, rightColumnWidth=18 }) {
+export default function LayoutColumn({ children, leftSide = '', rightSide = '', leftColumnWidth=32, rightColumnWidth=18 }) {
 
 
     const middleColumnWisdth = 100 - leftColumnWidth 
@@ -24,9 +24,9 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
                     >
 
                         {leftSide && <Box
-                            h='100vh'
+                            minH='100vh'
                             w={{ base: '100%', md: leftColumnWidth+'%' }}
-                            pr={{ base: 0, md: 2, lg: 2 }}
+                            pr={{ base: 0, md: 2, lg: 3 }}
                             py={{ base: 3, md: 3 }}
                         >
                             {leftSide}
@@ -35,9 +35,11 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
                         <Box
                             flex='1'
                             maxW={{ base: '100%', md: leftSide ? middleColumnWisdth+'%' : '100%' }}
-                            px={{ base: 0, md: 2, lg: 3 }}
-                            bg={{ base: 'white', md: 'whiteAlpha.800' }}
+                            px={{ base: 0, md: 2, lg: 4 }}
+                            bg={{ base: 'white', md: 'whiteAlpha.700' }}
                             pt={{ base: 1, md: 3 }}
+                            borderX='1px'
+                            borderColor={'blackAlpha.100'}
                         >
 
                             {children}
@@ -49,7 +51,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
                     {rightSide && <Box
                         w={{ base: '100%', md: rightColumnWidth+'%' }}
-                        h='100vh'
+                        minH='100vh'
                         bg=''
                         pl={{ base: 0, md: 2, lg: 2 }}
                         py={{ base: 3, md: 3 }}

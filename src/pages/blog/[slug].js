@@ -3,6 +3,7 @@ import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
+import BlogLeftSidebar from '../../Components/Blog/BlogLeftSidebar'
 import BlogRightSidebar from '../../Components/Blog/BlogRightSidebar'
 import TabContainer from '../../Components/HomePage/TabContainer'
 import MainLeftSidebar from '../../Layouts/Common/MainLeftSidebar'
@@ -20,13 +21,13 @@ export default function SingleBlogDetails() {
         <HomeLayout>
 
             <LayoutColumn
-                // leftColumnWidth={24}
-                leftSide={<MainLeftSidebar />}
-                rightSide={< BlogRightSidebar />}
-                // rightColumnWidth={2}
+                leftColumnWidth={26}
+                leftSide={<BlogLeftSidebar />}
+                // rightSide={< BlogRightSidebar />}
+                // rightColumnWidth={0}
             >
 
-                <Box mb={8} px={{ base: 0, md: 5 }}>
+                <Box mb={8} px={{ base: 0, md: 0 }}>
 
 
                     <Box py={2} bg={''} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
@@ -39,7 +40,7 @@ export default function SingleBlogDetails() {
 
                     <Box p={2} bg='blackAlpha.50'>
                         <HStack>
-                            <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন: </Text>
+                            <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
                             <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
                                 Facebook
                             </Button>
@@ -92,8 +93,14 @@ export default function SingleBlogDetails() {
 
 
 
-                    <Box pb={10}>
-                        <CommentInput />
+                    <Box shadow={'sm'}>
+                        <Box p={3} mb={2} bg='blackAlpha.50'>
+                            <Title order={5}>মন্তব্য করুন</Title>
+                        </Box>
+
+                        <Box p={0}>
+                            <CommentInput />
+                        </Box>
                     </Box>
 
                 </Box>

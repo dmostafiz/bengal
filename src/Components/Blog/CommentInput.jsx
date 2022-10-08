@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 export default function CommentInput() {
     const [value, setValue] = useState('');
     return (
-        <Box pb={10}>
+        <Box pb={0}>
 
             <ReactQuill
                 theme="snow"

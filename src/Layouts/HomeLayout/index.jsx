@@ -6,7 +6,7 @@ import TopBar from './inc/TopBar'
 // #303030
 export default function HomeLayout({ children }) {
     return (
-        <Box bg={'linkedin.900'} minH='100vh'>
+        <Box bg={'blue.900'} minH='100vh'>
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
@@ -16,19 +16,19 @@ export default function HomeLayout({ children }) {
                 <Box bgColor={'.700'} opacity=''>
                     <Container
                         maxW={'container.xl'}
-                        px={{ base: 0, md: 3 }}
-                        bg='whiteAlpha.700'
+                        px={{ base: 0, md: '10px' }}
+                        bg='whiteAlpha.800'
                         backdropFilter='auto'
-                        backdropBlur='7px'
+                        backdropBlur='2px'
                     >
 
                         <TopBar />
 
                         <Navigation />
 
-                        <Box bg={{ base: 'white', md: 'whiteAlpha.700' }} roundedTop={{ base: 'none', md: 'xl' }} roundedBottom='md' overflow={'hidden'}>
+                        <Box bg={{ base: 'white', md: 'whiteAlpha.800' }} roundedTop={{ base: 'none', md: '2xl' }} roundedBottom='md' overflow={'hidden'}>
 
-                            <ImageBanner src='/village.jpg' />
+                            <ImageBanner src='/banner.jpg' />
 
                             {children}
 
