@@ -38,8 +38,8 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
                             px={{ base: 0, md: 2, lg: 4 }}
                             bg={{ base: 'white', md: 'whiteAlpha.700' }}
                             pt={{ base: 1, md: 3 }}
-                            borderX='1px'
-                            borderColor={'blackAlpha.100'}
+                            borderX={{base: 'none', md:'1px'}}
+                            borderColor={{base: 'none', md:'blackAlpha.100'}}
                         >
 
                             {children}
