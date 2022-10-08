@@ -16,7 +16,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         <Box>
                             <Text>
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
-                                লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={0}>
+                                লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
                                         <Text as='span' fontWeight={'semibold'}>
                                             <a >{author.name}</a></Text>

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Divider, Flex, HStack, Image, Text, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Image, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import React from 'react'
@@ -41,12 +41,17 @@ export default function SingleBlogDetails() {
                     <Box p={2} bg='blackAlpha.50'>
                         <HStack>
                             <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
-                            <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
-                                Facebook
-                            </Button>
-                            <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
-                                Twitter
-                            </Button>
+                            <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
+                                <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
+                                    Facebook
+                                </Button>
+                            </Tooltip>
+
+                            <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
+                                <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
+                                    Twitter
+                                </Button>
+                            </Tooltip>
                         </HStack>
                     </Box>
 
@@ -97,7 +102,7 @@ export default function SingleBlogDetails() {
 
 
                     <Box p={3} mb={2} bg='blackAlpha.50'>
-                        
+
                     </Box>
 
 

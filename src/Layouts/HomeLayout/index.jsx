@@ -6,7 +6,7 @@ import TopBar from './inc/TopBar'
 // #303030
 export default function HomeLayout({ children }) {
     return (
-        <Box bg={'gray.800'} minH='100vh'>
+        <Box bg={'gray.500'} minH='100vh'>
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
@@ -18,7 +18,7 @@ export default function HomeLayout({ children }) {
                     <Container
                         maxW={'container.xl'}
                         px={{ base: 0, md: '10px' }}
-                        bg='whiteAlpha.900'
+                        bg='whiteAlpha.800'
                         backdropFilter='auto'
                         backdropBlur='2px'
                     >
