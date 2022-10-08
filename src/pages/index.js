@@ -10,6 +10,8 @@ import SelectedPostsCarousel from '../Components/HomePage/SelectedPostsCarousel'
 import HomeLayout from '../Layouts/HomeLayout'
 import ImageBanner from '../Layouts/HomeLayout/inc/ImageBanner'
 import LayoutColumn from '../Layouts/HomeLayout/LayoutColumn'
+import TopBloggers from '../Components/HomePage/TopBloggers'
+import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
 
 export default function Home() {
   return (
@@ -42,12 +44,12 @@ export default function Home() {
 
             {
               title: 'ধারাবাহিক প্রকাশনী',
-              component: <SelectedPostsCarousel />
+              component: <StepPostsCarousel />
             },
 
             {
-              title: 'মাস সেরা ব্লগার',
-              component: <SelectedPostsCarousel />
+              title: 'মাসের সেরা ব্লগার',
+              component: <TopBloggers />
             },
 
           ]} />
