@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, FormControl, FormHelperText, FormLabel, Input, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Spacer, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
 import Link from 'next/link'
@@ -46,9 +46,12 @@ export default function MainLeftSidebar() {
                 <Box>
                     <NavLink
 
-                        label={<Text fontSize={'16px'} fontWeight={700}>কমিউনিটি ফোরাম</Text>}
-                        description={'ব্লগ এর যেকোনো সমস্যা পোস্ট করুন এবং অন্যদের সমস্যা সমাধান করতে সাহায্য করুন'}
-                        icon={<MdOutlineForum size={32} color='orange' />}
+                        label={<Flex gap={1} alignItems='center'>
+                            <Text fontSize={'16px'} fontWeight={700}>ডিসকাশন ডেস্ক</Text>
+                            (<Text fontSize={'15px'} fontWeight='900' color='red.300'>৮ জন</Text>)
+                        </Flex>}
+                        description={'কমিউনিটি ডিসকাশন ডেস্ক এ অন্যান্য ব্লগারদের যেকোনো বিষয়ে আলোচনা করুন...'}
+                        icon={<MdOutlineForum size={32} color='#ecc94b' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
                         active
                         variant="subtle"
