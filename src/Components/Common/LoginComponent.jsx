@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { FaArrowLeft, FaBackspace, FaEnvelope, FaFacebook, FaFacebookF, FaGoogle, FaSignInAlt } from 'react-icons/fa'
 import { FacebookProvider } from 'react-facebook';
 import FacebookLoginButton from '../Auth/FacebookLoginButton';
-import FacebookLogin from 'react-facebook-login';
-
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { GoogleLogin } from 'react-google-login';
 
 export default function LoginComponent() {
 
@@ -18,6 +18,11 @@ export default function LoginComponent() {
         console.log(response);
     }
 
+    const responseGoogle = (response) => {
+        console.log(response);
+    }
+
+
 
     return (
         <Box>
@@ -27,62 +32,64 @@ export default function LoginComponent() {
 
 
             {!toggleEmainLogin ? <>
-
-                {/* <FacebookProvider appId="561683539070348">
+                {/* 
+                <FacebookProvider appId="561683539070348">
                     <FacebookLoginButton />
                 </FacebookProvider> */}
 
                 <FacebookLogin
                     appId="561683539070348"
-                    // autoLoad={true}
-                    fields="name,email,picture"
-                    // onClick={componentClicked}
+                    autoLoad={false}
                     callback={responseFacebook}
 
-                    render={renderProps => (
-                        <Button
-                            isLoading={renderProps.isProcessing}
-                            onClick={() => renderProps.onClick}
-                            mb='3'
-                            leftIcon={<FaFacebook size={20} />}
-                            colorScheme={'facebook'}
-                            shadow='sm'
-                            w='full'
-                            rounded={'sm'}
-                            gap={2}
-                        >
-                            <Text fontSize={'13px'}>ফেসবুক থেকে লগইন করুন</Text>
-                        </Button>
-                    )}
-                />,
+                    render={renderProps => <Button
+                        isLoading={renderProps.isProcessing}
+                        onClick={renderProps.onClick}
+                        mb='3'
+                        leftIcon={<FaFacebook size={20} />}
+                        colorScheme={'facebook'}
+                        shadow='sm'
+                        w='full'
+                        rounded={'sm'}
+                        gap={2}
+                    >
+                        <Text fontSize={'13px'}>ফেসবুক থেকে লগইন করুন</Text>
+                    </Button>
+                    }
+                />
 
 
-                <Button
-                    // isLoading
 
-                    mb='2'
-                    leftIcon={<Image h='20px' bg={'transparent'}
-                        src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
-                        color='red'
-                    />}
-                    bg={'whiteAlpha.900'}
-                    colorScheme={'gray'}
+                <GoogleLogin
+                    clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
+                    render={ renderProps => <Button
+                        mb='2'
+                        isLoading={renderProps.isProcessing}
+                        onClick={renderProps.onClick}
+                        leftIcon={<Image h='20px' bg={'transparent'}
+                            src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
+                            color='red'
+                        />}
+                        bg={'whiteAlpha.900'}
+                        colorScheme={'gray'}
+                        border='1px'
+                        borderColor={'blackAlpha.50'}
+                        shadow='sm'
+                        w='full'
+                        rounded={'sm'}
+                        size='md'
+                        gap={2}
+                    >
+                        <Text fontSize={'13px'}>গুগোল থেকে লগইন করুন</Text>
+                    </Button>}
+                />
 
-                    // _hover={{
-                    //     bg: 'whiteAlpha.900',
-                    //     shadow: 'sm'
-                    // }}
-                    border='1px'
-                    borderColor={'blackAlpha.50'}
 
-                    shadow='sm'
-                    w='full'
-                    rounded={'sm'}
-                    size='md'
-                    gap={2}
-                >
-                    <Text fontSize={'13px'}>গুগোল থেকে লগইন করুন</Text>
-                </Button>
 
                 <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
 
