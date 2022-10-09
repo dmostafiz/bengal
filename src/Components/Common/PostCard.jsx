@@ -78,7 +78,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
 
                 {image ? <Center py={5}>
-                    <Image maxW='full' maxH='300px' shadow='sm' src={image} alt='image' />
+                    <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
                 </Center> : <Spacer h={2} />}
 
 

@@ -6,6 +6,7 @@ import React from 'react'
 import { FaBlog, FaMicroblog } from 'react-icons/fa'
 import { MdOutlineForum } from 'react-icons/md'
 import { ListDetails } from 'tabler-icons-react'
+import AuthComponent from '../../Components/Common/AuthComponent'
 
 export default function MainLeftSidebar() {
     return (
@@ -60,24 +61,10 @@ export default function MainLeftSidebar() {
                 </Box>
             </Box>
 
+            <Box mb={5} shadow='md'>
+                <AuthComponent />
 
-            <Box mb={5} bg='blue.100'>
-                {/* <Center p={3} bg='blackAlpha.50'>
-                    <Title order={5}>ব্লগে প্রবেশ করুন</Title>
-                </Center> */}
-
-                <Box p={3}>
-                    <Input border={'none'} _focus={{ ring: '0', border: 'none' }} _hover={{ ring: '0', border: 'none' }} bg={'whiteAlpha.700'} size={'sm'} placeholder='ইমেইল এড্রেস / ইউগারনেম' type='email' />
-                    <Spacer h={2} />
-                    <Input border={'none'} _focus={{ ring: '0', border: 'none' }} _hover={{ ring: '0', border: 'none' }} _autofill={false} bg={'whiteAlpha.700'} size={'sm'} placeholder='পাসওয়ার্ড' type='password' />
-                    <Spacer h={2} />
-                    <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a>
-                    <Spacer h={2} />
-                    <Button color='black' colorScheme={'whiteAlpha'} shadow='sm' size={'sm'}>প্রবেশ করুন</Button>
-                </Box>
             </Box>
-
-
 
             <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
                 <Center p={3} bg='yellow.200'>

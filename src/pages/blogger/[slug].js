@@ -13,6 +13,7 @@ import PostCard from '../../Components/Common/PostCard'
 import Sticky from 'react-stickynode'
 import SidebarPostCard from '../../Components/Common/SidebarPostCard'
 import AuthorPostCard from '../../Components/Common/AuthorPostCard'
+import BloggerRightSidebar from '../../Components/blogger/BloggerRightSidebar'
 
 export default function categoryPosts() {
 
@@ -29,9 +30,9 @@ export default function categoryPosts() {
 
             <LayoutColumn
 
-                leftSide={<MainLeftSidebar />}
-
-                rightSide={<MainRightSidebar />}
+                rightSide={<BloggerRightSidebar />}
+                rightColumnWidth={30}
+            // rightSide={<MainRightSidebar />}
 
             >
 

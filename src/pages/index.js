@@ -115,7 +115,7 @@ export default function Home() {
 
             <PostCard
               title="রাম ও কৃষ্ণ - মানুষের কাছে পাঠানো নবী ছিলেন?"
-              image='https://s3.amazonaws.com/somewherein/pictures/shaiyan/shaiyan-1664874752-d595450_xlarge.jpg'
+              image='https://s3.amazonaws.com/somewherein/pictures/sherzatapon/sherzatapon-1665287090-be03f99_xlarge.jpg'
               content='যদি প্রমাণ করা যায় যে- রাম ও কৃষ্ণ ছিলেন মানুষের কাছে প্রেরিত ১ লক্ষ ২৪ হাজার নবীদের মাঝে দুইজন নবী, তাহলে আমাদের মাঝে ঐক্য ফিরে আসবে না? তাতে বাধা কোথায়? ভারতবর্ষের অনেক ইসলামী ব্যক্তিত্ব মনে করেন যে- রাম, কৃষ্ণ এবং শিব ইসলামের প্রেরিত পুরুষ ছিলেন। তেমনই একজন ইসলামী...'
               createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
               states={{
