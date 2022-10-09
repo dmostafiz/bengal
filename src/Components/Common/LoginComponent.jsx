@@ -41,7 +41,6 @@ export default function LoginComponent() {
                     appId="561683539070348"
                     autoLoad={false}
                     callback={responseFacebook}
-
                     render={renderProps => <Button
                         isLoading={renderProps.isProcessing}
                         onClick={renderProps.onClick}
@@ -63,6 +62,7 @@ export default function LoginComponent() {
                 <GoogleLogin
                     clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
                     buttonText="Login"
+                    // autoLoad={true}
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}

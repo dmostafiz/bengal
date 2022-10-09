@@ -3,10 +3,23 @@ import React from 'react'
 import ImageBanner from './inc/ImageBanner'
 import Navigation from './inc/Navigation'
 import TopBar from './inc/TopBar'
+import dynamic from 'next/dynamic'
+
+const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), {ssr: false})
+// import GoogleOneTapLogin from 'react-google-one-tap-login';
+
 // #303030
 export default function HomeLayout({ children }) {
     return (
         <Box bg={'gray.500'} minH='100vh'>
+
+
+            <GoogleOneTapLogin
+                onError={(error) => console.log(error)}
+                onSuccess={(response) => console.log(response)}
+                googleAccountConfigs={{ client_id: '721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com' }}
+            />
+
             <Box
                 bgAttachment={'fixed'}
                 // bgRepeat='no-repeat' 
