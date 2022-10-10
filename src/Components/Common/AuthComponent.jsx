@@ -3,7 +3,7 @@ import React from 'react'
 import LoginComponent from './LoginComponent'
 import RegistrationComponent from './RegistrationComponent'
 
-export default function AuthComponent() {
+export default function AuthComponent({px = 2, bg='blackAlpha.50'}) {
     return (
 
         <Tabs isFitted variant='unstyled' overflow='hidden'>
@@ -18,13 +18,13 @@ export default function AuthComponent() {
                 </Tab>
             </TabList>
 
-            <TabPanels bg='blackAlpha.50' w='full'>
+            <TabPanels bg={bg} w='full'>
 
-                <TabPanel pt={5} px={2}>
+                <TabPanel pt={5} px={px}>
                     <LoginComponent />
                 </TabPanel>
 
-                <TabPanel pt={5}  px={2}>
+                <TabPanel pt={5}  px={px}>
                     <RegistrationComponent />
                 </TabPanel>
 

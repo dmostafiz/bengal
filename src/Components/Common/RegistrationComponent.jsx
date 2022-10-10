@@ -12,8 +12,7 @@ export default function RegistrationComponent() {
         <Title order={5}>ব্লগে প্রবেশ করুন</Title>
     </Center> */}
 
-
-            {!toggleEmainLogin ? <>
+            <>
                 <Button
                     // isLoading
                     mb='3'
@@ -57,7 +56,7 @@ export default function RegistrationComponent() {
 
                 <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
 
-                <Button
+                {!toggleEmainLogin && <Button
                     // isLoading
                     onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
                     size='md'
@@ -70,24 +69,10 @@ export default function RegistrationComponent() {
                     gap={2}
                 >
                     <Text fontSize={'13px'}>ম্যানুয়ালি রেজিস্ট্রেশন করুন</Text>
-                </Button>
+                </Button>}
 
-            </> : <>
-
-                <Box px={2} pb={3}>
-                    <Button
-                        onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
-                        bg={'transparent'}
-                        variant='link'
-                        fontWeight={'normal'}
-                        _hover={{ textDecor: 'none' }}
-                        leftIcon={<FaArrowLeft />}
-                        colorScheme='yellow'
-                        size={'xs'} 
-                    >
-                        <Text fontSize={'13px'}>সোশ্যাল একাউন্ট রেজিস্ট্রেশন</Text>
-                    </Button>
-                </Box>
+            </>
+            {toggleEmainLogin && <>
 
                 {/* <Divider borderColor={'blackAlpha.100'} mb={3} /> */}
 
@@ -135,6 +120,22 @@ export default function RegistrationComponent() {
                     {/* <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a> */}
                     {/* <Spacer h={2} /> */}
                     <Button w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>রেজিস্ট্রেশন করুন</Button>
+
+
+                    <Box px={2} pt={3}>
+                        <Button
+                            onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
+                            bg={'transparent'}
+                            variant='link'
+                            fontWeight={'normal'}
+                            _hover={{ textDecor: 'none' }}
+                            leftIcon={<FaArrowLeft />}
+                            colorScheme='yellow'
+                            size={'xs'}
+                        >
+                            <Text fontSize={'13px'}>মিনিমাইজ করুন</Text>
+                        </Button>
+                    </Box>
                 </Box>
             </>}
 

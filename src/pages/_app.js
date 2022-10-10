@@ -3,6 +3,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { MantineProvider } from '@mantine/core';
 // import { NavigationProgress } from '@mantine/nprogress';
 import NextNProgress from "nextjs-progressbar";
+import AuthModalContextProvider from '../Contexts/AuthModalContext';
+import AuthContextProvider from '../Contexts/AuthContext';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -23,8 +25,13 @@ function MyApp({ Component, pageProps }) {
           height={3}
           showOnShallow={true}
         />
-        
-        <Component {...pageProps} />
+
+        <AuthModalContextProvider>
+          <AuthContextProvider>
+            <Component {...pageProps} />
+          </AuthContextProvider>
+        </AuthModalContextProvider>
+
       </ChakraProvider>
     </MantineProvider>
   )

@@ -31,7 +31,7 @@ export default function LoginComponent() {
     </Center> */}
 
 
-            {!toggleEmainLogin ? <>
+            <>
                 {/* 
                 <FacebookProvider appId="561683539070348">
                     <FacebookLoginButton />
@@ -67,7 +67,7 @@ export default function LoginComponent() {
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
-                    render={ renderProps => <Button
+                    render={renderProps => <Button
                         mb='2'
                         isLoading={renderProps.isProcessing}
                         onClick={renderProps.onClick}
@@ -93,7 +93,7 @@ export default function LoginComponent() {
 
                 <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
 
-                <Button
+                {!toggleEmainLogin && <Button
                     // isLoading
                     onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
                     size='md'
@@ -105,25 +105,13 @@ export default function LoginComponent() {
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ম্যানুয়ালি লগইন করুন</Text>
-                </Button>
+                    <Text fontSize={'13px'}>ইমেইল / পাসওয়ার্ড দিয়ে লগইন করুন</Text>
+                </Button>}
 
-            </> : <>
+            </>
 
-                <Box px={2} pb={3}>
-                    <Button
-                        onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
-                        bg={'transparent'}
-                        variant='link'
-                        fontWeight={'normal'}
-                        _hover={{ textDecor: 'none' }}
-                        leftIcon={<FaArrowLeft />}
-                        colorScheme='yellow'
-                        size={'xs'}
-                    >
-                        <Text fontSize={'13px'}>সোশ্যাল একাউন্ট লগইন</Text>
-                    </Button>
-                </Box>
+            {toggleEmainLogin && <>
+
 
                 {/* <Divider borderColor={'blackAlpha.100'} mb={5}/> */}
 
@@ -158,6 +146,21 @@ export default function LoginComponent() {
                     <Spacer h={3} />
 
                     <Button w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>প্রবেশ করুন</Button>
+
+                    <Box px={2} pt={3}>
+                        <Button
+                            onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
+                            bg={'transparent'}
+                            variant='link'
+                            fontWeight={'normal'}
+                            _hover={{ textDecor: 'none' }}
+                            leftIcon={<FaArrowLeft />}
+                            colorScheme='yellow'
+                            size={'xs'}
+                        >
+                            <Text fontSize={'13px'}>মিনিমাইজ করুন</Text>
+                        </Button>
+                    </Box>
                 </Box>
             </>}
 

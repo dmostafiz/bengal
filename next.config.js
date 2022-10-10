@@ -1,13 +1,8 @@
-const webpack = require('webpack')
+/** @type {import('next').NextConfig} */
 
-module.exports = {
-    webpack: (config, { dev }) => {
-        config.plugins.push(
-            new webpack.ProvidePlugin({
-                '$': 'jquery',
-                'jQuery': 'jquery',
-            })
-        )
-        return config
-    }
-}
+const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true,
+  }
+  
+  module.exports = nextConfig

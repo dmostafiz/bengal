@@ -1,17 +1,38 @@
 import { Avatar, Box, Button, Flex, Image, Input, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { BellRinging, ChevronDown, Logout, Pencil, User } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { FaBell, FaEnvelope } from 'react-icons/fa'
 import { Affix } from '@mantine/core'
+import { AuthModalContext } from '../../../Contexts/AuthModalContext'
+import { AuthContext } from '../../../Contexts/AuthContext'
+import { useRouter } from 'next/router'
 
 export default function TopBar() {
+
+    const router = useRouter()
+
+    const { isOpen, onOpen } = useContext(AuthModalContext)
+
+    const { isAuth, authUser } = useContext(AuthContext)
+
+    const handleClickWriteBlog = () => {
+
+        if (isAuth) {
+            router.push('/write')
+        }
+
+        else {
+            onOpen()
+        }
+    }
+
     return (
 
         <Box w='full' h='70px'>
-            <Affix position={{ top: 0, right: 0, left: 0 }}>
+            <Affix position={{ top: 0, right: 0, left: isOpen ? -12 : 0 }}>
                 <SectionContainer as='header' px={0}>
-                    <Box bg={'white'} borderBottom='2px' roundedBottom={{base: 'none', md: 'none'}} overflow='hidden' borderColor={'gray.200'} shadow='sm'>
+                    <Box bg={'white'} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} overflow='hidden' borderColor={'gray.200'} shadow='sm'>
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
                             <Flex alignItems={'center'} justify={'space-between'} gap={3}>
@@ -54,7 +75,7 @@ export default function TopBar() {
                                     </MenuList>
                                 </Menu>
 
-                                <Button rounded={'full'} colorScheme='yellow'>নগরশৈলীতে লিখুন</Button>
+                                <Button onClick={handleClickWriteBlog} rounded={'full'} colorScheme='yellow'>নগরশৈলীতে লিখুন</Button>
 
                                 {/* <Box>
 

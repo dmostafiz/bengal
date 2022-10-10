@@ -4,6 +4,7 @@ import ImageBanner from './inc/ImageBanner'
 import Navigation from './inc/Navigation'
 import TopBar from './inc/TopBar'
 import dynamic from 'next/dynamic'
+import AuthModal from '../../Components/Common/AuthModal'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), {ssr: false})
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -71,6 +72,8 @@ export default function HomeLayout({ children }) {
 
                 </Box>
             </Box>
+
+            <AuthModal />
         </Box>
     )
 }
