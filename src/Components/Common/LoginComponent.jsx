@@ -52,7 +52,7 @@ export default function LoginComponent() {
                         rounded={'sm'}
                         gap={2}
                     >
-                        <Text fontSize={'13px'}>ফেসবুক থেকে লগইন করুন</Text>
+                        <Text fontSize={'13px'}>ফেসবুক থেকে লগইন</Text>
                     </Button>
                     }
                 />
@@ -85,7 +85,7 @@ export default function LoginComponent() {
                         size='md'
                         gap={2}
                     >
-                        <Text fontSize={'13px'}>গুগোল থেকে লগইন করুন</Text>
+                        <Text fontSize={'13px'}>গুগোল থেকে লগইন</Text>
                     </Button>}
                 />
 
@@ -105,7 +105,7 @@ export default function LoginComponent() {
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ইমেইল / পাসওয়ার্ড দিয়ে লগইন করুন</Text>
+                    <Text fontSize={'13px'}>ইমেইল / পাসওয়ার্ড দিয়ে লগইন</Text>
                 </Button>}
 
             </>

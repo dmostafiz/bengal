@@ -3,19 +3,21 @@ import React from 'react'
 import LoginComponent from './LoginComponent'
 import RegistrationComponent from './RegistrationComponent'
 
-export default function AuthComponent({px = 2, bg='blackAlpha.50'}) {
+export default function AuthComponent({px = 2, bg='gray.100'}) {
     return (
 
         <Tabs isFitted variant='unstyled' overflow='hidden'>
 
-            <TabList border={'none'} bg='blackAlpha.200'>
-                <Tab _selected={{ bg: 'blackAlpha.50', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
+            <TabList border={'none'} bg='gray.200'>
+                <Tab _selected={{ bg: 'gray.300', color: 'blackAlpha.900', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
                     <Text as={'h6'} fontSize={{ base: '14px', md: '16px' }}>লগইন করুন</Text>
                 </Tab>
 
-                <Tab role="group"  _selected={{ bg: 'blackAlpha.50', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
-                    <Text as={'h6'} fontSize={{ base: '14px', md: '16px' }}>একাউন্ট তৈরী</Text>
+                <Tab role="group"  _selected={{ bg: 'gray.300', color: 'blackAlpha.900', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
+                    <Text as={'h6'} fontSize={{ base: '14px', md: '16px' }}>নিবন্ধন করুন</Text>
                 </Tab>
+
+    
             </TabList>
 
             <TabPanels bg={bg} w='full'>

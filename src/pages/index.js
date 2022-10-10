@@ -63,7 +63,7 @@ export default function Home() {
             <Title order={3}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Title>
           </Box>
 
-          <VStack gap={1}>
+          <VStack gap={3}>
             <PostCard
               title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
               image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'

@@ -23,7 +23,7 @@ export default function RegistrationComponent() {
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ফেসবুক থেকে রেজিস্ট্রেশন করুন</Text>
+                    <Text fontSize={'13px'}>ফেসবুক থেকে নিবন্ধন</Text>
                 </Button>
 
 
@@ -51,7 +51,7 @@ export default function RegistrationComponent() {
                     size='md'
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>গুগোল থেকে রেজিস্ট্রেশন করুন</Text>
+                    <Text fontSize={'13px'}>গুগোল থেকে নিবন্ধন</Text>
                 </Button>
 
                 <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
@@ -68,7 +68,7 @@ export default function RegistrationComponent() {
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ম্যানুয়ালি রেজিস্ট্রেশন করুন</Text>
+                    <Text fontSize={'13px'}>ম্যানুয়ালি নিবন্ধন করুন</Text>
                 </Button>}
 
             </>

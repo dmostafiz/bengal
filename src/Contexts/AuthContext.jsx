@@ -8,7 +8,7 @@ const AuthContextProvider = ( {children} ) => {
     const [authUser, setAuthUser] = useState(null)
 
     return <AuthContext.Provider value={{
-        isAuth: true,
+        isAuth: false,
         authUser: null
     }}>
         {children}

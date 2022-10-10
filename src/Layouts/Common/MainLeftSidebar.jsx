@@ -17,7 +17,7 @@ export default function MainLeftSidebar() {
                 <Box bg={'blackAlpha.100'}>
                     <Link href='/'>
                         <NavLink
-                            label={<Text fontSize={'16px'}>ব্লগ প্রথম পাতা</Text>}
+                            label={<Text fontSize={'17px'} fontWeight={500}>ব্লগ প্রথম পাতা</Text>}
                             // description={'সকল পোস্ট দেখুন'}
                             icon={<IconListDetails size={32} stroke={2} />}
                             // rightSection={<IconChevronRight size={12} stroke={1.5} />}
@@ -32,7 +32,7 @@ export default function MainLeftSidebar() {
                 <Box>
                     <Link href='/selected_posts'>
                         <NavLink
-                            label={<Text fontSize={'16px'}>বাছাইকৃত পোস্ট সমূহ</Text>}
+                            label={<Text fontSize={'17px'} fontWeight={500}>বাছাইকৃত সকল পোস্ট</Text>}
                             // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
                             icon={<IconListCheck size={32} stroke={2} />}
                             // rightSection={<IconChevronRight size={12} stroke={1.5} />}
@@ -48,7 +48,7 @@ export default function MainLeftSidebar() {
                     <NavLink
 
                         label={<Flex gap={1} alignItems='center'>
-                            <Text fontSize={'16px'} fontWeight={700}>ডিসকাশন ডেস্ক</Text>
+                            <Text fontSize={'17px'} fontWeight={700}>ডিসকাশন ডেস্ক</Text>
                             (<Text fontSize={'15px'} fontWeight='900' color='red.300'>৮ জন</Text>)
                         </Flex>}
                         description={'কমিউনিটি ডিসকাশন ডেস্ক এ অন্যান্য ব্লগারদের যেকোনো বিষয়ে আলোচনা করুন...'}
@@ -61,9 +61,11 @@ export default function MainLeftSidebar() {
                 </Box>
             </Box>
 
-            <Box mb={5} shadow='md'>
-                <AuthComponent />
-
+            <Box mb={5} shadow='sm'>
+                <Box bg='gray.100' py={2} px={2} mb={1}>
+                    <Text order={5}>একাউন্ট এ প্রবেশ করুন</Text>
+                </Box>
+                <AuthComponent px={5} />
             </Box>
 
             <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
