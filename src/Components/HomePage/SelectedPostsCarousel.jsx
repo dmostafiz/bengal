@@ -48,13 +48,13 @@ const useStyles = createStyles((theme) => ({
 const data = [
     {
         image:
-            'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+            'https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg',
         title: 'অনুবাদঃ সর্বেশ্বর দয়াল সাক্সেনার আরও তিনটি কবিতা',
         category: 'nature',
     },
     {
         image:
-            'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+            'https://s3.amazonaws.com/somewherein/pictures/sherzatapon/sherzatapon-1665287090-be03f99_xlarge.jpg',
         title: 'কিভাবে কিছু প্রাণী ‘কুমারী জন্মদান’ করে: পার্থেনোজেনেসিস- এর ব্যাখ্যা করা হয়েছে',
         category: 'beach',
     },

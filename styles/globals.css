@@ -44,6 +44,19 @@ a {
  color: rgb(106, 106, 211) !important;
 }
 
-#fr-logo{
+#fr-logo, .tox-statusbar__branding{
   display: none !important;
+}
+
+.tox-editor-header {
+    background-color: white;
+    border-bottom: 2px solid #eee !important;
+    box-shadow: 0 0px 0px 0px rgba(34,47,62,.1),0 0px 0px 0px rgba(34,47,62,.07) !important;
+    /* padding: 0px 0 !important; */
+    /* transition: box-shadow .5s; */
+}
+
+.tox-tinymce {
+  border: 2px solid #eee !important;
+  border-radius: 5px !important;
 }
