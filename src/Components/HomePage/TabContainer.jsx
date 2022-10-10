@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function TabContainer({ childrens }) {
     return (
-        <Tabs variant='enclosed' rounded={{base: 'sm', md:'lg'}} overflow='hidden' shadow='sm'>
+        <Tabs variant='unstyled' rounded={{base: 'sm', md:'lg'}} overflow='hidden' shadow='sm'>
           
             <TabList border={'none'}>
                 {childrens.map((item, index) => <Tab role="group" _selected={{ bg: 'gray.100', rounded: 'none', fontWeight: 'semibold' }} px={{base: 2, md: 3}} key={index}>

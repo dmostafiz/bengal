@@ -35,7 +35,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                             </Flex>
 
                                             <Box>
-                                                <Box px={0}>
+                                                <Box px={0} pt={3}>
                                                     <Text noOfLines={2} fontSize='13px'>রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে</Text>
                                                 </Box>
 
