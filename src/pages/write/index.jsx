@@ -264,7 +264,11 @@ export default function write() {
                   rightSide='dfd'
                   type='email'
                 />
-                <InputRightElement children={<Search />} />
+
+                <InputRightElement>
+                  <Search />
+                </InputRightElement>
+
               </InputGroup>
 
               <Box py={3}>
@@ -362,7 +366,9 @@ export default function write() {
                 value={selectedStepPost ? selectedStepPost.title : title}
                 type='text'
               />
-              {blogType == 'multiStep' && <InputRightElement width={'100px'} children={<Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? '১' : '৭'}</Text>} />}
+              {blogType == 'multiStep' && <InputRightElement width={'100px'} >
+                <Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? '১' : '৭'}</Text>
+              </InputRightElement>}
             </InputGroup>
           </Box>
 
