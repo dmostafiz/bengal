@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Flex, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, Flex, Image, Input, InputGroup, InputRightElement, Text, Tooltip, VStack } from '@chakra-ui/react'
 import { MultiSelect, SegmentedControl, Title } from '@mantine/core'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import BloggerRightSidebar from '../../Components/blogger/BloggerRightSidebar'
@@ -7,6 +7,8 @@ import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import { Editor } from '@tinymce/tinymce-react';
 import { AuthModalContext } from '../../Contexts/AuthModalContext'
 import { FileButton } from '@mantine/core';
+import { Check, Search, X } from 'tabler-icons-react'
+import { FaCheck } from 'react-icons/fa'
 
 
 export default function write() {
@@ -143,39 +145,43 @@ export default function write() {
 
   const [mainCategory, setMainCategory] = useState(selectedCategories[0]?.value);
 
+  const stepPosts = [
+    {
+      title: "ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল",
+      image: 'https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
+    },
+
+    {
+      title: "বান্দুরা রানী পবিত্র জপমালা গীর্জা",
+      image: 'https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
+    },
+    {
+      title: "রাম ও কৃষ্ণ - মানুষের কাছে পাঠানো নবী ছিলেন?",
+      image: 'https://s3.amazonaws.com/somewherein/pictures/sherzatapon/sherzatapon-1665287090-be03f99_xlarge.jpg'
+    },
+    {
+      title: "জনপ্রতিনিধিদের জবাবদিহিতাহীন এই সংস্কৃতি আরও কত বছর চলবে?",
+      image: 'https://s3.amazonaws.com/somewherein/pictures/SabbirShakil666/SabbirShakil666-1664873600-089caf6_xlarge.jpg'
+    },
+  ];
+
+
   const [blogType, setBlogTyple] = useState('normal')
 
   const [stepStatus, setStepStatus] = useState('new')
 
 
-  const stepPosts = [
-    {
-      image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
-      label: 'Bender Bending Rodríguez',
-      value: 'Bender Bending Rodríguez',
-      description: 'Fascinated with cooking',
-    },
-  
-    {
-      image: 'https://img.icons8.com/clouds/256/000000/futurama-mom.png',
-      label: 'Carol Miller',
-      value: 'Carol Miller',
-      description: 'One of the richest people on Earth',
-    },
-    {
-      image: 'https://img.icons8.com/clouds/256/000000/homer-simpson.png',
-      label: 'Homer Simpson',
-      value: 'Homer Simpson',
-      description: 'Overweight, lazy, and often ignorant',
-    },
-    {
-      image: 'https://img.icons8.com/clouds/256/000000/spongebob-squarepants.png',
-      label: 'Spongebob Squarepants',
-      value: 'Spongebob Squarepants',
-      description: 'Not just a sponge',
-    },
-  ];
-  
+  const [selectedStepPost, setSelectedStepPost] = useState(null)
+
+  const [title, setTitle] = useState(null)
+
+  useEffect(() => {
+
+    if (blogType == 'normal' || stepStatus == 'new') {
+      setSelectedStepPost(null)
+    }
+
+  }, [blogType, stepStatus])
 
   return (
     <HomeLayout>
@@ -196,20 +202,168 @@ export default function write() {
 
           <Divider mb={4} />
 
+          <Flex gap={5}>
+            <Box mb={10} >
+              <Box mb={1} px={0}>
+                <Title order={5}>পোস্ট এর ধরন</Title>
+                {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
+              </Box>
+
+
+              <SegmentedControl
+                value={blogType}
+                onChange={setBlogTyple}
+                data={[
+                  { label: 'সাধারণ', value: 'normal' },
+                  { label: 'ধারাবাহিক', value: 'multiStep' }
+                ]}
+              />
+
+            </Box>
+
+
+            {blogType == 'multiStep' && <Box mb={10}>
+
+              <Box mb={1} px={0}>
+                <Title order={5}>পোস্ট স্ট্যাটাস</Title>
+                {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
+              </Box>
+
+
+              <SegmentedControl
+                value={stepStatus}
+                onChange={setStepStatus}
+                data={[
+                  { label: 'নতুন শুরু করছি', value: 'new' },
+                  { label: 'পূর্বের লেখা থেকে চলমান', value: 'old' }
+                ]}
+              />
+
+
+            </Box>}
+
+          </Flex>
+
+
+
+          {(blogType == 'multiStep' && stepStatus == 'old' && !selectedStepPost) && <Box mb={10}>
+
+            <Box w='full' py={{ base: 2, md: 2 }} px={{ base: 2, md: 3 }} bg='blackAlpha.50'>
+              <Box py={2}>
+                <Title order={5}>যে পোস্ট টি চলমান থাকবে</Title>
+              </Box>
+              <InputGroup>
+                <Input
+                  border={'1px'}
+                  borderColor='blackAlpha.200'
+                  _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                  _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                  bg={'whiteAlpha.700'}
+                  size={'md'}
+                  placeholder='অনুসন্ধান করুন'
+                  rightSide='dfd'
+                  type='email'
+                />
+                <InputRightElement children={<Search />} />
+              </InputGroup>
+
+              <Box py={3}>
+                <Box maxH={'250px'} overflowY={'auto'}>
+
+                  {stepPosts.length ? stepPosts.map((post, index) => <Flex
+                    key={index}
+                    cursor='pointer'
+                    onClick={() => setSelectedStepPost(post)}
+                    _hover={{
+                      bg: 'gray.100'
+                    }}
+
+                    p={2}
+                    mb={1}
+                    alignItems={'center'}
+                    gap={2}
+                    bg='white'
+                  >
+                    <Box w='70px'>
+                      <Image src={post.image} />
+                    </Box>
+                    <Box flex={1}>
+                      <Title order={6}><Text noOfLines={1}>{post.title}</Text></Title>
+                      <Text as='span' fontSize={{ base: '11px', md: '14px' }}>৭ পর্ব লেখা হয়েছে</Text>
+                    </Box>
+
+                  </Flex>
+                  ) : <Center py={5}>
+                    <VStack>
+                      <Text>কোন ধারাবাহিক পোস্ট পাওয়া যায়নি</Text>
+                    </VStack>
+                  </Center>}
+                </Box>
+
+
+              </Box>
+
+
+            </Box>
+          </Box>
+          }
+
+
+
+
+
+
+          {selectedStepPost && <Box mb={10}>
+
+            <Box py={2}>
+              <Title order={5}>যে পোস্ট টি চলমান থাকবে</Title>
+            </Box>
+
+            <Flex
+              p={2}
+              mb={2}
+              alignItems={'center'}
+              gap={2}
+              bg='blackAlpha.50'
+            >
+              <Box w='70px' h='70px' bgImage={selectedStepPost.image} bgSize='cover' bgRepeat={'no-repeat'} bgPos='center'>
+              </Box>
+
+              <Box flex={1}>
+                <Title order={6}><Text noOfLines={1}>{selectedStepPost.title}</Text></Title>
+                <Text as='span' fontSize={{ base: '11px', md: '14px' }}>৭ পর্ব লেখা হয়েছে | সর্বশেষ আপডেট ~ ১২ ই অক্টোবর</Text>
+              </Box>
+              <Box w={{ base: 5, md: 10 }}>
+                <X cursor={'pointer'} onClick={() => setSelectedStepPost(null)} color='red' fontSize={{ base: '16px', md: '24px' }} />
+              </Box>
+            </Flex>
+          </Box>}
+
+
+
+
           <Box mb={10}>
             <Box mb={1} px={0}>
               <Title order={5}>শিরোনাম</Title>
             </Box>
-            <Input
-              border={'1px'}
-              borderColor='blackAlpha.200'
-              _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-              _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-              bg={'whiteAlpha.700'}
-              size={'md'}
-              placeholder='এখানে শিরোনাম লিখুন'
-              type='email'
-            />
+            <InputGroup>
+              <Input
+                key={selectedStepPost}
+                border={'1px'}
+                borderColor='blackAlpha.200'
+                _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                bg={'whiteAlpha.700'}
+                size={'md'}
+                placeholder='এখানে শিরোনাম লিখুন'
+                rightSide='dfd'
+                onChange={(e) => setTitle(e.target.value)}
+                readOnly={selectedStepPost && blogType == 'multiStep'}
+                value={selectedStepPost ? selectedStepPost.title : title}
+                type='text'
+              />
+              {blogType == 'multiStep' && <InputRightElement width={'100px'} children={<Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? '১' : '৭'}</Text>} />}
+            </InputGroup>
           </Box>
 
 
@@ -219,6 +373,7 @@ export default function write() {
             </Box>
 
             <Editor
+
               apiKey='n07kqhwmimi936tsx8nh222m7jrwbweyy7yowcwx8gjtmyol'
               onInit={(evt, editor) => editorRef.current = editor}
               initialValue=""
@@ -306,56 +461,6 @@ export default function write() {
 
           </Box>
 
-          <Box mb={10}>
-            <Box mb={1} px={0}>
-              <Title order={5}>লেখার ধরন</Title>
-              {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
-            </Box>
-
-
-            <SegmentedControl
-              value={blogType}
-              onChange={setBlogTyple}
-              data={[
-                { label: 'সাধারণ', value: 'normal' },
-                { label: 'ধারাবাহিক', value: 'multiStep' }
-              ]}
-            />
-
-          </Box>
-
-          {blogType == 'multiStep' && <Box mb={10}>
-
-            <Box mb={1} px={0}>
-              <Title order={5}>ধারাবাহিক লেখার স্ট্যাটাস</Title>
-              {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
-            </Box>
-
-
-            <SegmentedControl
-              value={stepStatus}
-              onChange={setStepStatus}
-              data={[
-                { label: 'নতুন শুরু করছি', value: 'new' },
-                { label: 'পূর্বের লেখা থেকে চলমান', value: 'old' }
-              ]}
-            />
-
-
-          </Box>}
-
-
-
-          {blogType == 'multiStep' && stepStatus == 'old' && <Box mb={10}>
-
-            <Box mb={1} px={0}>
-              <Title order={5}>পূর্বের ধারাবাহিক লেখা নির্বাচন করুন</Title>
-              {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
-            </Box>
-
-
-
-          </Box>}
 
 
         </Box>
@@ -363,6 +468,6 @@ export default function write() {
 
       </LayoutColumn>
 
-    </HomeLayout>
+    </HomeLayout >
   )
 }
