@@ -41,7 +41,7 @@ export default function HomeLayout({ children }) {
               
                     <Box
                         bg={{ base: 'white', md: 'whiteAlpha.800' }}
-                        // roundedTop={{ base: 'none', md: 'md' }}
+                        // roundedTop={{ base: 'none', md: '4xl' }}
                         roundedBottom='md'
                         overflow={'hidden'}
                         border='1px'

@@ -7,6 +7,7 @@ import { Affix } from '@mantine/core'
 import { AuthModalContext } from '../../../Contexts/AuthModalContext'
 import { AuthContext } from '../../../Contexts/AuthContext'
 import { useRouter } from 'next/router'
+import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
 
 export default function TopBar() {
 
@@ -32,7 +33,7 @@ export default function TopBar() {
         <Box w='full' h='70px'>
             <Affix position={{ top: 0, right: 0, left: isOpen ? -12 : 0 }}>
                 <SectionContainer as='header' px={0}>
-                    <Box bg={'white'} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} overflow='hidden' borderColor={'gray.200'} shadow='sm'>
+                    <Box bg={'white'} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
                             <Flex alignItems={'center'} justify={'space-between'} gap={3}>
@@ -42,19 +43,8 @@ export default function TopBar() {
                             </Flex>
 
                             <Box flex={1}>
-                                <Input
-                                    border='2px'
-                                    borderColor='gray.300'
-                                    w='full'
-                                    _focus={{
-                                        ring: 'none',
-                                        borderColor: 'gray.300',
-                                        roundedTop: '3xl',
-                                        roundedBottom: 'none',
-                                    }}
-                                    rounded={'full'}
-                                    placeholder='অনুসন্ধান করুন'
-                                />
+
+                                <DesktopSearchbar />
 
                             </Box>
 

@@ -60,7 +60,7 @@ export default function SingleBlogDetails() {
                         <Image maxW='full' maxH='500px' shadow='sm' src={'https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'} alt='name' />
                     </Center>
 
-                    <Box textAlign={'justify'} mb={5} lineHeight={'28px'} fontSize={'18px'}>
+                    <Box px={{base:2, md:5}} textAlign={'justify'} mb={5} lineHeight={'28px'} fontSize={'18px'}>
                         <p> বিশ্ব যতো প্রযুক্তির দিকে দৌড়াচ্ছে সমাজে নারীরা ততোই কোনঠাসা হয়ে পড়ছে। তাদের কোনঠাসা কে করছে? পুরুষরা কি নারীদের শাষক? কিংবা নারীরা কি পুরুষ দ্বারা শাসিত হবার বিধানে পড়ে? যদি না পড়ে তাহলে এর উদ্ভব হলো কিভাবে!</p>  <br />
 
                         <p> উদ্ভব হলো কতিপয় মানুষ, দল বা গোষ্ঠী; যারা নারীদের প্রযুক্তির পায়ে পা রেখে এগিয়ে যাওয়াকে মেনে নিতে পারছে না। তারা ভয়ে শঙ্কিত হয়ে আছে; নারীরা পুরুষের থেকে যেভাবে এগিয়ে চলেছে কোন একদিন এই পৃথিবীতে শাসকদলের বিলুপ্তি হবে। তাহলে পুরুষ শাসন করবে কাকে?</p>

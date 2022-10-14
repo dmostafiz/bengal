@@ -188,8 +188,13 @@ export default function write() {
 
       <LayoutColumn
 
-        rightSide={<></>}
-        rightColumnWidth={30}
+        leftColumnWidth={30}
+        leftSide={<>
+        
+        
+        
+        
+        </>}
       // rightSide={<MainRightSidebar />}
 
       >
@@ -202,8 +207,8 @@ export default function write() {
 
           <Divider mb={4} />
 
-          <Flex gap={5}>
-            <Box mb={10} >
+          <Flex mb={10} direction={{base: 'column', md: 'row'}} gap={5}>
+            <Box>
               <Box mb={1} px={0}>
                 <Title order={5}>পোস্ট এর ধরন</Title>
                 {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
@@ -222,7 +227,7 @@ export default function write() {
             </Box>
 
 
-            {blogType == 'multiStep' && <Box mb={10}>
+            {blogType == 'multiStep' && <Box>
 
               <Box mb={1} px={0}>
                 <Title order={5}>পোস্ট স্ট্যাটাস</Title>
@@ -231,11 +236,11 @@ export default function write() {
 
 
               <SegmentedControl
-                value={stepStatus}
+                value={stepPosts.length ? stepStatus : 'new'}
                 onChange={setStepStatus}
                 data={[
                   { label: 'নতুন শুরু করছি', value: 'new' },
-                  { label: 'পূর্বের লেখা থেকে চলমান', value: 'old' }
+                  { label: 'পূর্বের পোস্ট চলমান', value: 'old' }
                 ]}
               />
 
@@ -250,7 +255,7 @@ export default function write() {
 
             <Box w='full' py={{ base: 2, md: 2 }} px={{ base: 2, md: 3 }} bg='blackAlpha.50'>
               <Box py={2}>
-                <Title order={5}>যে পোস্ট টি চলমান থাকবে</Title>
+                <Title order={5}>যে পোস্ট টি চলমান থাকবে <Text as={'span'} fontSize={'12px'}>(সিলেক্ট করুন)</Text></Title>
               </Box>
               <InputGroup>
                 <Input
@@ -311,10 +316,6 @@ export default function write() {
             </Box>
           </Box>
           }
-
-
-
-
 
 
           {selectedStepPost && <Box mb={10}>
@@ -386,7 +387,7 @@ export default function write() {
 
               init={{
                 placeholder: 'এখানে বিস্তারিত পোস্ট লিখুন...',
-                height: 400,
+                height: 500,
                 menubar: false,
                 language: 'bn_BD',
                 skin: 'snow',
@@ -467,6 +468,13 @@ export default function write() {
 
           </Box>
 
+
+          <Box mb={10}>
+            <Flex gap={3}>
+              <Button >ড্রাফট এ সংরক্ষণ করুন</Button>
+              <Button colorScheme={'green'}>পাবলিশ করতে প্রিভিউ করুন</Button>
+            </Flex>
+          </Box>
 
 
         </Box>
