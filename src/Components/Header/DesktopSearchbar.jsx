@@ -16,7 +16,7 @@ export default function DesktopSearchbar() {
     }, [isOpen])
 
 
-    const [query, setQuery] = useState(null)
+    const [query, setQuery] = useState('')
 
 
     useEffect(() => {

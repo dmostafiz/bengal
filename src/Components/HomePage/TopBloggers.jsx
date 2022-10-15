@@ -2,7 +2,7 @@ import { Button, Avatar, Box, Divider, Flex, Wrap, Text } from '@chakra-ui/react
 import { Carousel } from '@mantine/carousel';
 import { createStyles, Paper, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useBreakpointValue } from '@chakra-ui/react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,38 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
-
 import { Navigation, Pagination, Scrollbar } from 'swiper';
-
-
-const useStyles = createStyles((theme) => ({
-    card: {
-        height: 220,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-
-    title: {
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-        fontWeight: 900,
-        color: theme.white,
-        lineHeight: 1.2,
-        fontSize: 32,
-        marginTop: theme.spacing.xs,
-    },
-
-    category: {
-        color: theme.white,
-        opacity: 0.7,
-        fontWeight: 700,
-        textTransform: 'uppercase',
-    },
-}));
-
 
 const data = [
     {
@@ -92,9 +61,42 @@ const data = [
 
 export default function TopBloggers() {
 
-    const theme = useMantineTheme();
 
-    const { classes } = useStyles();
+    const useStyles = createStyles((theme) => ({
+        card: {
+            height: 220,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        },
+
+        title: {
+            fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+            fontWeight: 900,
+            color: theme.white,
+            lineHeight: 1.2,
+            fontSize: 32,
+            marginTop: theme.spacing.xs,
+        },
+
+        category: {
+            color: theme.white,
+            opacity: 0.7,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+        },
+    }));
+
+
+    const [bloggers, setBloggers] = useState([])
+
+
+    useEffect(() => {
+        setBloggers(data)
+    }, [])
 
 
     return (
@@ -112,13 +114,13 @@ export default function TopBloggers() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {data.map((item) => (
-                    <SwiperSlide key={item.title}>
+                {bloggers.map((item, index) => (
+                    <SwiperSlide key={index}>
 
                         <Box bg='blue.800' color='whiteAlpha.800' p={3} rounded='xl'>
-                            <Flex direction={{ base: 'row', md: 'row' }} gap={{base: 1, md:2}}>
+                            <Flex direction={{ base: 'row', md: 'row' }} gap={{ base: 1, md: 2 }}>
                                 <Box>
-                                    <Avatar size={{base: 'sm', md: 'md'}} src={item.image} rounded={'full'} shadow name='লিমন লস্কর' />
+                                    <Avatar size={{ base: 'sm', md: 'md' }} src={item.image} rounded={'full'} shadow name='লিমন লস্কর' />
                                 </Box>
                                 <Box>
                                     <Title order={4}><Text noOfLines={1}>{item.name}</Text></Title>
@@ -131,7 +133,7 @@ export default function TopBloggers() {
                                     <Text noOfLines={3} fontSize='12px'>{item.description}</Text>
                                 </Box>
 
-                                <Divider my={1} borderColor='whiteAlpha.300'/>
+                                <Divider my={1} borderColor='whiteAlpha.300' />
 
                                 <Box bg={'blackAlpha.5'} fontSize={'13px'}>
                                     <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> টি পোস্ট লিখেছেন</Text>

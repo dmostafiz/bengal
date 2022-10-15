@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { Button, createStyles, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useBreakpointValue } from '@chakra-ui/react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,36 +14,6 @@ import 'swiper/css/scrollbar';
 
 
 import { Navigation, Pagination, Scrollbar } from 'swiper';
-
-
-const useStyles = createStyles((theme) => ({
-    card: {
-        height: 350,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-
-    title: {
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-        fontWeight: 900,
-        color: theme.white,
-        lineHeight: 1.2,
-        fontSize: 32,
-        marginTop: theme.spacing.xs,
-    },
-
-    category: {
-        color: theme.white,
-        opacity: 0.7,
-        fontWeight: 700,
-        textTransform: 'uppercase',
-    },
-}));
-
 
 const data = [
     {
@@ -93,10 +63,44 @@ const data = [
 
 export default function StepPostsCarousel() {
 
-    const theme = useMantineTheme();
+
+    const useStyles = createStyles((theme) => ({
+        card: {
+            height: 350,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        },
+
+        title: {
+            fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+            fontWeight: 900,
+            color: theme.white,
+            lineHeight: 1.2,
+            fontSize: 32,
+            marginTop: theme.spacing.xs,
+        },
+
+        category: {
+            color: theme.white,
+            opacity: 0.7,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+        },
+    }));
 
     const { classes } = useStyles();
 
+
+    const [posts, setPosts] = useState([])
+
+
+    useEffect(() => {
+        setPosts(data)
+    }, [])
 
     return (
         <Box w='full'>
@@ -112,8 +116,8 @@ export default function StepPostsCarousel() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {data.map((item) => (
-                    <SwiperSlide key={item.title}>
+                {posts.map((item, index) => (
+                    <SwiperSlide key={index}>
                         <Paper
                             shadow="lg"
                             p="xl"

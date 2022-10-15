@@ -12,8 +12,24 @@ import ImageBanner from '../Layouts/HomeLayout/inc/ImageBanner'
 import LayoutColumn from '../Layouts/HomeLayout/LayoutColumn'
 import TopBloggers from '../Components/HomePage/TopBloggers'
 import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
+import { useEffect } from 'react'
+import request from '../Helpers/axiosHelper'
 
 export default function Home() {
+  
+
+  useEffect(() => {
+
+    (
+      async () => {
+
+        const  {data} = await request.get('/')
+        console.log('Requested User: ', data)
+      }
+    )()
+
+  }, [])
+
   return (
     <HomeLayout>
 
