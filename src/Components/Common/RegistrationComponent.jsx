@@ -24,8 +24,6 @@ const schema = yup.object({
                 
                 const { ok, msg } = res.data
 
-                // console.log('checking Value: ', ok)
-                 
                 if(ok === true ) {
                     return false
                 }
