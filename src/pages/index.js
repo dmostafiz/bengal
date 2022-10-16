@@ -13,22 +13,22 @@ import LayoutColumn from '../Layouts/HomeLayout/LayoutColumn'
 import TopBloggers from '../Components/HomePage/TopBloggers'
 import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
 import { useEffect } from 'react'
-import request from '../Helpers/axiosHelper'
+import req from '../Helpers/axiosHelper'
 
 export default function Home() {
   
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    (
-      async () => {
+  //   (
+  //     async () => {
 
-        const  {data} = await request.get('/')
-        console.log('Requested User: ', data)
-      }
-    )()
+  //       const  {data} = await req.get('/auth')
+  //       console.log('Requested User: ', data)
+  //     }
+  //   )()
 
-  }, [])
+  // }, [])
 
   return (
     <HomeLayout>

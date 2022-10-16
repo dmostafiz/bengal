@@ -5,6 +5,7 @@ import { FacebookProvider } from 'react-facebook';
 import FacebookLoginButton from '../Auth/FacebookLoginButton';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
+import { useForm } from 'react-hook-form'
 
 export default function LoginComponent() {
 
@@ -21,6 +22,24 @@ export default function LoginComponent() {
     const responseGoogle = (response) => {
         console.log(response);
     }
+
+
+    const {
+        handleSubmit,
+        register,
+        formState: { errors, isSubmitting },
+    } = useForm()
+
+
+    function onSubmit(values) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                alert(JSON.stringify(values, null, 2))
+                resolve()
+            }, 3000)
+        })
+    }
+
 
 
 
@@ -117,6 +136,7 @@ export default function LoginComponent() {
 
                 <Box>
                     <Input
+                        autoComplete='off'
                         border={'1px'}
                         borderColor='blackAlpha.200'
                         _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
@@ -128,11 +148,11 @@ export default function LoginComponent() {
                     />
                     <Spacer h={2} />
                     <Input
+                        autoComplete='off'
                         border={'2px'}
                         borderColor='blackAlpha.200'
                         _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
                         _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                        _autofill={false}
                         bg={'whiteAlpha.700'}
                         size={'sm'}
                         placeholder='পাসওয়ার্ড'
@@ -145,7 +165,7 @@ export default function LoginComponent() {
 
                     <Spacer h={3} />
 
-                    <Button w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>প্রবেশ করুন</Button>
+                    <Button onClick={handleSubmit(onSubmit)} w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>প্রবেশ করুন</Button>
 
                     <Box px={2} pt={3}>
                         <Button

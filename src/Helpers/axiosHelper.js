@@ -5,9 +5,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 // axios.defaults.headers.common['Authorization'] = useToken();
 
 
-const request = axios.create({})
+const Axios = axios.create({})
 
-request.interceptors.request.use(
+Axios.interceptors.request.use(
 
     req => {
         return req
@@ -19,7 +19,7 @@ request.interceptors.request.use(
 
 )
 
-request.interceptors.response.use(
+Axios.interceptors.response.use(
 
     res => {
         return res
@@ -27,6 +27,7 @@ request.interceptors.response.use(
 
     err => {
         const status = err.response ? err.response.status : null
+        
 
         if (status === 401) {
             axios.post('/auth/refresh')
@@ -36,6 +37,8 @@ request.interceptors.response.use(
                 .catch(error => {
 
                 })
+        }if (status === 401) {
+            console.log('404 Error! ', res)
         }
 
         return Promise.reject(err)
@@ -43,4 +46,4 @@ request.interceptors.response.use(
 
 )
 
-export default request
+export default Axios
