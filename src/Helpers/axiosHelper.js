@@ -28,16 +28,14 @@ request.interceptors.response.use(
     err => {
         const status = err.response ? err.response.status : null
 
-        if(status === 401){
-            axios.post('/get_access_token', {
-                refreshToken: 'getRefreshToken'
-            })
-            .then(response => {
+        if (status === 401) {
+            axios.post('/auth/refresh')
+                .then(response => {
+                  
+                })
+                .catch(error => {
 
-            })
-            .catch(error => {
-                
-            })
+                })
         }
 
         return Promise.reject(err)
