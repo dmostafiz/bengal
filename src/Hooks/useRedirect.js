@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-export default function useRedirect() {
-  return (
-    <div>useRedirect</div>
-  )
+export default function useRedirect({url}) {
+
+  useEffect(() => {
+
+  }, [])
+  
+  if(url){
+    return (
+      <div>useRedirect</div>
+    )
+  }
 }

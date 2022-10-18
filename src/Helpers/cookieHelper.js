@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import Axios from './axiosHelper'
 
 export function setRedirectUrl(url) {
     Cookies.set('redirectUrl', url)
@@ -12,10 +13,10 @@ export function getRedirectUrl() {
 
     console.log('Get & remove Redirect URL: ', redirectUrl)
 
-    return redirectUrl
+    return redirectUrl || '/'
 }
 
-export function setAccessToken(token){
+export function setAccessToken(token) {
     console.log('Access Token Saved: ', token)
     Cookies.set('ccessToken', token)
 }
@@ -31,15 +32,46 @@ export function removeAccessToken() {
 }
 
 
-export function setUpdateToken(token){
+export function setUpdateToken(token) {
     console.log('Update Token Saved: ', token)
     Cookies.set('updateToken', token)
 }
 
-export function getUpdateToken() {
-    Cookies.set('Get updateToken')
-    return Cookies.get('updateToken')
+export async function authorizeUpdateToken() {
+
+    console.log('Get updateToken')
+    const updateToken = Cookies.get('updateToken')
+
+    if (updateToken) {
+
+        const { data } = await Axios.post('/auth/authorize_initial_acc_update_token', {}, {
+            headers: {
+                Authorization: `Bearer ${updateToken}`
+            }
+        })
+
+        console.log('authorize_initial_acc_update_token', data)
+
+        if (data.ok) {
+            return data.redirectUrl
+        }
+
+        return null
+
+    }
+
+    return null
 }
+
+
+export function getUpdateToken() {
+
+    console.log('Get updateToken')
+    return Cookies.get('updateToken')
+
+   
+}
+
 
 export function removeUpdateToken() {
     console.log('Access Token Removed')

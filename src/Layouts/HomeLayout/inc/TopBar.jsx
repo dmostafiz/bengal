@@ -9,6 +9,7 @@ import { AuthContext } from '../../../Contexts/AuthContext'
 import { useRouter } from 'next/router'
 import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
 import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
+import { setRedirectUrl } from '../../../Helpers/cookieHelper'
 
 export default function TopBar() {
 
@@ -25,6 +26,7 @@ export default function TopBar() {
         }
 
         else {
+            setRedirectUrl('/write')
             onOpen()
         }
     }

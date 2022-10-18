@@ -38,7 +38,7 @@ Axios.interceptors.response.use(
 
                 })
         }if (status === 401) {
-            console.log('404 Error! ', res)
+            // console.log('404 Error! ', res)
         }
 
         return Promise.reject(err)

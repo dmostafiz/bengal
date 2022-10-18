@@ -13,6 +13,8 @@ import Axios from '../../Helpers/axiosHelper';
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
 import { removeUpdateToken, setRedirectUrl, setUpdateToken } from '../../Helpers/cookieHelper';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { GoogleLogin } from 'react-google-login';
 
 const schema = yup.object({
     email: yup.string()
@@ -25,10 +27,10 @@ const schema = yup.object({
                 const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
                     withCredentials: true,
                 })
-                
+
                 const { ok, msg } = res.data
 
-                if(ok === true ) {
+                if (ok === true) {
                     return false
                 }
 
@@ -53,23 +55,44 @@ export default function RegistrationComponent() {
         resolver: yupResolver(schema)
     })
 
+    const responseFacebook = (response) => {
+        console.log(response);
+    }
+
+    const responseGoogle = (response) => {
+        const obj = response.profileObj
+
+        console.log(obj)
+
+        submitRegistrationData(
+            '/auth/social_signup',
+            {
+                email: obj.email,
+                avatar: obj.imageUrl
+            }
+        )
+    }
+
+
 
     async function onSubmit(values) {
         console.log('Form Value', values)
+        submitRegistrationData('/auth/signUp', values)
+    }
 
-        const {data} = await Axios.post('/auth/signUp', values, {
+    const submitRegistrationData = async ({ url, values }) => {
+        const { data } = await Axios.post(url, { ...values }, {
             // withCredentials: true
         })
 
         // console.log(res)
 
-        if(data.ok == true){
-
+        if (data.ok == true) {
 
             // Cookies.set('profileUpdateToken', data.profileUpdateToken)
             // removeUpdateToken(data.profileUpdateToken)
             setUpdateToken(data.profileUpdateToken)
-            setRedirectUrl(router.asPath)
+            // setRedirectUrl(router.asPath)
 
             toast({
                 title: 'নিবন্ধন সফল হয়েছে!',
@@ -78,7 +101,7 @@ export default function RegistrationComponent() {
                 position: 'top-right',
                 duration: 9000,
                 isClosable: true,
-              })
+            })
 
             router.push('/acc/initial/update_profile_information')
         }
@@ -92,46 +115,59 @@ export default function RegistrationComponent() {
     </Center> */}
 
             <>
-                <Button
-                    // isLoading
-                    mb='3'
-                    leftIcon={<FaFacebook size={20} />}
-                    colorScheme={'facebook'}
-                    shadow='sm'
-                    w='full'
-                    rounded={'sm'}
-                    gap={2}
-                >
-                    <Text fontSize={'13px'}>ফেসবুক থেকে নিবন্ধন</Text>
-                </Button>
+
+                <FacebookLogin
+                    appId="561683539070348"
+                    autoLoad={false}
+                    callback={responseFacebook}
+                    render={renderProps => <Button
+                        isLoading={renderProps.isProcessing}
+                        onClick={renderProps.onClick}
+                        mb='3'
+                        leftIcon={<FaFacebook size={20} />}
+                        colorScheme={'facebook'}
+                        shadow='sm'
+                        w='full'
+                        rounded={'sm'}
+                        gap={2}
+                    >
+                        <Text fontSize={'13px'}>ফেসবুক থেকে নিবন্ধন</Text>
+                    </Button>
+                    }
+                />
 
 
-                <Button
-                    // isLoading
 
-                    mb='2'
-                    leftIcon={<Image h='20px' bg={'transparent'}
-                        src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
-                        color='red'
-                    />}
-                    bg={'whiteAlpha.900'}
-                    colorScheme={'gray'}
 
-                    _hover={{
-                        bg: 'whiteAlpha.900',
-                        shadow: 'md'
-                    }}
-                    border='1px'
-                    borderColor={'blackAlpha.50'}
-
-                    shadow='sm'
-                    w='full'
-                    rounded={'sm'}
-                    size='md'
-                    gap={2}
-                >
-                    <Text fontSize={'13px'}>গুগোল থেকে নিবন্ধন</Text>
-                </Button>
+                <GoogleLogin
+                    clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                    buttonText="Login"
+                    // autoLoad={true}
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
+                    render={renderProps => <Button
+                        mb='2'
+                        isLoading={renderProps.isProcessing}
+                        onClick={renderProps.onClick}
+                        leftIcon={<Image h='20px' bg={'transparent'}
+                            src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
+                            color='red'
+                        />}
+                        bg={'whiteAlpha.900'}
+                        colorScheme={'gray'}
+                        border='1px'
+                        borderColor={'blackAlpha.50'}
+                        shadow='sm'
+                        w='full'
+                        rounded={'sm'}
+                        size='md'
+                        gap={2}
+                    >
+                        <Text fontSize={'13px'}>গুগোল থেকে নিবন্ধন</Text>
+                    </Button>}
+                />
 
                 <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
 
@@ -167,11 +203,7 @@ export default function RegistrationComponent() {
                             bg={'whiteAlpha.700'} size={'sm'}
                             placeholder='আপনার ইমেইল এড্রেসটি দিন'
                             type='text'
-                            {...register('email', {
-                                required: 'ইমেল ঠিকানাটি আবশ্যক',
-
-                                // minLength: { value: 4, message: 'Minimum length should be 4' },
-                            })}
+                            {...register('email')}
 
                         />
                         <FormErrorMessage>
