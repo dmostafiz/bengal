@@ -59,18 +59,20 @@ export default function RegistrationComponent() {
         console.log(response);
     }
 
-    const responseGoogle = (response) => {
+    const responseGoogle = async (response) => {
         const obj = response.profileObj
 
         console.log(obj)
 
-        submitRegistrationData(
-            '/auth/social_signup',
-            {
-                email: obj.email,
-                avatar: obj.imageUrl
-            }
-        )
+        if(obj){
+            submitRegistrationData(
+                '/auth/social_signup',
+                {
+                    email: obj?.email,
+                    avatar: obj?.imageUrl
+                }
+            )
+        }
     }
 
 
@@ -80,7 +82,7 @@ export default function RegistrationComponent() {
         submitRegistrationData('/auth/signUp', values)
     }
 
-    const submitRegistrationData = async ({ url, values }) => {
+    const submitRegistrationData = async (url, values) => {
         const { data } = await Axios.post(url, { ...values }, {
             // withCredentials: true
         })
