@@ -144,11 +144,10 @@ export default function RegistrationComponent() {
                 <GoogleLogin
                     clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
                     buttonText="Login"
-                    // autoLoad={true}
+                    autoLoad={false}
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
                     render={renderProps => <Button
                         mb='2'
                         isLoading={renderProps.isProcessing}
