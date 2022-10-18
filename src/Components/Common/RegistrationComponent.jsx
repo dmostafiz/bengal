@@ -93,8 +93,11 @@ export default function RegistrationComponent() {
 
             // Cookies.set('profileUpdateToken', data.profileUpdateToken)
             // removeUpdateToken(data.profileUpdateToken)
-            setUpdateToken(data.profileUpdateToken)
             // setRedirectUrl(router.asPath)
+
+            setUpdateToken(data.profileUpdateToken)
+            
+            window.location.href = '/acc/initial/update_profile_information'
 
             toast({
                 title: 'নিবন্ধন সফল হয়েছে!',
@@ -105,7 +108,6 @@ export default function RegistrationComponent() {
                 isClosable: true,
             })
 
-            router.push('/acc/initial/update_profile_information')
         }
     }
 
