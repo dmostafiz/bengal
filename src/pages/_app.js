@@ -28,7 +28,9 @@ function MyApp({ Component, pageProps }) {
 
         <AuthModalContextProvider>
           <AuthContextProvider>
+
             <Component {...pageProps} />
+
           </AuthContextProvider>
         </AuthModalContextProvider>
 

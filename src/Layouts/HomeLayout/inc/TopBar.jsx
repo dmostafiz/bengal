@@ -8,6 +8,7 @@ import { AuthModalContext } from '../../../Contexts/AuthModalContext'
 import { AuthContext } from '../../../Contexts/AuthContext'
 import { useRouter } from 'next/router'
 import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
+import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
 
 export default function TopBar() {
 
@@ -37,9 +38,7 @@ export default function TopBar() {
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
                             <Flex alignItems={'center'} justify={'space-between'} gap={3}>
-                                <Box h={'70px'}>
-                                    <Image h={'full'} w={'full'} src='/logo.png' />
-                                </Box>
+                               <SiteLogoDesktop />
                             </Flex>
 
                             <Box flex={1}>

@@ -1,5 +1,5 @@
 import { Box, Center, Container, Spacer, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import ImageBanner from './inc/ImageBanner'
 import Navigation from './inc/Navigation'
 import TopBar from './inc/TopBar'
@@ -11,6 +11,7 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 
 // #303030
 export default function HomeLayout({ children }) {
+
     return (
         <Box bg={'facebook.900'} minH='100vh'>
 
@@ -38,7 +39,7 @@ export default function HomeLayout({ children }) {
                     <TopBar />
 
                     <Navigation />
-              
+
                     <Box
                         bg={{ base: 'white', md: 'whiteAlpha.800' }}
                         // roundedTop={{ base: 'none', md: '4xl' }}

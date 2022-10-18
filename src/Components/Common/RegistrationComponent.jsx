@@ -1,7 +1,8 @@
 import {
     Avatar, Box, Button, Center, Divider, Flex, Image, Input, Spacer, Text, FormErrorMessage,
     FormLabel,
-    FormControl
+    FormControl,
+    useToast
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaArrowLeft, FaBackspace, FaEnvelope, FaFacebook, FaFacebookF, FaGoogle, FaSignInAlt } from 'react-icons/fa'
@@ -9,14 +10,17 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Axios from '../../Helpers/axiosHelper';
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router';
+import { removeUpdateToken, setRedirectUrl, setUpdateToken } from '../../Helpers/cookieHelper';
 
 const schema = yup.object({
     email: yup.string()
-        .email("একটি ভ্যালিড ইমেইল ব্যাবহার করুন!")
-        .required('ইমেল ঠিকানাটি আবশ্যক!')
+        .email("দুঃখিত! ইমেইলটি ঠিকানাটি সঠিক নয়!")
+        .required('নিবন্ধিনের জন্য ইমেইলটি ঠিকানাটি আবশ্যক!')
         .test(
             'checkEmailUnique',
-            'ইমেইলটি আগে থেকে নিবন্ধিত!',
+            'দুঃখিত! ইমেইলটি আগে থেকে নিবন্ধিত!',
             async (value) => {
                 const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
                     withCredentials: true,
@@ -35,6 +39,9 @@ const schema = yup.object({
 
 export default function RegistrationComponent() {
 
+    const router = useRouter()
+    const toast = useToast()
+
     const [toggleEmainLogin, setToggleEmainLogin] = useState(false)
 
     const {
@@ -42,6 +49,7 @@ export default function RegistrationComponent() {
         register,
         formState: { errors, isSubmitting },
     } = useForm({
+        mode: 'onChange',
         resolver: yupResolver(schema)
     })
 
@@ -49,11 +57,31 @@ export default function RegistrationComponent() {
     async function onSubmit(values) {
         console.log('Form Value', values)
 
-        const res = await Axios.post('/auth/signUp', values, {
+        const {data} = await Axios.post('/auth/signUp', values, {
             // withCredentials: true
         })
 
-        console.log(res)
+        // console.log(res)
+
+        if(data.ok == true){
+
+
+            // Cookies.set('profileUpdateToken', data.profileUpdateToken)
+            // removeUpdateToken(data.profileUpdateToken)
+            setUpdateToken(data.profileUpdateToken)
+            setRedirectUrl(router.asPath)
+
+            toast({
+                title: 'নিবন্ধন সফল হয়েছে!',
+                description: "আপনার নিবন্ধন সফল হয়েছে, অনুগ্রহপূর্বক আপনার প্রোফাইল এর তথ্য হালনাগাদ করুন।",
+                status: 'success',
+                position: 'top-right',
+                duration: 9000,
+                isClosable: true,
+              })
+
+            router.push('/acc/initial/update_profile_information')
+        }
     }
 
 
@@ -181,7 +209,7 @@ export default function RegistrationComponent() {
 
                     {/* <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a> */}
                     {/* <Spacer h={2} /> */}
-                    <Button isLoading={isSubmitting} onClick={handleSubmit(onSubmit)} w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>রেজিস্ট্রেশন করুন</Button>
+                    <Button disabled={errors.email && true} isLoading={isSubmitting} onClick={handleSubmit(onSubmit)} w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>রেজিস্ট্রেশন করুন</Button>
 
 
                     <Box px={2} pt={3}>
