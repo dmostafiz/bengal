@@ -46,6 +46,8 @@ export default function RegistrationComponent() {
 
     const [toggleEmainLogin, setToggleEmainLogin] = useState(false)
 
+    const [btnLoading, setBtnLoading] = useState(false)
+
     const {
         handleSubmit,
         register,
@@ -63,6 +65,7 @@ export default function RegistrationComponent() {
         const obj = response.profileObj
 
         console.log(obj)
+        setBtnLoading(true)
 
         if(obj){
             submitRegistrationData(
@@ -96,8 +99,6 @@ export default function RegistrationComponent() {
             // setRedirectUrl(router.asPath)
 
             setUpdateToken(data.profileUpdateToken)
-            
-            window.location.href = '/acc/initial/update_profile_information'
 
             toast({
                 title: 'নিবন্ধন সফল হয়েছে!',
@@ -107,7 +108,10 @@ export default function RegistrationComponent() {
                 duration: 9000,
                 isClosable: true,
             })
+            
+            window.location.href = '/acc/initial/update_profile_information'
 
+            setBtnLoading(false)
         }
     }
 
@@ -152,7 +156,7 @@ export default function RegistrationComponent() {
                     cookiePolicy={'single_host_origin'}
                     render={renderProps => <Button
                         mb='2'
-                        isLoading={renderProps.isProcessing}
+                        isLoading={btnLoading}
                         onClick={renderProps.onClick}
                         leftIcon={<Image h='20px' bg={'transparent'}
                             src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
