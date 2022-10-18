@@ -67,7 +67,7 @@ export default function RegistrationComponent() {
         console.log(obj)
         setBtnLoading(true)
 
-        if(obj){
+        if (obj) {
             submitRegistrationData(
                 '/auth/social_signup',
                 {
@@ -108,11 +108,21 @@ export default function RegistrationComponent() {
                 duration: 9000,
                 isClosable: true,
             })
-            
+
             window.location.href = '/acc/initial/update_profile_information'
 
-            setBtnLoading(false)
+        } else {
+            toast({
+                title: 'দুঃখিত!',
+                description: data.msg,
+                status: 'error',
+                position: 'top-right',
+                duration: 9000,
+                isClosable: true,
+            })
         }
+        
+        setBtnLoading(false)
     }
 
 
@@ -129,7 +139,7 @@ export default function RegistrationComponent() {
                     autoLoad={false}
                     callback={responseFacebook}
                     render={renderProps => <Button
-                        isLoading={renderProps.isProcessing}
+                        isLoading={btnLoading}
                         onClick={renderProps.onClick}
                         mb='3'
                         leftIcon={<FaFacebook size={20} />}
