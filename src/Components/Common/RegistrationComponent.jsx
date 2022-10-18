@@ -46,7 +46,8 @@ export default function RegistrationComponent() {
 
     const [toggleEmainLogin, setToggleEmainLogin] = useState(false)
 
-    const [btnLoading, setBtnLoading] = useState(false)
+    const [googleLoading, setGoogleLoading] = useState(false)
+    const [fbLoading, setFbLoading] = useState(false)
 
     const {
         handleSubmit,
@@ -59,13 +60,14 @@ export default function RegistrationComponent() {
 
     const responseFacebook = (response) => {
         console.log(response);
+        setFbLoading(true)
     }
 
     const responseGoogle = async (response) => {
         const obj = response.profileObj
 
         console.log(obj)
-        setBtnLoading(true)
+        setGoogleLoading(true)
 
         if (obj) {
             submitRegistrationData(
@@ -121,8 +123,8 @@ export default function RegistrationComponent() {
                 isClosable: true,
             })
         }
-        
-        setBtnLoading(false)
+
+        setGoogleLoading(false)
     }
 
 
@@ -139,7 +141,7 @@ export default function RegistrationComponent() {
                     autoLoad={false}
                     callback={responseFacebook}
                     render={renderProps => <Button
-                        isLoading={btnLoading}
+                        isLoading={fbLoading}
                         onClick={renderProps.onClick}
                         mb='3'
                         leftIcon={<FaFacebook size={20} />}
@@ -166,7 +168,7 @@ export default function RegistrationComponent() {
                     cookiePolicy={'single_host_origin'}
                     render={renderProps => <Button
                         mb='2'
-                        isLoading={btnLoading}
+                        isLoading={googleLoading}
                         onClick={renderProps.onClick}
                         leftIcon={<Image h='20px' bg={'transparent'}
                             src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
