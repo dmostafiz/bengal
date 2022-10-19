@@ -11,7 +11,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
     return (
         <SectionContainer >
-            <Box w='full'  py={{ base: 0, md: 0 }}>
+            <Box w='full' py={{ base: 0, md: 0 }}>
 
                 <Flex direction={{ base: 'column', md: 'row' }} gap={0}>
 
@@ -23,6 +23,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
                     >
 
                         {leftSide && <Box
+                            minH={{base: '0px', md:'100vh'}}
                             w={{ base: '100%', md: leftColumnWidth+'%' }}
                             pr={{ base: 0, md: 2, lg: 3 }}
                             py={{ base: 3, md: 3 }}
@@ -32,6 +33,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
                         <Box
                             flex='1'
+                            minH={'100vh'}
                             maxW={{ base: '100%', md: leftSide ? middleColumnWisdth+'%' : '100%' }}
                             px={{ base: 0, md: 2, lg: 4 }}
                             bg={{ base: 'white', md: 'white' }}
@@ -49,7 +51,8 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
 
                     {rightSide && <Box
-                        w={{ base: '100%', md: rightColumnWidth+'%' }}  
+                        w={{ base: '100%', md: rightColumnWidth+'%' }}
+                        minH={{base: '0px', md:'100vh'}}
                         bg=''
                         pl={{ base: 0, md: 2, lg: 2 }}
                         py={{ base: 3, md: 3 }}
