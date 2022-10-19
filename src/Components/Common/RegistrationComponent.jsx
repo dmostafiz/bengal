@@ -28,9 +28,7 @@ const schema = yup.object({
                     withCredentials: true,
                 })
 
-                const { ok, msg } = res.data
-
-                if (ok === true) {
+                if (res?.data?.ok === true) {
                     return false
                 }
 
@@ -80,6 +78,9 @@ export default function RegistrationComponent() {
                 }
             )
         }
+
+        setGoogleLoading(false)
+
     }
 
 
@@ -90,19 +91,19 @@ export default function RegistrationComponent() {
     }
 
     const submitRegistrationData = async (url, values) => {
-        const { data } = await Axios.post(url, { ...values }, {
+        const res = await Axios.post(url, { ...values }, {
             // withCredentials: true
         })
 
         // console.log(res)
 
-        if (data.ok == true) {
+        if (res?.data?.ok == true) {
 
             // Cookies.set('profileUpdateToken', data.profileUpdateToken)
             // removeUpdateToken(data.profileUpdateToken)
             // setRedirectUrl(router.asPath)
 
-            setUpdateToken(data.profileUpdateToken)
+            setUpdateToken(res?.data?.profileUpdateToken)
 
             toast({
                 title: 'নিবন্ধন সফল হয়েছে!',
@@ -118,7 +119,7 @@ export default function RegistrationComponent() {
         } else {
             toast({
                 title: 'দুঃখিত!',
-                description: data.msg,
+                description: res?.data?.msg ?? 'রিকুয়েস্টটি সফল হয়নি, আবার চেষ্টা করুন।',
                 status: 'error',
                 position: 'top-right',
                 duration: 9000,
@@ -166,7 +167,7 @@ export default function RegistrationComponent() {
                     clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
                     buttonText="Login"
                     autoLoad={false}
-                    onSuccess={() => responseGoogle()}
+                    onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
                     render={renderProps => <Button

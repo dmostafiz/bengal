@@ -16,10 +16,12 @@ export default function LoginComponent() {
 
 
     const responseFacebook = (response) => {
+        console.log('Facebook Login initialized')
         console.log(response);
     }
 
     const responseGoogle = (response) => {
+        console.log('Google Login initialized')
         console.log(response);
     }
 
@@ -79,7 +81,7 @@ export default function LoginComponent() {
 
 
                 <GoogleLogin
-                    clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                    clientId="21639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
                     buttonText="Login"
                     autoLoad={false}
                     onSuccess={responseGoogle}
