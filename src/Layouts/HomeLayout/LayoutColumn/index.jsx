@@ -20,7 +20,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
         if (flashMsg) {
             toast({
                 title: flashMsg.title ? flashMsg.title : '',
-                description: flashMsg.msg,
+                description: flashMsg.msg ? flashMsg.msg : '',
                 status: flashMsg.type,
                 position: 'top-right',
                 duration: 9000,

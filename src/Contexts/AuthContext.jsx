@@ -1,37 +1,43 @@
+import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/router"
 import { createContext, useEffect, useState } from "react"
-import { getUpdateToken } from "../Helpers/cookieHelper"
+import Axios from "../Helpers/axiosHelper"
+import { getAccessToken, getUpdateToken, removeAccessToken } from "../Helpers/cookieHelper"
+import useUser from "../Hooks/useUser"
 
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
 
-    const router = useRouter()
 
-    const [isAuth, setIsAuth] = useState(false)
-    const [authUser, setAuthUser] = useState(null)
+    const { data, isLoading, isError, error } = useQuery([], async () => {
 
-    const [loading, setLoading] = useState(false)
+        const response = await Axios.get('/auth/get_authorised_user')
 
-    const updateToken = getUpdateToken()
+        // console.log('Authorized User: ', response?.data?.user)
 
-    // useEffect(() => {
-    //     if (updateToken && !router.asPath.startsWith('/acc/initial/')) {
-    //         window.location.href = '/acc/initial/update_profile_information'
-    //         return <></>
-    //     }
+        return response?.data?.user
+    })
 
-    //     setLoading(false)
-    // }, [updateToken])
+    const logoutUser = async () => {
+        // alert('logout')
+        const response = await Axios.post('/auth/logout')
+        if(response?.data?.ok){
+            removeAccessToken()
 
-
+            window.location.href = '/'
+        }
+    }
 
     return <AuthContext.Provider value={{
-        isAuth: false,
-        authUser: null
+        isLoading: isLoading,
+        authUser: data,
+        isError: isError,
+        error: error,
+        logoutUser
     }}>
 
-       { children }
+        {children}
 
     </AuthContext.Provider>
 }

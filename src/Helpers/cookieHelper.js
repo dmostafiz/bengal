@@ -18,7 +18,7 @@ export function getRedirectUrl() {
 
 export function setAccessToken(token) {
     console.log('Access Token Saved: ', token)
-    Cookies.set('ccessToken', token)
+    Cookies.set('accessToken', token)
 }
 
 export function getAccessToken() {
@@ -74,13 +74,13 @@ export function getUpdateToken() {
 
 
 export function removeUpdateToken() {
-    console.log('Access Token Removed')
+    console.log('update Token Removed')
     Cookies.remove('updateToken')
 }
 
 
 
-export function setFlashMessage(type, title = '', msg) {
+export function setFlashMessage(type, title = '', msg = '') {
     console.log('Set flash msg: ', msg)
     Cookies.set('flashMessage', JSON.stringify({ type, title, msg }))
 }

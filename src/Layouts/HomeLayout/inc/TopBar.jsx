@@ -10,18 +10,19 @@ import { useRouter } from 'next/router'
 import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
 import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
 import { setRedirectUrl } from '../../../Helpers/cookieHelper'
+import useUser from '../../../Hooks/useUser'
 
 export default function TopBar() {
 
     const router = useRouter()
 
-    const { isOpen, onOpen } = useContext(AuthModalContext)
-
-    const { isAuth, authUser } = useContext(AuthContext)
+    const {onOpen} = useContext(AuthModalContext)
+    
+    const {authUser, isLoading, hasUser, isError, error, logoutUser} = useUser()
 
     const handleClickWriteBlog = () => {
 
-        if (isAuth) {
+        if (authUser) {
             router.push('/write')
         }
 
@@ -30,6 +31,10 @@ export default function TopBar() {
             onOpen()
         }
     }
+
+
+
+    // console.log('Topbar Auth User ', authUser)
 
     return (
 
@@ -77,18 +82,16 @@ export default function TopBar() {
                                     </Button>
 
 
-                                    <Menu>
+                                    {authUser && <Menu>
                                         <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
                                             <Avatar size={'xs'} name='Mostafiz Rahaman' src='' />
                                         </MenuButton>
                                         <MenuList rounded='none' zIndex={9999}>
                                             <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                             <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
-                                            <MenuItem>Mark as Draft</MenuItem>
-                                            <MenuItem>Delete</MenuItem>
-                                            <MenuItem icon={<Logout />}>লগ-আউট করুন</MenuItem>
+                                            <MenuItem onClick={logoutUser} icon={<Logout />}>লগ-আউট করুন</MenuItem>
                                         </MenuList>
-                                    </Menu>
+                                    </Menu>}
                                 </Flex>
 
                                 <Show below='md'>

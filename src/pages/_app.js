@@ -5,8 +5,12 @@ import { MantineProvider } from '@mantine/core';
 import NextNProgress from "nextjs-progressbar";
 import AuthModalContextProvider from '../Contexts/AuthModalContext';
 import AuthContextProvider from '../Contexts/AuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
+
   return (
     <MantineProvider
       withGlobalStyles
@@ -26,13 +30,16 @@ function MyApp({ Component, pageProps }) {
           showOnShallow={true}
         />
 
-        <AuthModalContextProvider>
-          <AuthContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthModalContextProvider>
+            <AuthContextProvider>
 
-            <Component {...pageProps} />
+              <Component {...pageProps} />
 
-          </AuthContextProvider>
-        </AuthModalContextProvider>
+            </AuthContextProvider>
+          </AuthModalContextProvider>
+        </QueryClientProvider>
+
 
       </ChakraProvider>
     </MantineProvider>

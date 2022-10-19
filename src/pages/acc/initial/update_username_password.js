@@ -15,6 +15,7 @@ import Cookies from 'js-cookie'
 import Axios from '../../../Helpers/axiosHelper'
 import { getRedirectUrl, getUpdateToken, removeUpdateToken, setAccessToken, setFlashMessage } from '../../../Helpers/cookieHelper'
 import CustomButton from '../../../Components/Common/CustomButton'
+import InitialUpdatePageWrapper from '../../../Wrappers/InitialUpdatePageWrapper'
 
 
 const schema = yup.object({
@@ -95,6 +96,8 @@ export default function update_username_password() {
 
             removeUpdateToken()
 
+            console.log(data)
+
             setAccessToken(data.accessToken)
 
             toast({
@@ -124,7 +127,8 @@ export default function update_username_password() {
 
     }
     return (
-        <>
+
+        <InitialUpdatePageWrapper>
 
             <LayoutColumn
                 rightSide={<></>}
@@ -139,7 +143,7 @@ export default function update_username_password() {
                     <Title order={4}>ইউজারনেম এবং পাসওয়ার্ড</Title>
                 </Box>
 
-                <form  autocomplete="new-password">
+                <form autocomplete="new-password">
 
                     <Box mb={8}>
 
@@ -229,6 +233,7 @@ export default function update_username_password() {
 
             </LayoutColumn>
 
-        </>
+        </InitialUpdatePageWrapper>
+
     )
 }
