@@ -1,8 +1,8 @@
-import { Avatar, Box, Button, Flex, Image, Input, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
 import React, { useContext } from 'react'
-import { BellRinging, ChevronDown, Logout, Pencil, User } from 'tabler-icons-react'
+import { BellRinging, ChevronDown, Logout, Menu2, Pencil, User } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
-import { FaBell, FaEnvelope } from 'react-icons/fa'
+import { FaBell, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
 import { Affix } from '@mantine/core'
 import { AuthModalContext } from '../../../Contexts/AuthModalContext'
 import { AuthContext } from '../../../Contexts/AuthContext'
@@ -34,56 +34,68 @@ export default function TopBar() {
     return (
 
         <Box w='full' h='70px'>
-            <Affix position={{ top: 0, right: 0, left: isOpen ? -12 : 0 }}>
+            <Affix position={{ top: 0, right: 0, left: 0 }}>
                 <SectionContainer as='header' px={0}>
-                    <Box bg={'white'} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
+                    <Box bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
                             <Flex alignItems={'center'} justify={'space-between'} gap={3}>
-                               <SiteLogoDesktop />
+                                <SiteLogoDesktop />
                             </Flex>
 
-                            <Box flex={1}>
+                            <Show above='md'>
+                                <Box flex={1}>
 
-                                <DesktopSearchbar />
+                                    <DesktopSearchbar />
 
-                            </Box>
+                                </Box>
 
-                            <Flex alignItems={'center'} justify={'space-between'} gap={3}>
+                            </Show>
 
-                                <Menu>
-                                    <MenuButton as={Button} rounded='full' background='transparent'>
+                            <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 2, md: 5 }}>
+
+                                <Flex alignItems={'center'} gap={{ base: '1px', md: 2 }}>
+                                    <Menu>
+                                        <MenuButton size={{ base: 'md', md: 'md' }} as={Button} bg={{ base: 'blackAlpha.100', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
+                                            <Flex alignItems={'center'} gap={1}>
+                                                <FaBell size={20} /> <Show above='md'><Text>নোটিফিকেশন</Text></Show>
+                                            </Flex>
+                                        </MenuButton>
+                                        <MenuList rounded='none'>
+                                            <MenuItem>Download</MenuItem>
+                                            <MenuItem>Create a Copy</MenuItem>
+                                            <MenuItem>Mark as Draft</MenuItem>
+                                            <MenuItem>Delete</MenuItem>
+                                            <MenuItem>Attend a Workshop</MenuItem>
+                                        </MenuList>
+                                    </Menu>
+
+                                    <Button size={{ base: 'md', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'blackAlpha.100', md: 'yellow.400' }} colorScheme='yellow'>
                                         <Flex alignItems={'center'} gap={1}>
-                                            <FaBell size={20} /> <Text>নোটিফিকেশন</Text>
+                                            <Pencil size={20} /> <Show above='md'><Text>নগরশৈলীতে লিখুন</Text></Show>
                                         </Flex>
-                                    </MenuButton>
-                                    <MenuList rounded='none'>
-                                        <MenuItem>Download</MenuItem>
-                                        <MenuItem>Create a Copy</MenuItem>
-                                        <MenuItem>Mark as Draft</MenuItem>
-                                        <MenuItem>Delete</MenuItem>
-                                        <MenuItem>Attend a Workshop</MenuItem>
-                                    </MenuList>
-                                </Menu>
+                                    </Button>
 
-                                <Button onClick={handleClickWriteBlog} rounded={'full'} colorScheme='yellow'>নগরশৈলীতে লিখুন</Button>
 
-                                {/* <Box>
+                                    <Menu>
+                                        <MenuButton as={Button} size={{ base: 'md', md: 'md' }} bg={{ base: 'blackAlpha.100', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
+                                            <Avatar size={'xs'} name='Mostafiz Rahaman' src='' />
+                                        </MenuButton>
+                                        <MenuList rounded='none' zIndex={9999}>
+                                            <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
+                                            <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
+                                            <MenuItem>Mark as Draft</MenuItem>
+                                            <MenuItem>Delete</MenuItem>
+                                            <MenuItem icon={<Logout />}>লগ-আউট করুন</MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                </Flex>
 
-                    </Box> */}
-
-                                <Menu>
-                                    <MenuButton as={Button} _hover={{ background: 'transparent' }} _active={{ background: 'transparent' }} background='transparent' rightIcon={<ChevronDown />}>
-                                        <Avatar size={'sm'} name='Mostafiz Rahaman' src='' />
-                                    </MenuButton>
-                                    <MenuList rounded='none' zIndex={9999}>
-                                        <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
-                                        <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
-                                        <MenuItem>Mark as Draft</MenuItem>
-                                        <MenuItem>Delete</MenuItem>
-                                        <MenuItem icon={<Logout />}>লগ-আউট করুন</MenuItem>
-                                    </MenuList>
-                                </Menu>
+                                <Show below='sm'>
+                                    <Button onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded={{ base: 'none', md: 'full' }} bg={'transparent'} colorScheme='gray'>
+                                        <Menu2 size={22} />
+                                    </Button>
+                                </Show>
 
                             </Flex>
 

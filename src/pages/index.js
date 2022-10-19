@@ -1,4 +1,4 @@
-import { Avatar, Box, Center, Divider, Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Center, Divider, Flex, Image, Show, Spacer, Text, VStack } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { ThumbUp } from 'tabler-icons-react'
 import PostCard from '../Components/Common/PostCard'
@@ -14,9 +14,10 @@ import TopBloggers from '../Components/HomePage/TopBloggers'
 import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
 import { useEffect } from 'react'
 import req from '../Helpers/axiosHelper'
+import BlogPanel from '../Components/Common/BlogPanel'
 
 export default function Home() {
-  
+
 
   // useEffect(() => {
 
@@ -44,6 +45,11 @@ export default function Home() {
         {/* <ImageBanner src='/banner.png' /> */}
 
         {/* <Box mb={8}></Box> */}
+
+
+        <Show below='sm'>
+          <BlogPanel />
+        </Show>
 
         <Box mb={8} w='full' overflow={'hidden'}>
           {/* <Box py={2} rounded='none' shadow='sm'>

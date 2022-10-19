@@ -12,7 +12,7 @@ export default function AuthModal() {
         <>
             {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
-            <Modal size={{base: 'sm', md: 'sm'}} isOpen={isOpen} onClose={onClose}>
+            <Modal blockScrollOnMount={false} size={{base: 'sm', md: 'sm'}} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent rounded='none'>
                     <ModalHeader px={8} pb={1} fontSize={'16px'}>{title}</ModalHeader>
