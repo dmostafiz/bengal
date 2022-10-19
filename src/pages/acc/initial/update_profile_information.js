@@ -15,6 +15,7 @@ import Cookies from 'js-cookie'
 import InitialUpdatePageWrapper from '../../../Wrappers/InitialUpdatePageWrapper'
 import Axios from '../../../Helpers/axiosHelper'
 import { getUpdateToken, removeUpdateToken, setUpdateToken } from '../../../Helpers/cookieHelper'
+import CustomButton from '../../../Components/Common/CustomButton'
 
 // update_profile_information
 const schema = yup.object({
@@ -98,21 +99,21 @@ export default function update_profile_information() {
         // console.log('values ', values)
         const profileUpdateToken = getUpdateToken()
 
-        const { data } = await Axios.post('/auth/update_initial_profile_info', { ...values, image }, {
+        const res = await Axios.post('/auth/update_initial_profile_info', { ...values, image }, {
             headers: {
                 Authorization: `Bearer ${profileUpdateToken}`
             }
         })
 
-        console.log('Profile Update Data ', data)
+        console.log('Profile Update Data ', res.data)
 
-        if (data.ok) {
+        if (res?.data.ok) {
 
             removeUpdateToken()
-            setUpdateToken(data.profileUpdateToken)
+            setUpdateToken(res?.data.profileUpdateToken)
 
             toast({
-                title: 'প্রোফাইল এর তথ্য হালনাগাদ হয়েছে!',
+                title: 'প্রোফাইল হালনাগাদ হয়েছে!',
                 description: "পরবর্তীতে লগইন এর সুবিধার্থে আপনার ইউজার নাম এবং পাসওয়ার্ড সেট করুন।",
                 status: 'success',
                 position: 'top-right',
@@ -290,14 +291,14 @@ export default function update_profile_information() {
                     </Box>
 
 
-                    <Button
+                    <CustomButton
                         // disabled={errors.email && true}
                         isLoading={isSubmitting}
                         onClick={handleSubmit(updateProfileInfo)}
                         colorScheme={'green'}
                     >
                         প্রোফাইল আপডেট করুন
-                    </Button>
+                    </CustomButton>
 
 
                     {/* <Divider /> */}

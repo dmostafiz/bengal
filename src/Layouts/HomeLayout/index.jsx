@@ -6,6 +6,8 @@ import TopBar from './inc/TopBar'
 import dynamic from 'next/dynamic'
 import AuthModal from '../../Components/Common/AuthModal'
 import LayoutWrapper from '../../Wrappers/LayoutWrapper'
+import { useRouter } from 'next/router'
+import { getFlashMessage } from '../../Helpers/cookieHelper'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';

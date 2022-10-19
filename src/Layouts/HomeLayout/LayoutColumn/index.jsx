@@ -1,13 +1,33 @@
-import { Box, Center, Divider, Flex, Text } from '@chakra-ui/react'
+import { Box, Center, Divider, Flex, Text, useToast } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
+import { getFlashMessage } from '../../../Helpers/cookieHelper'
 
 export default function LayoutColumn({ children, leftSide = '', rightSide = '', leftColumnWidth=32, rightColumnWidth=18 }) {
 
 
     const middleColumnWisdth = 100 - leftColumnWidth 
     const mainColumnWidth = 100 - rightColumnWidth
+
+    const router = useRouter()
+
+    const toast = useToast()
+
+    useEffect(() => {
+        const flashMsg = getFlashMessage()
+        if(flashMsg){
+            toast({
+                title: flashMsg.title ? flashMsg.title : '',
+                description: flashMsg.msg,
+                status: flashMsg.type,
+                position: 'top-right',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
+    }, [router])
 
     return (
         <SectionContainer >

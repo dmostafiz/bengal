@@ -12,9 +12,10 @@ import * as yup from "yup";
 import Axios from '../../Helpers/axiosHelper';
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
-import { removeUpdateToken, setRedirectUrl, setUpdateToken } from '../../Helpers/cookieHelper';
+import { removeUpdateToken, setFlashMessage, setRedirectUrl, setUpdateToken } from '../../Helpers/cookieHelper';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
+import CustomButton from './CustomButton';
 
 const schema = yup.object({
     email: yup.string()
@@ -69,7 +70,7 @@ export default function RegistrationComponent() {
         setGoogleLoading(true)
 
         if (obj) {
-            submitRegistrationData(
+            await submitRegistrationData(
                 '/auth/social_signup',
                 {
                     email: obj?.email,
@@ -87,7 +88,7 @@ export default function RegistrationComponent() {
 
     async function onSubmit(values) {
         console.log('Form Value', values)
-        submitRegistrationData('/auth/signUp', values)
+        await submitRegistrationData('/auth/signUp', values)
     }
 
     const submitRegistrationData = async (url, values) => {
@@ -97,13 +98,13 @@ export default function RegistrationComponent() {
 
         // console.log(res)
 
-        if (res?.data?.ok == true) {
+        if (res?.data.ok == true) {
 
             // Cookies.set('profileUpdateToken', data.profileUpdateToken)
             // removeUpdateToken(data.profileUpdateToken)
             // setRedirectUrl(router.asPath)
 
-            setUpdateToken(res?.data?.profileUpdateToken)
+            setUpdateToken(res?.data.profileUpdateToken)
 
             toast({
                 title: 'নিবন্ধন সফল হয়েছে!',
@@ -114,7 +115,11 @@ export default function RegistrationComponent() {
                 isClosable: true,
             })
 
+            setFlashMessage('success', "নিবন্ধন সফল হয়েছে!", "আপনার নিবন্ধন সফল হয়েছে, অনুগ্রহপূর্বক আপনার প্রোফাইল এর তথ্য হালনাগাদ করুন।",)
+
             window.location.href = '/acc/initial/update_profile_information'
+
+            return
 
         } else {
             toast({
@@ -125,9 +130,10 @@ export default function RegistrationComponent() {
                 duration: 9000,
                 isClosable: true,
             })
+
+            return
         }
 
-        setGoogleLoading(false)
     }
 
 
@@ -267,7 +273,16 @@ export default function RegistrationComponent() {
 
                     {/* <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a> */}
                     {/* <Spacer h={2} /> */}
-                    <Button disabled={errors.email && true} isLoading={isSubmitting} onClick={handleSubmit(onSubmit)} w='full' colorScheme={'blue'} shadow='sm' rounded={'sm'} size={'sm'}>রেজিস্ট্রেশন করুন</Button>
+                    <CustomButton
+                        disabled={errors.email && true}
+                        isLoading={isSubmitting}
+                        onClick={handleSubmit(onSubmit)}
+                        w='full' colorScheme={'blue'}
+                        shadow='sm' rounded={'sm'}
+                        size={'sm'}
+                    >
+                        রেজিস্ট্রেশন করুন
+                    </CustomButton>
 
 
                     <Box px={2} pt={3}>

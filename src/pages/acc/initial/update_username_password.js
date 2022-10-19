@@ -13,7 +13,8 @@ import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import Axios from '../../../Helpers/axiosHelper'
-import { getRedirectUrl, getUpdateToken, removeUpdateToken, setAccessToken } from '../../../Helpers/cookieHelper'
+import { getRedirectUrl, getUpdateToken, removeUpdateToken, setAccessToken, setFlashMessage } from '../../../Helpers/cookieHelper'
+import CustomButton from '../../../Components/Common/CustomButton'
 
 
 const schema = yup.object({
@@ -106,6 +107,8 @@ export default function update_username_password() {
                 duration: 9000,
                 isClosable: true,
             })
+
+            setFlashMessage('success', 'আপনার নিবন্ধন সম্পন্ন হয়েছে', "স্বাগতম! এই ব্লগে একজন নিবন্ধিত সদস্য হওয়ার জন্য আপনাকে অসংখ্য ধন্যবাদ। আশা করছি লেখক বা পাঠক হিসেবে আপনি ব্লগ এর সমস্ত নীতিমালা জেনে নেবেন এবং সেগুলোর যথার্থ সম্মান করবেন।")
 
             window.location.href = getRedirectUrl()
 
@@ -213,13 +216,13 @@ export default function update_username_password() {
                         </Box>
 
 
-                        <Button
+                        <CustomButton
                             isLoading={isSubmitting}
                             onClick={handleSubmit(handlSaveLoginInfo)}
                             colorScheme={'green'}
                         >
                             লগইন ইনফরমেশন আপডেট করুন
-                        </Button>
+                        </CustomButton>
 
                     </Box>
 

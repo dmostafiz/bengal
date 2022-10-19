@@ -69,11 +69,25 @@ export function getUpdateToken() {
     console.log('Get updateToken')
     return Cookies.get('updateToken')
 
-   
+
 }
 
 
 export function removeUpdateToken() {
     console.log('Access Token Removed')
     Cookies.remove('updateToken')
+}
+
+
+
+export function setFlashMessage(type, title = null, msg) {
+    console.log('Set flash msg: ', msg)
+    Cookies.set('flashMessage', JSON.stringify({ type, title, msg }))
+}
+
+export function getFlashMessage() {
+    const fls = Cookies.get('flashMessage') ? JSON.parse(Cookies.get('flashMessage')) : null
+    Cookies.remove('flashMessage')
+
+    return fls
 }
