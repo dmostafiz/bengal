@@ -92,8 +92,8 @@ export default function TopBar() {
                                 </Flex>
 
                                 <Show below='sm'>
-                                    <Button onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded={{ base: 'none', md: 'full' }} bg={'transparent'} colorScheme='gray'>
-                                        <Menu2 size={22} />
+                                    <Button onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline'  colorScheme='gray'>
+                                        <Menu2 size={24} />
                                     </Button>
                                 </Show>
 
