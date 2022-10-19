@@ -14,7 +14,8 @@ Axios.interceptors.request.use(
     },
 
     err => {
-        return Promise.reject(err)
+        // return Promise.reject(err)
+        return { data: {ok: false, msg: err?.message } }
     }
 
 )
@@ -27,21 +28,24 @@ Axios.interceptors.response.use(
 
     err => {
         const status = err.response ? err.response.status : null
-        
+
 
         if (status === 401) {
-            axios.post('/auth/refresh')
-                .then(response => {
-                  
-                })
-                .catch(error => {
+            // axios.post('/auth/refresh')
+            //     .then(response => {
 
-                })
-        }if (status === 401) {
+            //     })
+            //     .catch(error => {
+
+            //     })
+        }
+
+        if (status === 401) {
             // console.log('404 Error! ', res)
         }
 
-        return Promise.reject(err)
+        return { data: { ok: false, msg: err?.message } }
+
     }
 
 )

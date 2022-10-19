@@ -74,7 +74,8 @@ export default function RegistrationComponent() {
                 '/auth/social_signup',
                 {
                     email: obj?.email,
-                    avatar: obj?.imageUrl
+                    avatar: obj?.imageUrl,
+                    host: 'google'
                 }
             )
         }
@@ -169,6 +170,7 @@ export default function RegistrationComponent() {
                     render={renderProps => <Button
                         mb='2'
                         isLoading={googleLoading}
+                        loadingText='অপেক্ষা করুন...'
                         onClick={renderProps.onClick}
                         leftIcon={<Image h='20px' bg={'transparent'}
                             src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
