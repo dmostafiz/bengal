@@ -40,15 +40,13 @@ const schema = yup.object({
 
             async (value) => {
 
-                const { data } = await Axios.post(`/user/check_user_exists`, { by: 'username', value }, {
+                const res = await Axios.post(`/user/check_user_exists`, { by: 'username', value }, {
 
                     withCredentials: true,
 
                 })
 
-                const { ok, msg } = data
-
-                if (ok === true) {
+                if (res?.data.ok === true) {
 
                     return false
 

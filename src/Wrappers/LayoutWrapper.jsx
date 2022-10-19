@@ -5,7 +5,7 @@ import { authorizeUpdateToken, getUpdateToken } from '../Helpers/cookieHelper'
 
 export default function LayoutWrapper({ children }) {
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
 
@@ -19,7 +19,7 @@ export default function LayoutWrapper({ children }) {
           router.push(redirect)
         } else {
 
-          setLoading(false)
+          // setLoading(false)
         }
 
       }
@@ -27,8 +27,9 @@ export default function LayoutWrapper({ children }) {
     )()
 
 
+    setLoading(false)
 
-  }, [router])
+  }, [])
 
   return (
     <>

@@ -274,7 +274,6 @@ export default function RegistrationComponent() {
                     {/* <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a> */}
                     {/* <Spacer h={2} /> */}
                     <CustomButton
-                        disabled={errors.email && true}
                         isLoading={isSubmitting}
                         onClick={handleSubmit(onSubmit)}
                         w='full' colorScheme={'blue'}

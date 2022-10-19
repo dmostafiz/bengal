@@ -80,13 +80,15 @@ export function removeUpdateToken() {
 
 
 
-export function setFlashMessage(type, title = null, msg) {
+export function setFlashMessage(type, title = '', msg) {
     console.log('Set flash msg: ', msg)
     Cookies.set('flashMessage', JSON.stringify({ type, title, msg }))
 }
 
 export function getFlashMessage() {
-    const fls = Cookies.get('flashMessage') ? JSON.parse(Cookies.get('flashMessage')) : null
+    const fls =  Cookies.get('flashMessage') ? JSON.parse(Cookies.get('flashMessage')) : null
+
+    console.log('Get Flash Message ', fls)
     Cookies.remove('flashMessage')
 
     return fls
