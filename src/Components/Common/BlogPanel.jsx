@@ -8,21 +8,21 @@ export default function BlogPanel() {
     return (
         <Box mb={5} bg=''>
 
-            <Box bg={'blackAlpha.100'}>
+            <Box bg={'blackAlpha.50'} _hover={{bg: 'blackAlpha.200'}}>
                 <Link href='/'>
                     <NavLink
-                        label={<Text fontSize={'17px'} fontWeight={500}>ব্লগ প্রথম পাতা</Text>}
+                        label={<Text fontSize={'17px'} fontWeight={500}>রঙ্গন প্রচ্ছদ</Text>}
                         // description={'সকল পোস্ট দেখুন'}
-                        icon={<IconListDetails size={32} stroke={2} />}
+                        icon={<IconListDetails size={32} stroke={2} color='#385898'/>}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                        active
+                        // active
                         variant="subtle"
-                        color={'dark'}
+                        color={'light'}
                     />
                 </Link>
 
             </Box>
-
+{/* 
             <Box>
                 <Link href='/selected_posts'>
                     <NavLink
@@ -36,18 +36,18 @@ export default function BlogPanel() {
                     />
                 </Link>
 
-            </Box>
+            </Box> */}
 
             <Box>
                 <Link href='/selected_posts'>
                     <NavLink
                         label={<Text fontSize={'17px'} fontWeight={500}>পিডিএফ বই সামগ্রী</Text>}
                         // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
-                        icon={<IconBook size={32} stroke={2} />}
+                        icon={<IconBook size={32} stroke={2} color='#385898'/>}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                        active
+                        // active
                         variant="subtle"
-                        color={'dark'}
+                        color={'light'}
                     />
                 </Link>
 
@@ -57,13 +57,13 @@ export default function BlogPanel() {
                 <NavLink
 
                     label={<Flex gap={1} alignItems='center'>
-                        <Text fontSize={'17px'} fontWeight={0}>ডিসকাশন প্যানেল</Text>
+                        <Text fontSize={'17px'} fontWeight={700}>ডিসকাশন প্যানেল</Text>
                         (<Text fontSize={'15px'} fontWeight='900' color='red.300'>৮ জন</Text>)
                     </Flex>}
                     description={'কমিউনিটি ডিসকাশন প্যানেল এ অন্যান্য ব্লগারদের সাথে বিষয় ভিত্তিক আলোচনা করুন...'}
-                    icon={<MdOutlineForum size={32} color='#ecc94b' />}
+                    icon={<MdOutlineForum size={32} color='#385898' />}
                     // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                    active
+                    // active
                     variant="subtle"
                     color={'dark'}
                 />

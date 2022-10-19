@@ -34,7 +34,7 @@ export default function HomeLayout({ children }) {
                     <Container
                         maxW={'container.xl'}
                         px={{ base: 0, md: '10px' }}
-                        bg='gray.50'
+                        bg='facebook.50'
                         backdropFilter='auto'
                         backdropBlur='2px'
                     >

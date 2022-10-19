@@ -106,7 +106,7 @@ export default function TopBloggers() {
                 spaceBetween={10}
                 slidesPerView={useBreakpointValue({
                     base: 2,
-                    md: 3,
+                    md: 2,
                     lg: 3
                 })}
                 navigation

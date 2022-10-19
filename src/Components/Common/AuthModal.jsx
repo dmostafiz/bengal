@@ -13,13 +13,13 @@ export default function AuthModal() {
             {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
             <Modal blockScrollOnMount={false} size={{base: 'sm', md: 'sm'}} isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent rounded='none'>
-                    <ModalHeader px={8} pb={1} fontSize={'16px'}>{title}</ModalHeader>
+                <ModalOverlay zIndex={999} />
+                <ModalContent rounded='md' zIndex={9999999999999}>
+                    <ModalHeader px={3} pb={1} fontSize={'17px'}>{title}</ModalHeader>
                     <ModalCloseButton rounded={'full'}/>
                     <ModalBody px={0}>
 
-                        <AuthComponent px={8}/>
+                        <AuthComponent px={7}/>
 
                     </ModalBody>
                 </ModalContent>

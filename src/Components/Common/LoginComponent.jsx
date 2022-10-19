@@ -125,7 +125,7 @@ export default function LoginComponent() {
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ইমেইল / পাসওয়ার্ড দিয়ে লগইন</Text>
+                    <Text fontSize={'13px'}>ইমেইল ও পাসওয়ার্ড</Text>
                 </Button>}
 
             </>

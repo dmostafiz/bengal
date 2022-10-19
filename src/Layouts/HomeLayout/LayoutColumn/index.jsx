@@ -1,14 +1,14 @@
-import { Box, Center, Divider, Flex, Text, useToast } from '@chakra-ui/react'
+import { Box, Center, Divider, Flex, Show, Text, useToast } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { getFlashMessage } from '../../../Helpers/cookieHelper'
 
-export default function LayoutColumn({ children, leftSide = '', rightSide = '', leftColumnWidth=32, rightColumnWidth=18 }) {
+export default function LayoutColumn({ children, leftSide = '', rightSide = '', leftColumnWidth = 32, rightColumnWidth = 18 }) {
 
 
-    const middleColumnWisdth = 100 - leftColumnWidth 
+    const middleColumnWisdth = 100 - leftColumnWidth
     const mainColumnWidth = 100 - rightColumnWidth
 
     const router = useRouter()
@@ -17,7 +17,7 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
     useEffect(() => {
         const flashMsg = getFlashMessage()
-        if(flashMsg){
+        if (flashMsg) {
             toast({
                 title: flashMsg.title ? flashMsg.title : '',
                 description: flashMsg.msg,
@@ -33,34 +33,39 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
         <SectionContainer >
             <Box w='full' py={{ base: 0, md: 0 }}>
 
-                <Flex direction={{ base: 'column', md: 'row' }} gap={0}>
+                <Flex direction={{ base: 'column', lg: 'row' }} gap={0}>
 
                     <Flex
                         flex='1'
-                        maxW={{ base: '100%', md: rightSide ? mainColumnWidth+'%' : '100%' }}
+                        maxW={{ base: '100%', lg: rightSide ? mainColumnWidth + '%' : '100%' }}
                         direction={{ base: 'column-reverse', md: 'row' }}
                         gap={0}
                     >
 
                         {leftSide && <Box
-                            minH={{base: '0px', md:'100vh'}}
-                            w={{ base: '100%', md: leftColumnWidth+'%' }}
+                            minH={{ base: '0px', lg: '100vh' }}
+                            w={{ base: '100%', lg: leftColumnWidth + '%' }}
                             pr={{ base: 0, md: 2, lg: 3 }}
                             py={{ base: 3, md: 3 }}
                         >
                             {leftSide}
+
+                            <Show below='lg'>
+                                {rightSide}
+                            </Show>
                         </Box>}
 
                         <Box
                             flex='1'
                             minH={'100vh'}
-                            maxW={{ base: '100%', md: leftSide ? middleColumnWisdth+'%' : '100%' }}
-                            px={{ base: 0, md: 2, lg: 4 }}
+                            maxW={{ base: '100%', md: leftSide ? middleColumnWisdth + '%' : '100%' }}
+                            px={{ base: 0, md: 4, lg: 4 }}
+                            pr={{ base: 0, md: 10, lg: 4 }}
                             bg={{ base: 'white', md: 'white' }}
-                            pt={{ base: 1, md: 3 }}
-                            borderLeft={ leftSide ? {base: 'none', md:'1px'} : 'none'}
-                            borderRight={ rightSide ? {base: 'none', md:'1px'} : 'none'}
-                            borderColor={{base: 'none', md:'blackAlpha.100'}}
+                            pt={{ base: 1, lg: 3 }}
+                            borderLeft={leftSide ? { base: 'none', md: '1px' } : 'none'}
+                            borderRight={rightSide ? { base: 'none', md: '1px' } : 'none'}
+                            borderColor={{ base: 'none', md: 'blackAlpha.100' }}
                         >
 
                             {children}
@@ -71,13 +76,15 @@ export default function LayoutColumn({ children, leftSide = '', rightSide = '', 
 
 
                     {rightSide && <Box
-                        w={{ base: '100%', md: rightColumnWidth+'%' }}
-                        minH={{base: '0px', md:'100vh'}}
+                        w={{ base: '100%', lg: rightColumnWidth + '%' }}
+                        minH={{ base: '0px', lg: '100vh' }}
                         bg=''
                         pl={{ base: 0, md: 2, lg: 2 }}
                         py={{ base: 3, md: 3 }}
                     >
-                        {rightSide}
+                        <Show above='lg'>
+                            {rightSide}
+                        </Show>
                     </Box>}
 
                 </Flex>

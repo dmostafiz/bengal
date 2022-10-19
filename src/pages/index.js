@@ -47,7 +47,7 @@ export default function Home() {
         {/* <Box mb={8}></Box> */}
 
 
-        <Show below='sm'>
+        <Show below='md'>
           <BlogPanel />
         </Show>
 

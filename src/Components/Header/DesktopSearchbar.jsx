@@ -38,6 +38,7 @@ export default function DesktopSearchbar() {
                 // onBlur={onClose}
                 // position={'relative'}
                 // top={-5}
+                bg='blackAlpha.50'
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 border='2px'

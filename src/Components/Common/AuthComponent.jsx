@@ -6,15 +6,15 @@ import RegistrationComponent from './RegistrationComponent'
 export default function AuthComponent({px = 2, bg='gray.100'}) {
     return (
 
-        <Tabs isFitted variant='unstyled' overflow='hidden'>
+        <Tabs variant='unstyled' overflow='hidden'>
 
-            <TabList border={'none'} bg='gray.200'>
-                <Tab _selected={{ bg: 'gray.300', color: 'blackAlpha.900', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
-                    <Text as={'h6'} fontSize={{ base: '14px', md: '16px' }}>লগইন করুন</Text>
+            <TabList border={'none'} bg='gray.200' px={3}>
+                <Tab role={'group'} _selected={{ rounded: 'none', fontWeight:'bold'  }} px={{ base: 2 }}>
+                    <Text _groupHover={{color: 'red'}} as={'h6'} fontSize={{ base: '14px', md: '15px' }}>লগইন করুন</Text>
                 </Tab>
 
-                <Tab role="group"  _selected={{ bg: 'gray.300', color: 'blackAlpha.900', rounded: 'none', fontWeight: 'normal' }} px={{ base: 2, md: 3 }}>
-                    <Text as={'h6'} fontSize={{ base: '14px', md: '16px' }}>নিবন্ধন করুন</Text>
+                <Tab role="group"  _selected={{ color: 'blackAlpha.900', rounded: 'none', fontWeight:'bold' }} px={{ base: 2 }}>
+                    <Text as={'h6'} fontSize={{ base: '14px', md: '15px' }}>নিবন্ধন করুন</Text>
                 </Tab>
 
     
