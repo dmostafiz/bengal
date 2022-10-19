@@ -143,6 +143,7 @@ export default function RegistrationComponent() {
                     callback={responseFacebook}
                     render={renderProps => <Button
                         isLoading={fbLoading}
+                        isDisabled={googleLoading}
                         onClick={renderProps.onClick}
                         mb='3'
                         leftIcon={<FaFacebook size={20} />}
@@ -171,6 +172,7 @@ export default function RegistrationComponent() {
                         mb='2'
                         isLoading={googleLoading}
                         loadingText='অপেক্ষা করুন...'
+                        isDisabled={fbLoading}
                         onClick={renderProps.onClick}
                         leftIcon={<Image h='20px' bg={'transparent'}
                             src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
@@ -195,6 +197,7 @@ export default function RegistrationComponent() {
                 {!toggleEmainLogin && <Button
                     // isLoading
                     onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
+                    isDisabled={googleLoading || fbLoading}
                     size='md'
                     mb='3'
                     leftIcon={<FaSignInAlt />}
