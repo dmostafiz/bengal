@@ -44,7 +44,7 @@ Axios.interceptors.response.use(
             // console.log('404 Error! ', res)
         }
 
-        return { data: { ok: false, msg: err?.message } }
+        // return { data: { ok: false, msg: err?.message } }
 
     }
 
