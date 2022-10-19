@@ -64,6 +64,7 @@ export default function RegistrationComponent() {
     }
 
     const responseGoogle = async (response) => {
+
         const obj = response.profileObj
 
         console.log(obj)
@@ -165,7 +166,7 @@ export default function RegistrationComponent() {
                     clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
                     buttonText="Login"
                     autoLoad={false}
-                    onSuccess={responseGoogle}
+                    onSuccess={() => responseGoogle()}
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
                     render={renderProps => <Button
