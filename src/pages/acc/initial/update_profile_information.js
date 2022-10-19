@@ -28,9 +28,9 @@ const schema = yup.object({
         .required('আপনার জন্ম তারিখ নির্ধারণ করুন।'),
     bio: yup.string()
         // .min(10, 'কমপক্ষে ১০ টি বাক্য লিখুন।')
-        .test('len', 'কমপক্ষে ১০ টি বাক্য লিখতে হবে।', val => {
+        .test('len', 'কমপক্ষে ৬ টি বাক্য লিখতে হবে।', val => {
             const wordsArr = val.split(' ')
-            return wordsArr.length >= 10
+            return wordsArr.length >= 6
             //    console.log(wordsArr)
         })
         .required('আপনার সম্পর্কে বিস্তারিত লিখুন')
