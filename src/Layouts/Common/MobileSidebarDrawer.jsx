@@ -16,7 +16,7 @@ export default function MobileSidebarDrawer() {
 
     return (
         <>
-            <Button borderColor={'blackAlpha.50'} ref={btnRef} colorScheme='teal' onClick={onOpen} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline' colorScheme='gray'>
+            <Button borderColor={'blackAlpha.50'} ref={btnRef} colorScheme='teal' onClick={onOpen} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline'>
                 <Menu2 size={24} />
             </Button>
 
