@@ -57,7 +57,7 @@ export default function HomeLayout({ children }) {
                             shadow='sm'
                         >
 
-                            {/* <ImageBanner src='/banner.png' /> */}
+                            {/* <ImageBanner src='/banner.jpg' /> */}
 
                             <Box px={{ base: 0, md: 1 }} py={{ base: 0, md: 1 }}>
                                 {children}

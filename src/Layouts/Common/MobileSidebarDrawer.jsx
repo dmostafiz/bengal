@@ -38,7 +38,7 @@ export default function MobileSidebarDrawer() {
                         {/* <Input placeholder='Type here...' /> */}
                     </DrawerBody>
 
-                    <DrawerFooter borderTop={'2px'} borderColor='blackAlpha.200' pb={16} pt={0}>
+                    <DrawerFooter borderTop={'2px'} borderColor='blackAlpha.200' pb={16} pt={3}>
                         {(!isLoading && !authUser) ? <Flex w={'full'}>
                             <Link href={'/auth/login'}>
                                 <Button flex='1' variant='outline' mr={3}>

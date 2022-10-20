@@ -1,9 +1,11 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Center, Image } from '@chakra-ui/react'
 import React from 'react'
 
 export default function SiteLogoDesktop() {
     return (
-        <Box h={'70px'} w={'160px'} bgSize='100%' bgRepeat={'no-repeat'} bgPos={'center'} bgImage='/logo.png'>
-        </Box>
+        <Center h={'70px'} w={{ base: '100px', lg: '200px' }}>
+            <Image h='full' w='full' src='/logo.png' />
+        </Center>
+
     )
 }
