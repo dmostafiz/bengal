@@ -16,7 +16,7 @@ export default function UserPanel({ logout = false }) {
                 <NavLink
                     label={<Text fontSize={'17px'} fontWeight={500}>{authUser.displayName}</Text>}
                     description={<Text as='' fontSize={'12px'} color='blackAlpha.600'>@{authUser.userName}</Text>}
-                    icon={<Avatar size={'md'} name={authUser.displayName} src={authUser.avatar} />}
+                    icon={<Avatar size={'md'} src={authUser.avatar} />}
                     rightSection={<IconChevronRight size={12} stroke={1.5} />}
                     // active
                     // variant="filled"
