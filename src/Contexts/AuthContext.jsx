@@ -20,7 +20,9 @@ const AuthContextProvider = ({ children }) => {
         setHasUser(true)
         return response?.data?.user
     }, {
+        refetchOnWindowFocus: false,
         enabled: !hasUser ? true : false,
+        retry: false,
     })
 
     const logoutUser = async () => {
