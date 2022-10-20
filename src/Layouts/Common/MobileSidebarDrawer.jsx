@@ -21,7 +21,6 @@ export default function MobileSidebarDrawer() {
             </Button>
 
             <Drawer
-                size={'full'}
                 isOpen={isOpen}
                 placement='right'
                 onClose={onClose}
