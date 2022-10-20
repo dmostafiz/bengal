@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Show, Spacer, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconBook, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
 import Link from 'next/link'
@@ -11,25 +11,27 @@ import BlogPanel from '../../Components/Common/BlogPanel'
 import { AuthContext } from '../../Contexts/AuthContext'
 import useUser from '../../Hooks/useUser'
 
-export default function MainLeftSidebar({authpanel = true}) {
+export default function MainLeftSidebar({ authpanel = true }) {
 
-    const {authUser, isLoading, isError, error} = useUser()
+    const { authUser, isLoading, isError, error } = useUser()
 
     // console.log('Leftside auth: ', authUser)
 
     return (
         <Box>
 
-            <BlogPanel />
+            <Show above='md'>
+                <BlogPanel />
+            </Show>
 
 
-            {(!isLoading && authpanel == true) && <Box  mb={5} shadow='sm'>
+            {(!isLoading && authpanel == true) && <Box mb={5} shadow='sm'>
                 {/* <Box bg='gray.100' py={2} px={2} mb={1}>
                     <Text order={5}>একাউন্ট এ প্রবেশ করুন</Text>
                 </Box> */}
                 {!authUser && <AuthComponent px={5} />}
-                
-            </Box> }
+
+            </Box>}
 
             <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
                 <Center p={3} bg='yellow.200'>
