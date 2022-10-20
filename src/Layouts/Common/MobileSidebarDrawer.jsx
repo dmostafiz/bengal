@@ -15,7 +15,7 @@ export default function MobileSidebarDrawer() {
     const { authUser, isLoading } = useUser()
 
     return (
-        <Box h={'full'}>
+        <Box position={'relative'} h={'full'}>
             <Button borderColor={'blackAlpha.50'} ref={btnRef} colorScheme='teal' onClick={onOpen} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline'>
                 <Menu2 size={24} />
             </Button>
