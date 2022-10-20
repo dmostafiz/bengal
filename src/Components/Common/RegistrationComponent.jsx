@@ -1,140 +1,19 @@
 import {
-    Avatar, Box, Button, Center, Divider, Flex, Image, Input, Spacer, Text, FormErrorMessage,
-    FormLabel,
-    FormControl,
-    useToast
+    Box, Button, Center, Image, Input, Spacer, Text, FormErrorMessage,
+    FormControl
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { FaArrowLeft, FaBackspace, FaEnvelope, FaFacebook, FaFacebookF, FaGoogle, FaSignInAlt } from 'react-icons/fa'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import Axios from '../../Helpers/axiosHelper';
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/router';
-import { removeUpdateToken, setFlashMessage, setRedirectUrl, setUpdateToken } from '../../Helpers/cookieHelper';
+import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
 import CustomButton from './CustomButton';
+import useRegistration from '../../Hooks/useRegistration';
+import { FaFacebook } from 'react-icons/fa';
 
-const schema = yup.object({
-    email: yup.string()
-        .email("দুঃখিত! ইমেইলটি ঠিকানাটি সঠিক নয়!")
-        .required('নিবন্ধিনের জন্য ইমেইল ঠিকানাটি আবশ্যক!')
-        .test(
-            'checkEmailUnique',
-            'দুঃখিত! ইমেইলটি আগে থেকে নিবন্ধিত!',
-            async (value) => {
-                const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
-                    withCredentials: true,
-                })
-
-                if (res?.data?.ok === true) {
-                    return false
-                }
-
-                return true
-            }
-        ),
-}).required();
 
 export default function RegistrationComponent() {
 
-    const router = useRouter()
-    const toast = useToast()
+    const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useRegistration()
 
-    const [toggleEmainLogin, setToggleEmainLogin] = useState(false)
-
-    const [googleLoading, setGoogleLoading] = useState(false)
-    const [fbLoading, setFbLoading] = useState(false)
-
-    const {
-        handleSubmit,
-        register,
-        formState: { errors, isSubmitting },
-    } = useForm({
-        mode: 'onChange',
-        resolver: yupResolver(schema)
-    })
-
-    const responseFacebook = (response) => {
-        console.log(response);
-        setFbLoading(true)
-    }
-
-    const responseGoogle = async (response) => {
-
-        const obj = response.profileObj
-
-        console.log(obj)
-        setGoogleLoading(true)
-
-        if (obj) {
-            await submitRegistrationData(
-                '/auth/social_signup',
-                {
-                    email: obj?.email,
-                    avatar: obj?.imageUrl,
-                    host: 'google'
-                }
-            )
-        }
-
-        setGoogleLoading(false)
-
-    }
-
-
-
-    async function onSubmit(values) {
-        console.log('Form Value', values)
-        await submitRegistrationData('/auth/signUp', values)
-    }
-
-    const submitRegistrationData = async (url, values) => {
-        const res = await Axios.post(url, { ...values }, {
-            // withCredentials: true
-        })
-
-        // console.log(res)
-
-        if (res?.data.ok == true) {
-
-            // Cookies.set('profileUpdateToken', data.profileUpdateToken)
-            // removeUpdateToken(data.profileUpdateToken)
-            // setRedirectUrl(router.asPath)
-
-            setUpdateToken(res?.data.profileUpdateToken)
-
-            toast({
-                title: 'নিবন্ধন সফল হয়েছে!',
-                description: "আপনার নিবন্ধন সফল হয়েছে, অনুগ্রহপূর্বক আপনার প্রোফাইল এর তথ্য হালনাগাদ করুন।",
-                status: 'success',
-                position: 'top-right',
-                duration: 9000,
-                isClosable: true,
-            })
-
-            setFlashMessage('success', "নিবন্ধন সফল হয়েছে!", "আপনার নিবন্ধন সফল হয়েছে, অনুগ্রহপূর্বক আপনার প্রোফাইল এর তথ্য হালনাগাদ করুন।",)
-
-            window.location.href = '/acc/initial/update_profile_information'
-
-            return
-
-        } else {
-            toast({
-                title: 'দুঃখিত!',
-                description: res?.data?.msg ?? 'রিকুয়েস্টটি সফল হয়নি, আবার চেষ্টা করুন।',
-                status: 'error',
-                position: 'top-right',
-                duration: 9000,
-                isClosable: true,
-            })
-
-            return
-        }
-
-    }
 
 
     return (
@@ -143,164 +22,98 @@ export default function RegistrationComponent() {
         <Title order={5}>ব্লগে প্রবেশ করুন</Title>
     </Center> */}
 
-            <>
-
-                <FacebookLogin
-                    appId="561683539070348"
-                    autoLoad={false}
-                    callback={responseFacebook}
-                    render={renderProps => <Button
-                        isLoading={fbLoading}
-                        isDisabled={googleLoading}
-                        onClick={renderProps.onClick}
-                        mb='3'
-                        leftIcon={<FaFacebook size={20} />}
-                        colorScheme={'facebook'}
-                        shadow='sm'
-                        w='full'
-                        rounded={'sm'}
-                        gap={2}
-                    >
-                        <Text fontSize={'13px'}>ফেসবুক থেকে নিবন্ধন</Text>
-                    </Button>
-                    }
-                />
 
 
-
-
-                <GoogleLogin
-                    clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
-                    buttonText="Login"
-                    autoLoad={false}
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                    render={renderProps => <Button
-                        mb='2'
-                        isLoading={googleLoading}
-                        loadingText='অপেক্ষা করুন...'
-                        isDisabled={fbLoading}
-                        onClick={renderProps.onClick}
-                        leftIcon={<Image h='20px' bg={'transparent'}
-                            src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
-                            color='red'
-                        />}
-                        bg={'whiteAlpha.900'}
-                        colorScheme={'gray'}
-                        border='1px'
-                        borderColor={'blackAlpha.50'}
-                        shadow='sm'
-                        w='full'
-                        rounded={'sm'}
-                        size='md'
-                        gap={2}
-                    >
-                        <Text fontSize={'13px'}>গুগোল থেকে নিবন্ধন</Text>
-                    </Button>}
-                />
-
-                <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
-
-                {!toggleEmainLogin && <Button
-                    // isLoading
-                    onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
-                    isDisabled={googleLoading || fbLoading}
-                    size='md'
+            <FacebookLogin
+                appId="561683539070348"
+                autoLoad={false}
+                callback={responseFacebook}
+                render={renderProps => <Button
+                    isLoading={fbLoading}
+                    isDisabled={googleLoading}
+                    onClick={renderProps.onClick}
                     mb='3'
-                    leftIcon={<FaSignInAlt />}
-                    colorScheme={'yellow'}
+                    leftIcon={<FaFacebook size={20} />}
+                    colorScheme={'facebook'}
                     shadow='sm'
                     w='full'
                     rounded={'sm'}
                     gap={2}
                 >
-                    <Text fontSize={'13px'}>ম্যানুয়ালি নিবন্ধন করুন</Text>
+                    <Text fontSize={'13px'}>ফেসবুক থেকে নিবন্ধন</Text>
+                </Button>
+                }
+            />
+
+
+
+            <GoogleLogin
+                clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                buttonText="Login"
+                autoLoad={false}
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+                render={renderProps => <Button
+                    mb='2'
+                    isLoading={googleLoading}
+                    loadingText='অপেক্ষা করুন...'
+                    isDisabled={fbLoading}
+                    onClick={renderProps.onClick}
+                    leftIcon={<Image h='20px' bg={'transparent'}
+                        src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
+                        color='red'
+                    />}
+                    bg={'whiteAlpha.900'}
+                    colorScheme={'gray'}
+                    border='1px'
+                    borderColor={'blackAlpha.50'}
+                    shadow='sm'
+                    w='full'
+                    rounded={'sm'}
+                    size='md'
+                    gap={2}
+                >
+                    <Text fontSize={'13px'}>গুগোল থেকে নিবন্ধন</Text>
                 </Button>}
+            />
 
-            </>
-            {toggleEmainLogin && <>
+            <Center mb={2}><Text fontSize={'12px'} color='blackAlpha.500'>অথবা</Text></Center>
 
-                {/* <Divider borderColor={'blackAlpha.100'} mb={3} /> */}
 
-                <Box>
+            <Box>
 
-                    {/* <Text mb={1} fontSize={'14px'}>ইমেইল এড্রেস</Text> */}
-                    <FormControl isInvalid={errors.email}>
-                        <Input
-                            border={'1px'}
-                            borderColor='blackAlpha.200'
-                            _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                            _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                            bg={'whiteAlpha.700'} size={'sm'}
-                            placeholder='আপনার ইমেইল এড্রেসটি দিন'
-                            type='text'
-                            {...register('email')}
-
-                        />
-                        <FormErrorMessage>
-                            {errors.email && errors.email.message}
-                        </FormErrorMessage>
-                    </FormControl>
-
-                    <Spacer h={3} />
-
-                    {/* <Text mb={1} fontSize={'14px'}>পাসওয়ার্ড</Text>
+                {/* <Text mb={1} fontSize={'14px'}>ইমেইল এড্রেস</Text> */}
+                <FormControl isInvalid={errors.email}>
                     <Input
-                        border={'none'}
-                        _focus={{ ring: '0', border: 'none' }}
-                        _hover={{ ring: '0', border: 'none' }}
-                        _autofill={false} bg={'whiteAlpha.700'}
-                        size={'sm'}
-                        placeholder='পাসওয়ার্ড দিন'
-                        type='password'
+                        border={'1px'}
+                        borderColor='blackAlpha.200'
+                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                        bg={'whiteAlpha.700'} size={'sm'}
+                        placeholder='আপনার ইমেইল এড্রেসটি দিন'
+                        type='text'
+                        {...register('email')}
+
                     />
+                    <FormErrorMessage>
+                        {errors.email && errors.email.message}
+                    </FormErrorMessage>
+                </FormControl>
 
-                    <Spacer h={3} />
+                <Spacer h={3} />
 
-                    <Text mb={1} fontSize={'14px'}>পুনঃ পাসওয়ার্ড</Text>
-                    <Input
-                        border={'none'}
-                        _focus={{ ring: '0', border: 'none' }}
-                        _hover={{ ring: '0', border: 'none' }}
-                        _autofill={false} bg={'whiteAlpha.700'}
-                        size={'sm'}
-                        placeholder='পুনঃ পাসওয়ার্ড দিন'
-                        type='password'
-                    />
-                    
-                    <Spacer h={5} /> */}
+                <CustomButton
+                    isLoading={isSubmitting}
+                    onClick={handleSubmit(onSubmit)}
+                    w='full' colorScheme={'blue'}
+                    shadow='sm' rounded={'sm'}
+                    size={'sm'}
+                >
+                    রেজিস্ট্রেশন করুন
+                </CustomButton>
 
-                    {/* <a href='#'><Text fontSize={'13px'} color='blue.800'>পাসওয়ার্ড মনে নেই ?</Text></a> */}
-                    {/* <Spacer h={2} /> */}
-                    <CustomButton
-                        isLoading={isSubmitting}
-                        onClick={handleSubmit(onSubmit)}
-                        w='full' colorScheme={'blue'}
-                        shadow='sm' rounded={'sm'}
-                        size={'sm'}
-                    >
-                        রেজিস্ট্রেশন করুন
-                    </CustomButton>
-
-
-                    <Box px={2} pt={3}>
-                        <Button
-                            onClick={() => setToggleEmainLogin(!toggleEmainLogin)}
-                            bg={'transparent'}
-                            variant='link'
-                            fontWeight={'normal'}
-                            _hover={{ textDecor: 'none' }}
-                            leftIcon={<FaArrowLeft />}
-                            colorScheme='yellow'
-                            size={'xs'}
-                        >
-                            <Text fontSize={'13px'}>মিনিমাইজ করুন</Text>
-                        </Button>
-                    </Box>
-                </Box>
-            </>}
-
+            </Box>
 
         </Box>
     )

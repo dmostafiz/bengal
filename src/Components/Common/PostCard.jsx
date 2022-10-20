@@ -7,7 +7,7 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author, slug = 'বান্দুরা-রানী-পবিত্র-জপমালা-গীর্জা' }) {
     return (
-        <Box bg={'gray.50'} border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='md' overflow={'hidden'}>
+        <Box border='2px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
             <Box w='full' bg='.50' py={2} px={4}>
                 <Box fontSize={'15px'}>

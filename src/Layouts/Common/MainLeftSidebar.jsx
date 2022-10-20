@@ -11,7 +11,7 @@ import BlogPanel from '../../Components/Common/BlogPanel'
 import { AuthContext } from '../../Contexts/AuthContext'
 import useUser from '../../Hooks/useUser'
 
-export default function MainLeftSidebar() {
+export default function MainLeftSidebar({authpanel = true}) {
 
     const {authUser, isLoading, isError, error} = useUser()
 
@@ -23,7 +23,7 @@ export default function MainLeftSidebar() {
             <BlogPanel />
 
 
-            {!isLoading && <Box  mb={5} shadow='sm'>
+            {(!isLoading && authpanel == true) && <Box  mb={5} shadow='sm'>
                 {/* <Box bg='gray.100' py={2} px={2} mb={1}>
                     <Text order={5}>একাউন্ট এ প্রবেশ করুন</Text>
                 </Box> */}

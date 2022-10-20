@@ -1,6 +1,6 @@
-import { Avatar, Box, Button, Flex, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
 import React, { useContext } from 'react'
-import { BellRinging, ChevronDown, Logout, Menu2, Pencil, User } from 'tabler-icons-react'
+import { BellRinging, ChevronDown, Heart, Lock, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { FaBell, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
 import { Affix } from '@mantine/core'
@@ -11,14 +11,15 @@ import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
 import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
 import { setRedirectUrl } from '../../../Helpers/cookieHelper'
 import useUser from '../../../Hooks/useUser'
+import Link from 'next/link'
 
 export default function TopBar() {
 
     const router = useRouter()
 
-    const {onOpen} = useContext(AuthModalContext)
-    
-    const {authUser, isLoading, hasUser, isError, error, logoutUser} = useUser()
+    const { onOpen, seTitle } = useContext(AuthModalContext)
+
+    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
     const handleClickWriteBlog = () => {
 
@@ -28,6 +29,7 @@ export default function TopBar() {
 
         else {
             setRedirectUrl('/write')
+            seTitle('ব্লগ লিখতে লগইন করা আবশ্যক')
             onOpen()
         }
     }
@@ -75,27 +77,44 @@ export default function TopBar() {
                                         </MenuList>
                                     </Menu>
 
-                                    <Button size={{ base: 'md', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'blackAlpha.50', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{base: 'blackAlpha', md: 'yellow'}}>
+                                    <Button size={{ base: 'md', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'blackAlpha.50', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
                                         <Flex alignItems={'center'} gap={1}>
                                             <Pencil size={20} /> <Show above='md'><Text>নগরশৈলীতে লিখুন</Text></Show>
                                         </Flex>
                                     </Button>
 
 
-                                    {authUser && <Menu>
+                                    {authUser ? <Menu>
                                         <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
-                                            <Avatar size={'xs'} name='Mostafiz Rahaman' src='' />
+                                            <Avatar size={'xs'} name={authUser.displayName} src={authUser.avatar} />
                                         </MenuButton>
                                         <MenuList rounded='none' zIndex={9999}>
                                             <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                             <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
-                                            <MenuItem onClick={logoutUser} icon={<Logout />}>লগ-আউট করুন</MenuItem>
+                                            <MenuItem icon={<Heart />}>আমার পছন্দ তালিকা</MenuItem>
+                                            <MenuItem onClick={logoutUser} icon={<Power />}>লগ-আউট করুন</MenuItem>
+                                        </MenuList>
+                                    </Menu> 
+                                    : !isLoading && <Menu>
+                                        <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'}>
+                                            <Flex alignItems={'center'} gap={'1px'}>
+                                                <Icon as={UserCircle} fontSize={20} color='gray.700' />
+                                                <ChevronDown size={16} color='gray' />
+                                            </Flex>
+                                        </MenuButton>
+                                        <MenuList rounded='none' zIndex={9999}>
+                                            <Link href={'/auth/login'}>
+                                                <MenuItem icon={<Lock />}>লগইন করুন</MenuItem>
+                                            </Link>
+                                            <Link href={'/auth/create_acc'}>
+                                                <MenuItem icon={<Login />}>নিবন্ধন করুন</MenuItem>
+                                            </Link>
                                         </MenuList>
                                     </Menu>}
                                 </Flex>
 
                                 <Show below='md'>
-                                    <Button borderColor={'blackAlpha.50'} onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline'  colorScheme='gray'>
+                                    <Button borderColor={'blackAlpha.50'} onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline' colorScheme='gray'>
                                         <Menu2 size={24} />
                                     </Button>
                                 </Show>

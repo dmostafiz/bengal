@@ -81,8 +81,8 @@ export default function Home() {
 
 
         <Box mb={8}>
-          <Box py={2} bg={''} fontWeight='bold' rounded='sm'>
-            <Title order={3}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Title>
+          <Box py={2} px={2} bg={''} fontWeight='bold' rounded='sm'>
+            <Title order={4}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Title>
           </Box>
 
           <VStack gap={3}>
