@@ -8,6 +8,7 @@ import AuthModal from '../../Components/Common/AuthModal'
 import LayoutWrapper from '../../Wrappers/LayoutWrapper'
 import { useRouter } from 'next/router'
 import { getFlashMessage } from '../../Helpers/cookieHelper'
+import useUser from '../../Hooks/useUser'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -15,15 +16,18 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({ children }) {
 
+    const {isLoading, authUser} = useUser()
+
     return (
         <LayoutWrapper>
             <Box bg={{base:'white', md:'facebook.900'}} minH='100vh'>
 
-                <GoogleOneTapLogin
+                
+                {(!isLoading && !authUser) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => console.log(response)}
                     googleAccountConfigs={{ client_id: '721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com' }}
-                />
+                />}
 
                 <Box
                     bgColor={'blackAlpha.0'}

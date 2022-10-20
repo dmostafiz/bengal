@@ -12,6 +12,8 @@ import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
 import { setRedirectUrl } from '../../../Helpers/cookieHelper'
 import useUser from '../../../Hooks/useUser'
 import Link from 'next/link'
+import MobileSidebarDrawer from '../../Common/MobileSidebarDrawer'
+import SiteLogoMobile from '../../../Components/Common/SiteLogoMobile'
 
 export default function TopBar() {
 
@@ -46,9 +48,14 @@ export default function TopBar() {
                     <Box bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Flex alignItems={'center'} justify={'space-between'} gap={5}>
 
-                            <Flex alignItems={'center'} justify={'space-between'} gap={3}>
+                            <Show above='md' gap={3}>
                                 <SiteLogoDesktop />
-                            </Flex>
+                            </Show>
+
+
+                            <Show below='md' gap={3}>
+                                <SiteLogoMobile />
+                            </Show>
 
                             <Show above='xl'>
                                 <Box flex={1}>
@@ -114,9 +121,7 @@ export default function TopBar() {
                                 </Flex>
 
                                 <Show below='md'>
-                                    <Button borderColor={'blackAlpha.50'} onClick={handleClickWriteBlog} _hover={{ bg: 'transparent' }} _active={{ bg: 'transparent' }} rounded='lg' bg={'transparent'} variant='outline' colorScheme='gray'>
-                                        <Menu2 size={24} />
-                                    </Button>
+                                   <MobileSidebarDrawer />
                                 </Show>
 
                             </Flex>

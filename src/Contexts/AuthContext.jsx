@@ -10,7 +10,7 @@ export const AuthContext = createContext()
 const AuthContextProvider = ({ children }) => {
 
 
-    const { data, isLoading, isError, error } = useQuery([], async () => {
+    const { data, isLoading, isError, error } = useQuery(['authUser'], async () => {
 
         const response = await Axios.get('/auth/get_authorised_user')
 

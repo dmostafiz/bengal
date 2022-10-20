@@ -1,9 +1,9 @@
 import { Box, Image } from '@chakra-ui/react'
 import React from 'react'
 
-export default function SiteLogoDesktop() {
+export default function SiteLogoMobile() {
     return (
-        <Box h={'70px'} maxW={'160px'}>
+        <Box my={3} h={'40px'} w={'80px'}>
             <Image h={'full'} w={'full'} src='/logo.png' />
         </Box>
     )

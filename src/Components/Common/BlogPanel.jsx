@@ -6,6 +6,7 @@ import { MdOutlineForum } from 'react-icons/md'
 import useUser from '../../Hooks/useUser'
 import { Heart, Logout, Pencil, Power, User } from 'tabler-icons-react'
 import Link from 'next/link'
+import UserPanel from './UserPanel'
 
 export default function BlogPanel() {
 
@@ -14,26 +15,8 @@ export default function BlogPanel() {
     return (
         <Box mb={5} bg=''>
 
-            {(!isLoading && authUser) && <Box>
 
-                <NavLink
-                    label={<Text fontSize={'17px'} fontWeight={500}>{authUser.displayName}</Text>}
-                    description={<Text as='' fontSize={'12px'} color='blackAlpha.600'>@{authUser.userName}</Text>}
-                    icon={<Avatar size={'md'} name={authUser.displayName} src={authUser.avatar} />}
-                    rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                    // active
-                    variant="filled"
-                    // variant="subtle"
-                    // color={'blue'}
-                >
-                    <NavLink  icon={<User />} label="প্রোফাইল" />
-                    <NavLink  icon={<Pencil />} label="আমার লিখাসমূহ" />
-                    <NavLink  icon={<Heart />} label="আমার পছন্দ তালিকা" />
-                    {/* <NavLink onClick={logoutUser} icon={<Power />} label="লগ-আউট" /> */}
-                </NavLink>
-            </Box>
-
-            }
+            <UserPanel />
 
             <Box bg={'blackAlpha.50'} _hover={{ bg: 'blackAlpha.200' }}>
                 <Link href='/'>
