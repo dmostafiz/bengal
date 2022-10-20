@@ -30,9 +30,8 @@ export default function MobileSidebarDrawer() {
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
-                    <DrawerHeader borderBottom={'2px'} borderColor='blackAlpha.200'>
-                        <SiteLogoDesktop />
-
+                    <DrawerHeader py={0} borderBottom={'2px'} borderColor='blackAlpha.200'>
+                        <SiteLogoMobile />
                     </DrawerHeader>
 
                     <DrawerBody>
