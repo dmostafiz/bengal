@@ -28,7 +28,7 @@ export default function MobileSidebarDrawer() {
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
-                <DrawerContent>
+                <DrawerContent h={'100vh'}>
                     <DrawerCloseButton />
                     <DrawerHeader py={0} borderBottom={'2px'} borderColor='blackAlpha.200'>
                         <SiteLogoMobile />
@@ -38,7 +38,7 @@ export default function MobileSidebarDrawer() {
                         {/* <Input placeholder='Type here...' /> */}
                     </DrawerBody>
 
-                    <DrawerFooter bg={'gray.50'}>
+                    <DrawerFooter borderTop={'2px'} borderColor='blackAlpha.200' pb={14}>
                         {(!isLoading && !authUser) ? <Flex w={'full'}>
                             <Link href={'/auth/login'}>
                                 <Button flex='1' variant='outline' mr={3}>
