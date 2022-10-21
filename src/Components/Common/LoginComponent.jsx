@@ -10,7 +10,7 @@ import useLogin from '../../Hooks/useLogin';
 
 export default function LoginComponent() {
 
-    const {responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting} = useLogin()
+    const {responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useLogin()
 
     return (
         <Box>
@@ -21,7 +21,8 @@ export default function LoginComponent() {
                 callback={responseFacebook}
                 fields="name,email,picture"
                 render={renderProps => <Button
-                    isLoading={renderProps.isProcessing}
+                    isLoading={fbLoading}
+                    isDisabled={googleLoading}
                     onClick={renderProps.onClick}
                     mb='3'
                     leftIcon={<FaFacebook size={20} />}
@@ -45,7 +46,8 @@ export default function LoginComponent() {
                 cookiePolicy={'single_host_origin'}
                 render={renderProps => <Button
                     mb='2'
-                    isLoading={renderProps.isProcessing}
+                    isLoading={googleLoading}
+                    isDisabled={fbLoading}
                     onClick={renderProps.onClick}
                     leftIcon={<Image h='20px' bg={'transparent'}
                         src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'
@@ -117,6 +119,7 @@ export default function LoginComponent() {
 
                 <CustomButton
                     isLoading={isSubmitting}
+                    isDisabled={fbLoading || googleLoading}
                     onClick={handleSubmit(onSubmit)}
                     w='full'
                     colorScheme={'blue'}

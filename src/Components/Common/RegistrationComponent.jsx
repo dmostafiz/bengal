@@ -95,6 +95,7 @@ export default function RegistrationComponent() {
 
                 <CustomButton
                     isLoading={isSubmitting}
+                    isDisabled={fbLoading || googleLoading}
                     onClick={handleSubmit(onSubmit)}
                     w='full' colorScheme={'blue'}
                     shadow='sm' rounded={'sm'}

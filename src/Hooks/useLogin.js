@@ -30,10 +30,12 @@ export default function useLogin() {
     })
 
 
-    const [facebookLoading, setFLoading] = useState(false)
+    const [googleLoading, setGoogleLoading] = useState(false)
+    const [fbLoading, setFbLoading] = useState(false)
 
 
     const responseFacebook = async (response) => {
+        setFbLoading(true)
 
         if (response?.email) {
 
@@ -42,9 +44,13 @@ export default function useLogin() {
 
             })
         }
+
+        setFbLoading(false)
     }
 
     const responseGoogle = async (response) => {
+
+        setGoogleLoading(true)
 
         const obj = response.profileObj
 
@@ -55,6 +61,8 @@ export default function useLogin() {
 
             })
 
+            setGoogleLoading(false)
+            
             return loginStatus
         }
         else
@@ -76,6 +84,25 @@ export default function useLogin() {
         console.log('Response ', res.data)
 
         if (res?.data?.ok) {
+
+            if(res?.data?.type == 'update'){
+
+                setUpdateToken(res?.data.profileUpdateToken)
+
+                toast({
+                    title: 'আপনার প্রোফাইল হালনাগাদ করুন',
+                    // description: "আপনার নিবন্ধন সফল হয়েছে, অনুগ্রহপূর্বক আপনার প্রোফাইল এর তথ্য হালনাগাদ করুন।",
+                    status: 'success',
+                    position: 'top-right',
+                    duration: 9000,
+                    isClosable: true,
+                })
+    
+                setFlashMessage('success', "আপনার প্রোফাইল হালনাগাদ করুন", "")
+    
+                window.location.href = '/acc/initial/update_profile_information'
+                return
+            }
 
             toast({
                 title: 'ব্লগে আপনাকে স্বাগতম!',
@@ -104,6 +131,7 @@ export default function useLogin() {
                 duration: 9000,
                 isClosable: true,
             })
+            
 
             return false
 
