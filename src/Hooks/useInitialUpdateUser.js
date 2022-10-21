@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { authorizeUpdateToken } from '../Helpers/cookieHelper'
 
 export default function useInitialUpdateUser() {
-    
+
     const router = useRouter()
 
     const [loading, setLoading] = useState(true)
@@ -15,10 +15,13 @@ export default function useInitialUpdateUser() {
         (
 
             async () => {
+
                 const data = await authorizeUpdateToken()
 
                 setAvatar(data.avatar)
                 setEmail(data.email)
+
+                if (!data) return window.location.href = '/'
 
                 if (!data?.redirectUrl && router.asPath.startsWith('/acc/initial')) {
                     window.location.href = '/'
@@ -29,10 +32,9 @@ export default function useInitialUpdateUser() {
 
             }
 
-
         )()
 
     }, [router])
 
-    return { loading, avatar, email}
+    return { loading, avatar, email }
 }

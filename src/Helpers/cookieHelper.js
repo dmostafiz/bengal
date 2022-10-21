@@ -40,20 +40,21 @@ export function setUpdateToken(token) {
 export async function authorizeUpdateToken() {
 
     console.log('Get updateToken')
+    
     const updateToken = Cookies.get('updateToken')
 
     if (updateToken) {
 
-        const { data } = await Axios.post('/auth/authorize_initial_acc_update_token', {}, {
+        const response = await Axios.post('/auth/authorize_initial_acc_update_token', {}, {
             headers: {
                 Authorization: `Bearer ${updateToken}`
             }
         })
 
-        console.log('authorize_initial_acc_update_token', data)
+        console.log('authorize_initial_acc_update_token', response.data)
 
-        if (data.ok) {
-            return data
+        if (response?.data?.ok) {
+            return response?.data
         }
 
         return null

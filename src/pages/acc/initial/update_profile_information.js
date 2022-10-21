@@ -68,7 +68,6 @@ export default function update_profile_information() {
     }, [avatar])
 
 
-
     useEffect(() => {
 
         if (file) {
