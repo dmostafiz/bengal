@@ -1,7 +1,4 @@
-import {
-    Box, Button, Center, Image, Input, Spacer, Text, FormErrorMessage,
-    FormControl
-} from '@chakra-ui/react'
+import { Box, Button, Center, Image, Input, Spacer, Text, FormErrorMessage,FormControl } from '@chakra-ui/react'
 import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
@@ -9,12 +6,9 @@ import CustomButton from './CustomButton';
 import useRegistration from '../../Hooks/useRegistration';
 import { FaFacebook } from 'react-icons/fa';
 
-
 export default function RegistrationComponent() {
 
     const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useRegistration()
-
-
 
     return (
         <Box>
@@ -22,10 +16,8 @@ export default function RegistrationComponent() {
         <Title order={5}>ব্লগে প্রবেশ করুন</Title>
     </Center> */}
 
-
-
             <FacebookLogin
-                appId="561683539070348"
+                appId={process.env.FACEBOOK_APP_ID}
                 autoLoad={false}
                 callback={responseFacebook}
                 render={renderProps => <Button
@@ -45,10 +37,8 @@ export default function RegistrationComponent() {
                 }
             />
 
-
-
             <GoogleLogin
-                clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                clientId={process.env.GOOGLE_CLIENT_ID}
                 buttonText="Login"
                 autoLoad={false}
                 onSuccess={responseGoogle}

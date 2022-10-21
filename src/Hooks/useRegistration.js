@@ -46,8 +46,21 @@ export default function useRegistration() {
         resolver: yupResolver(schema)
     })
 
-    const responseFacebook = (response) => {
-        console.log(response);
+    const responseFacebook = async (response) => {
+
+        setFbLoading(true)
+
+        if (response?.email) {
+            await submitRegistrationData(
+                '/auth/social_signup',
+                {
+                    email: response?.email,
+                    avatar: response?.picture?.url,
+                    host: 'facebook'
+                }
+            )
+        }
+
         setFbLoading(true)
     }
 
@@ -56,6 +69,7 @@ export default function useRegistration() {
         const obj = response.profileObj
 
         console.log(obj)
+
         setGoogleLoading(true)
 
         if (obj) {

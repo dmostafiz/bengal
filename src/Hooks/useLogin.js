@@ -33,19 +33,39 @@ export default function useLogin() {
     const [facebookLoading, setFLoading] = useState(false)
 
 
-    const responseFacebook = (response) => {
-        console.log('Facebook Login initialized')
-        console.log(response);
+    const responseFacebook = async (response) => {
+
+        if (response?.email) {
+
+            await submitLoginData('/auth/social_signin', {
+                email: response?.email
+
+            })
+        }
     }
 
-    const responseGoogle = (response) => {
-        console.log('Google Login initialized')
-        console.log(response);
+    const responseGoogle = async (response) => {
+
+        const obj = response.profileObj
+
+        if (obj) {
+
+            await submitLoginData('/auth/signIn', {
+                email: obj?.email
+
+            })
+        }
+
     }
 
     async function onSubmit(values) {
+        await submitLoginData('/auth/signIn', values)
+    }
 
-        const res = await Axios.post('/auth/signIn', { ...values })
+
+    async function submitLoginData(url, values) {
+
+        const res = await Axios.post(url, { ...values })
 
         console.log('Response ', res.data)
 
@@ -70,6 +90,7 @@ export default function useLogin() {
         }
 
         if (!res?.data?.ok) {
+
             toast({
                 title: 'দুঃখিত!',
                 description: res?.data?.msg ?? 'রিকুয়েস্টটি সফল হয়নি, আবার চেষ্টা করুন।',
@@ -78,10 +99,11 @@ export default function useLogin() {
                 duration: 9000,
                 isClosable: true,
             })
-        }
 
+        }
     }
 
 
-    return {responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting}
+
+    return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting }
 }

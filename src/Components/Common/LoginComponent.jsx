@@ -1,19 +1,12 @@
-import { Avatar, Box, Button, Center, Divider, Flex, FormControl, FormErrorMessage, Image, Input, Spacer, Text, useToast } from '@chakra-ui/react'
+import { Box, Button, Center, FormControl, FormErrorMessage, Image, Input, Spacer, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaArrowLeft, FaBackspace, FaEnvelope, FaFacebook, FaFacebookF, FaGoogle, FaSignInAlt } from 'react-icons/fa'
 import { FacebookProvider } from 'react-facebook';
 import FacebookLoginButton from '../Auth/FacebookLoginButton';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import Axios from '../../Helpers/axiosHelper';
 import CustomButton from './CustomButton';
-import { getRedirectUrl, setAccessToken, setFlashMessage } from '../../Helpers/cookieHelper';
 import useLogin from '../../Hooks/useLogin';
-
-
 
 export default function LoginComponent() {
 
@@ -22,9 +15,8 @@ export default function LoginComponent() {
     return (
         <Box>
 
-
             <FacebookLogin
-                appId="561683539070348"
+                appId={process.env.FACEBOOK_APP_ID}
                 autoLoad={false}
                 callback={responseFacebook}
                 fields="name,email,picture"
@@ -45,7 +37,7 @@ export default function LoginComponent() {
             />
 
             <GoogleLogin
-                clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                clientId={process.env.GOOGLE_CLIENT_ID}
                 buttonText="Login"
                 autoLoad={false}
                 onSuccess={responseGoogle}
