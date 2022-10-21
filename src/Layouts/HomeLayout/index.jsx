@@ -49,7 +49,7 @@ export default function HomeLayout({ children }) {
                 {(!isLoading && !authUser) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => tryToLoginOrSignup(response)}
-                    googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID }}
+                    googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID, auto_select:false }}
                 />}
 
                 <Box
