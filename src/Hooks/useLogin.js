@@ -50,10 +50,16 @@ export default function useLogin() {
 
         if (obj) {
 
-            await submitLoginData('/auth/signIn', {
+            const loginStatus = await submitLoginData('/auth/social_signin', {
                 email: obj?.email
 
             })
+
+            return loginStatus
+        }
+        else
+        {
+            return false
         }
 
     }
@@ -84,7 +90,6 @@ export default function useLogin() {
 
             setFlashMessage('success', "ব্লগে আপনাকে স্বাগতম!", "")
 
-
             window.location.href = getRedirectUrl()
 
         }
@@ -99,6 +104,8 @@ export default function useLogin() {
                 duration: 9000,
                 isClosable: true,
             })
+
+            return false
 
         }
     }

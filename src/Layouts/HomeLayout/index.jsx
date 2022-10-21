@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import { getFlashMessage } from '../../Helpers/cookieHelper'
 import useUser from '../../Hooks/useUser'
 import SectionContainer from '../../Components/Common/SectionContainer'
+import useLogin from '../../Hooks/useLogin'
+import useRegistration from '../../Hooks/useRegistration'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -18,15 +20,28 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 export default function HomeLayout({ children }) {
 
     const { isLoading, authUser } = useUser()
+    const {responseGoogle} = useLogin()
+    const register = useRegistration()
+
+    async function tryToLoginOrSignup(response) {
+
+        const loginResponse =  await responseGoogle(response)
+
+        if(loginResponse == false){
+            await register.responseGoogle(response)
+        }
+
+    }
 
     return (
         <LayoutWrapper>
+
             <Box bg={{ base: 'white', md: 'gray.200' }} minH='100vh'>
 
                 {(!isLoading && !authUser) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
-                    onSuccess={(response) => console.log(response)}
-                    googleAccountConfigs={{ client_id: '721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com' }}
+                    onSuccess={(response) => tryToLoginOrSignup(response)}
+                    googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID }}
                 />}
 
                 <Box
