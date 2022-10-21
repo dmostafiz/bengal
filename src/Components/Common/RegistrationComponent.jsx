@@ -20,6 +20,7 @@ export default function RegistrationComponent() {
                 appId={process.env.FACEBOOK_APP_ID}
                 autoLoad={false}
                 callback={responseFacebook}
+                fields="name,email,picture"
                 render={renderProps => <Button
                     isLoading={fbLoading}
                     isDisabled={googleLoading}
