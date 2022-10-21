@@ -9,6 +9,7 @@ import LayoutWrapper from '../../Wrappers/LayoutWrapper'
 import { useRouter } from 'next/router'
 import { getFlashMessage } from '../../Helpers/cookieHelper'
 import useUser from '../../Hooks/useUser'
+import SectionContainer from '../../Components/Common/SectionContainer'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -16,13 +17,12 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({ children }) {
 
-    const {isLoading, authUser} = useUser()
+    const { isLoading, authUser } = useUser()
 
     return (
         <LayoutWrapper>
-            <Box bg={{base:'white', md:'facebook.900'}} minH='100vh'>
+            <Box bg={{ base: 'white', md: 'gray.200' }} minH='100vh'>
 
-                
                 {(!isLoading && !authUser) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => console.log(response)}
@@ -30,20 +30,24 @@ export default function HomeLayout({ children }) {
                 />}
 
                 <Box
-                    bgColor={'blackAlpha.0'}
+                    // bgColor={'blackAlpha.0'}
                     backdropFilter='auto'
                     backdropBlur='2px'
+                    backgroundImage={'bg.png'}
                 >
 
-                    <Container
+                    <SectionContainer
                         maxW={'container.xl'}
                         px={{ base: 0, md: '10px' }}
-                        bg='facebook.50'
+                        bg='gray.50'
                         backdropFilter='auto'
                         backdropBlur='2px'
                     >
 
                         <TopBar />
+
+
+                        {/* <ImageBanner src='/banner.jpg' /> */}
 
                         <Navigation />
 
@@ -57,7 +61,6 @@ export default function HomeLayout({ children }) {
                             shadow='sm'
                         >
 
-                            {/* <ImageBanner src='/banner.jpg' /> */}
 
                             <Box px={{ base: 0, md: 1 }} py={{ base: 0, md: 1 }}>
                                 {children}
@@ -67,10 +70,10 @@ export default function HomeLayout({ children }) {
 
 
                         <Center py='5'>
-                            <Text>2022 @ nogorshoily.com all rights reserved</Text>
+                            <Text>2022 @ bengalread.com all rights reserved</Text>
                         </Center>
 
-                    </Container>
+                    </SectionContainer>
 
                 </Box>
 

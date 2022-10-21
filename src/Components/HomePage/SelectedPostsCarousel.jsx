@@ -113,7 +113,7 @@ export default function SelectedPostsCarousel() {
                         <Paper
                             shadow="lg"
                             p="xl"
-                            radius="lg"
+                            radius="md"
                             sx={{ backgroundImage: `url(${item.image})` }}
                             className={classes.card}
                         >

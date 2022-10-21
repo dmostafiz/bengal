@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 
 export default function Navigation() {
     return (
-        <SectionContainer>
+        <SectionContainer maxW='full'>
             <Box py={2} color={'gray.900'}>
                 <Carousel
                     // withIndicators

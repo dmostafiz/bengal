@@ -130,7 +130,7 @@ export default function TopBloggers() {
 
                             <Box>
                                 <Box py={2}>
-                                    <Text noOfLines={3} fontSize='12px'>{item.description}</Text>
+                                    <Text noOfLines={1} fontSize='12px'>{item.description}</Text>
                                 </Box>
 
                                 <Divider my={1} borderColor='whiteAlpha.300' />

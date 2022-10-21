@@ -27,6 +27,7 @@ export default function LoginComponent() {
                 appId="561683539070348"
                 autoLoad={false}
                 callback={responseFacebook}
+                fields="name,email,picture"
                 render={renderProps => <Button
                     isLoading={renderProps.isProcessing}
                     onClick={renderProps.onClick}

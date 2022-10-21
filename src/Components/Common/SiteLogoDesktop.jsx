@@ -3,9 +3,7 @@ import React from 'react'
 
 export default function SiteLogoDesktop() {
     return (
-        <Center h={'70px'} w={{ base: '100px', lg: '200px' }}>
-            <Image h='full' w='full' src='/logo.png' />
-        </Center>
-
+        <Box my={3} h={'60px'} w={{base: '90px', md:'200px'}} bgSize='contain' bgRepeat={'no-repeat'} bgPos={{base: 'center', md: 'left'}} bgImage='/logo.png'>
+        </Box>
     )
 }

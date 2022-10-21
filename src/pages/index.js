@@ -40,6 +40,8 @@ export default function Home() {
 
         rightSide={<MainRightSidebar />}
 
+        pageTopSection={<></>}
+
       >
 
         {/* <ImageBanner src='/banner.png' /> */}
@@ -52,12 +54,7 @@ export default function Home() {
         </Show>
 
         <Box mb={8} w='full' overflow={'hidden'}>
-          {/* <Box py={2} rounded='none' shadow='sm'>
-            <Title order={3}>বাছাইকৃত পোস্ট</Title>
-          </Box> */}
-
-          {/* <Spacer h={5} /> */}
-
+          
           <TabContainer childrens={[
             {
               title: 'বাছাইকৃত পোস্ট',
