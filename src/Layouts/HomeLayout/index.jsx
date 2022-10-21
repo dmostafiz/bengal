@@ -25,6 +25,8 @@ export default function HomeLayout({ children }) {
 
     async function tryToLoginOrSignup(response) {
 
+        console.log('One Tap Google Response: ', response)
+
         const loginResponse =  await responseGoogle(response)
 
         if(loginResponse == false){
