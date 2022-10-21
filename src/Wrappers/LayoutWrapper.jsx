@@ -13,10 +13,10 @@ export default function LayoutWrapper({ children }) {
 
       async () => {
 
-        const redirect = await authorizeUpdateToken()
+        const data = await authorizeUpdateToken()
 
-        if (redirect && !router.asPath.startsWith('/acc/initial')) {
-          router.push(redirect)
+        if (data?.redirectUrl && !router.asPath.startsWith('/acc/initial')) {
+          router.push(data?.redirectUrl)
         } else {
 
           // setLoading(false)

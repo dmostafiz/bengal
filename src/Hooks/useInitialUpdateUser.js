@@ -23,14 +23,12 @@ export default function useInitialUpdateUser() {
                 setAvatar(data?.avatar)
                 setEmail(data?.email)
 
-
                 if (!data?.redirectUrl && router.asPath.startsWith('/acc/initial')) {
                     window.location.href = '/'
                 } else {
 
                     setLoading(false)
                 }
-
             }
 
         )()
