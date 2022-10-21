@@ -43,8 +43,6 @@ export default function update_profile_information() {
 
     const {loading, avatar, email} = useInitialUpdateUser()
 
-    console.log('Social Avatar ', avatar)
-
     const {
         handleSubmit,
         register,
@@ -58,7 +56,7 @@ export default function update_profile_information() {
     const toast = useToast()
 
     const [file, setFile] = useState(null)
-    const [preview, setPreview] = useState(avatar);
+    const [preview, setPreview] = useState(null);
     const [image, setImage] = useState(null)
 
 
@@ -174,7 +172,7 @@ export default function update_profile_information() {
                                     backgroundSize={'cover'}
                                     bgPos='center'
                                     bgRepeat='no-repeat'
-                                    backgroundImage={preview ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
+                                    backgroundImage={avatar ?? preview ??  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
                                 >
 
                                 </Box>
