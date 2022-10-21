@@ -140,5 +140,5 @@ export default function useLogin() {
 
 
 
-    return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting }
+    return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading }
 }
