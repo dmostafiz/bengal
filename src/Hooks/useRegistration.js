@@ -48,6 +48,8 @@ export default function useRegistration() {
 
     const responseFacebook = async (response) => {
 
+        console.log('FaceBook Signup ', response)
+
         setFbLoading(true)
 
         if (response?.email) {
@@ -61,7 +63,7 @@ export default function useRegistration() {
             )
         }
 
-        setFbLoading(true)
+        setFbLoading(false)
     }
 
     const responseGoogle = async (response) => {

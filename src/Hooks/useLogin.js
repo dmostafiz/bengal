@@ -35,7 +35,12 @@ export default function useLogin() {
 
 
     const responseFacebook = async (response) => {
+
+        console.log('FaceBook Signup ', response)
+
+
         setFbLoading(true)
+
 
         if (response?.email) {
 
