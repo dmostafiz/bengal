@@ -48,7 +48,7 @@ export default function useLogin() {
         setFbLoading(false)
     }
 
-    const responseGoogle = async (response) => {
+    const responseGoogle = async (response, errorNotify = true) => {
 
         setGoogleLoading(true)
 
@@ -59,7 +59,7 @@ export default function useLogin() {
             const loginStatus = await submitLoginData('/auth/social_signin', {
                 email: obj?.email
 
-            })
+            }, errorNotify)
 
             setGoogleLoading(false)
             
@@ -77,7 +77,7 @@ export default function useLogin() {
     }
 
 
-    async function submitLoginData(url, values) {
+    async function submitLoginData(url, values, errorNotify = true) {
 
         const res = await Axios.post(url, { ...values })
 
@@ -123,15 +123,19 @@ export default function useLogin() {
 
         if (!res?.data?.ok) {
 
-            toast({
-                title: 'দুঃখিত!',
-                description: res?.data?.msg ?? 'রিকুয়েস্টটি সফল হয়নি, আবার চেষ্টা করুন।',
-                status: 'error',
-                position: 'top-right',
-                duration: 9000,
-                isClosable: true,
-            })
-            
+            if (errorNotify) {
+
+                toast({
+                    title: 'দুঃখিত!',
+                    description: res?.data?.msg ?? 'রিকুয়েস্টটি সফল হয়নি, আবার চেষ্টা করুন।',
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 9000,
+                    isClosable: true,
+                })
+                
+            }
+
 
             return false
 
