@@ -57,7 +57,7 @@ export default function useRegistration() {
                 '/auth/social_signup',
                 {
                     email: response?.email,
-                    avatar: response?.picture?.url,
+                    avatar: response?.picture?.data?.url,
                     host: 'facebook'
                 }
             )
