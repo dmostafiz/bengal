@@ -60,10 +60,10 @@ export default function HomeLayout({ children }) {
                     googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID, auto_select: false }}
                 />}
 
-                {onTapLoading && <Box right={20} top={24} bg={'white'} px={3} py={2} rounded='full' shadow='md' zIndex={999999999999} pos={'fixed'} >
+                {onTapLoading && <Box right={20} top={24} bg={'green.400'} px={3} py={2} rounded='full' shadow='md' zIndex={999999999999} pos={'fixed'} >
                     <Flex alignItems={'center'} gap={3}>
-                        <Spinner color='yellow.500' />
-                        <Text>অপেক্ষা করুন...</Text>
+                        <Spinner color='white' />
+                        <Text color='white'>অপেক্ষা করুন...</Text>
                     </Flex>
                 </Box>}
 
