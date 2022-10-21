@@ -53,7 +53,7 @@ export async function authorizeUpdateToken() {
         console.log('authorize_initial_acc_update_token', data)
 
         if (data.ok) {
-            return data.redirectUrl
+            return data
         }
 
         return null

@@ -16,6 +16,7 @@ import InitialUpdatePageWrapper from '../../../Wrappers/InitialUpdatePageWrapper
 import Axios from '../../../Helpers/axiosHelper'
 import { getUpdateToken, removeUpdateToken, setUpdateToken } from '../../../Helpers/cookieHelper'
 import CustomButton from '../../../Components/Common/CustomButton'
+import useInitialUpdateUser from '../../../Hooks/useInitialUpdateUser'
 
 // update_profile_information
 const schema = yup.object({
@@ -40,6 +41,10 @@ const schema = yup.object({
 
 export default function update_profile_information() {
 
+    const {loading, avatar, email} = useInitialUpdateUser()
+
+    console.log('Social Avatar ', avatar)
+
     const {
         handleSubmit,
         register,
@@ -53,9 +58,8 @@ export default function update_profile_information() {
     const toast = useToast()
 
     const [file, setFile] = useState(null)
-    const [preview, setPreview] = useState(null);
+    const [preview, setPreview] = useState(avatar);
     const [image, setImage] = useState(null)
-
 
 
     useEffect(() => {
@@ -139,6 +143,7 @@ export default function update_profile_information() {
 
     return (
         <InitialUpdatePageWrapper>
+
             <LayoutColumn
                 rightSide={<></>}
                 leftSide={<></>}
