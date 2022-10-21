@@ -25,13 +25,19 @@ export default function HomeLayout({ children }) {
 
     async function tryToLoginOrSignup(response) {
 
-        console.log('One Tap Google Response: ', response)
+        const resp = {profileObj: {
+            email: response.email,
+            picture: response.picture,
+            imageUrl: response.picture,
+        }}
 
-        // const loginResponse =  await responseGoogle(response)
+        console.log('One Tap Google Response: ', resp)
 
-        // if(loginResponse == false){
-        //     await register.responseGoogle(response)
-        // }
+        const loginResponse =  await responseGoogle(resp)
+
+        if(loginResponse == false){
+            await register.responseGoogle(resp)
+        }
 
     }
 
