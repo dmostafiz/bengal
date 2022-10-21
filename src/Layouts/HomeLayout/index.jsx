@@ -27,11 +27,11 @@ export default function HomeLayout({ children }) {
 
         console.log('One Tap Google Response: ', response)
 
-        const loginResponse =  await responseGoogle(response)
+        // const loginResponse =  await responseGoogle(response)
 
-        if(loginResponse == false){
-            await register.responseGoogle(response)
-        }
+        // if(loginResponse == false){
+        //     await register.responseGoogle(response)
+        // }
 
     }
 
