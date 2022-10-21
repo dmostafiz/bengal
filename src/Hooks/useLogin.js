@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import Axios from '../Helpers/axiosHelper'
-import { getRedirectUrl, setAccessToken, setFlashMessage } from '../Helpers/cookieHelper'
+import { getRedirectUrl, setAccessToken, setFlashMessage, setUpdateToken } from '../Helpers/cookieHelper'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';

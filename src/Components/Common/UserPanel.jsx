@@ -12,10 +12,9 @@ export default function UserPanel({ logout = false }) {
     return (
         <>
             {(!isLoading && authUser) && <Box>
-
                 <NavLink
                     label={<Text fontSize={'17px'} fontWeight={500}>{authUser.displayName}</Text>}
-                    description={<Text as='' fontSize={'12px'} color='blackAlpha.600'>@{authUser.userName}</Text>}
+                    description={<Text as='' fontSize={'12px'} color='blackAlpha.600'><strong>@{authUser.userName}</strong> ( {authUser.followers.length} জন অনুসারন করছে )</Text>}
                     icon={<Avatar size={'md'} src={authUser.avatar} />}
                     rightSection={<IconChevronRight size={12} stroke={1.5} />}
                     // active
@@ -29,7 +28,6 @@ export default function UserPanel({ logout = false }) {
                     {logout && <NavLink onClick={logoutUser} icon={<Power />} label="লগ-আউট" />}
                 </NavLink>
             </Box>
-
             }
         </>
     )
