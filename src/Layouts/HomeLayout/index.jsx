@@ -1,5 +1,5 @@
-import { Box, Center, Container, Spacer, Text } from '@chakra-ui/react'
-import React, { useContext, useEffect } from 'react'
+import { Box, Center, Container, Flex, Spacer, Spinner, Text } from '@chakra-ui/react'
+import React, { useContext, useEffect, useState } from 'react'
 import ImageBanner from './inc/ImageBanner'
 import Navigation from './inc/Navigation'
 import TopBar from './inc/TopBar'
@@ -19,25 +19,33 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({ children }) {
 
+    const [onTapLoading, setOneTapLoading] = useState(false)
+
     const { isLoading, authUser } = useUser()
-    const {responseGoogle} = useLogin()
+    const { responseGoogle } = useLogin()
     const register = useRegistration()
 
     async function tryToLoginOrSignup(response) {
 
-        const resp = {profileObj: {
-            email: response.email,
-            picture: response.picture,
-            imageUrl: response.picture,
-        }}
+        setOneTapLoading(true)
+
+        const resp = {
+            profileObj: {
+                email: response.email,
+                picture: response.picture,
+                imageUrl: response.picture,
+            }
+        }
 
         console.log('One Tap Google Response: ', resp)
 
-        const loginResponse =  await responseGoogle(resp)
+        const loginResponse = await responseGoogle(resp)
 
-        if(loginResponse == false){
+        if (loginResponse == false) {
             await register.responseGoogle(resp)
         }
+
+        setOneTapLoading(false)
 
     }
 
@@ -49,8 +57,15 @@ export default function HomeLayout({ children }) {
                 {(!isLoading && !authUser) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => tryToLoginOrSignup(response)}
-                    googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID, auto_select:false }}
+                    googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID, auto_select: false }}
                 />}
+
+                {onTapLoading && <Box right={20} top={24} bg={'white'} px={3} py={2} rounded='full' shadow='md' zIndex={999999999999} pos={'fixed'} >
+                    <Flex alignItems={'center'} gap={3}>
+                        <Spinner color='yellow.500' />
+                        <Text>অপেক্ষা করুন...</Text>
+                    </Flex>
+                </Box>}
 
                 <Box
                     // bgColor={'blackAlpha.0'}
