@@ -18,10 +18,11 @@ export default function useInitialUpdateUser() {
 
                 const data = await authorizeUpdateToken()
 
-                setAvatar(data.avatar)
-                setEmail(data.email)
-
                 if (!data) return window.location.href = '/'
+
+                setAvatar(data?.avatar)
+                setEmail(data?.email)
+
 
                 if (!data?.redirectUrl && router.asPath.startsWith('/acc/initial')) {
                     window.location.href = '/'
