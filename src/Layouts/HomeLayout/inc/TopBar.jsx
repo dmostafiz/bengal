@@ -14,7 +14,7 @@ import useUser from '../../../Hooks/useUser'
 import Link from 'next/link'
 import MobileSidebarDrawer from '../../Common/MobileSidebarDrawer'
 import SiteLogoMobile from '../../../Components/Common/SiteLogoMobile'
-
+import {BsPencilSquare} from 'react-icons/bs'
 export default function TopBar() {
 
     const router = useRouter()
@@ -63,9 +63,9 @@ export default function TopBar() {
 
                                     <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 3, md: 5 }}>
 
-                                        <Flex alignItems={'center'} gap={{ base: '0.5px', md: 2 }}>
+                                        <Flex alignItems={'center'} gap={{ base: 0, md: 2 }}>
                                             <Menu>
-                                                <MenuButton size={{ base: 'md', md: 'md' }} as={Button} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
+                                                <MenuButton size={{ base: 'sm', md: 'md' }} as={Button} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
                                                     <Flex alignItems={'center'} gap={1}>
                                                         <FaBell size={20} /> <Show above='lg'><Text>নোটিফিকেশন</Text></Show>
                                                     </Flex>
@@ -79,15 +79,15 @@ export default function TopBar() {
                                                 </MenuList>
                                             </Menu>
 
-                                            <Button size={{ base: 'md', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'blackAlpha.50', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
+                                            <Button size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
                                                 <Flex alignItems={'center'} gap={1}>
-                                                    <Pencil size={20} /> <Show above='md'><Text>নগরশৈলীতে লিখুন</Text></Show>
+                                                    <BsPencilSquare size={20} /> <Show above='md'><Text>বেঙ্গলরিডে লিখুন</Text></Show>
                                                 </Flex>
                                             </Button>
 
 
                                             {authUser ? <Menu>
-                                                <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
+                                                <MenuButton as={Button} size={{ base: 'sm', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
                                                     <Avatar size={'xs'} src={authUser.avatar} />
                                                 </MenuButton>
                                                 <MenuList rounded='none' zIndex={9999}>
@@ -98,7 +98,7 @@ export default function TopBar() {
                                                 </MenuList>
                                             </Menu>
                                                 : !isLoading && <Menu>
-                                                    <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'blackAlpha.50', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'}>
+                                                    <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'}>
                                                         <Flex alignItems={'center'} gap={'0px'}>
                                                             <Icon as={UserCircle} fontSize={24} color='gray.700' />
                                                             <ChevronDown size={16} color='gray' />
