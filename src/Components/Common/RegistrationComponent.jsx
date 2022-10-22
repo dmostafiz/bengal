@@ -22,7 +22,8 @@ export default function RegistrationComponent() {
                 callback={responseFacebook}
                 fields="name,email,picture"
                 render={renderProps => <Button
-                    isLoading={fbLoading}
+                    isLoading={fbLoading || renderProps.isProcessing}
+                    loadingText='অপেক্ষা করুন...'
                     isDisabled={googleLoading}
                     onClick={renderProps.onClick}
                     mb='3'
@@ -47,7 +48,7 @@ export default function RegistrationComponent() {
                 cookiePolicy={'single_host_origin'}
                 render={renderProps => <Button
                     mb='2'
-                    isLoading={googleLoading}
+                    isLoading={googleLoading || renderProps.isProcessing}
                     loadingText='অপেক্ষা করুন...'
                     isDisabled={fbLoading}
                     onClick={renderProps.onClick}

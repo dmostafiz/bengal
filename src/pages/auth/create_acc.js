@@ -79,16 +79,16 @@ export default function create_acc() {
 
                         <Center mb={5} mt={3}><Text fontSize={'14px'} color='blackAlpha.600'>অথবা</Text></Center>
 
-                        <Flex direction={{ base: 'column', md: 'row' }} gap={3}>
+                        <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: 2, md: 3 }}>
                             <FacebookLogin
-                                appId="561683539070348"
+                                appId={process.env.FACEBOOK_APP_ID}
                                 autoLoad={false}
                                 callback={responseFacebook}
                                 render={renderProps => <Button
                                     isLoading={fbLoading}
+                                    loadingText='অপেক্ষা করুন...'
                                     isDisabled={googleLoading}
                                     onClick={renderProps.onClick}
-                                    mb='3'
                                     leftIcon={<FaFacebook size={20} />}
                                     colorScheme={'facebook'}
                                     shadow='sm'
@@ -102,14 +102,13 @@ export default function create_acc() {
                             />
 
                             <GoogleLogin
-                                clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                                clientId={process.env.GOOGLE_CLIENT_ID}
                                 buttonText="Login"
                                 autoLoad={false}
                                 onSuccess={responseGoogle}
                                 onFailure={responseGoogle}
                                 cookiePolicy={'single_host_origin'}
                                 render={renderProps => <Button
-                                    mb='2'
                                     isLoading={googleLoading}
                                     loadingText='অপেক্ষা করুন...'
                                     isDisabled={fbLoading}

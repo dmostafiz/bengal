@@ -42,10 +42,10 @@ export default function TopBar() {
 
     return (
 
-        <Box w='full' h='80px'>
+        <Box w='full' h={{base: '60px', md:'80px'}}>
             <Affix position={{ top: 0, right: 0, left: 0 }}>
                 <SectionContainer as='header' maxW='full' px={0}>
-                    <Box h='80px' bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
+                    <Box h={{base: '60px', md:'80px'}} bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Center w={'full'} h='full'>
                             <SectionContainer as='header' px={0}>
                                 <Flex w='full' alignItems={'center'} justify={'space-between'} gap={10}>

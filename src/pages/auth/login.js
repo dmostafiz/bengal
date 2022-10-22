@@ -16,7 +16,7 @@ import ComponentLoader from '../../Components/Common/ComponentLoader'
 
 export default function login() {
 
-    const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting } = useLogin()
+    const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useLogin()
 
     const { isLoading, authUser } = useUser()
 
@@ -105,15 +105,16 @@ export default function login() {
                         <Center mb={5} mt={3}><Text fontSize={'14px'} color='blackAlpha.600'>অথবা</Text></Center>
 
 
-                        <Flex direction={{ base: 'column', md: 'row' }} gap={3}>
+                        <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: 2, md: 3 }}>
                             <FacebookLogin
-                                appId="561683539070348"
+                                appId={process.env.FACEBOOK_APP_ID}
                                 autoLoad={false}
                                 callback={responseFacebook}
                                 render={renderProps => <Button
-                                    isLoading={renderProps.isProcessing}
+                                    isLoading={fbLoading || renderProps.isProcessing}
+                                    loadingText='অপেক্ষা করুন...'
+                                    isDisabled={googleLoading}
                                     onClick={renderProps.onClick}
-                                    mb='3'
                                     leftIcon={<FaFacebook size={20} />}
                                     colorScheme={'facebook'}
                                     shadow='sm'
@@ -127,15 +128,16 @@ export default function login() {
                             />
 
                             <GoogleLogin
-                                clientId="721639709461-pjuq114vpiae24gs165e1aedpp2shau3.apps.googleusercontent.com"
+                                clientId={process.env.GOOGLE_CLIENT_ID}
                                 buttonText="Login"
                                 autoLoad={false}
                                 onSuccess={responseGoogle}
                                 onFailure={responseGoogle}
                                 cookiePolicy={'single_host_origin'}
                                 render={renderProps => <Button
-                                    mb='2'
-                                    isLoading={renderProps.isProcessing}
+                                    isLoading={googleLoading || renderProps.isProcessing}
+                                    loadingText='অপেক্ষা করুন...'
+                                    isDisabled={fbLoading}
                                     onClick={renderProps.onClick}
                                     leftIcon={<Image h='20px' bg={'transparent'}
                                         src='https://aws1.discourse-cdn.com/auth0/optimized/3X/8/a/8a06490f525c8f65d4260204bc3bc7b0e1fb0ba7_2_500x500.png'

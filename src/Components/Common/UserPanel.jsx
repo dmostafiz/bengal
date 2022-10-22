@@ -19,6 +19,7 @@ export default function UserPanel({ logout = false }) {
                     rightSection={<IconChevronRight size={12} stroke={1.5} />}
                     // active
                     // variant="filled"
+                    
                     variant="light"
                     color={'light'}
                 >

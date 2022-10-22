@@ -72,8 +72,10 @@ export default function useLogin() {
         }
         else
         {
+            setGoogleLoading(false)
             return false
         }
+        
 
     }
 
