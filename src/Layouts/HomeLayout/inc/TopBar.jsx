@@ -14,7 +14,9 @@ import useUser from '../../../Hooks/useUser'
 import Link from 'next/link'
 import MobileSidebarDrawer from '../../Common/MobileSidebarDrawer'
 import SiteLogoMobile from '../../../Components/Common/SiteLogoMobile'
-import {BsPencilSquare} from 'react-icons/bs'
+import { BsPencilSquare } from 'react-icons/bs'
+import useInitialBlogWriting from '../../../Hooks/useInitialBlogWriting'
+
 export default function TopBar() {
 
     const router = useRouter()
@@ -23,14 +25,21 @@ export default function TopBar() {
 
     const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
-    const handleClickWriteBlog = () => {
+    const { hasDraftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
+
+    const handleClickWriteBlog = async () => {
 
         if (authUser) {
-            router.push('/write')
+
+            if (await hasDraftedPosts()) {
+                router.push('/write/drafted_posts')
+            } else {
+                await redirectToNewPostEditor()
+            }
         }
 
         else {
-            setRedirectUrl('/write')
+            setRedirectUrl('/write/new')
             seTitle('ব্লগ লিখতে লগইন করা আবশ্যক')
             onOpen()
         }
@@ -42,13 +51,13 @@ export default function TopBar() {
 
     return (
 
-        <Box w='full' h={{base: '60px', md:'70px', lg: '80px'}}>
+        <Box w='full' h={{ base: '60px', md: '70px', lg: '80px' }}>
             <Affix position={{ top: 0, right: 0, left: 0 }}>
                 <SectionContainer as='header' maxW='full' px={0}>
-                    <Box h={{base: '60px', md:'70px', lg: '80px'}} bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
+                    <Box h={{ base: '60px', md: '70px', lg: '80px' }} bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Center w={'full'} h='full'>
                             <SectionContainer as='header' px={0}>
-                                <Flex w='full' alignItems={'center'} justify={'space-between'} gap={{base:3, md:10}}>
+                                <Flex w='full' alignItems={'center'} justify={'space-between'} gap={{ base: 3, md: 10 }}>
 
                                     <Box>
                                         <SiteLogoDesktop />
@@ -70,8 +79,8 @@ export default function TopBar() {
                                                         <FaBell size={20} /> <Show above='lg'><Text>নোটিফিকেশন</Text></Show>
                                                     </Flex>
                                                 </MenuButton>
-                                                <MenuList rounded='none'>
-                                                    <Box width={'350px'}>
+                                                <MenuList shadow={'md'} rounded='none' pos={'relative'}  top={{base: '6px',md:'9px'}} right={0}>
+                                                    <Box width={{base: '100vw', md: '350px'}}>
                                                         <Center py={5}>
                                                             <Icon as={BellOff} color={'blackAlpha.500'} fontSize={'26px'} />  <Text color={'blackAlpha.500'}>কোন নোটিফিকেশন পাওয়া যায়নি</Text>
                                                         </Center>
@@ -79,7 +88,7 @@ export default function TopBar() {
                                                 </MenuList>
                                             </Menu>
 
-                                            <Button size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
+                                            <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
                                                 <Flex alignItems={'center'} gap={1}>
                                                     <BsPencilSquare size={20} /> <Show above='md'><Text>বেঙ্গলরিডে লিখুন</Text></Show>
                                                 </Flex>
@@ -90,7 +99,7 @@ export default function TopBar() {
                                                 <MenuButton as={Button} size={{ base: 'sm', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
                                                     <Avatar size={'xs'} src={authUser.avatar} />
                                                 </MenuButton>
-                                                <MenuList rounded='none' zIndex={9999}>
+                                                <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{base: '6px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
                                                     <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                                     <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
                                                     <MenuItem icon={<Heart />}>আমার পছন্দ তালিকা</MenuItem>
@@ -104,7 +113,7 @@ export default function TopBar() {
                                                             <ChevronDown size={16} color='gray' />
                                                         </Flex>
                                                     </MenuButton>
-                                                    <MenuList rounded='none' zIndex={9999}>
+                                                    <MenuList shadow={'md'} rounded='none' zIndex={9999}>
                                                         <Link href={'/auth/login'}>
                                                             <MenuItem icon={<Lock />}>লগইন করুন</MenuItem>
                                                         </Link>

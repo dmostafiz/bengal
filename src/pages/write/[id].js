@@ -9,6 +9,7 @@ import { AuthModalContext } from '../../Contexts/AuthModalContext'
 import { FileButton } from '@mantine/core';
 import { Check, Search, X } from 'tabler-icons-react'
 import { FaCheck } from 'react-icons/fa'
+import BlogPanel from '../../Components/Common/BlogPanel'
 
 
 export default function write() {
@@ -188,8 +189,8 @@ export default function write() {
 
       <LayoutColumn
 
-        leftColumnWidth={23}
-        leftSide={<> </>}
+        // leftColumnWidth={32}
+        leftSide={<><BlogPanel /> </>}
         rightSide={<></>}
 
       >
@@ -235,7 +236,7 @@ export default function write() {
                 onChange={setStepStatus}
                 data={[
                   { label: 'নতুন শুরু করছি', value: 'new' },
-                  { label: 'পূর্বের পোস্ট চলমান', value: 'old' }
+                  { label: 'পূর্বের পোস্ট চলমান', value: 'old', disabled:true }
                 ]}
               />
 

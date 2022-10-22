@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import Axios from '../Helpers/axiosHelper'
-import { getRedirectUrl, setAccessToken, setFlashMessage, setUpdateToken } from '../Helpers/cookieHelper'
+import { getRedirectUrl, setAccessToken, setFlashMessage, setRedirectUrl, setUpdateToken } from '../Helpers/cookieHelper'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
+import useInitialBlogWriting from './useInitialBlogWriting';
 
 const schema = yup.object({
 
@@ -16,7 +17,10 @@ const schema = yup.object({
 
 }).required();
 
-export default function useLogin() {
+export default function useLogin(redirectUrl=null) {
+
+    const { getRedirectingUrl } = useInitialBlogWriting()
+
 
     const toast = useToast()
 
@@ -86,6 +90,10 @@ export default function useLogin() {
 
     async function submitLoginData(url, values, errorNotify = true) {
 
+        if(redirectUrl){
+            setRedirectUrl(redirectUrl)
+        }
+
         const res = await Axios.post(url, { ...values })
 
         console.log('Response ', res.data)
@@ -112,7 +120,7 @@ export default function useLogin() {
             }
 
             toast({
-                title: 'ব্লগে আপনাকে স্বাগতম!',
+                title: 'স্বাগতম!',
                 // description: "ব্লগে আপনাকে স্বাগতম।",
                 status: 'success',
                 position: 'top-right',
@@ -124,7 +132,13 @@ export default function useLogin() {
 
             setFlashMessage('success', "ব্লগে আপনাকে স্বাগতম!", "")
 
-            window.location.href = getRedirectUrl()
+            const redirectUrl = getRedirectUrl()
+
+            if(redirectUrl == '/write/new'){
+                return window.location.href = await getRedirectingUrl()
+            }
+
+            window.location.href = redirectUrl
 
         }
 
@@ -148,7 +162,6 @@ export default function useLogin() {
 
         }
     }
-
 
 
     return { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading }

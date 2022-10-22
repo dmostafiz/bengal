@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import AuthModal from '../../Components/Common/AuthModal'
 import LayoutWrapper from '../../Wrappers/LayoutWrapper'
 import { useRouter } from 'next/router'
-import { getFlashMessage } from '../../Helpers/cookieHelper'
+import { getFlashMessage, setRedirectUrl } from '../../Helpers/cookieHelper'
 import useUser from '../../Hooks/useUser'
 import SectionContainer from '../../Components/Common/SectionContainer'
 import useLogin from '../../Hooks/useLogin'
@@ -19,6 +19,8 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 
 // #303030
 export default function HomeLayout({ children }) {
+
+    const {asPath} = useRouter()
 
     const [onTapLoading, setOneTapLoading] = useState(false)
 
@@ -39,6 +41,8 @@ export default function HomeLayout({ children }) {
         }
 
         console.log('One Tap Google Response: ', resp)
+
+        setRedirectUrl(asPath)
 
         const loginResponse = await responseGoogle(resp, false)
 

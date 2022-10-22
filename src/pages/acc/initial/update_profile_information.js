@@ -64,6 +64,7 @@ export default function update_profile_information() {
 
 
     useEffect(() => {
+        console.log('Social Avatar ', avatar)
         setPreview(avatar)
     }, [avatar])
 

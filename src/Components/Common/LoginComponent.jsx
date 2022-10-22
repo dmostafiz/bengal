@@ -1,8 +1,6 @@
 import { Box, Button, Center, FormControl, FormErrorMessage, Image, Input, Spacer, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaArrowLeft, FaBackspace, FaEnvelope, FaFacebook, FaFacebookF, FaGoogle, FaSignInAlt } from 'react-icons/fa'
-import { FacebookProvider } from 'react-facebook';
-import FacebookLoginButton from '../Auth/FacebookLoginButton';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { GoogleLogin } from 'react-google-login';
 import CustomButton from './CustomButton';
