@@ -48,7 +48,7 @@ export default function TopBar() {
                     <Box h={{base: '60px', md:'70px', lg: '80px'}} bg={'white'} px={3} borderBottom='2px' roundedBottom={{ base: 'none', md: 'none' }} borderColor={'gray.200'} shadow='sm'>
                         <Center w={'full'} h='full'>
                             <SectionContainer as='header' px={0}>
-                                <Flex w='full' alignItems={'center'} justify={'space-between'} gap={10}>
+                                <Flex w='full' alignItems={'center'} justify={'space-between'} gap={{base:3, md:10}}>
 
                                     <Box>
                                         <SiteLogoDesktop />
