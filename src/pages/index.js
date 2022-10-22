@@ -78,11 +78,12 @@ export default function Home() {
 
 
         <Box mb={8}>
-          <Box py={2} px={2} bg={''} fontWeight='bold' rounded='sm'>
-            <Title order={4}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Title>
+
+          <Box py={3} borderBottom='0px' borderColor={'blackAlpha.200'} px={4} mb={6} bg={'blackAlpha.50'} fontWeight='bold' rounded='sm'>
+            <Title order={4}><Text color={'blackAlpha.800'}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Text></Title>
           </Box>
 
-          <VStack gap={3}>
+          <VStack gap={5}>
             <PostCard
               title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
               image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'

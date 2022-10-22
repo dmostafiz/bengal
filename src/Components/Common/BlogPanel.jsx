@@ -21,7 +21,7 @@ export default function BlogPanel() {
             <Box bg={'blackAlpha.50'} _hover={{ bg: 'blackAlpha.200' }}>
                 <Link href='/'>
                     <NavLink
-                        label={<Text fontSize={'17px'} fontWeight={500}>রঙ্গন প্রচ্ছদ</Text>}
+                        label={<Text fontSize={'17px'} fontWeight={500}>বেঙ্গলরিড প্রচ্ছদ</Text>}
                         // description={'সকল পোস্ট দেখুন'}
                         icon={<IconListDetails size={32} stroke={2} color='#385898' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
@@ -51,7 +51,7 @@ export default function BlogPanel() {
             <Box>
                 <Link href='/selected_posts'>
                     <NavLink
-                        label={<Text fontSize={'17px'} fontWeight={500}>পিডিএফ বই সামগ্রী</Text>}
+                        label={<Text fontSize={'17px'} fontWeight={500}>অনলাইন পিডিএফ বই</Text>}
                         // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
                         icon={<IconBook size={32} stroke={2} color='#385898' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}

@@ -7,9 +7,16 @@ import React from 'react'
 
 export default function PostCard({ title, image, content, createdAt, states, author, slug = 'বান্দুরা-রানী-পবিত্র-জপমালা-গীর্জা' }) {
     return (
-        <Box border='2px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
+        <Box border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
-            <Box w='full' bg='.50' py={2} px={4}>
+            <Box w='full' bg='.50' px={2}>
+                <Link href={`/blog/${slug}`}>
+                    <a href={`/blog/${slug}`}>
+                        <Title order={3}><Text color='gray.900'>{title}</Text></Title>
+                    </a>
+                </Link>
+
+
                 <Box fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
                         {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
@@ -66,16 +73,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Divider borderColor={'blackAlpha.100'} mb={2} />
+            <Divider borderColor={'blackAlpha.200'} mt={2} />
 
-            <Box py={1} px={4}>
-
-                <Link href={`/blog/${slug}`}>
-                    <a href={`/blog/${slug}`}>
-                        <Title order={3}><Text color='gray.900'>{title}</Text></Title>
-                    </a>
-                </Link>
-
+            <Box py={0} px={2}>
 
                 {image ? <Center py={5}>
                     <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
@@ -92,7 +92,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             <Divider borderColor={'blackAlpha.100'} mt={2} />
 
-            <Box w='full' bg='blackAlpha' py={1} px={4} fontSize='12px' fontWeight={'normal'}>
+            <Box w='full' bg='blackAlpha' py={1} px={2} fontSize='12px' fontWeight={'normal'}>
                 <Flex gap={2} justify='space-between' alignItems={'center'}>
                     <Flex gap={2} justify='flex-start' alignItems={'center'}>
                         <Text>{states.read} বার পড়া হয়েছে</Text>

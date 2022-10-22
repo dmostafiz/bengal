@@ -188,14 +188,9 @@ export default function write() {
 
       <LayoutColumn
 
-        leftColumnWidth={30}
-        leftSide={<>
-        
-        
-        
-        
-        </>}
-      // rightSide={<MainRightSidebar />}
+        leftColumnWidth={23}
+        leftSide={<> </>}
+        rightSide={<></>}
 
       >
 
@@ -207,7 +202,7 @@ export default function write() {
 
           <Divider mb={4} />
 
-          <Flex mb={10} direction={{base: 'column', md: 'row'}} gap={5}>
+          <Flex mb={10} direction={{ base: 'column', md: 'row' }} gap={5}>
             <Box>
               <Box mb={1} px={0}>
                 <Title order={5}>পোস্ট এর ধরন</Title>
