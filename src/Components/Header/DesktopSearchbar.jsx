@@ -56,37 +56,38 @@ export default function DesktopSearchbar() {
                 transition={'ease'}
             />
 
-            <SlideFade in={isOpen} offsetY='20px'>
-                <Box
-                    shadow={'sm'}
-                    borderBottom='2px'
-                    borderLeft='2px'
-                    borderRight='2px'
-                    borderColor='gray.300'
-                    w='full'
-                    position={'absolute'}
-                    bg={'white'}
-                    // px={3}
-                    // py={2}
-                    zIndex={99999999999}
-                    // minH='0px'
-                    roundedBottom={'xl'}
-                    overflow='hidden'
-                >
+            <Box hidden={!isOpen}>
+                <SlideFade in={isOpen} offsetY='-50px'>
+                    <Box
+                        shadow={'sm'}
+                        borderBottom='2px'
+                        borderLeft='2px'
+                        borderRight='2px'
+                        borderColor='gray.300'
+                        w='full'
+                        position={'absolute'}
+                        bg={'white'}
+                        // px={3}
+                        // py={2}
 
-                    <Box px={4} py={1} >
-                        <Title order={5}>অনুসন্ধান - {query}</Title>
-                        {/* <Text fontSize={'13px'}>৩ জন ব্লগার, ১৫ টি ব্লগ পোস্ট পাওয়া গেছে</Text> */}
+                        // minH='0px'
+                        roundedBottom={'xl'}
+                        overflow='hidden'
+                    >
+
+                        <Box px={4} py={1} >
+                            <Title order={5}>অনুসন্ধান - {query}</Title>
+                            {/* <Text fontSize={'13px'}>৩ জন ব্লগার, ১৫ টি ব্লগ পোস্ট পাওয়া গেছে</Text> */}
+                        </Box>
+
+                        <Box >
+
+                        </Box>
+
+
                     </Box>
-
-                    <Box >
-
-                    </Box>
-
-
-                </Box>
-            </SlideFade >
-
+                </SlideFade >
+            </Box>
 
         </Box >
     )

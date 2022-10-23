@@ -40,6 +40,7 @@ export default function TopBar() {
 
         else {
             setRedirectUrl('/write/new')
+            
             seTitle('ব্লগ লিখতে লগইন করা আবশ্যক')
             onOpen()
         }

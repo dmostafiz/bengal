@@ -35,18 +35,18 @@ Axios.interceptors.response.use(
 
         if (status === 401) {
             
-            Axios.post('/auth/refresh')
-                .then(response => {
+            // Axios.post('/auth/refresh')
+            //     .then(response => {
 
-                    console.log('Refresh token response', response)
-                    if(response?.data?.accessToken){
-                        setAccessToken(response.data.accessToken)
-                    }
+            //         console.log('Refresh token response', response)
+            //         if(response?.data?.accessToken){
+            //             setAccessToken(response.data.accessToken)
+            //         }
 
-                })
-                .catch(error => {
+            //     })
+            //     .catch(error => {
 
-                })
+            //     })
         }
 
         if (status === 401) {
