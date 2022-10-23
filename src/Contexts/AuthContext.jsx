@@ -12,7 +12,7 @@ const AuthContextProvider = ({ children }) => {
 
     const [hasUser, setHasUser] = useState(false)
 
-    const { data, isLoading, isError, error } = useQuery(['authUser', accessToken], async () => {
+    const { data, isLoading, isError, error } = useQuery(['authUser'], async () => {
 
         const response = await Axios.get('/auth/get_authorised_user')
 
