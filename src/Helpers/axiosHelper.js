@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getAccessToken, setAccessToken } from './cookieHelper';
 
 const Axios = axios.create({
-    withCredentials: 'include'
+    withCredentials: 'include',
 })
 
 Axios.defaults.baseURL = process.env.BASE_API
