@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { getAccessToken } from './cookieHelper';
 
-const Axios = axios.create({})
+const Axios = axios.create({
+    withCredentials: 'include'
+})
 
 Axios.defaults.baseURL = process.env.BASE_API
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
