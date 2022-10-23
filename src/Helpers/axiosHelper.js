@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getAccessToken } from './cookieHelper';
+import { getAccessToken, setAccessToken } from './cookieHelper';
 
 const Axios = axios.create({
     withCredentials: 'include'
@@ -34,13 +34,19 @@ Axios.interceptors.response.use(
 
 
         if (status === 401) {
-            // axios.post('/auth/refresh')
-            //     .then(response => {
+            
+            Axios.post('/auth/refresh')
+                .then(response => {
 
-            //     })
-            //     .catch(error => {
+                    console.log('Refresh token response', response)
+                    if(response?.data?.accessToken){
+                        setAccessToken(response.data.accessToken)
+                    }
 
-            //     })
+                })
+                .catch(error => {
+
+                })
         }
 
         if (status === 401) {
