@@ -37,6 +37,7 @@
     "font-awesome": "^4.7.0",
     "framer-motion": "^6.5.1",
     "js-cookie": "^3.0.1",
+    "moment": "^2.29.4",
     "next": "12.3.1",
     "next-redirects": "^3.2.3",
     "nextjs-progressbar": "0.0.14",

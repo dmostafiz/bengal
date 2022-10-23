@@ -2,14 +2,16 @@ import { Box, Button, Center, Divider, Flex, Image, Input, InputGroup, InputRigh
 import { Title } from '@mantine/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Search } from 'tabler-icons-react'
 import AuthWrapperLoginFrom from '../../Components/Auth/AuthWrapperLoginFrom'
 import BlogPanel from '../../Components/Common/BlogPanel'
+import formatDate from '../../Helpers/formatDate'
 import useInitialBlogWriting from '../../Hooks/useInitialBlogWriting'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import AuthWrapper from '../../Wrappers/AuthWrapper'
+
 
 const draftPosts = [
     {
@@ -38,8 +40,19 @@ export default function drafted_posts() {
 
     const router = useRouter()
 
-    const { redirectToNewPostEditor } = useInitialBlogWriting()
-    
+    const { draftedPosts, redirectToNewPostEditor } = useInitialBlogWriting()
+
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        (
+            async () => {
+                const draftedPost = await draftedPosts()
+                setPosts(draftedPost)
+            }
+        )()
+    }, [])
+
 
     return (
         <HomeLayout>
@@ -89,7 +102,7 @@ export default function drafted_posts() {
                                 <Box py={3}>
                                     <Box maxH={'350px'} overflowY={'auto'}>
 
-                                        {draftPosts.length ? draftPosts.map((post, index) => <Flex
+                                        {posts.length ? posts.map((post, index) => <Flex
                                             key={index}
                                             p={2}
                                             mb={1}
@@ -98,16 +111,22 @@ export default function drafted_posts() {
                                             bg='white'
                                         >
                                             <Box w='100px'>
-                                                <Image src={post.image} />
+                                                {post.image ? <Image src={post.image} /> : <Box w='full' h='70px' bg='red.50' border='2px' borderColor={'red.100'}>
+                                                    <Center h='full'>
+                                                        <Text fontSize={'11px'} color={'red.600'}>ছবি নেই</Text>
+                                                    </Center>
+                                                </Box>}
                                             </Box>
                                             <Box flex={1}>
-                                                <Title order={6}><Text noOfLines={1}>{post.title}</Text></Title>
-                                                <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >আরবি জমজমা এবং ফারসি জামেদ মিলে তৈরি হয়েছে বাংলা ভাষার শব্দ জমজমাট।</Text>
-                                                <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>সর্বশেষ আপডেট ~ ১৫ই জানুয়ারী, ২০২২</Text>
+                                                <Title order={6}><Text noOfLines={1}>{post.title ? post.title : '( শিরোনাম নেই )'}</Text></Title>
+                                                <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >{post.content ? post.content : 'কন্টেন্ট লেখা হয়নি'}</Text>
+                                                <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>সর্বশেষ আপডেট ~ {formatDate(post.updatedAt)}</Text>
                                             </Box>
 
                                             <Box>
-                                                <Button>লেখা চালিয়ে যান</Button>
+                                                <Link href={`/write/${post.id}`}>
+                                                    <Button>লেখা চালিয়ে যান</Button>
+                                                </Link>
                                             </Box>
 
                                         </Flex>
@@ -134,7 +153,7 @@ export default function drafted_posts() {
                 </AuthWrapper>
 
             </LayoutColumn>
-            
+
         </HomeLayout>
     )
 }

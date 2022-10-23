@@ -30,9 +30,15 @@ export default function useInitialBlogWriting() {
     }, [router])
 
 
-    const hasDraftedPosts = async () => {
+    const draftedPosts = async () => {
 
-        return true
+        const response = await Axios.get('/user/author_drafted_posts')
+
+        console.log('Author drafted posts ase', response.data.posts)
+
+        if(response?.data?.ok == true && response?.data?.posts?.length) return response.data.posts
+
+        return []
 
     }
 
@@ -57,11 +63,15 @@ export default function useInitialBlogWriting() {
 
     const getRedirectingUrl = async () => {
 
-        if (await hasDraftedPosts()) return '/write/drafted_posts'
+        // console.log(draftedPosts().length)
+        const checkDraftedPosts = await draftedPosts()
+
+        if (checkDraftedPosts.length ) return '/write/drafted_posts'
 
         const postId = await generateNewBlogId()
+
         return `/write/${postId}`
     }
 
-    return { hasDraftedPosts, generateNewBlogId, redirectToNewPostEditor, getRedirectingUrl, editingPost, editingPostLoading }
+    return { draftedPosts, generateNewBlogId, redirectToNewPostEditor, getRedirectingUrl, editingPost, editingPostLoading }
 }

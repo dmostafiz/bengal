@@ -25,14 +25,20 @@ export default function TopBar() {
 
     const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
-    const { hasDraftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
+    const { draftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
 
     const handleClickWriteBlog = async () => {
 
         if (authUser) {
 
-            if (await hasDraftedPosts()) {
+            const checkDraftedPosts = await draftedPosts()
+
+            // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
+
+            if (checkDraftedPosts.length > 0) {
+                
                 router.push('/write/drafted_posts')
+
             } else {
                 await redirectToNewPostEditor()
             }
