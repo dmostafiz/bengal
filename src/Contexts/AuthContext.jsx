@@ -18,7 +18,8 @@ const AuthContextProvider = ({ children }) => {
 
         // console.log('Authorized User: ', response?.data?.user)
         setHasUser(true)
-        return response?.data?.user
+        return response?.data?.user || null
+
     }, {
         refetchOnWindowFocus: false,
         enabled: !hasUser ? true : false,

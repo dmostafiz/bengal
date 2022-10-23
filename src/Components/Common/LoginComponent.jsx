@@ -8,7 +8,7 @@ import useLogin from '../../Hooks/useLogin';
 
 export default function LoginComponent() {
 
-    const {responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useLogin()
+    const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useLogin()
 
     return (
         <Box>
@@ -73,9 +73,10 @@ export default function LoginComponent() {
 
             {/* <Divider borderColor={'blackAlpha.100'} mb={5}/> */}
 
-            <form autocomplete="new-password">
+            <form autoComplete="new-password">
                 <FormControl isInvalid={errors.email}>
                     <Input
+                        autoComplete="new-password"
                         border={'1px'}
                         borderColor='blackAlpha.200'
                         _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
@@ -96,7 +97,7 @@ export default function LoginComponent() {
                 <FormControl isInvalid={errors.password}>
                     <Input
                         border={'2px'}
-                        autocomplete="new-password"
+                        autoComplete="new-password"
                         borderColor='blackAlpha.200'
                         _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
                         _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
@@ -130,7 +131,7 @@ export default function LoginComponent() {
                     প্রবেশ করুন
                 </CustomButton>
 
-    
+
             </form>
 
         </Box >
