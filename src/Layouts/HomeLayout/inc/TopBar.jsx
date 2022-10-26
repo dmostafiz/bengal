@@ -37,7 +37,7 @@ export default function TopBar() {
 
             if (checkDraftedPosts.length > 0) {
                 
-                router.push('/write/drafted_posts')
+                router.push('/editor/drafted_posts')
 
             } else {
                 await redirectToNewPostEditor()

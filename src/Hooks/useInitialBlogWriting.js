@@ -66,7 +66,7 @@ export default function useInitialBlogWriting() {
 
         console.log('Redirecting to post id', postId)
 
-        return Router.push(`/write/${postId}`)
+        return Router.push(`/editor/${postId}`)
 
     }
 
@@ -77,7 +77,7 @@ export default function useInitialBlogWriting() {
 
         console.log('checkDraftedPosts', checkDraftedPosts)
 
-        if (checkDraftedPosts.length) return '/write/drafted_posts'
+        if (checkDraftedPosts.length) return '/editor/drafted_posts'
 
         const postId = await generateNewBlogId()
 
