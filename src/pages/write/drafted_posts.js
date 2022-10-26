@@ -106,7 +106,7 @@ export default function drafted_posts() {
                                 </InputGroup>
 
                                 <Box py={3}>
-                                    {draftedLoading ? <ComponentLoader />
+                                    {draftedLoading ? <ComponentLoader py='3'/>
                                         :
                                         <Box maxH={'350px'} overflowY={'auto'}>
 
