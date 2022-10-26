@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { Search } from 'tabler-icons-react'
 import AuthWrapperLoginFrom from '../../Components/Auth/AuthWrapperLoginFrom'
 import BlogPanel from '../../Components/Common/BlogPanel'
+import ComponentLoader from '../../Components/Common/ComponentLoader'
 import formatDate from '../../Helpers/formatDate'
 import useInitialBlogWriting from '../../Hooks/useInitialBlogWriting'
 import HomeLayout from '../../Layouts/HomeLayout'
@@ -44,12 +45,14 @@ export default function drafted_posts() {
     const { draftedPosts, redirectToNewPostEditor } = useInitialBlogWriting()
 
     const [posts, setPosts] = useState([])
+    const [draftedLoading, setDraftedLoading] = useState(true)
 
     useEffect(() => {
         (
             async () => {
                 const draftedPost = await draftedPosts()
                 setPosts(draftedPost)
+                setDraftedLoading(false)
             }
         )()
     }, [])
@@ -103,43 +106,45 @@ export default function drafted_posts() {
                                 </InputGroup>
 
                                 <Box py={3}>
-                                    <Box maxH={'350px'} overflowY={'auto'}>
+                                    {draftedLoading ? <ComponentLoader />
+                                        :
+                                        <Box maxH={'350px'} overflowY={'auto'}>
 
-                                        {posts.length ? posts.map((post, index) => <Flex
-                                            key={index}
-                                            p={2}
-                                            mb={1}
-                                            alignItems={'center'}
-                                            gap={2}
-                                            bg='white'
-                                        >
-                                            <Box w='100px'>
-                                                {post.image ? <Image src={post.image} /> : <Box w='full' h='70px' bg='red.50' border='2px' borderColor={'red.100'}>
-                                                    <Center h='full'>
-                                                        <Text fontSize={'11px'} color={'red.600'}>ছবি নেই</Text>
-                                                    </Center>
-                                                </Box>}
-                                            </Box>
-                                            <Box flex={1}>
-                                                <Title order={6}><Text noOfLines={1}>{post.title ? post.title : '#শিরোনাম নেই#'}</Text></Title>
-                                                <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >{post.content ? <div dangerouslySetInnerHTML={{__html: post.content}}></div> : '#কন্টেন্ট লেখা হয়নি#'}</Text>
-                                                <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>{formatDate(post.updatedAt)} ( সর্বশেষ আপডেট )</Text>
-                                            </Box>
+                                            {posts.length ? posts.map((post, index) => <Flex
+                                                key={index}
+                                                p={2}
+                                                mb={1}
+                                                alignItems={'center'}
+                                                gap={2}
+                                                bg='white'
+                                            >
+                                                <Box w='100px'>
+                                                    {post.image ? <Image src={post.image} /> : <Box w='full' h='70px' bg='red.50' border='2px' borderColor={'red.100'}>
+                                                        <Center h='full'>
+                                                            <Text fontSize={'11px'} color={'red.600'}>ছবি নেই</Text>
+                                                        </Center>
+                                                    </Box>}
+                                                </Box>
+                                                <Box flex={1}>
+                                                    <Title order={6}><Text noOfLines={1}>{post.title ? post.title : '#শিরোনাম নেই#'}</Text></Title>
+                                                    <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >{post.content ? <div dangerouslySetInnerHTML={{ __html: post.content }}></div> : '#কন্টেন্ট লেখা হয়নি#'}</Text>
+                                                    <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>{formatDate(post.updatedAt)} ( সর্বশেষ আপডেট )</Text>
+                                                </Box>
 
-                                            <Box>
-                                                <Link href={`/write/${post.id}`}>
-                                                    <Button>লেখা চালিয়ে যান</Button>
-                                                </Link>
-                                            </Box>
+                                                <Box>
+                                                    <Link href={`/write/${post.id}`}>
+                                                        <Button>লেখা চালিয়ে যান</Button>
+                                                    </Link>
+                                                </Box>
 
-                                        </Flex>
-                                        ) : <Center py={5}>
-                                            <VStack>
-                                                <Text>কোন খসড়া পোস্ট পাওয়া যায়নি</Text>
-                                            </VStack>
-                                        </Center>}
-                                    </Box>
-
+                                            </Flex>
+                                            ) : <Center py={5}>
+                                                <VStack>
+                                                    <Text>কোন খসড়া পোস্ট পাওয়া যায়নি</Text>
+                                                </VStack>
+                                            </Center>}
+                                        </Box>
+                                    }
 
                                 </Box>
 
