@@ -234,7 +234,7 @@ export default function write() {
 
 
                   <Box py={2}>
-                    <Title order={3}>ব্লগ লিখুন</Title>
+                    <Title order={3}>{router?.query?.editorStatus == 'update' ? 'ব্লগ পোস্ট আপডেট করুন' : 'ব্লগ লিখুন' } </Title>
                   </Box>
 
                   <Divider mb={4} />
