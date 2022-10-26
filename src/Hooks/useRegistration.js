@@ -11,7 +11,7 @@ import { setFlashMessage, setUpdateToken } from '../Helpers/cookieHelper';
 const schema = yup.object({
     email: yup.string()
         .email("দুঃখিত! ইমেইলটি ঠিকানাটি সঠিক নয়!")
-        .required('নিবন্ধিনের জন্য ইমেইল ঠিকানাটি আবশ্যক!')
+        .required('নিবন্ধনের জন্য ইমেইল ঠিকানাটি আবশ্যক!')
         .test(
             'checkEmailUnique',
             'দুঃখিত! ইমেইলটি আগে থেকে নিবন্ধিত!',

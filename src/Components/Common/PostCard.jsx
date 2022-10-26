@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Divider, Flex, Image, Spacer, Text, Wrap } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Divider, Flex, Image, Show, Spacer, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
 import { HoverCard, Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
@@ -6,10 +6,16 @@ import React from 'react'
 // import { ThumbUpOff } from 'tableicons-react'
 
 export default function PostCard({ title, image, content, createdAt, states, author, slug = 'বান্দুরা-রানী-পবিত্র-জপমালা-গীর্জা' }) {
+
+    const imgBreakPoints = useBreakpoint({
+        base: false,
+        md: true
+    })
+
     return (
         <Box border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
 
-            <Box w='full' bg='.50' px={2}>
+            <Box w='full' bg='.50'>
                 <Link href={`/blog/${slug}`}>
                     <a href={`/blog/${slug}`}>
                         <Title order={3}><Text color='gray.900'>{title}</Text></Title>
@@ -75,36 +81,44 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             <Divider borderColor={'blackAlpha.200'} mt={2} />
 
-            <Box py={0} px={2}>
+            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
 
-                {image ? <Center py={5}>
-                    <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
-                </Center> : <Spacer h={2} />}
+                {image ? <Box w={{ base: 'full', md: 'full', lg: '150px' }} rounded='md' overflow={'hidden'} py={0} bgImage={image} bgPos='center' bgSize='cover'>
+                    <Center bg='whiteAlpha.500' backdropFilter='blur(7px)' rounded='md' overflow={'hidden'} h='full' w='full'>
+                        {/* <Show below={'lg'}> */}
+                        <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
+                        {/* </Show> */}
+                    </Center>
+                </Box> : <Spacer h={2} />}
 
 
-                <Box textAlign={'justify'}>{content}    <Link href={`/blog/${slug}`}>
-                    <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
-                </Link>
+                <Box flex={image && 1} w='full' textAlign={'justify'}>
+                    <Box>
+                        {content}  <Link href={`/blog/${slug}`}>
+                            <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                        </Link>
+                    </Box>
 
+                    <Divider borderColor={'blackAlpha.100'} mt={1} />
+
+                    <Box w='full' bg='blackAlpha' py={1} fontSize='12px' fontWeight={'normal'}>
+                        <Flex gap={2} justify='space-between' alignItems={'center'}>
+                            <Flex gap={2} justify='flex-start' alignItems={'center'}>
+                                <Text>{states.read} বার পড়া হয়েছে</Text>
+                                <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
+                                <Text>{states.comment} টি মন্তব্য</Text>
+                            </Flex>
+
+                            <Flex alignItems={'center'} gap={1}>
+                                <Text fontSize={'15px'}>{states.like}</Text><IconThumbUp size={16} />
+                            </Flex>
+                        </Flex>
+                    </Box>
                 </Box>
 
-            </Box>
+            </Flex>
 
-            <Divider borderColor={'blackAlpha.100'} mt={2} />
 
-            <Box w='full' bg='blackAlpha' py={1} px={2} fontSize='12px' fontWeight={'normal'}>
-                <Flex gap={2} justify='space-between' alignItems={'center'}>
-                    <Flex gap={2} justify='flex-start' alignItems={'center'}>
-                        <Text>{states.read} বার পড়া হয়েছে</Text>
-                        <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
-                        <Text>{states.comment} টি মন্তব্য</Text>
-                    </Flex>
-
-                    <Flex alignItems={'center'} gap={1}>
-                        <Text fontSize={'15px'}>{states.like}</Text><IconThumbUp size={16} />
-                    </Flex>
-                </Flex>
-            </Box>
         </Box>
     )
 }

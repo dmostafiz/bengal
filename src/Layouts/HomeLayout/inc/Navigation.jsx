@@ -11,7 +11,7 @@ export default function Navigation() {
     // const { categories } = useCategory()
     // const { data } = getAllCategory()
 
-    console.log('Navigation categories array', categories())
+    // console.log('Navigation categories array', categories())
 
     return (
         <SectionContainer maxW='full'>

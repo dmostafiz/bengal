@@ -67,7 +67,7 @@ export default function Home() {
             },
 
             {
-              title: 'মাসের সেরা ব্লগার',
+              title: 'সেরা ব্লগার',
               component: <TopBloggers />
             },
 

@@ -2,6 +2,7 @@ import { Box, Button, Center, Divider, Flex, Image, Input, InputGroup, InputRigh
 import { Title } from '@mantine/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 import React, { useEffect, useState } from 'react'
 import { Search } from 'tabler-icons-react'
 import AuthWrapperLoginFrom from '../../Components/Auth/AuthWrapperLoginFrom'
@@ -56,6 +57,8 @@ export default function drafted_posts() {
 
     return (
         <HomeLayout>
+
+            {/* <Script src="lang/moment/bn-bd" /> */}
 
             <LayoutColumn
 
@@ -118,9 +121,9 @@ export default function drafted_posts() {
                                                 </Box>}
                                             </Box>
                                             <Box flex={1}>
-                                                <Title order={6}><Text noOfLines={1}>{post.title ? post.title : '( শিরোনাম নেই )'}</Text></Title>
-                                                <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >{post.content ? post.content : 'কন্টেন্ট লেখা হয়নি'}</Text>
-                                                <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>সর্বশেষ আপডেট ~ {formatDate(post.updatedAt)}</Text>
+                                                <Title order={6}><Text noOfLines={1}>{post.title ? post.title : '#শিরোনাম নেই#'}</Text></Title>
+                                                <Text noOfLines={2} fontSize={{ base: '12px', md: '14px' }} >{post.content ? <div dangerouslySetInnerHTML={{__html: post.content}}></div> : '#কন্টেন্ট লেখা হয়নি#'}</Text>
+                                                <Text color='blackAlpha.500' fontSize={{ base: '10px', md: '11px' }} noOfLines={1}>{formatDate(post.updatedAt)} ( সর্বশেষ আপডেট )</Text>
                                             </Box>
 
                                             <Box>

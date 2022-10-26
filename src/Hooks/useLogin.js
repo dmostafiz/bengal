@@ -96,7 +96,7 @@ export default function useLogin(redirectUrl=null) {
 
         const res = await Axios.post(url, { ...values })
 
-        console.log('Response ', res.data)
+        console.log('Response ', res?.data)
 
         if (res?.data?.ok) {
 
@@ -135,7 +135,11 @@ export default function useLogin(redirectUrl=null) {
             const redirectUrl = getRedirectUrl()
 
             if(redirectUrl == '/write/new'){
-                return window.location.href = await getRedirectingUrl()
+                const rdURL =  await getRedirectingUrl()
+
+                // console.log('rdURL ', rdURL)
+                return window.location.href = rdURL
+                // return
             }
 
             window.location.href = redirectUrl

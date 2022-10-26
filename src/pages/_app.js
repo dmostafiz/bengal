@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
       <ChakraProvider>
 
         <NextNProgress
-          color="#ecc94b"
+          color="#6e6e6e"
           startPosition={0.3}
           stopDelayMs={200}
           height={3}

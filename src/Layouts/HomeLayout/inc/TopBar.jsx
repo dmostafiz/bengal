@@ -47,7 +47,8 @@ export default function TopBar() {
         else {
             setRedirectUrl('/write/new')
             
-            seTitle('ব্লগ লিখতে লগইন করা আবশ্যক')
+            seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
+            
             onOpen()
         }
     }
@@ -86,7 +87,7 @@ export default function TopBar() {
                                                         <FaBell size={20} /> <Show above='lg'><Text>নোটিফিকেশন</Text></Show>
                                                     </Flex>
                                                 </MenuButton>
-                                                <MenuList shadow={'md'} rounded='none' pos={'relative'}  top={{base: '6px',md:'9px'}} right={0}>
+                                                <MenuList shadow={'md'} rounded='none' pos={'relative'} top={{base: '6px',md:'9px'}} right={0}>
                                                     <Box width={{base: '100vw', md: '350px'}}>
                                                         <Center py={5}>
                                                             <Icon as={BellOff} color={'blackAlpha.500'} fontSize={'26px'} />  <Text color={'blackAlpha.500'}>কোন নোটিফিকেশন পাওয়া যায়নি</Text>
@@ -106,7 +107,7 @@ export default function TopBar() {
                                                 <MenuButton as={Button} size={{ base: 'sm', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
                                                     <Avatar size={'xs'} src={authUser.avatar} />
                                                 </MenuButton>
-                                                <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{base: '6px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
+                                                <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{base: '2px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
                                                     <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                                     <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
                                                     <MenuItem icon={<Heart />}>আমার পছন্দ তালিকা</MenuItem>
@@ -120,7 +121,7 @@ export default function TopBar() {
                                                             <ChevronDown size={16} color='gray' />
                                                         </Flex>
                                                     </MenuButton>
-                                                    <MenuList shadow={'md'} rounded='none' zIndex={9999}>
+                                                    <MenuList shadow={'md'} rounded='none' zIndex={9999}pos={'relative'} top={{base: '2px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
                                                         <Link href={'/auth/login'}>
                                                             <MenuItem icon={<Lock />}>লগইন করুন</MenuItem>
                                                         </Link>

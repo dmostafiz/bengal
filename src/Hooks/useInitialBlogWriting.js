@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import Axios from '../Helpers/axiosHelper'
+import { getAccessToken } from '../Helpers/cookieHelper'
 
 export default function useInitialBlogWriting() {
 
@@ -32,11 +33,15 @@ export default function useInitialBlogWriting() {
 
     const draftedPosts = async () => {
 
-        const response = await Axios.get('/user/author_drafted_posts')
+        const response = await Axios.get('/user/author_drafted_posts', {
+            headers: {
+                Authorization: `Bearer ${getAccessToken()}`
+            }
+        })
 
-        console.log('Author drafted posts ase', response.data.posts)
+        console.log('Author drafted posts ase', response?.data?.posts)
 
-        if(response?.data?.ok == true && response?.data?.posts?.length) return response.data.posts
+        if (response?.data?.ok == true && response?.data?.posts?.length) return response.data.posts
 
         return []
 
@@ -44,7 +49,11 @@ export default function useInitialBlogWriting() {
 
     const generateNewBlogId = async () => {
 
-        const post = await Axios.post('/post')
+        const post = await Axios.post('/post', {}, {
+            headers: {
+                Authorization: `Bearer ${getAccessToken()}`
+            }
+        })
 
         console.log('Post has created ', post)
 
@@ -66,7 +75,9 @@ export default function useInitialBlogWriting() {
         // console.log(draftedPosts().length)
         const checkDraftedPosts = await draftedPosts()
 
-        if (checkDraftedPosts.length ) return '/write/drafted_posts'
+        console.log('checkDraftedPosts', checkDraftedPosts)
+
+        if (checkDraftedPosts.length) return '/write/drafted_posts'
 
         const postId = await generateNewBlogId()
 
