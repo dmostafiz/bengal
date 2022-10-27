@@ -18,85 +18,93 @@ import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
 
 
-function SingleBlogDetails({ post }) {
+function SingleBlogDetails({ post, ok }) {
     return (
         <HomeLayout>
 
-            <LayoutColumn
-                // leftColumnWidth={26}
-                rightSide={<></>}
-                leftSide={< BlogLeftSidebar />}
-                rightColumnWidth={15}
-            >
+            {ok ?
 
-                <Box mb={8} px={{ base: 0, md: 2 }}>
+                <LayoutColumn
+                    // leftColumnWidth={26}
+                    rightSide={<></>}
+                    leftSide={< BlogLeftSidebar />}
+                    rightColumnWidth={15}
+                >
 
-
-                    <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
-                        <Title order={2}>{post?.title}</Title>
-                    </Box>
-
-                    <Box py={2} mb='2'>
-                        <Text color='blackAlpha.600'>{formatDate(post?.createdAt)}</Text>
-                    </Box>
-
-                    <Box p={2} bg='blackAlpha.50'>
-                        <HStack>
-                            <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
-                            <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
-                                <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
-                                    Facebook
-                                </Button>
-                            </Tooltip>
-
-                            <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
-                                <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
-                                    Twitter
-                                </Button>
-                            </Tooltip>
-                        </HStack>
-                    </Box>
+                    <Box mb={8} px={{ base: 0, md: 2 }}>
 
 
-                    <Center w={'full'} py={6}>
-                       {post.image && <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />} 
-                    </Center>
+                        <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
+                            <Title order={2}>{post?.title}</Title>
+                        </Box>
 
-                    <Box
-                        px={{ base: 2, md: 5 }}
-                        textAlign={'justify'}
-                        mb={5}
-                        fontSize={'17px'}
-                        lineHeight='28px'
-                        as='article'
-                        dangerouslySetInnerHTML={{__html:post?.content}}
-                    >
-                    </Box>
+                        <Box py={2} mb='2'>
+                            <Text color='blackAlpha.600'>{formatDate(post?.createdAt)}</Text>
+                        </Box>
+
+                        <Box p={2} bg='blackAlpha.50'>
+                            <HStack>
+                                <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
+                                <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
+                                    <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
+                                        Facebook
+                                    </Button>
+                                </Tooltip>
+
+                                <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
+                                    <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
+                                        Twitter
+                                    </Button>
+                                </Tooltip>
+                            </HStack>
+                        </Box>
 
 
+                        <Box px={{ base: 2, md: 5 }}>
+                            <Center w={'full'} py={6}>
+                                {post.image && <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />}
+                            </Center>
 
+                            <Box
+                                textAlign={'justify'}
+                                mb={5}
+                                fontSize={'17px'}
+                                lineHeight='24px'
+                                as='article'
+                                fontWeight={500}
+                                dangerouslySetInnerHTML={{ __html: post?.content }}
+                            >
+                            </Box>
 
-                    <Box p={3} mb={2} bg='blackAlpha.50'>
-
-                    </Box>
+                        </Box>
 
 
 
 
-                    <Box shadow={'sm'}>
                         <Box p={3} mb={2} bg='blackAlpha.50'>
-                            <Title order={5}>মন্তব্য করুন</Title>
+
                         </Box>
 
-                        <Box p={0}>
-                            <CommentInput />
+
+
+
+                        <Box shadow={'sm'}>
+                            <Box p={3} mb={2} bg='blackAlpha.50'>
+                                <Title order={5}>মন্তব্য করুন</Title>
+                            </Box>
+
+                            <Box p={0}>
+                                <CommentInput />
+                            </Box>
                         </Box>
+
                     </Box>
 
-                </Box>
+                </LayoutColumn>
 
-
-            </LayoutColumn>
+                : <Center h='75vh'>
+                    <Text>পোস্ট পাওয়া যায়নি!</Text>
+                </Center>}
 
         </HomeLayout>
     )
@@ -104,8 +112,11 @@ function SingleBlogDetails({ post }) {
 
 SingleBlogDetails.getInitialProps = async (ctx) => {
     const res = await Axios.get(`/post/getSinglePost/${ctx.query.slug}`)
-    
-    return { post: res?.data?.post }
+
+    return {
+        post: res?.data?.post,
+        ok: res?.data?.ok
+    }
 }
 
 export default SingleBlogDetails

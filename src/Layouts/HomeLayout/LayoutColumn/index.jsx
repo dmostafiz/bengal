@@ -46,7 +46,7 @@ export default function LayoutColumn({ children, pageTopSection ='', leftSide = 
 
                         {leftSide && <Box
                             minH={{ base: '0px', lg: '100vh' }}
-                            w={{ base: '100%', lg: leftColumnWidth + '%' }}
+                            w={{ base: '100%', md: leftColumnWidth + '%' }}
                             pr={{ base: 0, md: 2, lg: 3 }}
                             py={{ base: 3, md: 3 }}
                         >
