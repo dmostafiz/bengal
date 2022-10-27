@@ -27,6 +27,7 @@
     "@mantine/notifications": "^5.5.0",
     "@mantine/nprogress": "^5.5.4",
     "@mantine/spotlight": "^5.5.0",
+    "@nosferatu500/react-truncate": "^3.0.1",
     "@tabler/icons": "^1.101.0",
     "@tanstack/react-query": "^4.12.0",
     "@tinymce/tinymce-react": "^4.2.0",
@@ -54,6 +55,8 @@
     "react-social-media-embed": "^2.2.2",
     "react-stickynode": "^4.1.0",
     "react-summernote": "^2.0.2",
+    "react-truncate": "^2.4.0",
+    "react-truncate-lines": "^1.0.9",
     "swiper": "^8.4.2",
     "tabler-icons-react": "^1.55.0",
     "yup": "^0.32.11"

@@ -146,7 +146,7 @@ export default function drafted_posts() {
 
                                                     <Box>
                                                         <Link href={`/editor/${post.id}?editorStatus=update`}>
-                                                            <Button size={{ base: 'sm', md: 'md' }}>লেখা চালিয়ে যান</Button>
+                                                            <Button size={{ base: 'sm', md: 'md' }}>সম্পাদনা করুন</Button>
                                                         </Link>
                                                     </Box>
                                                 </Flex>

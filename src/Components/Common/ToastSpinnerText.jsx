@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ToastSpinnerText({text=null}) {
   return (
-    <Box pos='fixed' p={2} right='30px' style={{position: 'fixed'}} top='355px' rounded='full' bg={'white'} shadow='md'>
+    <Box zIndex={999999999} pos='fixed' p={2} right='10px' style={{position: 'fixed'}} top={{base: '90', md: '105px'}} rounded='full' bg={'white'} shadow='md'>
        <Flex color={'blackAlpha.600'} alignItems={'center'} gap='1'>
           <Spinner size={'sm'} />
            {text && <Text fontSize={'12px'}>{text}</Text>}

@@ -13,6 +13,7 @@ import SectionContainer from '../../Components/Common/SectionContainer'
 import useLogin from '../../Hooks/useLogin'
 import useRegistration from '../../Hooks/useRegistration'
 import FullscreenLoader from '../../Components/Common/FullscreenLoader'
+import ToastSpinnerText from '../../Components/Common/ToastSpinnerText'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -20,7 +21,7 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({ children }) {
 
-    const {asPath} = useRouter()
+    const { asPath } = useRouter()
 
     const [onTapLoading, setOneTapLoading] = useState(false)
 
@@ -59,6 +60,7 @@ export default function HomeLayout({ children }) {
 
             <Box bg={{ base: 'white', md: 'gray.200' }} minH='100vh'>
 
+
                 {(!isLoading && !authUser && !onTapLoading) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => tryToLoginOrSignup(response)}
@@ -67,53 +69,50 @@ export default function HomeLayout({ children }) {
 
                 {onTapLoading && <FullscreenLoader spinnerSize='md' />}
 
-                <Box
-                    // bgColor={'blackAlpha.0'}
+
+
+               
+
+                <SectionContainer
+                    maxW={'container.xl'}
+                    px={{ base: 0, md: '10px' }}
+                    bg='gray.50'
                     backdropFilter='auto'
-                    backdropBlur='2px'
-                    backgroundImage={'bg.png'}
+                    // backdropBlur='2px'
                 >
 
-                    <SectionContainer
-                        maxW={'container.xl'}
-                        px={{ base: 0, md: '10px' }}
-                        bg='gray.50'
-                        backdropFilter='auto'
-                        backdropBlur='2px'
+                    <TopBar />
+
+                    {/* <ToastSpinnerText text='পোস্টটি সেভ হচ্ছে...' /> */}
+                    {/* <ImageBanner src='/banner.jpg' /> */}
+
+                    <Navigation />
+
+                    <Box
+                        bg={{ base: 'white', md: 'whiteAlpha.800' }}
+                        // roundedTop={{ base: 'none', md: '4xl' }}
+                        roundedBottom='md'
+                        overflow={'hidden'}
+                        border='1px'
+                        borderColor={'blackAlpha.200'}
+                        shadow='sm'
                     >
 
-                        <TopBar />
 
+                        <Box px={{ base: 0, md: 1 }} py={{ base: 0, md: 1 }}>
 
-                        {/* <ImageBanner src='/banner.jpg' /> */}
-
-                        <Navigation />
-
-                        <Box
-                            bg={{ base: 'white', md: 'whiteAlpha.800' }}
-                            // roundedTop={{ base: 'none', md: '4xl' }}
-                            roundedBottom='md'
-                            overflow={'hidden'}
-                            border='1px'
-                            borderColor={'blackAlpha.200'}
-                            shadow='sm'
-                        >
-
-
-                            <Box px={{ base: 0, md: 1 }} py={{ base: 0, md: 1 }}>
-                                {children}
-                            </Box>
-
+                            {children}
                         </Box>
 
+                    </Box>
 
-                        <Center py='5'>
-                            <Text>2022 @ bengalread.com all rights reserved</Text>
-                        </Center>
 
-                    </SectionContainer>
+                    <Center py='5'>
+                        <Text>2022 @ bengalread.com all rights reserved</Text>
+                    </Center>
 
-                </Box>
+                </SectionContainer>
+
 
                 <AuthModal />
             </Box>

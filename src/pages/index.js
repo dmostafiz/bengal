@@ -15,6 +15,7 @@ import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
 import { useEffect } from 'react'
 import req from '../Helpers/axiosHelper'
 import BlogPanel from '../Components/Common/BlogPanel'
+import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
 
 export default function Home() {
 
@@ -83,22 +84,10 @@ export default function Home() {
             <Title order={4}><Text color={'blackAlpha.800'}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Text></Title>
           </Box>
 
-          <VStack gap={5}>
-            <PostCard
-              title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
-              image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
-              content='পর্দায় যেমনই থাকুক না কেন, বাস্তব জীবনে হিরোর ভূমিকায় দেখা গেছে তাকে। বিভিন্ন সময়ে ডিপজলের সেবামূলক কাজের কথাও উঠে আসে। তবে তিনি তার মাকে প্রচন্ড ভালোবাসতেন। তার কাছের অনেকেই এমন কথা বলেন। কমেডি অভিনেতা জ্যাকি আলমগীর জানালেন, ডিপজল সাহেব প্রচন্ড মা ভক্ত। মায়ের প্রতি ডিপজলের ভালোবাসার কথা জানিয়ে জ্যাকি...'
-              createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-              states={{
-                read: 5,
-                comment: 3,
-                like: 3
-              }}
-              author={{
-                name: 'লিমন লস্কর',
-                image: ''
-              }}
-            />
+          <LatestBlogPost />
+
+          <VStack gap={5} mt={8}>
+
 
             <PostCard
               title="বান্দুরা রানী পবিত্র জপমালা গীর্জা"

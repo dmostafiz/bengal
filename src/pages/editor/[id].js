@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Flex, FormControl, FormErrorMessage, Image, Input, InputGroup, InputRightElement, Text, Tooltip, VStack } from '@chakra-ui/react'
+import { Box, Button, Center, Divider, Flex, FormControl, FormErrorMessage, Image, Input, InputGroup, InputRightElement, Text, Tooltip, useToast, VStack } from '@chakra-ui/react'
 import { MultiSelect, SegmentedControl, Title } from '@mantine/core'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import BloggerRightSidebar from '../../Components/blogger/BloggerRightSidebar'
@@ -24,7 +24,9 @@ import { min } from 'moment'
 import { useDebouncedState } from '@mantine/hooks'
 import Axios from '../../Helpers/axiosHelper'
 import ToastSpinnerText from '../../Components/Common/ToastSpinnerText'
-
+// import banglaNumber from '../../Helpers/banglaNumber'
+import banglaNumber from '../../Helpers/banglaNumber'
+import categories from '../../Hooks/categories'
 
 const schema = yup.object({
 
@@ -53,6 +55,9 @@ const schema = yup.object({
 export default function write() {
 
   const router = useRouter()
+
+  const toast = useToast()
+
   const { editingPost, editingPostLoading } = useInitialBlogWriting()
   // console.log('Post from writing page', editingPost)
 
@@ -76,7 +81,7 @@ export default function write() {
 
   const [currPost, setCurrentPost] = useState(null)
 
-  const { file, setFile, fileDataURL, setFileDataURL, tinny_mce_image_handler, tinnyImagePickerCallback } = usePostImageUpload()
+  const { setFile, preview, setPreview, image, tinny_mce_image_handler, tinnyImagePickerCallback } = usePostImageUpload()
 
   const [title, setTitle] = useState('')
   const [titleDebounce, setTitleDebounce] = useDebouncedState('', 2000)
@@ -89,7 +94,29 @@ export default function write() {
 
   const [selectedStepPost, setSelectedStepPost] = useState(null)
 
+  const [postPart, setPostPart] = useState(1)
+
+  const [cats, setCategories] = useState([])
+
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const getCategories = categories()
+
+  useEffect(() => {
+
+    const postCats = getCategories?.length ? getCategories.map((cat) => {
+      return {
+        value: cat.id,
+        label: cat.name
+      }
+    }) : []
+
+    // console.log('postCats', postCats)
+
+    setCategories(postCats)
+
+  }, [getCategories])
+
 
 
   useEffect(() => {
@@ -103,16 +130,22 @@ export default function write() {
           console.log('Editing post.... : ', res?.data?.post)
 
           if (res?.data?.ok) {
-            
-            const post  = res?.data?.post
+
+            const post = res?.data?.post
 
             reset({
               title: post?.title,
-              content: post?.content
+              content: post?.content,
+              category: post?.categoryIDs
             })
 
             setTitle(post?.title)
             setContent(post?.content)
+            setPreview(post?.image)
+            setBlogTyple(post?.postType)
+            setStepStatus(post?.part < 2 ? 'new' : 'old')
+            setPostPart(post?.part || 1)
+            setSelectedCategories(post?.categoryIDs)
 
             setCurrentPost(post)
           }
@@ -129,23 +162,6 @@ export default function write() {
 
   const editorRef = useRef(null)
 
-
-  const data = [
-    { value: 'গল্প', label: 'গল্প' },
-    { value: 'উপন্যাস', label: 'উপন্যাস' },
-    { value: 'সমসাময়িক', label: 'সমসাময়িক' },
-    { value: 'কবিতা', label: 'কবিতা' },
-    { value: 'সাহিত্য', label: 'সাহিত্য' },
-    { value: 'পড়ালেখা', label: 'পড়ালেখা' },
-    { value: 'দেশ-বিদেশ', label: 'দেশ-বিদেশ' },
-    { value: 'ভ্রমণ', label: 'ভ্রমণ' },
-    { value: 'মুক্তিযুদ্ধ', label: 'মুক্তিযুদ্ধ' },
-    { value: 'ছবি ব্লগ', label: 'ছবি ব্লগ' },
-    { value: 'বিজ্ঞান-প্রযুক্তি', label: 'বিজ্ঞান-প্রযুক্তি' },
-  ];
-
-
-  const [mainCategory, setMainCategory] = useState(selectedCategories[0]?.value);
 
   const stepPosts = [
     {
@@ -177,34 +193,76 @@ export default function write() {
   }, [blogType, stepStatus])
 
 
-  const handlePublishBlog = (value) => {
-    console.log('value', value)
-  }
-
   const [postSaving, setSaving] = useState(false)
 
   useEffect(() => {
 
-    if(currPost){
+    if (currPost) {
 
       setSaving(true)
-      saveDraftPost()
+      savePost({
+        title: title,
+        content: content,
+        status: 'drafted'
+      })
 
     }
 
-  }, [titleDebounce, contentDebounce])
+  }, [titleDebounce, contentDebounce, image])
 
-  const saveDraftPost = async () => {
+  const [drafting, setDrafting] = useState(false)
+  const handleDraftSave = () => {
+    setDrafting(true)
+    savePost({
+      title: title,
+      content: content,
+      image: image,
+      postType: blogType,
+      part: blogType == 'multiStep' && stepStatus == 'new' ? 1 : blogType == 'multiStep' && stepStatus == 'old' ? 2 : null,
+      categories: selectedCategories,
+      status: 'drafted'
+    })
+  }
+
+  const [publishing, setPublishing] = useState(false)
+  const handlePublishBlog = () => {
+    setPublishing(true)
+    savePost({
+      title: title,
+      content: content,
+      image: image,
+      postType: blogType,
+      part: blogType == 'multiStep' && stepStatus == 'new' ? 1 : blogType == 'multiStep' && stepStatus == 'old' ? 2 : null,
+      categories: selectedCategories,
+      status: 'published'
+    })
+  }
+
+  const savePost = async (data) => {
     console.log(titleDebounce, contentDebounce)
 
     const res = await Axios.post('/post/update', {
       id: router.query.id,
-      title: title,
-      content: content,
-      status: 'drafted'
+      ...data,
     })
 
+    if(res?.data?.ok){
+      toast({
+        title: 'ব্লগটি সফলভাবে পাবলিশ হয়েছে!',
+        // description: "ব্লগে আপনাকে স্বাগতম।",
+        status: 'success',
+        position: 'top-right',
+        duration: 9000,
+        isClosable: true,
+    })
+    }
+
+    setFile(null)
+
     setSaving(false)
+    setDrafting(false)
+    setPublishing(false)
+
   }
 
   return (
@@ -215,10 +273,12 @@ export default function write() {
         // leftColumnWidth={32}
         leftSide={<><BlogPanel /> </>}
         rightSide={<>
-          {(postSaving && (title || content)) && <ToastSpinnerText text='পোস্টটি সেভ হচ্ছে...' />}
+          {(postSaving && (title || content)) && <ToastSpinnerText text='সেভ হচ্ছে...' />}
         </>}
 
       >
+
+
 
         <AuthWrapper loading={true} component={<AuthWrapperLoginFrom redirectUrl={router.asPath} />}>
 
@@ -234,7 +294,7 @@ export default function write() {
 
 
                   <Box py={2}>
-                    <Title order={3}>{router?.query?.editorStatus == 'update' ? 'ব্লগ পোস্ট আপডেট করুন' : 'ব্লগ লিখুন' } </Title>
+                    <Title order={3}>{router?.query?.editorStatus == 'update' ? 'ব্লগ পোস্ট আপডেট' : 'ব্লগ লিখুন'} </Title>
                   </Box>
 
                   <Divider mb={4} />
@@ -262,7 +322,7 @@ export default function write() {
                     {blogType == 'multiStep' && <Box>
 
                       <Box mb={1} px={0}>
-                        <Title order={5}>পোস্ট স্ট্যাটাস</Title>
+                        <Title order={5}>স্ট্যাটাস</Title>
                         {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
                       </Box>
 
@@ -271,12 +331,10 @@ export default function write() {
                         value={stepPosts.length ? stepStatus : 'new'}
                         onChange={setStepStatus}
                         data={[
-                          { label: 'নতুন শুরু করছি', value: 'new' },
-                          { label: 'পূর্বের পোস্ট চলমান', value: 'old', disabled: true }
+                          { label: 'প্রথম পর্ব', value: 'new' },
+                          { label: 'চলমান পোস্ট', value: 'old' }
                         ]}
                       />
-
-
                     </Box>}
 
                   </Flex>
@@ -284,7 +342,6 @@ export default function write() {
 
 
                   {(blogType == 'multiStep' && stepStatus == 'old' && !selectedStepPost) && <Box mb={10}>
-
                     <Box w='full' py={{ base: 2, md: 2 }} px={{ base: 2, md: 3 }} bg='blackAlpha.50'>
                       <Box py={2}>
                         <Title order={5}>যে পোস্ট টি চলমান থাকবে <Text as={'span'} fontSize={'12px'}>(সিলেক্ট করুন)</Text></Title>
@@ -411,7 +468,7 @@ export default function write() {
                           // {...register('title')}
                           />
                           {blogType == 'multiStep' && <InputRightElement width={'100px'} >
-                            <Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? '১' : '৭'}</Text>
+                            <Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? banglaNumber(postPart) : banglaNumber(24)}</Text>
                           </InputRightElement>}
                         </InputGroup>}
                       />
@@ -495,8 +552,8 @@ export default function write() {
                     </Box>
 
                     <FileButton onChange={setFile} accept="image/png,image/jpeg">
-                      {(props) => <Center bg={fileDataURL ? 'gray.800' : 'gray.50'} bgImage={fileDataURL} bgSize='contain' bgPosition={'center'} bgRepeat='no-repeat' border={'2px'} borderColor='blackAlpha.100' cursor={'pointer'} {...props} w='full' h={fileDataURL ? { base: 200, md: 200 } : 150}>
-                        <Button bg={'whiteAlpha.600'} variant='outline'>{fileDataURL ? 'প্রচ্ছদ ছবি পরিবর্তন করুন' : 'প্রচ্ছদ ছবি আপলোড করুন'}</Button>
+                      {(props) => <Center bg={preview ? 'gray.800' : 'gray.50'} bgImage={preview} bgSize='contain' bgPosition={'center'} bgRepeat='no-repeat' border={'2px'} borderColor='blackAlpha.100' cursor={'pointer'} {...props} w='full' h={preview ? { base: 200, md: 200 } : 150}>
+                        <Button size='sm' bg={'whiteAlpha.600'} variant='outline'>{preview ? 'প্রচ্ছদ ছবি পরিবর্তন করুন' : 'প্রচ্ছদ ছবি আপলোড করুন'}</Button>
                       </Center>}
                     </FileButton>
 
@@ -517,7 +574,7 @@ export default function write() {
                         rules={{ required: true }}
                         render={({ field: { onChange, onBlur, value, ref } }) =>
                           <MultiSelect
-                            data={data}
+                            data={cats}
                             searchable
                             nothingFound="কোনকিছু পাওয়া যায়নি"
                             maxSelectedValues={3}
@@ -546,8 +603,18 @@ export default function write() {
 
                   <Box mb={10}>
                     <Flex gap={3}>
-                      <Button >ড্রাফট এ সংরক্ষণ করুন</Button>
-                      <Button onClick={handleSubmit(handlePublishBlog)} colorScheme={'green'}>পাবলিশ করতে প্রিভিউ করুন</Button>
+                      <Button
+                        isLoading={drafting}
+                        onClick={handleDraftSave}
+                      >
+                        খসড়াই সংরক্ষণ করুন
+                      </Button>
+                      <Button
+                        isLoading={publishing}
+                        onClick={handleSubmit(handlePublishBlog)}
+                        colorScheme={'green'}>
+                        পাবলিশ করুন
+                      </Button>
                     </Flex>
                   </Box>
 

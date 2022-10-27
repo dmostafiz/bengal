@@ -3,9 +3,11 @@ import { HoverCard, Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
 import React from 'react'
+import formatDate from '../../Helpers/formatDate'
+import PostTrancate from './PostTrancate'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({ title, image, content, createdAt, states, author, slug = 'বান্দুরা-রানী-পবিত্র-জপমালা-গীর্জা' }) {
+export default function PostCard({ title, image, content, createdAt, states, author, slug }) {
 
     const imgBreakPoints = useBreakpoint({
         base: false,
@@ -32,24 +34,24 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
                                         <Text as='span' fontWeight={'semibold'}>
-                                            <a >{author.name}</a></Text>
+                                            <a >{author.displayName}</a></Text>
                                     </HoverCard.Target>
                                     <HoverCard.Dropdown p={10}>
 
                                         <Box bg='blackAlpha.5'>
                                             <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
                                                 <Box>
-                                                    <Avatar size='md' rounded={'md'} shadow name='লিমন লস্কর' />
+                                                    <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
                                                 </Box>
                                                 <Box>
-                                                    <Title order={4}><Text noOfLines={1}>লিমন লস্কর</Text></Title>
-                                                    <Text fontSize={'12px'}>@limon_lashkar</Text>
+                                                    <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
+                                                    <Text fontSize={'12px'}>@{author.userName}</Text>
                                                 </Box>
                                             </Flex>
 
                                             <Box>
                                                 <Box px={0} pt={3}>
-                                                    <Text noOfLines={2} fontSize='13px'>রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে</Text>
+                                                    <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
                                                 </Box>
 
                                                 <Divider my={1} />
@@ -69,7 +71,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                                     </HoverCard.Dropdown>
                                 </HoverCard>, <Text as='span' fontSize={'13px'}>
-                                    {createdAt}
+                                    {formatDate(createdAt)}
                                 </Text>
                             </Text>
                         </Box>
@@ -93,11 +95,18 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
 
                 <Box flex={image && 1} w='full' textAlign={'justify'}>
-                    <Box>
-                        {content}  <Link href={`/blog/${slug}`}>
+                    {/* <Box>
+                        <Text noOfLines={'4'} dangerouslySetInnerHTML={{__html: content}} /> <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
                         </Link>
-                    </Box>
+                    </Box> */}
+
+                    <PostTrancate
+                        content={content}
+                        slug={<>... <Link href={`/blog/${slug}`}>
+                            <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                        </Link></>}
+                    />
 
                     <Divider borderColor={'blackAlpha.100'} mt={1} />
 
