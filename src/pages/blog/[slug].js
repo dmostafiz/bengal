@@ -26,7 +26,7 @@ function SingleBlogDetails({ post }) {
                 // leftColumnWidth={26}
                 rightSide={<></>}
                 leftSide={< BlogLeftSidebar />}
-                rightColumnWidth={10}
+                rightColumnWidth={15}
             >
 
                 <Box mb={8} px={{ base: 0, md: 2 }}>
@@ -66,10 +66,11 @@ function SingleBlogDetails({ post }) {
                         px={{ base: 2, md: 5 }}
                         textAlign={'justify'}
                         mb={5}
-                        lineHeight={'28px'}
-                        fontSize={'18px'}
+                        fontSize={'17px'}
+                        lineHeight='28px'
+                        as='article'
+                        dangerouslySetInnerHTML={{__html:post?.content}}
                     >
-                        <div dangerouslySetInnerHTML={{__html:post?.content}}></div>
                     </Box>
 
 
