@@ -91,7 +91,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
                         {/* </Show> */}
                     </Center>
-                </Box> : <Spacer h={2} w={0} />}
+                </Box> : <></>}
 
 
                 <Box flex={image && 1} w='full' textAlign={'justify'}>
