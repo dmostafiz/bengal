@@ -174,11 +174,11 @@ export default function DesktopSearchbar() {
                         <Box px={4} py={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
                             <Title order={5}>{`${searchFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান`} - {query}</Title>
                             {/* <Text fontSize={'13px'}>৩ জন ব্লগার, ১৫ টি ব্লগ পোস্ট পাওয়া গেছে</Text> */}
+                            {searchData.length > 0 && <Text mb={2} fontSize='13px'>মোট {banglaNumber(searchData.length)} টি রেজাল্ট পাওয়া গেছে</Text>}
                         </Box>
 
                         <Box px={4} py={3}>
 
-                            {searchData.length > 0 && <Text mb={2} fontSize='13px'>মোট {banglaNumber(searchData.length)} টি রেজাল্ট পাওয়া গেছে</Text>}
 
                             {searchLoading ? <SpinnerText text={'অনুসন্ধান চলছে...'} />
 
@@ -188,14 +188,14 @@ export default function DesktopSearchbar() {
                                         <Link href={`/blog/${post?.id}`} key={index}>
                                             <Flex cursor={'pointer'} _hover={{bg: 'blackAlpha.50'}} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
 
-                                                {post.image && <Box w='100px'>
-                                                    <Image src={post.image} />
+                                                {post.image && <Box w='70px' h='50px'>
+                                                    <Image h={'full'} w='full' objectFit={'cover'} src={post.image} />
                                                 </Box>}
                                                 <Box flex='1'>
                                                     <Title order={5}>{post.title}</Title>
                                                     <PostTrancate
                                                         lines={1}
-                                                        content={post.content}
+                                                        content={post?.content ?? ''}
                                                     // slug={<>... <Link href={`/blog/${slug}`}>
                                                     //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
                                                     // </Link></>

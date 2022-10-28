@@ -35,7 +35,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
                                 লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
-                                        <Text as='span' color={'blackAlpha.800'}>
+                                        <Text as='span' color={'blue.500'}>
                                             {author.displayName}
                                         </Text>
                                     </HoverCard.Target>
@@ -48,7 +48,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                                 </Box>
                                                 <Box>
                                                     <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                    <Text fontSize={'12px'}>@{author.userName}</Text>
+                                                    <Text fontSize={'12px'}>{banglaNumber(7)} টি পোস্ট লিখেছেন</Text>
                                                 </Box>
                                             </Flex>
 
@@ -91,7 +91,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 {image ? <Box w={{ base: 'full', md: 'full', lg: '150px' }} shadow='sm' rounded='lg' overflow={'hidden'} bgImage={image} bgPos='center' bgSize='cover'>
                     <Center bg='whiteAlpha.700' backdropFilter='blur(5px)' rounded='lg' overflow={'hidden'} h='full' w='full'>
                         {/* <Show below={'lg'}> */}
-                        <Image maxW={{base: '70%', md:'full'}} objectFit={'cover'} shadow='sm' src={image} alt='image' />
+                        <Image maxW={{ base: '70%', md: 'full' }} objectFit={'cover'} shadow='sm' src={image} alt='image' />
                         {/* </Show> */}
                     </Center>
                 </Box> : <></>}
@@ -104,28 +104,28 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Link>
                     </Box> */}
 
+
                     <PostTrancate
                         content={content}
                         slug={<Link href={`/blog/${slug}`}>
-                            <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                            <Text cursor={'pointer'} color='blue.500' as={'span'} fontSize={'13px'} href={`/blog/${slug}`}>বাকিটুকু পড়ুন</Text>
                         </Link>}
                     />
 
-                    {/* <Divider borderColor={'blackAlpha.200'} mt={1} /> */}
-                    <Box />
 
-                    <Box w='full' borderTop='1px' borderColor='blackAlpha.100' color='blackAlpha.600' py={1} fontSize='13px' fontWeight={'500'}>
+                    <Box w='full' borderTop='1px' borderColor='blackAlpha.100' color='blackAlpha.600' py={1} fontSize='12px' fontWeight={'500'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
                             <Flex gap={2} justify='flex-start' alignItems={'center'}>
-                                <Text><Text as={'span'} fontSize='17px' fontWeight={'normal'}>{banglaNumber(states.read)}</Text> জন পড়েছেন</Text>
+                                <Text><Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.read)}</Text> জন পড়েছেন</Text>
                                 <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
-                                <Text><Text as={'span'} fontSize='17px' fontWeight={'normal'}>{banglaNumber(states.comment)}</Text> টি মন্তব্য</Text>
+                                <Text><Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.comment)}</Text> টি মন্তব্য</Text>
                             </Flex>
 
                             <Flex alignItems={'center'} gap={1}>
                                 <ThumbUp size={16} />
-                                <Text fontSize={'15px'}>
-                                <Text as={'span'} fontSize='17px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> টি লাইক</Text>
+                                <Text>
+                                    <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> টি লাইক
+                                </Text>
                             </Flex>
                         </Flex>
                     </Box>
