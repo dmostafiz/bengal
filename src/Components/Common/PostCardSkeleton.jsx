@@ -6,8 +6,8 @@ export default function PostCardSkeleton() {
         <Stack mb={10} spacing={3}>
             <Skeleton height='20px' />
             <Skeleton height='15px' />
-            <Flex gap={2}>
-                <Box w={'170px'} h={'90px'}>
+            <Flex direction={{base: 'column', lg: 'row'}} gap={2}>
+                <Box w={{base: 'full', lg:'170px'}} h={'90px'}>
                     <Skeleton height='full' />
                 </Box>
 
