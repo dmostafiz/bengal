@@ -94,7 +94,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 </Box> : <></>}
 
 
-                <Box flex={image && 1} w='full' textAlign={'justify'}>
+                <Box flex={1} w='full' textAlign={'justify'}>
                     {/* <Box>
                         <Text noOfLines={'4'} dangerouslySetInnerHTML={{__html: content}} /> <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
