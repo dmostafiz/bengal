@@ -1,6 +1,7 @@
 import { VStack } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import useSWR from 'swr'
 import Axios from '../../Helpers/axiosHelper'
 import ComponentLoader from '../Common/ComponentLoader'
 import PostCard from '../Common/PostCard'
@@ -8,9 +9,9 @@ import PostCardSkeleton from '../Common/PostCardSkeleton'
 
 export default function LatestBlogPost() {
 
-    const { data, isLoading, isError, error } = useQuery(['latestPosts'], async () => {
+    const { data, error} = useSWR('/post', async (url) => {
 
-        const response = await Axios.get('/post')
+        const response = await Axios.get(url)
         console.log('Response posts ', response?.data)
 
         return response?.data?.posts || []
@@ -24,7 +25,7 @@ export default function LatestBlogPost() {
 
     return (
         <>
-            {isLoading && !data
+            {!data
 
                 ? <>
                     <PostCardSkeleton />
@@ -34,7 +35,7 @@ export default function LatestBlogPost() {
 
                 </>
 
-                : !isLoading && data && <VStack gap={5}>
+                : data && <VStack gap={5}>
                     {data.map((post, index) => <PostCard
                         key={index}
                         title={post?.title}
