@@ -85,10 +85,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
 
-                {image ? <Box w={{ base: 'full', md: 'full', lg: '150px' }} rounded='md' overflow={'hidden'} py={0} bgImage={image} bgPos='center' bgSize='cover'>
+                {image ? <Box w={{ base: 'full', md: 'full', lg: '150px' }}  rounded='md' overflow={'hidden'} py={0} bgImage={image} bgPos='center' bgSize='cover'>
                     <Center bg='whiteAlpha.500' backdropFilter='blur(7px)' rounded='md' overflow={'hidden'} h='full' w='full'>
                         {/* <Show below={'lg'}> */}
-                        <Image maxW='full' maxH='600px' shadow='sm' src={image} alt='image' />
+                        <Image maxW='full'h='full' objectFit={'cover'} shadow='sm' src={image} alt='image' />
                         {/* </Show> */}
                     </Center>
                 </Box> : <></>}
