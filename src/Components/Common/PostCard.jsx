@@ -9,7 +9,7 @@ import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({ title, image, content, createdAt, states, author, slug }) {
+export default function PostCard({ title, image, content, createdAt, states, author, slug,  authorCard = true}) {
 
     const imgBreakPoints = useBreakpoint({
         base: false,
@@ -33,7 +33,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         <Box>
                             <Text fontSize={'13px'} color={'blackAlpha.600'}>
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
-                                লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+                               {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
                                         <Text as='span' color={'blue.500'}>
                                             {author.displayName}
@@ -62,7 +62,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                                 <Box bg={'blackAlpha.5'} fontSize={'13px'}>
                                                     <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
                                                     <Wrap spacing={2} alignItems='flex-end'>
-                                                        <Link href={'/blogger/limon_lashkar'}>
+                                                        <Link href={`/blogger/${author.id}`}>
                                                             <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
                                                         </Link>
                                                         <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
@@ -73,7 +73,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                         </Box>
 
                                     </HoverCard.Dropdown>
-                                </HoverCard>, <Text as='span' fontSize={'13px'}>
+                                </HoverCard>, </> : <> লিখেছেন {author?.displayName}, </> } <Text as='span' fontSize={'13px'}>
                                     {formatDate(createdAt)}
                                 </Text>
                             </Text>

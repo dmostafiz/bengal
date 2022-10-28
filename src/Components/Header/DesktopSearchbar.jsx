@@ -217,7 +217,7 @@ export default function DesktopSearchbar() {
                                                     <Title order={5}>{user.displayName}</Title>
                                                     <PostTrancate
                                                         lines={1}
-                                                        content={user.bio}
+                                                        content={user?.bio ?? ''}
                                                     // slug={<>... <Link href={`/blog/${slug}`}>
                                                     //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
                                                     // </Link></>
