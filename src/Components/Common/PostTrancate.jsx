@@ -3,14 +3,20 @@ import { Wrap } from '@chakra-ui/react'
 // import { Text } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
-import Truncate from '@nosferatu500/react-truncate'
+// import Truncate from '@nosferatu500/react-truncate'
 import { stripHtml } from 'string-strip-html'
+import TextTruncate from 'react-text-truncate';
 
-
-export default function PostTrancate({ content, slug, lines=3 }) {
+export default function PostTrancate({ content, slug, lines = 3 }) {
     return (
-        <Truncate lines={lines} ellipsis={slug && slug} >
-            <Box textAlign={'justify'} noOfLines={2}>{stripHtml(content).result}</Box>
-        </Truncate>
+        <Box color={'blackAlpha.700'}>
+            <TextTruncate
+                line={lines}
+                element="span"
+                truncateText="…"
+                text={stripHtml(content).result}
+                textTruncateChild={slug}
+            />
+        </Box>
     )
 }
