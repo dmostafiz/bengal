@@ -10,7 +10,7 @@ import { stripHtml } from 'string-strip-html'
 export default function PostTrancate({ content, slug, lines=3 }) {
     return (
         <Truncate lines={lines} ellipsis={slug && slug} >
-            <Box textAlign={'justify'} noOfLines={2} dangerouslySetInnerHTML={{__html:stripHtml(content).result}}></Box>
+            <Box textAlign={'justify'} noOfLines={2}>{stripHtml(content).result}</Box>
         </Truncate>
     )
 }
