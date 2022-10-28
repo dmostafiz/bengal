@@ -16,7 +16,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box border='0px' borderColor={'blackAlpha.50'} rounded='sm' shadow='sm' overflow={'hidden'}>
+        <Box border='0px' borderColor={'blackAlpha.50'} w='full' rounded='sm' shadow='sm' overflow={'hidden'}>
 
             <Box w='full' bg='.50'>
                 <Link href={`/blog/${slug}`}>

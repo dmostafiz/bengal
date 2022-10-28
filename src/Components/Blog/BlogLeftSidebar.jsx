@@ -70,7 +70,7 @@ export default function BlogLeftSidebar() {
                         </Box>
                         <Box>
                             <Title order={4}><Text noOfLines={1}>লিমন লস্কর </Text></Title>
-                            <Text fontSize={'12px'}>@limon_lashkar</Text>
+                            <Text fontSize={'12px'}>৬ টি পোস্ট লিখেছেন</Text>
                         </Box>
                     </Flex>
 

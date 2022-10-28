@@ -63,7 +63,7 @@ export default function categoryPosts() {
                         <Title order={4}>লিমন লস্কর এর সকল পোস্ট ( ক্রমানুসারে )</Title>
                     </Box>
 
-                    <VStack gap={1}>
+                    <VStack gap={5}>
 
                         <PostCard
                             title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
