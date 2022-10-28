@@ -4,12 +4,13 @@ import { Wrap } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import Truncate from '@nosferatu500/react-truncate'
+import { stripHtml } from 'string-strip-html'
 
 
-export default function PostTrancate({ content, slug }) {
+export default function PostTrancate({ content, slug, lines=3 }) {
     return (
-        <Truncate lines={3} ellipsis={slug} >
-            <div noOfLines={2} dangerouslySetInnerHTML={{__html:content}}></div>
+        <Truncate lines={lines} ellipsis={slug && slug} >
+            <Box textAlign={'justify'} noOfLines={2} dangerouslySetInnerHTML={{__html:stripHtml(content).result}}></Box>
         </Truncate>
     )
 }

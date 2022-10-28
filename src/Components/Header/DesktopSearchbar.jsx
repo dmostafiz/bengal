@@ -1,4 +1,4 @@
-import { Box, Center, Collapse, Fade, Flex, Icon, Input, SlideFade, Spinner, Text, useDisclosure, useOutsideClick } from '@chakra-ui/react'
+import { Box, Center, Collapse, Fade, Flex, Icon, Image, Input, SlideFade, Spinner, Text, useDisclosure, useOutsideClick } from '@chakra-ui/react'
 import { Title, Tooltip } from '@mantine/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
@@ -6,10 +6,17 @@ import { AlignJustified, AlignRight, List, Search, User, ZoomExclamation, ZoomOu
 import { useDebouncedState } from '@mantine/hooks'
 import SpinnerText from '../Common/SpinnerText'
 import IconText from '../Common/IconText'
+import Axios from '../../Helpers/axiosHelper'
+import PostTrancate from '../Common/PostTrancate'
+import banglaNumber from '../../Helpers/banglaNumber'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function DesktopSearchbar() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const router = useRouter()
 
     const ref = useRef()
 
@@ -20,9 +27,11 @@ export default function DesktopSearchbar() {
     }, [isOpen])
 
 
-    const [seachFor, setSearchFor] = useState('blog')
+    const [searchFor, setSearchFor] = useState('blog')
     const [query, setQuery] = useState('')
     const [value, setValue] = useDebouncedState('', 500);
+
+    const [searchData, setSearchData] = useState([])
 
     const [searchLoading, setLoading] = useState(true)
 
@@ -40,20 +49,35 @@ export default function DesktopSearchbar() {
         }
     }, [query])
 
+    useEffect(() => {
+        onClose()
+    }, [router])
+
 
 
 
     useEffect(() => {
 
-        setLoading(true)
 
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000)
+        (
+            async () => {
+                setLoading(true)
+
+                const response = await Axios.get(`/system/search/${searchFor}/${query}`)
+
+                console.log('Search results ', response?.data)
+
+                if (response?.data?.ok) {
+                    setSearchData(response?.data?.results)
+                }
+
+                setLoading(false)
+            }
+
+        )()
 
 
-
-    }, [value, seachFor])
+    }, [value, searchFor])
 
 
 
@@ -66,7 +90,7 @@ export default function DesktopSearchbar() {
                 roundedTop={isOpen ? 'xl' : '3xl'}
                 roundedBottom={isOpen ? 'none' : '3xl'}
                 py={'2px'}
-                // bg='blackAlpha.50'
+            // bg='blackAlpha.50'
             >
                 <Flex alignItems={'center'}>
                     <Box pl={2} pt={1}>
@@ -92,33 +116,32 @@ export default function DesktopSearchbar() {
                             // roundedTop: '3xl',
                             // roundedBottom: isOpen ? 'none' : '3xl',
                         }}
-                        placeholder={`${seachFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান করুন`}
+                        placeholder={`${searchFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান করুন`}
                         transition={'ease'}
                         size='sm'
-                        // py={}
+                    // py={}
                     />
 
                     <Flex px="4" alignItems={'center'} gap={2}>
 
                         <Icon
                             cursor={'pointer'}
-                            onClick={() => setSearchFor('blog')}
-                            as={AlignRight}
-                            fontSize={20}
-                            color={seachFor == 'blog' ? 'yellow.400' : 'blackAlpha.400'}
-                            title='dfdfd'
+                            onClick={() => setSearchFor('blogger')}
+                            as={User}
+                            fontSize={18}
+                            color={searchFor == 'blogger' ? 'yellow.400' : 'blackAlpha.400'}
                         // _hover={{
                         //     color: 'blackAlpha.600'
                         // }}
                         />
 
-
                         <Icon
                             cursor={'pointer'}
-                            onClick={() => setSearchFor('blogger')}
-                            as={User}
-                            fontSize={18}
-                            color={seachFor == 'blogger' ? 'yellow.400' : 'blackAlpha.400'}
+                            onClick={() => setSearchFor('blog')}
+                            as={AlignRight}
+                            fontSize={20}
+                            color={searchFor == 'blog' ? 'yellow.400' : 'blackAlpha.400'}
+                            title='dfdfd'
                         // _hover={{
                         //     color: 'blackAlpha.600'
                         // }}
@@ -149,14 +172,65 @@ export default function DesktopSearchbar() {
                     >
 
                         <Box px={4} py={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
-                            <Title order={5}>{`${seachFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান`} - {query}</Title>
+                            <Title order={5}>{`${searchFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান`} - {query}</Title>
                             {/* <Text fontSize={'13px'}>৩ জন ব্লগার, ১৫ টি ব্লগ পোস্ট পাওয়া গেছে</Text> */}
                         </Box>
 
-                        <Box px={4} py={8}>
+                        <Box px={4} py={3}>
 
-                            {searchLoading ? <SpinnerText text={'অনুসন্ধান চলছে...'} /> 
-                            : <IconText justify='center' icon={ZoomExclamation} text='কোনকিছু পাওয়া যায়নি' /> }
+                            {searchData.length > 0 && <Text mb={2} fontSize='13px'>মোট {banglaNumber(searchData.length)} টি রেজাল্ট পাওয়া গেছে</Text>}
+
+                            {searchLoading ? <SpinnerText text={'অনুসন্ধান চলছে...'} />
+
+                                : searchData.length ? <Box w={'full'} maxH='400px' overflowY={'auto'}>
+
+                                    {searchFor == 'blog' && searchData.map((post, index) =>
+                                        <Link href={`/blog/${post?.id}`} key={index}>
+                                            <Flex cursor={'pointer'} _hover={{bg: 'blackAlpha.50'}} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
+
+                                                {post.image && <Box w='100px'>
+                                                    <Image src={post.image} />
+                                                </Box>}
+                                                <Box flex='1'>
+                                                    <Title order={5}>{post.title}</Title>
+                                                    <PostTrancate
+                                                        lines={1}
+                                                        content={post.content}
+                                                    // slug={<>... <Link href={`/blog/${slug}`}>
+                                                    //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                                                    // </Link></>
+                                                    // }
+                                                    />
+                                                </Box>
+                                            </Flex>
+                                        </Link>
+                                    )}
+
+                                    {searchFor == 'blogger' && searchData.map((user, index) =>
+                                        <Link href={`/blogger/${user?.id}`} key={index}>
+                                            <Flex cursor={'pointer'} _hover={{bg: 'blackAlpha.50'}} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
+
+                                                {user.avatar && <Box w='60px'>
+                                                    <Image src={user.avatar} />
+                                                </Box>}
+                                                <Box flex='1'>
+                                                    <Title order={5}>{user.displayName}</Title>
+                                                    <PostTrancate
+                                                        lines={1}
+                                                        content={user.bio}
+                                                    // slug={<>... <Link href={`/blog/${slug}`}>
+                                                    //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
+                                                    // </Link></>
+                                                    // }
+                                                    />
+                                                </Box>
+                                            </Flex>
+                                        </Link>
+                                    )}
+
+                                </Box>
+
+                                    : <IconText justify='center' icon={ZoomExclamation} text='কোনকিছু পাওয়া যায়নি' />}
 
                         </Box>
 
