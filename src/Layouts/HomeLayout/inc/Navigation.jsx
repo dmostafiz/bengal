@@ -14,7 +14,7 @@ export default function Navigation() {
     // console.log('Navigation categories array', categories())
 
     return (
-        <SectionContainer maxW='full' px={0}>
+        <SectionContainer maxW='full' px={{base: 2, lg: 0}}>
             <Box zIndex={999999999} py={2} color={'gray.900'}>
                 <Carousel
                     // withIndicators

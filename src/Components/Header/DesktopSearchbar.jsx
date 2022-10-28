@@ -61,18 +61,19 @@ export default function DesktopSearchbar() {
         <Box ref={ref} position={'relative'} w='full'>
 
             <Box
-                border='2px'
+                border='1px'
                 borderColor='gray.300'
                 roundedTop={isOpen ? 'xl' : '3xl'}
                 roundedBottom={isOpen ? 'none' : '3xl'}
-                bg='blackAlpha.50'
+                py={'2px'}
+                // bg='blackAlpha.50'
             >
                 <Flex alignItems={'center'}>
                     <Box pl={2} pt={1}>
                         <Icon
                             as={Search}
                             color='blackAlpha.400'
-                            fontSize={'24px'}
+                            fontSize={'20px'}
                         />
                     </Box>
                     <Input
@@ -93,17 +94,17 @@ export default function DesktopSearchbar() {
                         }}
                         placeholder={`${seachFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান করুন`}
                         transition={'ease'}
+                        size='sm'
+                        // py={}
                     />
 
                     <Flex px="4" alignItems={'center'} gap={2}>
-
-
 
                         <Icon
                             cursor={'pointer'}
                             onClick={() => setSearchFor('blog')}
                             as={AlignRight}
-                            fontSize={24}
+                            fontSize={20}
                             color={seachFor == 'blog' ? 'yellow.400' : 'blackAlpha.400'}
                             title='dfdfd'
                         // _hover={{
@@ -116,7 +117,7 @@ export default function DesktopSearchbar() {
                             cursor={'pointer'}
                             onClick={() => setSearchFor('blogger')}
                             as={User}
-                            fontSize={22}
+                            fontSize={18}
                             color={seachFor == 'blogger' ? 'yellow.400' : 'blackAlpha.400'}
                         // _hover={{
                         //     color: 'blackAlpha.600'
@@ -133,8 +134,8 @@ export default function DesktopSearchbar() {
                     <Box
                         shadow={'sm'}
                         borderBottom='2px'
-                        borderLeft='2px'
-                        borderRight='2px'
+                        borderLeft='1px'
+                        borderRight='1px'
                         borderColor='gray.300'
                         w='full'
                         position={'absolute'}
