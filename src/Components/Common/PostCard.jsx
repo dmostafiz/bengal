@@ -3,6 +3,7 @@ import { HoverCard, Title } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
 import React from 'react'
+import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
 // import { ThumbUpOff } from 'tableicons-react'
@@ -113,13 +114,13 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Box w='full' bg='blackAlpha' py={1} fontSize='12px' fontWeight={'normal'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
                             <Flex gap={2} justify='flex-start' alignItems={'center'}>
-                                <Text>{states.read} বার পড়া হয়েছে</Text>
+                                <Text>{banglaNumber(states.read)} বার পড়া হয়েছে</Text>
                                 <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
-                                <Text>{states.comment} টি মন্তব্য</Text>
+                                <Text>{banglaNumber(states.comment)} টি মন্তব্য</Text>
                             </Flex>
 
                             <Flex alignItems={'center'} gap={1}>
-                                <Text fontSize={'15px'}>{states.like}</Text><IconThumbUp size={16} />
+                                <Text fontSize={'15px'}>{banglaNumber(states.like)}</Text><IconThumbUp size={16} />
                             </Flex>
                         </Flex>
                     </Box>
