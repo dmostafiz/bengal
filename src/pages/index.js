@@ -16,6 +16,7 @@ import { useEffect } from 'react'
 import req from '../Helpers/axiosHelper'
 import BlogPanel from '../Components/Common/BlogPanel'
 import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
+import SectionTitle from '../Components/Common/SectionTitle'
 
 export default function Home() {
 
@@ -55,7 +56,7 @@ export default function Home() {
         </Show>
 
         <Box mb={8} w='full' overflow={'hidden'}>
-          
+
           <TabContainer childrens={[
             {
               title: 'বাছাইকৃত পোস্ট',
@@ -80,10 +81,7 @@ export default function Home() {
 
         <Box mb={8}>
 
-          <Box py={3} borderBottom='0px' borderColor={'blackAlpha.200'} px={4} mb={6} bg={'blackAlpha.50'} fontWeight='bold' rounded='sm'>
-            <Title order={4}><Text color={'blackAlpha.800'}>সাম্প্রতিক পোস্ট (ক্রমানুসারে)</Text></Title>
-          </Box>
-
+          <SectionTitle title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
           <LatestBlogPost />
 
           <VStack gap={5} mt={8}>
