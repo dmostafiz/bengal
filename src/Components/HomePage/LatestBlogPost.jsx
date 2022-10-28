@@ -4,16 +4,17 @@ import React from 'react'
 import Axios from '../../Helpers/axiosHelper'
 import ComponentLoader from '../Common/ComponentLoader'
 import PostCard from '../Common/PostCard'
+import PostCardSkeleton from '../Common/PostCardSkeleton'
 
 export default function LatestBlogPost() {
 
     const { data, isLoading, isError, error } = useQuery(['latestPosts'], async () => {
 
         const response = await Axios.get('/post')
-
         console.log('Response posts ', response?.data)
 
         return response?.data?.posts || []
+
 
     }, {
         // refetchOnWindowFocus: false,
@@ -23,9 +24,15 @@ export default function LatestBlogPost() {
 
     return (
         <>
-            { isLoading && !data
+            {isLoading && !data
 
-                ? <ComponentLoader />
+                ? <>
+                    <PostCardSkeleton />
+                    <PostCardSkeleton />
+                    <PostCardSkeleton />
+                    <PostCardSkeleton />
+
+                </>
 
                 : !isLoading && data && <VStack gap={5}>
                     {data.map((post, index) => <PostCard
