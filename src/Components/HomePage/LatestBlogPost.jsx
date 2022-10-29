@@ -12,14 +12,9 @@ export default function LatestBlogPost() {
     const { data, error} = useSWR('/post', async (url) => {
 
         const response = await Axios.get(url)
-        console.log('Response posts ', response?.data)
-
+        // console.log('Response posts ', response?.data)
         return response?.data?.posts || []
 
-
-    }, {
-        // refetchOnWindowFocus: false,
-        // retry: false,
     })
 
 
@@ -44,9 +39,9 @@ export default function LatestBlogPost() {
                         content={post?.content}
                         createdAt={post?.createdAt}
                         states={{
-                            read: 5,
-                            comment: 3,
-                            like: 3
+                            read: post?.views?.length ?? 0,
+                            comment: post?.comments?.length ?? 0,
+                            like: post?.likes?.length ?? 0,
                         }}
                         author={post?.author}
                     />)}

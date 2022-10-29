@@ -62,6 +62,7 @@ export default function CommentInput() {
                     height: 250,
                     menubar: false,
                     skin: 'oxide',
+                    statusbar: false,
                     language: 'bn_BD',
                     language_url: '/lang/tinny/bn_BD.js',
                     plugins: [

@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Avatar, Badge, Box, Center, Divider, Flex, Hide, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
-import { Blockquote, Title } from '@mantine/core'
-import TabContainer from '../../Components/HomePage/TabContainer'
-import MainLeftSidebar from '../../Layouts/Common/MainLeftSidebar'
-import MainRightSidebar from '../../Layouts/Common/MainRightSidebar'
-import SelectedPostsCarousel from '../../Components/HomePage/SelectedPostsCarousel'
+import { Title } from '@mantine/core'
 import HomeLayout from '../../Layouts/HomeLayout'
-import ImageBanner from '../../Layouts/HomeLayout/inc/ImageBanner'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import { useRouter } from 'next/router'
 import PostCard from '../../Components/Common/PostCard'
-import Sticky from 'react-stickynode'
-import SidebarPostCard from '../../Components/Common/SidebarPostCard'
-import AuthorPostCard from '../../Components/Common/AuthorPostCard'
-import BloggerRightSidebar from '../../Components/blogger/BloggerRightSidebar'
 import Axios from '../../Helpers/axiosHelper'
 import ComponentLoader from '../../Components/Common/ComponentLoader'
 import IconText from '../../Components/Common/IconText'
 import formatDate from '../../Helpers/formatDate'
 import SectionTitle from '../../Components/Common/SectionTitle'
+import banglaNumber from '../../Helpers/banglaNumber'
 
 export default function categoryPosts() {
 
     const router = useRouter()
-
-    const [blogger, setBlogger] = useState(null)
 
     const [user, setUser] = useState(null)
 
@@ -35,8 +25,6 @@ export default function categoryPosts() {
 
         (
             async () => {
-                setBlogger('লিমন লস্কর')
-
                 if (router.query?.slug) {
 
                     const response = await Axios.get(`/user/blogger/${router.query?.slug}`)
@@ -48,12 +36,12 @@ export default function categoryPosts() {
                     setLoading(false)
                 }
 
-
             }
 
         )()
 
     }, [router])
+
 
     return (
         <HomeLayout>
@@ -126,11 +114,11 @@ export default function categoryPosts() {
                                     <Tbody>
                                         <Tr>
                                             <Td>পোস্ট লিখেছেন </Td>
-                                            <Td isNumeric>২৩৯ টি</Td>
+                                            <Td isNumeric>{banglaNumber(user?.posts?.length)} টি</Td>
                                         </Tr>
                                         <Tr>
                                             <Td>মন্তব্য করেছেন</Td>
-                                            <Td isNumeric>৭৮০ টি</Td>
+                                            <Td isNumeric>{banglaNumber(user?.comments?.length)} টি</Td>
                                         </Tr>
                                         <Tr>
                                             <Td>মন্তব্য পেয়েছেন</Td>

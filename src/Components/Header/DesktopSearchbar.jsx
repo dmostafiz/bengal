@@ -29,7 +29,7 @@ export default function DesktopSearchbar() {
 
     const [searchFor, setSearchFor] = useState('blog')
     const [query, setQuery] = useState('')
-    const [value, setValue] = useDebouncedState('', 500);
+    const [value, setValue] = useDebouncedState('', 1000);
 
     const [searchData, setSearchData] = useState([])
 
@@ -42,16 +42,19 @@ export default function DesktopSearchbar() {
 
 
     useEffect(() => {
+
         if (query) {
             onOpen()
         } else {
             onClose()
         }
+
     }, [query])
+
 
     useEffect(() => {
         onClose()
-    }, [router])
+    }, [router.asPath])
 
 
 
@@ -59,22 +62,30 @@ export default function DesktopSearchbar() {
     useEffect(() => {
 
 
-        (
-            async () => {
-                setLoading(true)
+        var isMounted = true
 
-                const response = await Axios.get(`/system/search/${searchFor}/${query}`)
+        async function getSearchData(){
+            setLoading(true)
 
-                console.log('Search results ', response?.data)
+            const response = await Axios.get(`/system/search/${searchFor}/${query}`)
 
-                if (response?.data?.ok) {
-                    setSearchData(response?.data?.results)
-                }
+            console.log('Search results ', response?.data)
 
-                setLoading(false)
+            if (response?.data?.ok) {
+                setSearchData(response?.data?.results)
             }
 
-        )()
+            setLoading(false)
+        }
+
+        if(isMounted && value){
+            getSearchData()
+        }
+
+
+        return () => {
+            isMounted = false
+        }
 
 
     }, [value, searchFor])
@@ -186,7 +197,7 @@ export default function DesktopSearchbar() {
 
                                     {searchFor == 'blog' && searchData.map((post, index) =>
                                         <Link href={`/blog/${post?.id}`} key={index}>
-                                            <Flex cursor={'pointer'} _hover={{bg: 'blackAlpha.50'}} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
+                                            <Flex cursor={'pointer'} _hover={{ bg: 'blackAlpha.50' }} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
 
                                                 {post.image && <Box w='70px' h='50px'>
                                                     <Image h={'full'} w='full' objectFit={'cover'} src={post.image} />
@@ -208,7 +219,7 @@ export default function DesktopSearchbar() {
 
                                     {searchFor == 'blogger' && searchData.map((user, index) =>
                                         <Link href={`/blogger/${user?.id}`} key={index}>
-                                            <Flex cursor={'pointer'} _hover={{bg: 'blackAlpha.50'}} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
+                                            <Flex cursor={'pointer'} _hover={{ bg: 'blackAlpha.50' }} p={2} border='1px' borderColor={'blackAlpha.200'} mb={2} alignItems={'center'} gap={2}>
 
                                                 {user.avatar && <Box w='60px'>
                                                     <Image src={user.avatar} />

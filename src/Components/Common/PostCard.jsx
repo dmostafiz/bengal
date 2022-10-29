@@ -30,8 +30,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 <Box fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
                         {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
-                        <Box>
-                            <Text fontSize={'13px'} color={'blackAlpha.600'}>
+                        <Box fontSize={'13px'} color={'blackAlpha.600'}>
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
                                {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
@@ -76,7 +75,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 </HoverCard>, </> : <> লিখেছেন {author?.displayName}, </> } <Text as='span' fontSize={'13px'}>
                                     {formatDate(createdAt)}
                                 </Text>
-                            </Text>
+                           
                         </Box>
                     </Flex>
 
