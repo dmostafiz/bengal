@@ -118,11 +118,11 @@ export default function categoryPosts() {
                                         </Tr>
                                         <Tr>
                                             <Td>মন্তব্য করেছেন</Td>
-                                            <Td isNumeric>{banglaNumber(user?.comments?.length)} টি</Td>
+                                            <Td isNumeric>{banglaNumber(user?.postComments?.length)} টি</Td>
                                         </Tr>
                                         <Tr>
                                             <Td>মন্তব্য পেয়েছেন</Td>
-                                            <Td isNumeric>৭৮০ টি</Td>
+                                            <Td isNumeric>{banglaNumber(user?.getComments?.length)} টি</Td>
                                         </Tr>
                                     </Tbody>
 

@@ -22,15 +22,15 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Box w='full' bg='.50'>
                 <Link href={`/blog/${slug}`}>
                     <a href={`/blog/${slug}`}>
-                        <Title order={4}><Text color='gray.900'>{title}</Text></Title>
+                        <Title order={3}><Text color='gray.900'>{title}</Text></Title>
                     </a>
                 </Link>
 
 
-                <Box fontSize={'15px'}>
+                <Box my={{base: 2, md: 0}} fontSize={'15px'}>
                     <Flex alignItems={'center'} gap={2}>
                         {/* <Avatar shadow={'sm'} src={author.image} size={'md'} name='লিমন লস্কর' /> */}
-                        <Box fontSize={'13px'} color={'blackAlpha.600'}>
+                        <Box fontSize={'15px'} color={'blackAlpha.600'}>
                                 {/* <Avatar shadow={'sm'} src={author.image} size={'sm'} name='লিমন লস্কর' /> */}
                                {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
                                     <HoverCard.Target>
@@ -112,7 +112,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     />
 
 
-                    <Box w='full' borderTop='1px' borderColor='blackAlpha.100' color='blackAlpha.600' py={1} fontSize='12px' fontWeight={'500'}>
+                    <Box w='full' borderTop='1px' borderColor='blackAlpha.200' color='blackAlpha.600' py={1} fontSize='15px' fontWeight={'500'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
                             <Flex gap={2} justify='flex-start' alignItems={'center'}>
                                 <Text><Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.read)}</Text> জন পড়েছেন</Text>

@@ -1,13 +1,15 @@
-import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Image, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Image, Show, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
+import { FacebookShareButton, FacebookShareCount } from 'react-share'
 import { ThumbUp } from 'tabler-icons-react'
 import BlogLeftSidebar from '../../Components/Blog/BlogLeftSidebar'
 import BlogRightSidebar from '../../Components/Blog/BlogRightSidebar'
 import SectionTitle from '../../Components/Common/SectionTitle'
+import SidebarPostCard from '../../Components/Common/SidebarPostCard'
 import TabContainer from '../../Components/HomePage/TabContainer'
 import Axios from '../../Helpers/axiosHelper'
 import banglaNumber from '../../Helpers/banglaNumber'
@@ -48,6 +50,38 @@ function SingleBlogDetails({ post, ok }) {
 
     }, [])
 
+    function postWritter() {
+        return <Box>
+            <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
+                <Box>
+                    <Avatar size='md' rounded={'md'} shadow src={post.author.avatar} bg='transparent' name={post.author.displayName} />
+                </Box>
+                <Box>
+                    <Title order={4}><Text noOfLines={1}>{post.author.displayName}</Text></Title>
+                    <Text fontSize={'13px'}>{banglaNumber(post.author.posts.length)} টি পোস্ট লিখেছেন</Text>
+                </Box>
+            </Flex>
+
+            <Box>
+                <Box px={0} pt={3} pb={2}>
+                    <Text noOfLines={2} fontSize='14px'>{post.author.bio}</Text>
+                </Box>
+
+                <Divider mb={2} />
+
+                <Box bg={'blackAlpha.5'} fontSize={'13px'}>
+                    {post.author.followers.length > 0 && <Text mb={1} color='blackAlpha.600'>
+                        <Text as='span' fontSize={'16px'} fontWeight='bold'>{banglaNumber(post.author.followers.length)}</Text> জন অনুসরন করছে
+                    </Text>}
+                    <Wrap spacing={2} alignItems='flex-end'>
+                        <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
+                    </Wrap>
+                </Box>
+            </Box>
+            {/* <Divider my={1} /> */}
+        </Box>
+    }
 
     return (
         <HomeLayout>
@@ -57,71 +91,158 @@ function SingleBlogDetails({ post, ok }) {
                 <LayoutColumn
                     // leftColumnWidth={26}
                     rightSide={<></>}
-                    leftSide={< BlogLeftSidebar />}
+                    leftSide={<Box>
+
+                        <Show above='md'>
+                            <Box w='full' mb={5}>
+
+                                <Box bg='blackAlpha.50' p={2}>
+                                    <Title order={5}>পোস্টটি লিখেছেন</Title>
+                                </Box>
+
+                                <Box py={4} px={2}>
+                                    {postWritter()}
+                                </Box>
+
+                            </Box>
+                        </Show>
+
+
+
+                        <Box w='full' bg='' mb={5}>
+
+                            <Box bg='blackAlpha.50' p={2}>
+                                <Title order={5}>লেখকের অন্যান্য পোস্ট</Title>
+                            </Box>
+
+
+                            <SidebarPostCard
+                                title="বান্দুরা রানী পবিত্র জপমালা গীর্জা"
+                                image='https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
+                                content='ঢাকা থেকে মাত্র ১ ঘন্টা ৩০ মিনিটের দূরর্ত্বে নবাবগঞ্জে খ্রীষ্টান আদিনিবাস। এই নাবাগঞ্জে রয়েছে ধর্মীয় বিচিত্রতা ও সহবস্থান। রয়েছে প্রায় চারশ বছরের পুরান ভাঙ্গা মসজিদ ও প্রায় ২৪০ বছরের পূরান  "রানী পবিত্র জপমালা গীর্জা" যা বান্দুরা গীর্জা নামেও বহুল পরিচিত...'
+                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
+                                states={{
+                                    read: 5,
+                                    comment: 3,
+                                    like: 3
+                                }}
+                                author={{
+                                    name: 'লিমন লস্কর',
+                                    image: ''
+                                }}
+                            />
+
+
+                            <SidebarPostCard
+                                title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
+                                image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
+                                content='পর্দায় যেমনই থাকুক না কেন, বাস্তব জীবনে হিরোর ভূমিকায় দেখা গেছে তাকে। বিভিন্ন সময়ে ডিপজলের সেবামূলক কাজের কথাও উঠে আসে। তবে তিনি তার মাকে প্রচন্ড ভালোবাসতেন। তার কাছের অনেকেই এমন কথা বলেন। কমেডি অভিনেতা জ্যাকি আলমগীর জানালেন, ডিপজল সাহেব প্রচন্ড মা ভক্ত। মায়ের প্রতি ডিপজলের ভালোবাসার কথা জানিয়ে জ্যাকি...'
+                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
+                                states={{
+                                    read: 5,
+                                    comment: 3,
+                                    like: 3
+                                }}
+                                author={{
+                                    name: 'লিমন লস্কর',
+                                    image: ''
+                                }}
+                            />
+
+
+                            <SidebarPostCard
+                                title="জনপ্রতিনিধিদের জবাবদিহিতাহীন এই সংস্কৃতি আরও কত বছর চলবে?"
+                                image='https://s3.amazonaws.com/somewherein/pictures/SabbirShakil666/SabbirShakil666-1664873600-089caf6_xlarge.jpg'
+                                content='এদেশের কনস্টিটিউশন অনুযায়ী পাঁচ বছর পরপর ভোটের মাধ্যমে জনপ্রতিনিধি, সরকার গঠন করার নিয়ম । কিন্তু পুরো পাঁচ বছর কেটে গেলেও এদেশের সব এলাকাতে জনপ্রতিনিধি আর জনতার মুখোমুখি কোনো সেমিনার/সিম্পোজিয়াম/প্রোগ্রাম করা হয়? সোজাসাপ্টা উত্তর আসবে, ‘না’ । কোনো জবাবদিহিতা আছে? উত্তর হবে, ‘না’ । ...'
+                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
+                                states={{
+                                    read: 5,
+                                    comment: 3,
+                                    like: 3
+                                }}
+                                author={{
+                                    name: 'লিমন লস্কর',
+                                    image: ''
+                                }}
+                            />
+                        </Box>
+
+                    </Box>}
                     rightColumnWidth={15}
                 >
 
-                    <Box mb={8} px={{ base: 0, md: 2 }}>
+                    <Box mb={5} px={{ base: 0, md: 5 }}>
 
-                        <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
-                            <Title order={2}>{post?.title}</Title>
-                        </Box>
+                        <Box >
 
-                        <Box py={2} mb='2'>
-                            <Text color='blackAlpha.600'>{formatDate(post?.createdAt)}</Text>
-                        </Box>
+                            <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
+                                <Title order={2}>{post?.title}</Title>
+                            </Box>
 
-                        <Box p={2} bg='blackAlpha.50'>
-                            <HStack>
-                                <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
-                                <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
-                                    <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
-                                        Facebook
-                                    </Button>
-                                </Tooltip>
+                            <Box py={2} mb='2'>
+                                <Text color='blackAlpha.600'>{formatDate(post?.createdAt)}</Text>
+                            </Box>
 
-                                <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
-                                    <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
-                                        Twitter
-                                    </Button>
-                                </Tooltip>
-                            </HStack>
-                        </Box>
+                            <Box p={2} bg='blackAlpha.50'>
+                                <HStack>
+                                    <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
+                                    <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
+                                        <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
+                                            Facebook
+                                        </Button>
+                                        {/* <FacebookShareButton url={router.asPath}>
+                                            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                                        </FacebookShareButton> */}
 
+                                    </Tooltip>
 
-                        <Box px={{ base: 1, md: 3 }}>
-                            <Center w={'full'} py={6}>
-                                {post.image && <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />}
-                            </Center>
+                                    <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
+                                        <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
+                                            Twitter
+                                        </Button>
+                                    </Tooltip>
+                                </HStack>
+                            </Box>
+                            {/* {post.image ? <Center w={'full'} py={4}>
+                                <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />
+                            </Center> : <Box my={2} />} */}
+
+                            <Box my={4} />
 
                             <Box
-                                textAlign={'justify'}
-                                mb={10}
-                                fontSize={'17px'}
-                                lineHeight='24px'
                                 as='article'
+                                textAlign={'justify'}
+                                mb={4}
+                                fontSize={{ base: '17px', md: '18px' }}
+                                lineHeight={{ base: '25px', md: '27px' }}
                                 fontWeight={500}
+                                letterSpacing='-.1px'
                                 dangerouslySetInnerHTML={{ __html: post?.content }}
                             >
                             </Box>
 
-                            <Box px={0} pb={2}>
-                                <Text fontSize={'14px'} color={'blackAlpha.600'}>সর্বশেষ আপডেট  - {formatDate(post.createdAt)}</Text>
+
+
+                            <Divider />
+
+
+                            <Box px={0} py={1}>
+                                <Text fontSize={'15px'} letterSpacing='-.2px' color={'blackAlpha.500'}>সর্বশেষ আপডেট  - {formatDate(post.createdAt)}</Text>
                             </Box>
 
                             <Divider />
 
-                            <Box px={0} py={1} mb={2} bg='blacAlpha.50'>
+                            <Box px={0} py={8} bg='blacAlpha.50'>
                                 <Flex gap={2} justify='space-between' alignItems={'center'}>
-                                    <Flex gap={2} justify='flex-start' alignItems={'center'}>
-                                        <Text>
-                                            <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(post.views.length)}</Text> জন পড়েছেন
+                                    <Flex gap={3} justify='flex-start' alignItems={'center'}>
+                                        <Text fontSize='15px' fontWeight={'black'} color={'facebook.500'}>
+                                            <Text as={'span'} fontSize='16px'>{banglaNumber(post.views.length)}</Text> জন পড়েছেন
                                         </Text>
 
-                                        <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
+                                        <Divider orientation='vertical' borderColor={'blackAlpha.200'} h='10px' />
 
-                                        <Text>
-                                            <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(post.likes.length)}</Text> লাইক
+                                        <Text fontSize='15px' fontWeight={'black'} color={'facebook.500'}>
+                                            <Text as={'span'} fontSize='16px' fontWeight={'black'}>{banglaNumber(post.likes.length)}</Text> টি লাইক
                                         </Text>
 
                                         <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
@@ -133,39 +254,45 @@ function SingleBlogDetails({ post, ok }) {
 
 
 
-                                    <Flex alignItems={'center'} gap={1}>
-                                        <ThumbUp size={16} />
-                                        <Text>
-                                            <Text as={'span'} fontSize='14px' fontWeight={'normal'}>লাইক দিন</Text>
-                                        </Text>
-                                    </Flex>
+                                    <Button size={'sm'} rounded='full'>
+                                        <Flex alignItems={'center'} gap={1}>
+                                            <ThumbUp size={18} />
+                                            <Text>
+                                                <Text as={'span'} fontSize='16px' fontWeight={'normal'}>লাইক</Text>
+                                            </Text>
+                                        </Flex>
+
+                                    </Button>
                                 </Flex>
 
                             </Box>
 
                         </Box>
 
+                        <Show below='md'>
+                            <Box px={{ base: 0, md: 3 }} py={6}>
+                                <SectionTitle py={1} mb={5} title='পোস্টটি লিখেছেন' />
+                                {postWritter()}
+                            </Box>
+                        </Show>
 
-                        <Box px={3} py={4}>
+                        <Box py={6}>
                             <SectionTitle py={1} title={!post.comments.length ? 'কোন মন্তব্য নেই' : `${post.comments.length} টি মন্তব্য`} />
                         </Box>
 
-
-
-                        <Box py={10} px={3}>
+                        <Box py={10}>
 
                             <Box p={1}>
-                                <Title order={6}>{!post.comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'}</Title>
+                                <Title order={5}>{!post.comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'}</Title>
                             </Box>
 
                             <Box mb={2}>
                                 <CommentInput />
                             </Box>
 
-                            <Button colorScheme={'green'}>মন্তব্য পোস্ট করুন</Button>
+                            <Button size={'sm'} rounded='sm' colorScheme={'green'}>মন্তব্য পোস্ট করুন</Button>
 
                         </Box>
-
 
                     </Box>
 
