@@ -2,10 +2,10 @@ import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Image,
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FaFacebook, FaTwitter } from 'react-icons/fa'
 import { FacebookShareButton, FacebookShareCount } from 'react-share'
-import { ThumbUp } from 'tabler-icons-react'
+import { ThumbDown, ThumbUp } from 'tabler-icons-react'
 import BlogLeftSidebar from '../../Components/Blog/BlogLeftSidebar'
 import BlogRightSidebar from '../../Components/Blog/BlogRightSidebar'
 import SectionTitle from '../../Components/Common/SectionTitle'
@@ -22,6 +22,9 @@ import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import { Facebook, Linkedin, Twitter } from 'react-social-sharing'
 import SocialShareButtons from '../../Components/Common/SocialShareButtons'
 import { useState } from 'react'
+import { AuthModalContext } from '../../Contexts/AuthModalContext'
+import useUser from '../../Hooks/useUser'
+import { setRedirectUrl } from '../../Helpers/cookieHelper'
 
 
 // import CommentInput from '../../Components/Blog/CommentInput'
@@ -32,19 +35,25 @@ function SingleBlogDetails({ post, ok }) {
 
     const router = useRouter()
 
+    const { onOpen, seTitle } = useContext(AuthModalContext)
+
+    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
+
     async function storeTraffic() {
         const res = await Axios.post(`/post/storePostTraffic/${router?.query?.slug}`)
-        console.log('storePostTraffic', res?.data)
+        // console.log('storePostTraffic', res?.data)
     }
+
+    const [likesCount, setLikesCount] = useState(post?.likes?.length)
 
     useEffect(() => {
 
-        console.log(router)
+        // console.log(router)
 
         let isMounted = true
 
         if (isMounted) {
-            console.log('traffic req sending')
+            // console.log('traffic req sending')
             storeTraffic()
         }
 
@@ -53,6 +62,74 @@ function SingleBlogDetails({ post, ok }) {
         }
 
     }, [])
+
+
+    const [isLiked, setIsLiked] = useState(false)
+
+    const [liking, setLiking] = useState(false)
+
+
+    useEffect(() => {
+
+        console.log('auth user id', authUser)
+
+
+        if (authUser?.id) {
+
+            // console.log('Post Likes', post.likes)
+
+            const hasLike = post?.likes.some(like => like.authorId == authUser?.id)
+
+            console.log('Has Like', hasLike)
+
+            setIsLiked(hasLike ? true : false)
+        }
+
+    }, [authUser])
+
+
+    const sendLikeRequest = async () => {
+
+        const res = await Axios.post(`/post/like/${router?.query?.slug}`)
+
+        console.log('Like Status ', res?.data)
+
+        if (res?.data?.ok) {
+            setIsLiked(res?.data?.likeStatus == 'like' ? true : false)
+            setLikesCount(res?.data?.likeStatus == 'like' ? likesCount + 1 : likesCount - 1)
+        }
+
+        setLiking(false)
+
+    }
+
+    const handleClickLike = () => {
+
+        var isMounted = true
+
+        setLiking(true)
+
+        if (isMounted) {
+
+            if (authUser) {
+
+                sendLikeRequest()
+
+            } else {
+
+                setLiking(false)
+                setRedirectUrl(router?.asPath)
+                seTitle('পোস্ট এ লাইক দিতে লগইন করুন')
+                onOpen()
+            }
+
+        }
+
+        return () => {
+            isMounted = false
+        }
+
+    }
 
 
     function postWritter() {
@@ -189,7 +266,7 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
                             <Box p={2} bg='blackAlpha.50'>
-                                <Flex direction={{base: 'column', lg: 'row'}} gap={3} alignItems={{base: 'start', lg: 'center'}}>
+                                <Flex direction={{ base: 'column', lg: 'row' }} gap={3} alignItems={{ base: 'start', lg: 'center' }}>
 
                                     <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
                                     <SocialShareButtons link={router.asPath} />
@@ -212,47 +289,41 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
 
+                            <Box px={0} py={4} bg='blacAlpha.50'>
 
-                            <Divider />
+                                <Flex gap={{ base: 2, lg: 5 }} direction={{ base: 'column', lg: 'row' }} justify='space-between' alignItems={{ base: 'start', lg: 'center' }}>
 
+                                    <Flex flex='1' direction={'column'}>
 
-                            <Box px={0} py={1}>
-                                <Text fontSize={'15px'} letterSpacing='-.2px' color={'blackAlpha.500'}>সর্বশেষ আপডেট  - {formatDate(post.createdAt)}</Text>
-                            </Box>
+                                        <Box px={0} py={1}>
+                                            <Text fontSize={'15px'} letterSpacing='-.2px' color={'blackAlpha.500'}>সর্বশেষ আপডেট  - {formatDate(post.createdAt)}</Text>
+                                        </Box>
 
-                            <Divider />
+                                        <Divider borderColor={'blackAlpha.300'} />
 
-                            <Box px={0} py={8} bg='blacAlpha.50'>
-                                <Flex gap={2} justify='space-between' alignItems={'center'}>
-                                    <Flex gap={3} justify='flex-start' alignItems={'center'}>
-                                        <Text fontSize='15px' fontWeight={'black'} color={'facebook.500'}>
-                                            <Text as={'span'} fontSize='16px'>{banglaNumber(post.views.length)}</Text> জন পড়েছেন
-                                        </Text>
+                                        <Flex gap={3} justify='flex-start' alignItems={'start'}>
+                                            <Text fontSize='15px' fontWeight={'black'} color={'gray.500'}>
+                                                <Text as={'span'} fontSize='16px'>{banglaNumber(post.views.length)}</Text> জন পড়েছেন
+                                            </Text>
 
-                                        <Divider orientation='vertical' borderColor={'blackAlpha.200'} h='10px' />
+                                            <Divider orientation='vertical' borderColor={'blackAlpha.300'} h='25px' />
 
-                                        <Text fontSize='15px' fontWeight={'black'} color={'facebook.500'}>
-                                            <Text as={'span'} fontSize='16px' fontWeight={'black'}>{banglaNumber(post.likes.length)}</Text> টি লাইক
-                                        </Text>
-
-                                        <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
-                                        {/* 
-                                    <Text>
-                                        <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(post.comments.length)}</Text> টি মন্তব্য
-                                    </Text> */}
-                                    </Flex>
-
-
-
-                                    <Button size={'sm'} rounded='full'>
-                                        <Flex alignItems={'center'} gap={1}>
-                                            <ThumbUp size={18} />
-                                            <Text>
-                                                <Text as={'span'} fontSize='16px' fontWeight={'normal'}>লাইক</Text>
+                                            <Text fontSize='15px' fontWeight={'black'} color={'linkedin.500'}>
+                                                <Text as={'span'} fontSize='16px' fontWeight={'black'}>{banglaNumber(likesCount)}</Text> লাইক
                                             </Text>
                                         </Flex>
 
-                                    </Button>
+                                    </Flex>
+
+                                    <Box w={'60px'} />
+
+                                    <Flex justify={'end'} >
+                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='md' size='md' leftIcon={isLiked ? <ThumbDown size={20} /> : <ThumbUp size={20} />} rounded='full'>
+                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লাইক '}</Text>
+                                        </Button>
+                                    </Flex>
+
+
                                 </Flex>
 
                             </Box>
@@ -277,7 +348,7 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
                             <Box mb={2}>
-                                <CommentInput />
+                                <CommentInput key={authUser} />
                             </Box>
 
                             <Button size={'sm'} rounded='sm' colorScheme={'green'}>মন্তব্য পোস্ট করুন</Button>

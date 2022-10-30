@@ -1,52 +1,63 @@
 import { Box } from '@chakra-ui/react';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { AuthModalContext } from '../../Contexts/AuthModalContext';
+import useUser from '../../Hooks/useUser';
+import Axios from '../../Helpers/axiosHelper';
+import axios from 'axios';
 
 
 export default function CommentInput() {
     const [value, setValue] = useState('')
+
     const editorRef = useRef(null)
 
+    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
-    const image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = false;
-        xhr.open('POST', 'postAcceptor.php');
 
-        xhr.upload.onprogress = (e) => {
-            progress(e.loaded / e.total * 100);
-        };
+    const { onOpen, seTitle } = useContext(AuthModalContext)
 
-        xhr.onload = () => {
-            if (xhr.status === 403) {
-                reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
-                return;
-            }
 
-            if (xhr.status < 200 || xhr.status >= 300) {
-                reject('HTTP Error: ' + xhr.status);
-                return;
-            }
+    const tinnyImagePickerCallback = (cb, value, meta) => {
 
-            const json = JSON.parse(xhr.responseText);
+        // if(!authUser?.id){
+        //     seTitle('ফাইল আপলোড করার জন্য লগইন করুন')
+        //     return onOpen()
+        // }
 
-            if (!json || typeof json.location != 'string') {
-                reject('Invalid JSON: ' + xhr.responseText);
-                return;
-            }
 
-            resolve(json.location);
-        };
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
 
-        xhr.onerror = () => {
-            reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-        };
+        input.addEventListener('change', (e) => {
 
-        const formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
+            const file = e.target.files[0];
 
-        xhr.send(formData);
-    })
+            console.log('TinnyMCE File ', file)
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(file)
+
+            reader.onloadend = () => {
+           
+                Axios.post('/post/image_upload', {image: reader.result})
+                .then(res => {
+                    // console.log('image upload success ', res.data)
+                    cb(res.data.location, { title: file.name });
+                })
+                .catch(err => {
+                    console.log('File upload err', err.message)
+                })
+        
+              }
+
+        });
+
+        input.click();
+    }
+
 
     return (
         <Box pb={0}>
@@ -66,17 +77,20 @@ export default function CommentInput() {
                     language: 'bn_BD',
                     language_url: '/lang/tinny/bn_BD.js',
                     plugins: [
-                        'image', 'media', 'link', 'code', 'bullist', 'numlist'
+                        'image', 'link', 'code', 'bullist', 'numlist'
                     ],
-                    toolbar: 'bold italic underline bullist numlist link image media',
+                    toolbar: 'bold italic underline bullist numlist link image',
                     // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
                     // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                     // a11y_advanced_options: true
-                    // file_picker_callback: tinnyImagePickerCallback,
-                    images_upload_handler: image_upload_handler,
+                    file_picker_callback: tinnyImagePickerCallback,
+    
 
-                    file_picker_types: 'file image media',
-                    block_unsupported_drop: false
+                    // file_picker_types: 'file image',
+                    file_picker_types: 'image',
+                    automatic_uploads: true,
+                    // file_browser_callback_types: 'file image media',
+                    // block_unsupported_drop: false
                 }}
 
             />

@@ -123,7 +123,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             <Flex alignItems={'center'} gap={1}>
                                 <ThumbUp size={16} />
                                 <Text>
-                                    <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> টি লাইক
+                                    <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
                                 </Text>
                             </Flex>
                         </Flex>
