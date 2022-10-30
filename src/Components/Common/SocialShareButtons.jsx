@@ -16,7 +16,12 @@ export default function SocialShareButtons({ link, popup = true, title = '' }) {
         var y = window.outerHeight / 2 + window.screenY - (h / 2)
         var x = window.outerWidth / 2 + window.screenX - (w / 2)
 
-        window.open(shareUrl, 'newwin', popup ? 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + y + ', left=' + x : null);
+        var newWin  = window.open(shareUrl, 'newwin', popup ? 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + y + ', left=' + x : null);
+
+        if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
+            //POPUP BLOCKED
+            indow.open(shareUrl, 'newwin')
+        }
     }
 
     const fbShareUrl = 'https://www.facebook.com/sharer/sharer.php?u='
