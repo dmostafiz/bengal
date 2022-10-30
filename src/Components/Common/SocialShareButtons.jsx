@@ -1,8 +1,8 @@
-import { Button, HStack, Text, Tooltip, Wrap } from '@chakra-ui/react'
+import { Button, HStack, IconButton, Text, Tooltip, Wrap } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import React from 'react'
 import { BsTelegram } from 'react-icons/bs';
-import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebook, FaLinkedin, FaTelegram, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 
 export default function SocialShareButtons({ link, popup = true, title = '' }) {
 
@@ -11,7 +11,12 @@ export default function SocialShareButtons({ link, popup = true, title = '' }) {
         const shareUrl = url + window.location.protocol + '//' + window.location.hostname + link
         console.log('Share Url: ', shareUrl)
 
-        window.open(shareUrl, 'newwin', popup ? 'width=600px,height=600px' : null);
+        var w = 600
+        var h = 600
+        var y = window.outerHeight / 2 + window.screenY - (h / 2)
+        var x = window.outerWidth / 2 + window.screenX - (w / 2)
+
+        window.open(shareUrl, 'newwin', popup ? 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + y + ', left=' + x : null);
     }
 
     const fbShareUrl = 'https://www.facebook.com/sharer/sharer.php?u='
@@ -24,23 +29,28 @@ export default function SocialShareButtons({ link, popup = true, title = '' }) {
         <Wrap>
 
             <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
-                <Button onClick={() => openShareWindow(`${fbShareUrl}`)} size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
-                    Facebook
+                <Button onClick={() => openShareWindow(`${fbShareUrl}`)} gap={0} pr={3} size='xs' rounded={'sm'} colorScheme='facebook' leftIcon={<FaFacebook />}>
+                    ফেসবুক শেয়ার
                 </Button>
             </Tooltip>
 
 
             <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
-                <Button onClick={() => openShareWindow(`${twitterShareUrl}`)} size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
-                    Twitter
-                </Button>
+                <IconButton onClick={() => openShareWindow(`${twitterShareUrl}`)} size={'xs'} rounded='sm' colorScheme='twitter' icon={<FaTwitter />} />
             </Tooltip>
 
             <Tooltip hasArrow label={'লিংকড-ইন এ শেয়ার করুন'} bg='gray.800'>
-                <Button onClick={() => openShareWindow(`${linkedInShareUrl}`)} size={'xs'} rounded='none' colorScheme='linkedin' leftIcon={<FaLinkedin />}>
-                    Linked In
-                </Button>
+                <IconButton icon={<FaLinkedin />} onClick={() => openShareWindow(`${linkedInShareUrl}`)} size={'xs'} rounded='sm' colorScheme='linkedin' />
             </Tooltip>
+
+            <Tooltip hasArrow label={'টেলিগ্রামে শেয়ার করুন'} bg='gray.800'>
+                <IconButton icon={<FaTelegram />} onClick={() => openShareWindow(`${telegramShareUrl}`)} size={'xs'} rounded='sm' colorScheme='telegram' />
+            </Tooltip>
+
+            <Tooltip hasArrow label={'হটসআপে শেয়ার করুন'} bg='gray.800'>
+                <IconButton icon={<FaWhatsapp />} onClick={() => openShareWindow(`${whatsappShareUrl}`)} size={'xs'} rounded='sm' colorScheme='whatsapp' />
+            </Tooltip>
+
 
             {/* <Tooltip hasArrow label={'টেলিগ্রামে শেয়ার করুন'} bg='gray.800'>
                 <Button onClick={() => openShareWindow(`${telegramShareUrl}`)} size={'xs'} rounded='none' colorScheme='telegram' leftIcon={<BsTelegram />}>
