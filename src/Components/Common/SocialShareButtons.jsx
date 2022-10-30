@@ -5,7 +5,7 @@ import { BsTelegram } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 
 export default function SocialShareButtons({ link, popup=true, title='' }) {
-    
+
     function openShareWindow(url) {
 
         const shareUrl = url + window.location.protocol + '//' + window.location.hostname + link
@@ -42,7 +42,7 @@ export default function SocialShareButtons({ link, popup=true, title='' }) {
                 </Button>
             </Tooltip>
 
-            <Tooltip hasArrow label={'টেলিগ্রামে শেয়ার করুন'} bg='gray.800'>
+            {/* <Tooltip hasArrow label={'টেলিগ্রামে শেয়ার করুন'} bg='gray.800'>
                 <Button onClick={() => openShareWindow(`${telegramShareUrl}`)} size={'xs'} rounded='none' colorScheme='telegram' leftIcon={<BsTelegram />}>
                     Telegram
                 </Button>
@@ -52,7 +52,7 @@ export default function SocialShareButtons({ link, popup=true, title='' }) {
                 <Button onClick={() => openShareWindow(`${whatsappShareUrl}`)} size={'xs'} rounded='none' colorScheme='whatsapp' leftIcon={<FaWhatsapp />}>
                     Whatsapp
                 </Button>
-            </Tooltip>
+            </Tooltip> */}
 
         </Wrap>
     )
