@@ -273,7 +273,7 @@ function SingleBlogDetails({ post, ok }) {
                                 </Flex>
                             </Box>
                             {post.image ? <Center w={'full'} py={4}>
-                                <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />
+                                <Image w='full' maxH='500px' objectFit={'cover'} shadow='sm' src={post.image} alt='name' />
                             </Center> : <Box my={4} />}
 
                             <Box
