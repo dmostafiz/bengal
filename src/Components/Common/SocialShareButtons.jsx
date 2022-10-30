@@ -5,12 +5,10 @@ import { BsTelegram } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 
 export default function SocialShareButtons({ link, popup=true, title='' }) {
-
-    const router = useRouter()
-
+    
     function openShareWindow(url) {
 
-        const shareUrl = url + window.location.protocol + '//' + window.location.hostname + router.asPath + link
+        const shareUrl = url + window.location.protocol + '//' + window.location.hostname + link
         console.log('Share Url: ', shareUrl)
 
         window.open(shareUrl, 'newwin', popup ? 'width=600px,height=600px' : null);
