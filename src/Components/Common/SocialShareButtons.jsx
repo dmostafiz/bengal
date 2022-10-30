@@ -4,7 +4,7 @@ import React from 'react'
 import { BsTelegram } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 
-export default function SocialShareButtons({ link, popup=true, title='' }) {
+export default function SocialShareButtons({ link, popup = true, title = '' }) {
 
     function openShareWindow(url) {
 
