@@ -52,9 +52,9 @@ export default function SocialShareButtons({ link, popup = true, title = '' }) {
                 <IconButton icon={<FaTelegram />} onClick={() => openShareWindow(`${telegramShareUrl}`)} size={'xs'} rounded='sm' colorScheme='telegram' />
             </Tooltip>
 
-            <Tooltip hasArrow label={'হটসআপে শেয়ার করুন'} bg='gray.800'>
+            {/* <Tooltip hasArrow label={'হটসআপে শেয়ার করুন'} bg='gray.800'>
                 <IconButton icon={<FaWhatsapp />} onClick={() => openShareWindow(`${whatsappShareUrl}`)} size={'xs'} rounded='sm' colorScheme='whatsapp' />
-            </Tooltip>
+            </Tooltip> */}
 
 
             {/* <Tooltip hasArrow label={'টেলিগ্রামে শেয়ার করুন'} bg='gray.800'>
