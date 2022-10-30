@@ -19,6 +19,10 @@ import MainRightSidebar from '../../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 
+import { Facebook, Linkedin, Twitter } from 'react-social-sharing'
+import SocialShareButtons from '../../Components/Common/SocialShareButtons'
+import { useState } from 'react'
+
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -29,13 +33,13 @@ function SingleBlogDetails({ post, ok }) {
     const router = useRouter()
 
     async function storeTraffic() {
-
         const res = await Axios.post(`/post/storePostTraffic/${router?.query?.slug}`)
         console.log('storePostTraffic', res?.data)
-
     }
 
     useEffect(() => {
+
+        console.log(router)
 
         let isMounted = true
 
@@ -49,6 +53,7 @@ function SingleBlogDetails({ post, ok }) {
         }
 
     }, [])
+
 
     function postWritter() {
         return <Box>
@@ -184,30 +189,15 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
                             <Box p={2} bg='blackAlpha.50'>
-                                <HStack>
+                                <Flex direction={{base: 'column', lg: 'row'}} gap={3} alignItems={{base: 'start', lg: 'center'}}>
+
                                     <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
-                                    <Tooltip hasArrow label={'ফেসবুকে শেয়ার করুন'} bg='gray.800'>
-                                        <Button size='xs' rounded={'none'} colorScheme='facebook' leftIcon={<FaFacebook />}>
-                                            Facebook
-                                        </Button>
-                                        {/* <FacebookShareButton url={router.asPath}>
-                                            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-                                        </FacebookShareButton> */}
-
-                                    </Tooltip>
-
-                                    <Tooltip hasArrow label={'টুইটারে শেয়ার করুন'} bg='gray.800'>
-                                        <Button size={'xs'} rounded='none' colorScheme='twitter' leftIcon={<FaTwitter />}>
-                                            Twitter
-                                        </Button>
-                                    </Tooltip>
-                                </HStack>
+                                    <SocialShareButtons link={router.asPath} />
+                                </Flex>
                             </Box>
-                            {/* {post.image ? <Center w={'full'} py={4}>
+                            {post.image ? <Center w={'full'} py={4}>
                                 <Image maxW='full' maxH='500px' shadow='sm' src={post.image} alt='name' />
-                            </Center> : <Box my={2} />} */}
-
-                            <Box my={4} />
+                            </Center> : <Box my={4} />}
 
                             <Box
                                 as='article'
