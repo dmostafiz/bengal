@@ -7,6 +7,7 @@ import { FileLike, Heart, ThumbUp } from 'tabler-icons-react'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
+import {BsHandThumbsUp} from 'react-icons/bs'
 // import { ThumbUpOff } from 'tableicons-react'
 
 export default function PostCard({ title, image, content, createdAt, states, author, slug,  authorCard = true}) {
@@ -121,7 +122,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             </Flex>
 
                             <Flex alignItems={'center'} gap={1}>
-                                <ThumbUp size={16} />
+                                <BsHandThumbsUp size={16} />
                                 <Text>
                                     <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
                                 </Text>

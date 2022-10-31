@@ -3,7 +3,8 @@ import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect } from 'react'
-import { FaFacebook, FaTwitter } from 'react-icons/fa'
+import { FaFacebook, FaRegHandPeace, FaTwitter } from 'react-icons/fa'
+import { BiBookReader } from 'react-icons/bi'
 import { FacebookShareButton, FacebookShareCount } from 'react-share'
 import { ThumbDown, ThumbUp } from 'tabler-icons-react'
 import BlogLeftSidebar from '../../Components/Blog/BlogLeftSidebar'
@@ -25,7 +26,7 @@ import { useState } from 'react'
 import { AuthModalContext } from '../../Contexts/AuthModalContext'
 import useUser from '../../Hooks/useUser'
 import { setRedirectUrl } from '../../Helpers/cookieHelper'
-
+import { BsHandThumbsDown, BsHandThumbsUp } from 'react-icons/bs'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -302,15 +303,23 @@ function SingleBlogDetails({ post, ok }) {
                                         <Divider borderColor={'blackAlpha.300'} />
 
                                         <Flex gap={3} justify='flex-start' alignItems={'start'}>
-                                            <Text fontSize='15px' fontWeight={'black'} color={'gray.500'}>
-                                                <Text as={'span'} fontSize='16px'>{banglaNumber(post.views.length)}</Text> জন পড়েছেন
-                                            </Text>
+                                            <Flex alignItems={'center'} gap={1} color={'gray.500'}>
+                                                <BiBookReader />
+                                                <Text as={'span'} fontWeight={'black'} fontSize='16px'>
+                                                    {banglaNumber(post.views.length)}
+                                                </Text>
+                                                <Text fontSize={'15px'} fontWeight='normal'>জন পড়েছেন</Text>
+                                            </Flex>
 
                                             <Divider orientation='vertical' borderColor={'blackAlpha.300'} h='25px' />
 
-                                            <Text fontSize='15px' fontWeight={'black'} color={'linkedin.500'}>
-                                                <Text as={'span'} fontSize='16px' fontWeight={'black'}>{banglaNumber(likesCount)}</Text> লাইক
-                                            </Text>
+                                            <Flex alignItems={'center'} gap={1} color={'linkedin.500'}>
+                                                <FaRegHandPeace />
+                                                <Text as={'span'} fontSize='16px' fontWeight={'black'}>
+                                                    {banglaNumber(likesCount)}
+                                                </Text>
+                                                <Text fontSize={'15px'} fontWeight='normal'>লাইক</Text>
+                                            </Flex>
                                         </Flex>
 
                                     </Flex>
@@ -318,7 +327,7 @@ function SingleBlogDetails({ post, ok }) {
                                     <Box w={'60px'} />
 
                                     <Flex justify={'end'} >
-                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='md' size='md' leftIcon={isLiked ? <ThumbDown size={20} /> : <ThumbUp size={20} />} rounded='full'>
+                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='md' size='md' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='full'>
                                             <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লাইক '}</Text>
                                         </Button>
                                     </Flex>
