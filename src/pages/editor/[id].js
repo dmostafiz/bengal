@@ -518,8 +518,7 @@ export default function write() {
                             // a11y_advanced_options: true
 
                             file_picker_callback: tinnyImagePickerCallback,
-                            images_upload_handler: tinny_mce_image_handler,
-
+                            // images_upload_handler: tinny_mce_image_handler,
                             file_picker_types: 'image',
                             block_unsupported_drop: true,
                             images_file_types: 'jpg,svg,webp,png,jpeg,gif',

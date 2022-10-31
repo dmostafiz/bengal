@@ -1,5 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
+import Axios from '../Helpers/axiosHelper';
 
 export default function usePostImageUpload() {
 
@@ -110,39 +111,38 @@ export default function usePostImageUpload() {
 
 
   const tinnyImagePickerCallback = (cb, value, meta) => {
-    // return onOpen()
-
 
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
 
     input.addEventListener('change', (e) => {
-      const file = e.target.files[0];
 
-      console.log('TinnyMCE File ', file)
+        const file = e.target.files[0];
 
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        /*
-          Note: Now we need to register the blob in TinyMCEs image blob
-          registry. In the next release this part hopefully won't be
-          necessary, as we are looking to handle it internally.
-        */
-        const id = 'blobid' + (new Date()).getTime();
-        const blobCache = tinymce.activeEditor.editorUpload.blobCache;
-        const base64 = reader.result.split(',')[1];
-        const blobInfo = blobCache.create(id, file, base64);
-        blobCache.add(blobInfo);
+        console.log('TinnyMCE File ', file)
 
-        /* call the callback and populate the Title field with the file name */
-        cb(blobInfo.blobUri(), { title: file.name });
-      });
-      reader.readAsDataURL(file);
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file)
+
+        reader.onloadend = () => {
+       
+            Axios.post('/post/image_upload', {image: reader.result})
+            .then(res => {
+                // console.log('image upload success ', res.data)
+                cb(res.data.location, { title: file.name });
+            })
+            .catch(err => {
+                console.log('File upload err', err.message)
+            })
+    
+          }
+
     });
 
     input.click();
-  }
+}
 
 
   return { file, setFile, preview, setPreview, image, tinny_mce_image_handler, tinnyImagePickerCallback }

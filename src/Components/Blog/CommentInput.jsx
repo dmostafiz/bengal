@@ -20,12 +20,6 @@ export default function CommentInput() {
 
     const tinnyImagePickerCallback = (cb, value, meta) => {
 
-        // if(!authUser?.id){
-        //     seTitle('ফাইল আপলোড করার জন্য লগইন করুন')
-        //     return onOpen()
-        // }
-
-
         const input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
@@ -70,7 +64,8 @@ export default function CommentInput() {
 
                 init={{
                     placeholder: 'এখানে আপনার মন্তব্য লিখুন...',
-                    height: 250,
+                    height: 350,
+                    resize: true,
                     menubar: false,
                     skin: 'oxide',
                     statusbar: false,
