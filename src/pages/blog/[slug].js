@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Image, Show, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Icon, Image, Show, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -20,7 +20,8 @@ import MainRightSidebar from '../../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 
-import { Facebook, Linkedin, Twitter } from 'react-social-sharing'
+import { FcReading } from 'react-icons/fc'
+import { AiFillLike } from 'react-icons/ai'
 import SocialShareButtons from '../../Components/Common/SocialShareButtons'
 import { useState } from 'react'
 import { AuthModalContext } from '../../Contexts/AuthModalContext'
@@ -304,7 +305,7 @@ function SingleBlogDetails({ post, ok }) {
 
                                         <Flex gap={3} justify='flex-start' alignItems={'start'}>
                                             <Flex alignItems={'center'} gap={1} color={'gray.500'}>
-                                                <BiBookReader />
+                                                <FcReading color='' size='22px' />
                                                 <Text as={'span'} fontWeight={'black'} fontSize='16px'>
                                                     {banglaNumber(post.views.length)}
                                                 </Text>
@@ -313,8 +314,8 @@ function SingleBlogDetails({ post, ok }) {
 
                                             <Divider orientation='vertical' borderColor={'blackAlpha.300'} h='25px' />
 
-                                            <Flex alignItems={'center'} gap={1} color={'linkedin.500'}>
-                                                <FaRegHandPeace />
+                                            <Flex alignItems={'center'} gap={1} color={'linkedin.700'}>
+                                                <Icon as={AiFillLike} color='orange.400' fontSize='22px' />
                                                 <Text as={'span'} fontSize='16px' fontWeight={'black'}>
                                                     {banglaNumber(likesCount)}
                                                 </Text>

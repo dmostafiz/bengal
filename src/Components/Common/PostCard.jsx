@@ -18,7 +18,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box w='full' rounded='sm' overflow={'hidden'}>
+        <Box w='full' rounded='md' overflow={'hidden'}>
 
             <Box w='full' bg='.50'>
                 <Link href={`/blog/${slug}`}>
@@ -116,15 +116,15 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Box w='full' borderTop='1px' borderColor='blackAlpha.200' color='blackAlpha.600' py={1} fontSize='15px' fontWeight={'500'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
                             <Flex gap={2} justify='flex-start' alignItems={'center'}>
-                                <Text><Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.read)}</Text> জন পড়েছেন</Text>
+                                <Text><Text as={'span'} fontSize='16px' fontWeight={'normal'}>{banglaNumber(states.read)}</Text> জন পড়েছেন</Text>
                                 <Divider orientation='vertical' borderColor={'blackAlpha.50'} h='10px' />
-                                <Text><Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.comment)}</Text> টি মন্তব্য</Text>
+                                <Text><Text as={'span'} fontSize='16px' fontWeight={'normal'}>{banglaNumber(states.comment)}</Text> টি মন্তব্য</Text>
                             </Flex>
 
                             <Flex alignItems={'center'} gap={1}>
                                 <BsHandThumbsUp size={16} />
                                 <Text>
-                                    <Text as={'span'} fontSize='14px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
+                                    <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
                                 </Text>
                             </Flex>
                         </Flex>
