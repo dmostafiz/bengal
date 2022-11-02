@@ -9,7 +9,7 @@ import TextTruncate from 'react-text-truncate';
 
 export default function PostTrancate({ content, slug, lines = 3 }) {
     return (
-        <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'18px'}} lineHeight={'22px'}>
+        <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'17px'}} lineHeight={'22px'}>
             <TextTruncate
                 line={lines}
                 element="span"

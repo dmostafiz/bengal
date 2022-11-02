@@ -1,11 +1,16 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import React from 'react'
 
-export default function SectionTitle({title, px=0, py=2, mb=6, order=4, showBorder=true, bg='transparent'}) {
+export default function SectionTitle({ icon = null, title, px = 0, py = 2, mb = 6, order = 4, showBorder = true, bg = 'transparent' }) {
     return (
         <Box py={py} px={px} borderBottom={showBorder ? '2px' : '0px'} borderColor={'blackAlpha.200'} bg={bg} mb={mb} fontWeight='bold' rounded='sm'>
-            <Title order={order}><Text color={'blackAlpha.800'}>{title}</Text></Title>
+            <Title order={order}>
+                <Flex alignItems={'center'} gap={1}>
+                    {icon && icon}
+                    <Text color={'blackAlpha.800'}>{title}</Text>
+                </Flex>
+            </Title>
         </Box>
 
     )
