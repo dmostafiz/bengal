@@ -30,7 +30,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
 
                 {image ?
-                    <Box w={{ base: 'full', md: 'full', lg: '40%' }} h={{ lg: '215' }} shadow='sm' border='2px' borderColor={'blackAlpha.100'} p={'2px'} rounded='md' overflow={'hidden'}
+                    <Box opacity={'.80'} w={{ base: 'full', md: 'full', lg: '40%' }} h={{ lg: '215' }} shadow='sm' border='2px' borderColor={'blackAlpha.100'} p={'2px'} rounded='md' overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
                         bgPos='center' bgSize='cover'>
@@ -38,9 +38,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             <a href={`/blog/${slug}`}>
                                 <Center bg='whiteAlpha.700' backdropFilter='blur(5px)' rounded='sm' overflow={'hidden'} h='full' w='full'>
                                     {/* <Show below={'lg'}> */}
-                                    <Tooltip.Floating withArrow label={title} p='top'>
-                                        <Image maxW={{ base: '70%', md: 'full' }} minH={'full'} objectFit={'cover'} src={image} alt='image' />
-                                    </Tooltip.Floating>
+                                    <Image title={title} maxW={{ base: '70%', md: 'full' }} minH={'full'} objectFit={'cover'} src={image} alt='image' />
                                     {/* </Show> */}
                                 </Center>
                             </a>
@@ -57,12 +55,12 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     </Box> */}
 
 
-                    <Box pt={image ? '5px' : '0px'}>
+                    <Box w='full' pt={image ? '5px' : '0px'}>
 
                         <Box textAlign={'left'} w='full' bg='.50' mb='2' pb='1' borderBottom={'1px'} borderColor='blackAlpha.200'>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
-                                    <Title order={3}><Text noOfLines='1' color='gray.900'>{title}</Text></Title>
+                                    <Title order={3}><Text color='gray.900'>{title}</Text></Title>
                                 </a>
                             </Link>
                             <Box my={{ base: 2, md: 0 }}>

@@ -3,21 +3,21 @@ import { Wrap } from '@chakra-ui/react'
 // import { Text } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
-// import Truncate from '@nosferatu500/react-truncate'
-import { stripHtml } from 'string-strip-html'
-import TextTruncate from 'react-text-truncate';
+import truncate from 'truncate-html';
 
 export default function PostTrancate({ content, slug, lines = 3 }) {
     return (
-        <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'17px'}}>
-            <Text dangerouslySetInnerHTML={{__html:content}} noOfLines='7'></Text>
-            {/* <TextTruncate
-                line={lines}
-                element="p"
-                truncateText="…"
-                text={`${stripHtml(content).result}`}
-                textTruncateChild={slug}
-            /> */}
-        </Box>
+
+        <Box as='div' w='full' fontSize={'17px'} dangerouslySetInnerHTML={{
+            __html: truncate(content, 270, {
+                ellipsis: `...`,
+                // byWords: true,
+                keepWhitespaces: true,
+                stripTags: false,
+                excludes: ['img', 'video'],
+                decodeEntities: true,
+                reserveLastWord: true
+            })
+        }} />
     )
 }
