@@ -20,7 +20,7 @@ import MainRightSidebar from '../../Layouts/Common/MainRightSidebar'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 
-import { FcReading } from 'react-icons/fc'
+import { FcComments, FcReading } from 'react-icons/fc'
 import { AiFillLike } from 'react-icons/ai'
 import SocialShareButtons from '../../Components/Common/SocialShareButtons'
 import { useState } from 'react'
@@ -305,7 +305,7 @@ function SingleBlogDetails({ post, ok }) {
 
                                         <Flex gap={3} justify='flex-start' alignItems={'start'}>
                                             <Flex alignItems={'center'} gap={1} color={'gray.500'}>
-                                                <FcReading color='' size='22px' />
+                                                <FcReading color='' size='18px' />
                                                 <Text as={'span'} fontWeight={'black'} fontSize='16px'>
                                                     {banglaNumber(post.views.length)}
                                                 </Text>
@@ -315,7 +315,7 @@ function SingleBlogDetails({ post, ok }) {
                                             <Divider orientation='vertical' borderColor={'blackAlpha.300'} h='25px' />
 
                                             <Flex alignItems={'center'} gap={1} color={'linkedin.700'}>
-                                                <Icon as={AiFillLike} color='orange.400' fontSize='22px' />
+                                                <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
                                                 <Text as={'span'} fontSize='16px' fontWeight={'black'}>
                                                     {banglaNumber(likesCount)}
                                                 </Text>
@@ -348,7 +348,7 @@ function SingleBlogDetails({ post, ok }) {
                         </Show>
 
                         <Box py={6}>
-                            <SectionTitle py={1} title={!post.comments.length ? 'কোন মন্তব্য নেই' : `${post.comments.length} টি মন্তব্য`} />
+                            <SectionTitle icon={<FcComments color='' size='24px' />} py={1} title={!post.comments.length ? 'কোন মন্তব্য নেই' : `${post.comments.length} টি মন্তব্য`} />
                         </Box>
 
                         <Box py={10}>
