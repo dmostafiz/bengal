@@ -12,7 +12,7 @@ export default function PostTrancate({ content, slug, lines = 3 }) {
         <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'17px'}} lineHeight={'22px'}>
             <TextTruncate
                 line={lines}
-                element="span"
+                element="p"
                 truncateText="…"
                 text={stripHtml(content).result}
                 textTruncateChild={slug}

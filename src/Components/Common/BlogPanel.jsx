@@ -63,7 +63,7 @@ export default function BlogPanel() {
 
             </Box>
 
-            <Box>
+            {/* <Box>
                 <NavLink
 
                     label={<Flex gap={1} alignItems='center'>
@@ -77,7 +77,7 @@ export default function BlogPanel() {
                     variant="subtle"
                     color={'dark'}
                 />
-            </Box>
+            </Box> */}
         </Box>
     )
 }

@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { getFlashMessage } from '../../../Helpers/cookieHelper'
 
-export default function LayoutColumn({ children, pageTopSection ='', leftSide = '', rightSide = '', leftColumnWidth = 32, rightColumnWidth = 18 }) {
+export default function LayoutColumn({ children, pageTopSection ='', leftSide = '', rightSide = '', leftColumnWidth = 30, rightColumnWidth = 18 }) {
 
 
     const middleColumnWisdth = 100 - leftColumnWidth
@@ -30,7 +30,7 @@ export default function LayoutColumn({ children, pageTopSection ='', leftSide = 
     }, [router])
 
     return (
-        <SectionContainer >
+        <SectionContainer px={2}>
             <Box w='full' py={{ base: 0, md: 0 }}>
 
                 {pageTopSection}
