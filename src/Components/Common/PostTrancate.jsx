@@ -9,14 +9,15 @@ import TextTruncate from 'react-text-truncate';
 
 export default function PostTrancate({ content, slug, lines = 3 }) {
     return (
-        <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'17px'}} lineHeight={'22px'}>
-            <TextTruncate
+        <Box color={'blackAlpha.700'} fontSize={{base:'17px', md:'17px'}}>
+            <Text dangerouslySetInnerHTML={{__html:content}} noOfLines='7'></Text>
+            {/* <TextTruncate
                 line={lines}
                 element="p"
                 truncateText="…"
-                text={stripHtml(content).result}
+                text={`${stripHtml(content).result}`}
                 textTruncateChild={slug}
-            />
+            /> */}
         </Box>
     )
 }

@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Divider, Flex, Icon, Image, Show, Spacer, Text, useBreakpoint, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Divider, Flex, Icon, Image, Show, Spacer, Stack, Text, useBreakpoint, VStack, Wrap } from '@chakra-ui/react'
 import { HoverCard, Title, Tooltip } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
@@ -49,7 +49,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     : <></>}
 
 
-                <VStack flex={1} w='full' textAlign={'justify'} px={image ? 0 : 2}>
+                <Stack w={{ base: 'full', md: 'full', lg: image ? '60%' : 'full' }} textAlign={'justify'} px={image ? 0 : 2}>
                     {/* <Box>
                         <Text noOfLines={'4'} dangerouslySetInnerHTML={{__html: content}} /> <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
@@ -57,9 +57,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     </Box> */}
 
 
-                    <Box pt={image ? '10px' : '0px'}>
+                    <Box pt={image ? '5px' : '0px'}>
 
-                        <Box w='full' bg='.50' mb='2' pb='1' borderBottom={'1px'} borderColor='blackAlpha.200'>
+                        <Box textAlign={'left'} w='full' bg='.50' mb='2' pb='1' borderBottom={'1px'} borderColor='blackAlpha.200'>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
                                     <Title order={3}><Text noOfLines='1' color='gray.900'>{title}</Text></Title>
@@ -180,7 +180,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Flex>
                     </Box>
 
-                </VStack>
+                </Stack>
 
             </Flex>
 
