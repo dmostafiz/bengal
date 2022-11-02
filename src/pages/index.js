@@ -82,6 +82,7 @@ export default function Home() {
         <Box mb={8}>
 
           <SectionTitle title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+          
           <LatestBlogPost />
 
           <VStack gap={5} mt={8}>
