@@ -7,7 +7,7 @@ import { FileLike, Heart, ThumbUp } from 'tabler-icons-react'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
-import { BsHandThumbsUp } from 'react-icons/bs'
+import { BsArrowRightShort, BsHandThumbsUp } from 'react-icons/bs'
 import { FcComments, FcReading } from 'react-icons/fc'
 import { AiFillLike } from 'react-icons/ai'
 import { FaLongArrowAltRight } from 'react-icons/fa'
@@ -128,7 +128,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                             <Flex gap={4} flex='1' justify='flex-start' alignItems={'center'}>
 
-                                <Tooltip withArrow color={'purple'} label='8 members read this post'>
+                                <Tooltip withArrow color={'purple'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
                                     <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
                                         <FcReading color='' size='18px' />
                                         <Text as={'span'} fontWeight={'black'} fontSize='14px'>
@@ -139,8 +139,8 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 </Tooltip>
 
 
-                                <Tooltip withArrow label='8 likes' color={'orange'}>
-                                    <Flex alignItems={'center'} gap={1}>
+                                <Tooltip withArrow label={`${banglaNumber(states.like)} জন লাইক দিয়েছেন`} color={'orange'}>
+                                    <Flex whiteSpace='nowrap' alignItems={'center'} gap={1}>
                                         <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
                                         <Text>
                                             <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
@@ -149,27 +149,32 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 </Tooltip>
 
 
-                                <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
+                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'} color={'gray.500'}>
                                     <FcComments color='' size='18px' />
-                                    {states.comment ? <Tooltip label='8 Comments'>
+                                    {states.comment ? <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য পাওয়া গেছে`}>
                                         <Flex gap={'5px'}>
                                             <Text as={'span'} fontWeight={'black'} fontSize='15px'>
                                                 {banglaNumber(states.comment)}
                                             </Text>
                                             <Text fontSize={'15px'} fontWeight='normal'> মন্তব্য</Text>
                                         </Flex>
-                                    </Tooltip> : <Text fontSize={'15px'} fontWeight='normal'> মন্তব্য nai</Text>}
+                                    </Tooltip> : <Text fontSize={'15px'} fontWeight='normal'> মন্তব্য নেই</Text>}
 
                                 </Flex>
 
                             </Flex>
 
 
-                            <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
-                                <Link href={`/blog/${slug}`}>
-                                    <Text cursor={'pointer'} color='cyan.500' as={'span'} fontSize={'13px'} href={`/blog/${slug}`}><Icon as={FaLongArrowAltRight} fontSize='18px' /></Text>
-                                </Link>
-                            </Flex>
+
+                            <Link href={`/blog/${slug}`}>
+                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'}>
+                                    <Icon as={BsArrowRightShort} color='cyan.600' fontSize='18px' />
+                                    <Text cursor={'pointer'} color='cyan.600' as={'span'} fontSize={'13px'} href={`/blog/${slug}`}>
+                                        বিস্তারিত পড়ুন
+                                    </Text>
+                                </Flex>
+                            </Link>
+
 
 
                         </Flex>
