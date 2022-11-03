@@ -28,6 +28,8 @@ import { AuthModalContext } from '../../Contexts/AuthModalContext'
 import useUser from '../../Hooks/useUser'
 import { setRedirectUrl } from '../../Helpers/cookieHelper'
 import { BsHandThumbsDown, BsHandThumbsUp } from 'react-icons/bs'
+import useSWR from 'swr'
+import BlogCommentThread from '../../Components/Blog/BlogCommentThread'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -45,6 +47,36 @@ function SingleBlogDetails({ post, ok }) {
         const res = await Axios.post(`/post/storePostTraffic/${router?.query?.slug}`)
         // console.log('storePostTraffic', res?.data)
     }
+
+    const [comments, setComments] = useState([])
+
+    // const [commentLoading, setCommentLoading] = useState(true)
+
+
+
+    const swrComments = useSWR(`/post/get_post_comments/${post.id}`, async (url) => {
+
+        const response = await Axios.get(url)
+
+        return response?.data?.comments
+
+    }, {
+        // refetchOnWindowFocus: false,
+        // retry: false,
+    })
+
+
+    useEffect(() => {
+        console.log('swrComments ', swrComments.data)
+
+        if (swrComments.data?.length) {
+            setComments(swrComments?.data)
+        }
+
+    }, [swrComments])
+
+
+
 
     const [likesCount, setLikesCount] = useState(post?.likes?.length)
 
@@ -279,57 +311,86 @@ function SingleBlogDetails({ post, ok }) {
                             </Center> : <Box my={4} />}
 
                             <Box
+                                // mb={6}
                                 as='article'
+                                color={'gray.700'}
                                 textAlign={'justify'}
-                                mb={4}
-                                fontSize={{ base: '17px', md: '18px' }}
-                                lineHeight={{ base: '25px', md: '27px' }}
+                                fontSize={{ base: '17px', md: '17px' }}
+                                lineHeight={{ base: '25px', md: '26px' }}
                                 fontWeight={500}
-                                letterSpacing='-.1px'
+                                letterSpacing='-.2px'
                                 dangerouslySetInnerHTML={{ __html: post?.content }}
                             >
                             </Box>
 
+                            <Flex alignItems='center' gap={0}>
 
-                            <Box px={0} py={4} bg='blacAlpha.50'>
+                                <Box
+                                    flex={2}
+                                    borderBottom={'1px'}
+                                    borderColor='gray.200'
+                                />
+
+                                <Box
+                                    border={'1px'}
+                                    borderColor='gray.200'
+                                    px={5}
+                                    rounded='xl'
+                                >
+                                    <Text fontSize={'20px'} color='gray.300' fontStyle={''} fontWeight=''>সমাপ্ত</Text>
+                                </Box>
+
+                                <Box
+                                    flex={3}
+                                    borderBottom={'1px'}
+                                    borderColor='gray.200'
+                                />
+
+                                <Box
+                                    flex={10}
+                                />
+                            </Flex>
+
+
+                            <Box px={0} py={8} bg='blacAlpha.50'>
 
                                 <Flex gap={{ base: 2, lg: 5 }} direction={{ base: 'column', lg: 'row' }} justify='space-between' alignItems={{ base: 'start', lg: 'center' }}>
 
-                                    <Flex flex='1' direction={'column'}>
+                                    <Flex direction={'column'}>
 
                                         <Box px={0} py={1}>
-                                            <Text fontSize={'15px'} letterSpacing='-.2px' color={'blackAlpha.500'}>সর্বশেষ আপডেট  - {formatDate(post.createdAt)}</Text>
+                                            <Text whiteSpace={'nowrap'} fontSize={'13px'} letterSpacing='-.2px' color={'gray.400'} fontWeight='black'>সর্বশেষ এডিট  - {formatDate(post.createdAt)}</Text>
                                         </Box>
 
-                                        <Divider borderColor={'blackAlpha.300'} />
+                                        <Divider borderColor={'gray.300'} />
 
                                         <Flex gap={3} justify='flex-start' alignItems={'start'}>
-                                            <Flex alignItems={'center'} gap={1} color={'gray.500'}>
+                                            <Flex whiteSpace={'nowrap'} alignItems={'center'} gap={1} color={'gray.500'}>
                                                 <FcReading color='' size='18px' />
                                                 <Text as={'span'} fontWeight={'black'} fontSize='16px'>
                                                     {banglaNumber(post.views.length)}
                                                 </Text>
-                                                <Text fontSize={'15px'} fontWeight='normal'>জন পড়েছেন</Text>
+                                                <Text fontSize={'15px'} fontWeight='black'>জন পড়েছেন</Text>
                                             </Flex>
 
-                                            <Divider orientation='vertical' borderColor={'blackAlpha.300'} h='25px' />
+                                            <Divider orientation='vertical' borderColor={'gray.300'} h='25px' />
 
                                             <Flex alignItems={'center'} gap={1} color={'linkedin.700'}>
                                                 <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
                                                 <Text as={'span'} fontSize='16px' fontWeight={'black'}>
                                                     {banglaNumber(likesCount)}
                                                 </Text>
-                                                <Text fontSize={'15px'} fontWeight='normal'>লাইক</Text>
+                                                <Text fontSize={'15px'} fontWeight='black'>লাইক</Text>
                                             </Flex>
                                         </Flex>
 
                                     </Flex>
 
-                                    <Box w={'60px'} />
+                                    {/* <Box w={'60px'} /> */}
 
                                     <Flex justify={'end'} >
-                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='md' size='md' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='full'>
-                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লাইক '}</Text>
+                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='sm' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='md' size='md'>
+                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লেখককে উৎসাহিত করুন'}</Text>
                                         </Button>
                                     </Flex>
 
@@ -347,21 +408,57 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
                         </Show>
 
-                        <Box py={6}>
-                            <SectionTitle icon={<FcComments color='' size='24px' />} py={1} title={!post.comments.length ? 'কোন মন্তব্য নেই' : `${post.comments.length} টি মন্তব্য`} />
+                        <Box pt={5}>
+                            <SectionTitle showBorder={false} icon={<FcComments color='' size='24px' />} py={0} title={!comments.length ? 'কোন মন্তব্য নেই' : `${banglaNumber(comments.length)} টি মন্তব্য`} />
                         </Box>
 
-                        <Box py={10}>
+                        {comments.length > 0 && <Box w='full'>
 
-                            <Box p={1}>
-                                <Title order={5}>{!post.comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'}</Title>
-                            </Box>
+                            {comments.map((comment, index) => {
+
+                                return <Box w='full' mb={5}>
+
+                                    <BlogCommentThread shouldReply={true} key={index} comment={comment} />
+
+                                    {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
+                                        <Box key={index} pl={{base: 5, lg:16}}>
+
+                                            <BlogCommentThread shouldReply={true} bg='blue.50' key={index} comment={comment} />
+
+                                            {comment.childs.length > 0 && <Box w='full'>
+
+                                                {comment.childs.map((comment, index) => {
+
+                                                    return <Box w='full'  pl={{base: 5, lg:16}}>
+                                                        <BlogCommentThread bg='gray.50' key={index} comment={comment} />
+
+                                                        {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
+                                                            <Box key={index} pl={16}>
+                                                                <BlogCommentThread key={index} comment={comment} />
+                                                            </Box>
+                                                        )}
+                                                    </Box>
+
+                                                })}
+
+                                            </Box>}
+                                        </Box>
+                                    )}
+                                </Box>
+
+                            })}
+
+                        </Box>}
+
+                        <Box pb={10} pt={comments.length ? 10 : 0}>
+
+                            {/* {comments.length > 0 &&  <Box p={1}>
+                                <Title order={4}>{!comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'}</Title>
+                            </Box>} */}
 
                             <Box mb={2}>
-                                <CommentInput key={authUser} />
+                                <CommentInput key={authUser} replyTo='post' id={post?.id} user={authUser} />
                             </Box>
-
-                            <Button size={'sm'} rounded='sm' colorScheme={'green'}>মন্তব্য পোস্ট করুন</Button>
 
                         </Box>
 

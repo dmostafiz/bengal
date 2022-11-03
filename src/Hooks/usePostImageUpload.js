@@ -68,46 +68,63 @@ export default function usePostImageUpload() {
 
   const tinny_mce_image_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
 
-    // return onOpen()
 
-    const xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-    xhr.open('POST', 'postAcceptor.php');
+    const reader = new FileReader();
 
-    xhr.upload.onprogress = (e) => {
-      progress(e.loaded / e.total * 100);
-    };
+    reader.readAsDataURL(blobInfo.blob())
 
-    xhr.onload = () => {
-      if (xhr.status === 403) {
-        reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
-        return;
+    reader.onloadend = () => {
+   
+        Axios.post('/post/image_upload', {image: reader.result})
+        .then(res => {
+            // console.log('image upload success ', res.data)
+            resolve(res.data.location);
+            
+        })
+        .catch(err => {
+            console.log('File upload err', err.message)
+        })
+
       }
 
-      if (xhr.status < 200 || xhr.status >= 300) {
-        reject('HTTP Error: ' + xhr.status);
-        return;
-      }
-
-      // const json = JSON.parse(xhr.responseText);
-
-      // if (!json || typeof json.location != 'string') {
-      //   reject('Invalid JSON: ' + xhr.responseText);
-      //   return;
-      // }
-
-      // resolve(json.location);
-    };
-
-    xhr.onerror = () => {
-      reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
-    };
-
-    const formData = new FormData();
-    formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-    xhr.send(formData);
-  })
+    // const xhr = new XMLHttpRequest();
+    // xhr.withCredentials = false;
+    // xhr.open('POST', 'postAcceptor.php');
+  
+    // xhr.upload.onprogress = (e) => {
+    //   progress(e.loaded / e.total * 100);
+    // };
+  
+    // xhr.onload = () => {
+    //   if (xhr.status === 403) {
+    //     reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+    //     return;
+    //   }
+  
+    //   if (xhr.status < 200 || xhr.status >= 300) {
+    //     reject('HTTP Error: ' + xhr.status);
+    //     return;
+    //   }
+  
+    //   const json = JSON.parse(xhr.responseText);
+  
+    //   if (!json || typeof json.location != 'string') {
+    //     reject('Invalid JSON: ' + xhr.responseText);
+    //     return;
+    //   }
+  
+    //   resolve(json.location);
+    // };
+  
+    // xhr.onerror = () => {
+    //   reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+    // };
+  
+    // const formData = new FormData();
+    // formData.append('file', blobInfo.blob(), blobInfo.filename());
+  
+    // xhr.send(formData);
+  });
 
 
   const tinnyImagePickerCallback = (cb, value, meta) => {

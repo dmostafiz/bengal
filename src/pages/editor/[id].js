@@ -20,7 +20,6 @@ import usePostImageUpload from '../../Hooks/usePostImageUpload'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { min } from 'moment'
 import { useDebouncedState } from '@mantine/hooks'
 import Axios from '../../Helpers/axiosHelper'
 import ToastSpinnerText from '../../Components/Common/ToastSpinnerText'
@@ -81,7 +80,7 @@ export default function write() {
 
   const [currPost, setCurrentPost] = useState(null)
 
-  const { setFile, preview, setPreview, image, tinny_mce_image_handler, tinnyImagePickerCallback } = usePostImageUpload()
+  const { setFile, preview, setPreview, image, tinny_mce_image_handler } = usePostImageUpload()
 
   const [title, setTitle] = useState('')
   const [titleDebounce, setTitleDebounce] = useDebouncedState('', 2000)
@@ -101,6 +100,11 @@ export default function write() {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const getCategories = categories()
+
+  useEffect(() => {
+    console.log('TinnyMCE content ################', content)
+  }, [content])
+
 
   useEffect(() => {
 
@@ -208,7 +212,7 @@ export default function write() {
 
     }
 
-  }, [titleDebounce, contentDebounce, image])
+  }, [titleDebounce, contentDebounce])
 
   const [drafting, setDrafting] = useState(false)
   const handleDraftSave = () => {
@@ -246,7 +250,7 @@ export default function write() {
       ...data,
     })
 
-    if(res?.data?.ok){
+    if (res?.data?.ok) {
       toast({
         title: 'ব্লগটি সফলভাবে পাবলিশ হয়েছে!',
         // description: "ব্লগে আপনাকে স্বাগতম।",
@@ -254,7 +258,7 @@ export default function write() {
         position: 'top-right',
         duration: 9000,
         isClosable: true,
-    })
+      })
     }
 
     setFile(null)
@@ -509,20 +513,23 @@ export default function write() {
                             icons: 'small  ',
                             language_url: '/lang/tinny/bn_BD.js',
                             statusbar: false,
+                            // plugins: [
+                            //   'preview', 'image', 'media', 'link', 'code', 'bullist', 'numlist'
+                            // ],
+                            // toolbar: 'bold italic underline alignleft aligncenter bullist numlist link image media ',
                             plugins: [
-                              'preview', 'image', 'media', 'link', 'code', 'bullist', 'numlist'
+                              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'emoticons'
                             ],
-                            toolbar: 'bold italic underline alignleft aligncenter bullist numlist link image media ',
-                            // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                            // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                            // a11y_advanced_options: true
-
-                            file_picker_callback: tinnyImagePickerCallback,
-                            // images_upload_handler: tinny_mce_image_handler,
+                            toolbar: 'blocks bold underline image media link emoticons',
+                            block_formats: 'Paragraph=p; প্যারাগ্রাফ হেডিং=h3',
+                            br_in_pre: true,
+                            images_upload_handler: tinny_mce_image_handler,
                             file_picker_types: 'image',
                             block_unsupported_drop: true,
                             images_file_types: 'jpg,svg,webp,png,jpeg,gif',
-
+                            content_style: 'img { width: 100%; height: auto }',
                             setup: (editor) => {
                               editor.on('click', () => {
                                 //  onOpen()
@@ -531,8 +538,6 @@ export default function write() {
                           }}
                         />}
                       />
-
-
 
                       <FormErrorMessage>
                         {errors.content && errors.content.message}

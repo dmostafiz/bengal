@@ -1,94 +1,210 @@
-import { Box } from '@chakra-ui/react';
-import React, { useContext, useRef, useState } from 'react';
+import { Box, Button, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { AuthModalContext } from '../../Contexts/AuthModalContext';
 import useUser from '../../Hooks/useUser';
 import Axios from '../../Helpers/axiosHelper';
 import axios from 'axios';
+import { setRedirectUrl } from '../../Helpers/cookieHelper';
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 
-export default function CommentInput() {
-    const [value, setValue] = useState('')
+const schema = yup.object({
+
+    content: yup.string()
+        // .min(10, 'কমপক্ষে ১০ টি বাক্য লিখুন।')
+        .test('len', 'কমপক্ষে ২ টি বাক্য লিখতে হবে।', val => {
+            const wordsArr = val?.split(' ')
+            return wordsArr?.length >= 2
+            //    console.log(wordsArr)
+        })
+        .required('মন্তব্য লিখতে হবে')
+
+}).required();
+
+
+export default function CommentInput({ replyTo, id, user }) {
+
+    const {
+        handleSubmit,
+        register,
+        control,
+        formState: { errors, isSubmitting },
+        reset
+    } = useForm({
+        mode: 'onSubmit',
+        resolver: yupResolver(schema),
+    })
+
+    const router = useRouter()
+    const toast = useToast()
+
+    const [content, setContent] = useState('')
+    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
     const editorRef = useRef(null)
 
-    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
-
-
     const { onOpen, seTitle } = useContext(AuthModalContext)
 
+    const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
 
-    const tinnyImagePickerCallback = (cb, value, meta) => {
+        console.log('TinnyMce User: ', user)
+        if (!user) {
+            setRedirectUrl(router.asPath)
+            seTitle('লগইন / নিবন্ধন করুন')
+            onOpen()
 
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
+            reject('শুধুমাত্র নিবন্ধিত সদস্যরাই ছবি আপলোড করতে পারবেন');
+        }
 
-        input.addEventListener('change', (e) => {
+        const reader = new FileReader();
 
-            const file = e.target.files[0];
+        reader.readAsDataURL(blobInfo.blob())
 
-            console.log('TinnyMCE File ', file)
+        reader.onloadend = () => {
 
-            const reader = new FileReader();
-
-            reader.readAsDataURL(file)
-
-            reader.onloadend = () => {
-           
-                Axios.post('/post/image_upload', {image: reader.result})
+            Axios.post('/post/image_upload', { image: reader.result })
                 .then(res => {
                     // console.log('image upload success ', res.data)
-                    cb(res.data.location, { title: file.name });
+                    resolve(res.data.location);
+
                 })
                 .catch(err => {
                     console.log('File upload err', err.message)
                 })
-        
-              }
 
-        });
+        }
 
-        input.click();
+    });
+
+
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmmitComment = async (value) => {
+
+        setLoading(true)
+
+        const res = await Axios.post('/post/store_comment', {
+            content,
+            replyTo,
+            id
+        })
+
+        // console.log('Comment Response ', res)
+
+        if (res?.data?.ok) {
+            toast({
+                title: 'আপনার মন্তব্যটি সফল হয়েছে!',
+                // description: "ব্লগে আপনাকে স্বাগতম।",
+                status: 'success',
+                position: 'top-right',
+                duration: 9000,
+                isClosable: true,
+            })
+
+            setContent('')
+
+            reset({
+                content: ''
+            })
+        } else {
+            toast({
+                title: res?.data?.msg,
+                // description: "ব্লগে আপনাকে স্বাগতম।",
+                status: 'error',
+                position: 'top-right',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
+
+        setLoading(false)
     }
+
 
 
     return (
         <Box pb={0}>
 
+            <FormControl isInvalid={errors.content}>
 
-            <Editor
-                apiKey='n07kqhwmimi936tsx8nh222m7jrwbweyy7yowcwx8gjtmyol'
-                onInit={(evt, editor) => editorRef.current = editor}
-                initialValue=""
+                <Controller
+                    name="content"
+                    control={control}
+                    rules={{ required: true }}
 
-                init={{
-                    placeholder: 'এখানে আপনার মন্তব্য লিখুন...',
-                    height: 350,
-                    resize: true,
-                    menubar: false,
-                    skin: 'oxide',
-                    statusbar: false,
-                    language: 'bn_BD',
-                    language_url: '/lang/tinny/bn_BD.js',
-                    plugins: [
-                        'image', 'link', 'code', 'bullist', 'numlist'
-                    ],
-                    toolbar: 'bold italic underline bullist numlist link image',
-                    // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                    // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                    // a11y_advanced_options: true
-                    file_picker_callback: tinnyImagePickerCallback,
-    
+                    render={({ field: { onChange, onBlur, value, ref } }) => <Editor
 
-                    // file_picker_types: 'file image',
-                    file_picker_types: 'image',
-                    automatic_uploads: true,
-                    // file_browser_callback_types: 'file image media',
-                    // block_unsupported_drop: false
-                }}
+                        apiKey='n07kqhwmimi936tsx8nh222m7jrwbweyy7yowcwx8gjtmyol'
 
-            />
+                        onInit={(evt, editor) => editorRef.current = editor}
+
+                        value={value}
+
+                        onEditorChange={val => {
+                            setContent(val)
+                            onChange(val)
+                        }}
+
+                        init={{
+                            placeholder: 'আপনার মন্তব্য লিখুন...',
+                            height: 230,
+                            width: '100%',
+                            // resize: true,
+                            menubar: false,
+                            skin: 'oxide',
+                            statusbar: false,
+                            language: 'bn_BD',
+                            language_url: '/lang/tinny/bn_BD.js',
+
+                            menubar: false,
+                            plugins: [
+                                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'emoticons'
+                            ],
+                            toolbar: 'bold underline link emoticons',
+                            block_formats: 'Paragraph=p; প্যারাগ্রাফ হেডিং=h3',
+                            br_in_pre: true,
+                            images_upload_handler: example_image_upload_handler,
+                            images_file_types: 'jpg,svg,webp,png,jpeg,gif',
+                            content_style: 'img { width: 100%; height: auto }',
+                            setup: (editor) => {
+                                editor.on('click', () => {
+                                    if (!user) {
+                                        setRedirectUrl(router.asPath)
+                                        onOpen()
+                                    } else {
+                                        editor.contentWindow.innerHeight = 200
+                                        console.log('he he he', editor)
+                                    }
+                                });
+                            }
+                        }}
+                    />}
+                />
+
+                <FormErrorMessage>
+                    {errors.content && errors.content.message}
+                </FormErrorMessage>
+
+            </FormControl>
+
+            <Box my={3} />
+
+            <Button
+                ml={1}
+                onClick={handleSubmit(handleSubmmitComment)}
+                isLoading={loading}
+                size={replyTo == 'post' ? 'md' : 'sm'}
+                rounded={replyTo == 'post' ? 'md' : 'full'}
+                colorScheme={replyTo == 'post' ? 'green' : 'yellow'}
+            >
+                {replyTo == 'post' ? 'মন্তব্য পোস্ট করুন' : 'আপনার উত্তর দিন'}
+            </Button>
         </Box>
     )
 }

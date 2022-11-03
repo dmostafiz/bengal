@@ -14,7 +14,7 @@ export default function PostTrancate({ content, slug, lines = 3 }) {
                    // byWords: true,
                    keepWhitespaces: true,
                    stripTags: false,
-                   excludes: ['img', 'video'],
+                   excludes: ['img', 'video', 'script'],
                    decodeEntities: true,
                    reserveLastWord: true
                })
