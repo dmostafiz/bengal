@@ -416,11 +416,12 @@ function SingleBlogDetails({ post, ok }) {
 
                             {comments.map((comment, index) => {
 
-                                return <Box w='full' mb={5}>
+                                return <Box key={index} w='full' mb={5}>
 
                                     <BlogCommentThread shouldReply={true} key={index} comment={comment} />
 
                                     {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
+
                                         <Box key={index} pl={{base: 5, lg:16}}>
 
                                             <BlogCommentThread shouldReply={true} bg='blue.50' key={index} comment={comment} />
@@ -429,7 +430,7 @@ function SingleBlogDetails({ post, ok }) {
 
                                                 {comment.childs.map((comment, index) => {
 
-                                                    return <Box w='full'  pl={{base: 5, lg:16}}>
+                                                    return <Box key={index} w='full'  pl={{base: 5, lg:16}}>
                                                         <BlogCommentThread bg='gray.50' key={index} comment={comment} />
 
                                                         {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
