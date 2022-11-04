@@ -6,6 +6,7 @@ import NextNProgress from "nextjs-progressbar";
 import AuthModalContextProvider from '../Contexts/AuthModalContext';
 import AuthContextProvider from '../Contexts/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import CommentContextProvider from '../Contexts/CommentContext';
 
 const queryClient = new QueryClient()
 
@@ -33,9 +34,9 @@ function MyApp({ Component, pageProps }) {
         <QueryClientProvider client={queryClient}>
           <AuthModalContextProvider>
             <AuthContextProvider>
-
-              <Component {...pageProps} />
-
+              <CommentContextProvider>
+                <Component {...pageProps} />
+              </CommentContextProvider>
             </AuthContextProvider>
           </AuthModalContextProvider>
         </QueryClientProvider>

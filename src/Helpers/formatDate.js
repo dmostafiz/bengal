@@ -137,7 +137,7 @@ const formatDate = (date, format = 'LLL', calendar = false) => {
 
     if (calendar) {
 
-        return moment(date).calendar()
+        return moment(date).fromNow()
 
     } else {
 

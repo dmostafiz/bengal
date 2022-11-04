@@ -6,7 +6,7 @@ import React, { useContext, useEffect } from 'react'
 import { FaFacebook, FaRegHandPeace, FaTwitter } from 'react-icons/fa'
 import { BiBookReader } from 'react-icons/bi'
 import { FacebookShareButton, FacebookShareCount } from 'react-share'
-import { ThumbDown, ThumbUp } from 'tabler-icons-react'
+import { Edit, PencilPlus, ThumbDown, ThumbUp } from 'tabler-icons-react'
 import BlogLeftSidebar from '../../Components/Blog/BlogLeftSidebar'
 import BlogRightSidebar from '../../Components/Blog/BlogRightSidebar'
 import SectionTitle from '../../Components/Common/SectionTitle'
@@ -30,6 +30,9 @@ import { setRedirectUrl } from '../../Helpers/cookieHelper'
 import { BsHandThumbsDown, BsHandThumbsUp } from 'react-icons/bs'
 import useSWR from 'swr'
 import BlogCommentThread from '../../Components/Blog/BlogCommentThread'
+import { useQuery } from '@tanstack/react-query'
+import { CommentContext } from '../../Contexts/CommentContext'
+import { IconPencilPlus } from '@tabler/icons'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -41,44 +44,58 @@ function SingleBlogDetails({ post, ok }) {
 
     const { onOpen, seTitle } = useContext(AuthModalContext)
 
-    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
+    const { authUser, hasUser } = useUser()
+
+    const { setCommentLoading, commentId, commentChildren, currentReplyThread } = useContext(CommentContext)
+
+    const [comments, setComments] = useState([])
+
+
+    const commentQuery = useQuery(['getComments', commentId], async () => {
+
+        const response = await Axios.get(`/post/get_post_comments/${post.id}`)
+        setComments(response?.data?.comments)
+        return response?.data?.comments
+
+    })
+
+    useEffect(() => {
+        if (commentQuery?.data) {
+            setCommentLoading(false)
+
+            if (commentId && typeof document != undefined) {
+
+                const thread = document.getElementById(commentId)
+
+                thread?.scrollIntoView({
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'center'
+                });
+
+                // thread?.style?.background = "yellow";
+                // document.getElementById(commentId)?.style.borderColor = "#FAF0C4";
+                // document.getElementById(commentId).style.color = "black";
+
+                // thread?.style.color = "black";
+            }
+
+            // usee
+
+
+        }
+
+    }, [commentQuery?.data])
+
+
+
+    const [likesCount, setLikesCount] = useState(post?.likes?.length)
+
 
     async function storeTraffic() {
         const res = await Axios.post(`/post/storePostTraffic/${router?.query?.slug}`)
         // console.log('storePostTraffic', res?.data)
     }
-
-    const [comments, setComments] = useState([])
-
-    // const [commentLoading, setCommentLoading] = useState(true)
-
-
-
-    const swrComments = useSWR(`/post/get_post_comments/${post.id}`, async (url) => {
-
-        const response = await Axios.get(url)
-
-        return response?.data?.comments
-
-    }, {
-        // refetchOnWindowFocus: false,
-        // retry: false,
-    })
-
-
-    useEffect(() => {
-        console.log('swrComments ', swrComments.data)
-
-        if (swrComments.data?.length) {
-            setComments(swrComments?.data)
-        }
-
-    }, [swrComments])
-
-
-
-
-    const [likesCount, setLikesCount] = useState(post?.likes?.length)
 
     useEffect(() => {
 
@@ -164,6 +181,7 @@ function SingleBlogDetails({ post, ok }) {
         }
 
     }
+
 
 
     function postWritter() {
@@ -323,36 +341,9 @@ function SingleBlogDetails({ post, ok }) {
                             >
                             </Box>
 
-                            <Flex alignItems='center' gap={0}>
+                            <Box my={0} />
 
-                                <Box
-                                    flex={2}
-                                    borderBottom={'1px'}
-                                    borderColor='gray.200'
-                                />
-
-                                <Box
-                                    border={'1px'}
-                                    borderColor='gray.200'
-                                    px={5}
-                                    rounded='xl'
-                                >
-                                    <Text fontSize={'20px'} color='gray.300' fontStyle={''} fontWeight=''>সমাপ্ত</Text>
-                                </Box>
-
-                                <Box
-                                    flex={3}
-                                    borderBottom={'1px'}
-                                    borderColor='gray.200'
-                                />
-
-                                <Box
-                                    flex={10}
-                                />
-                            </Flex>
-
-
-                            <Box px={0} py={8} bg='blacAlpha.50'>
+                            <Box px={0} py={5} bg='blacAlpha.50'>
 
                                 <Flex gap={{ base: 2, lg: 5 }} direction={{ base: 'column', lg: 'row' }} justify='space-between' alignItems={{ base: 'start', lg: 'center' }}>
 
@@ -408,41 +399,63 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
                         </Show>
 
-                        <Box pt={5}>
-                            <SectionTitle showBorder={false} icon={<FcComments color='' size='24px' />} py={0} title={!comments.length ? 'কোন মন্তব্য নেই' : `${banglaNumber(comments.length)} টি মন্তব্য`} />
-                        </Box>
+                        <Flex id='scroll-tot-comment' pt={5} gap='5' alignItems={'center'} mb={4}>
+                            <SectionTitle showBorder={false} icon={<FcComments color='' size='24px' />} py={0} mb={0} title={!comments.length ? 'কোন মন্তব্য নেই' : `${banglaNumber(comments.length)} টি মন্তব্য`} />
+                            {comments.length > 5 &&
+                                <Button
+                                    onClick={() => {
+                                        document.getElementById('main-comment-editor').scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'center',
+                                            inline: 'center'
+                                        })
+                                    }}
+                                    size={'sm'}
+                                >
+                                    মন্তব্য করুন
+                                </Button>}
+                        </Flex>
 
-                        {comments.length > 0 && <Box w='full'>
+                        {comments.length > 0 && <Box w='full' px={{ base: 'full', lg: '3' }}>
 
                             {comments.map((comment, index) => {
 
                                 return <Box key={index} w='full' mb={5}>
 
-                                    <BlogCommentThread shouldReply={true} key={index} comment={comment} />
+                                    <BlogCommentThread
+                                        openOnReply={true}
+                                        showChildrenButton={true}
+                                        replyType='post'
+                                        shouldReply={true}
+                                        key={index}
+                                        comment={comment}
+                                    />
 
-                                    {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
+                                    {(comment.childs?.length > 0 && commentChildren == comment.id) && comment.childs.map((comment, index) =>
+                                        <Box pl={{ base: 5, lg: 10 }}>
+                                            <Box key={index}>
+                                                {/* Show 1st children */}
+                                                <BlogCommentThread
+                                                    replyType='comment'
+                                                    shouldReply={true}
+                                                    bg='blue.50'
+                                                    comment={comment}
+                                                />
 
-                                        <Box key={index} pl={{base: 5, lg:16}}>
+                                                {comment.childs.length > 0 && comment.childs.map((comment, index) =>
 
-                                            <BlogCommentThread shouldReply={true} bg='blue.50' key={index} comment={comment} />
+                                                    <Box key={index} w='full' pl={{ base: 5, lg: 10 }}>
 
-                                            {comment.childs.length > 0 && <Box w='full'>
+                                                        {/* Show 2nd children */}
+                                                        <BlogCommentThread
+                                                            replyType='comment'
+                                                            bg='gray.50'
+                                                            comment={comment}
+                                                        />
 
-                                                {comment.childs.map((comment, index) => {
-
-                                                    return <Box key={index} w='full'  pl={{base: 5, lg:16}}>
-                                                        <BlogCommentThread bg='gray.50' key={index} comment={comment} />
-
-                                                        {comment.childs?.length > 0 && comment.childs.map((comment, index) =>
-                                                            <Box key={index} pl={16}>
-                                                                <BlogCommentThread key={index} comment={comment} />
-                                                            </Box>
-                                                        )}
                                                     </Box>
-
-                                                })}
-
-                                            </Box>}
+                                                )}
+                                            </Box>
                                         </Box>
                                     )}
                                 </Box>
@@ -453,11 +466,11 @@ function SingleBlogDetails({ post, ok }) {
 
                         <Box pb={10} pt={comments.length ? 10 : 0}>
 
-                            {/* {comments.length > 0 &&  <Box p={1}>
-                                <Title order={4}>{!comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'}</Title>
-                            </Box>} */}
+                            {comments.length > 0 && <Box p={1}>
+                                <SectionTitle mb={1} showBorder={false} icon={<Edit size='24px' />} py={0} title={!comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'} />
+                            </Box>}
 
-                            <Box mb={2}>
+                            <Box mb={2} id='main-comment-editor'>
                                 <CommentInput key={authUser} replyTo='post' id={post?.id} user={authUser} />
                             </Box>
 

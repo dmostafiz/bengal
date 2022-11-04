@@ -13,7 +13,7 @@ import { AiFillLike } from 'react-icons/ai'
 import { FaLongArrowAltRight } from 'react-icons/fa'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({ title, image, content, createdAt, states, author, slug, authorCard = true }) {
+export default function PostCard({ title, image, content, createdAt, states, author, slug, categories, authorCard = true }) {
 
     const imgBreakPoints = useBreakpoint({
         base: false,
@@ -21,107 +21,127 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box w='full' rounded='md' overflow={'hidden'}>
-
+        <Box w='full' rounded='md' overflow={'hidden'} mb={3}>
 
 
             {/* <Box my={3} /> */}
 
             <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
 
-                {image ?
-                    <Box opacity={'.80'} w={{ base: 'full', md: 'full', lg: '40%' }} h={{ lg: '215' }} shadow='sm' border='2px' borderColor={'blackAlpha.100'} p={'2px'} rounded='md' overflow={'hidden'}
-                        // bgImage={image}
-                        objectFit='cover'
-                        bgPos='center' bgSize='cover'>
-                        <Link href={`/blog/${slug}`}>
-                            <a href={`/blog/${slug}`}>
-                                <Center bg='whiteAlpha.700' backdropFilter='blur(5px)' rounded='sm' overflow={'hidden'} h='full' w='full'>
-                                    {/* <Show below={'lg'}> */}
-                                    <Image title={title} maxW={{ base: '70%', md: 'full' }} minH={'full'} objectFit={'cover'} src={image} alt='image' />
-                                    {/* </Show> */}
-                                </Center>
-                            </a>
-                        </Link>
-                    </Box>
-                    : <></>}
+               
+                <Flex direction={{ base: 'row', md: 'column', lg: 'column' }} gap={{base:2, lg: 0}} w={{ base: 'full', md: '240px', lg: '240px' }}>
 
 
-                <Stack w={{ base: 'full', md: 'full', lg: image ? '60%' : 'full' }} textAlign={'justify'} px={image ? 0 : 2}>
-                    {/* <Box>
-                        <Text noOfLines={'4'} dangerouslySetInnerHTML={{__html: content}} /> <Link href={`/blog/${slug}`}>
-                            <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
-                        </Link>
-                    </Box> */}
-
-
-                    <Box w='full' pt={image ? '5px' : '0px'}>
-
-                        <Box textAlign={'left'} w='full' bg='.50' mb='2' pb='1' borderBottom={'1px'} borderColor='blackAlpha.200'>
+                    {image ?
+                        <Box opacity={'.80'} w={{base: '140px', lg: 'full'}} h={{base: '100px', lg: '150px'}} shadow='sm' rounded='md' 
+                         overflow={'hidden'}
+                            // bgImage={image}
+                            objectFit='cover'
+                            bgPos='center' bgSize='cover'>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
-                                    <Title order={3}><Text color='gray.900'>{title}</Text></Title>
+                                    <Center h='full' w='full'>
+                                        {/* <Show below={'lg'}> */}
+                                        <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
+                                        {/* </Show> */}
+                                    </Center>
                                 </a>
                             </Link>
-                            <Box my={{ base: 2, md: 0 }}>
-                                <Box fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} ml={1}>
-                                    {/* <Avatar shadow={'sm'} src={author.image} size={'xs'} name='লিমন লস্কর' /> */}
-                                    {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
-                                        <HoverCard.Target>
-                                            <Text as='span' color={'blue.500'}>
-                                                {author.displayName}
-                                            </Text>
-                                        </HoverCard.Target>
-                                        <HoverCard.Dropdown p={10}>
+                        </Box>
+                        : <></>}
 
-                                            <Box bg='blackAlpha.5'>
-                                                <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
-                                                    <Box>
-                                                        <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
-                                                    </Box>
-                                                    <Box>
-                                                        <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                        <Text fontSize={'12px'}>{banglaNumber(7)} টি পোস্ট লিখেছেন</Text>
-                                                    </Box>
-                                                </Flex>
+                    <Box flex='1' textAlign={'left'} w='full' bg='.50' p={{base: '0px', lg:1}} mb='2' >
 
-                                                <Box>
-                                                    <Box px={0} pt={3}>
-                                                        <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
-                                                    </Box>
+                        <Link href={`/blog/${slug}`}>
+                            <a href={`/blog/${slug}`}>
+                                <Title order={3}><Text noOfLines={{base: 1, lg:2}} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                            </a>
+                        </Link>
 
-                                                    <Divider my={1} />
 
-                                                    <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                                        <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
-                                                        <Wrap spacing={2} alignItems='flex-end'>
-                                                            <Link href={`/blogger/${author.id}`}>
-                                                                <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
-                                                            </Link>
-                                                            <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                                                        </Wrap>
-                                                    </Box>
-                                                </Box>
-                                                {/* <Divider my={1} /> */}
+                        <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                            {formatDate(createdAt)}
+                        </Text>
+
+                        {categories?.length > 0 && <Box pt={3}>
+                            <Wrap>
+
+                                {categories.map((cat, index) => <Button
+                                    key={index}
+                                    size='xs'
+                                >
+
+                                    {cat.name}
+
+                                </Button>)}
+
+                            </Wrap>
+                        </Box>}
+                    </Box>
+
+                </Flex>
+
+
+                <Box flex='1'>
+
+                    <Box borderTop='px' borderBottom='1px' borderColor='blackAlpha.200' py={1} mb={2} >
+                      
+                        <Text fontSize={'16px'} letterSpacing='-0.8px' color={'blackAlpha.600'}>
+                            {/* <Avatar shadow={'sm'} src={author.image} size={'xs'} name='লিমন লস্কর' /> */}
+                            {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+                                <HoverCard.Target>
+                                    <Text as='span' color={'blue.500'}>
+                                        {author.displayName}
+                                    </Text>
+                                </HoverCard.Target>
+                                <HoverCard.Dropdown p={10}>
+
+                                    <Box bg='blackAlpha.5'>
+                                        <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
+                                            <Box>
+                                                <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
+                                            </Box>
+                                            <Box>
+                                                <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
+                                                <Text fontSize={'12px'}>{banglaNumber(7)} টি পোস্ট লিখেছেন</Text>
+                                            </Box>
+                                        </Flex>
+
+                                        <Box>
+                                            <Box px={0} pt={3}>
+                                                <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
                                             </Box>
 
-                                        </HoverCard.Dropdown>
-                                    </HoverCard> </> : <> লিখেছেন {author?.displayName} </>}
+                                            <Divider my={1} />
 
-                                    <Text as='span' fontSize={'12px'} ml={1}> {formatDate(createdAt)}
-                                    </Text>
-                                </Box>
-                            </Box>
-                        </Box>
+                                            <Box bg={'blackAlpha.5'} fontSize={'13px'}>
+                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
+                                                <Wrap spacing={2} alignItems='flex-end'>
+                                                    <Link href={`/blogger/${author.id}`}>
+                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                    </Link>
+                                                    <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+                                                </Wrap>
+                                            </Box>
+                                        </Box>
+                                        {/* <Divider my={1} /> */}
+                                    </Box>
+
+                                </HoverCard.Dropdown>
+                            </HoverCard> </> : <> লিখেছেন {author?.displayName} </>}
+                        </Text>
+                    </Box>
+
+                    <Box w='full' pb={2}>
 
                         <PostTrancate
-                            lines={4}
+                            char={350}
                             content={content}
                         />
                     </Box>
 
 
-                    <Box w='full' borderTop='1px' borderColor='blackAlpha.200' color='blackAlpha.600' py={1} fontSize='15px' fontWeight={'500'}>
+                    <Box w='full' borderTop='1px' borderBottom='0px' borderColor='blackAlpha.200' color='blackAlpha.600' py={1} fontSize='15px' fontWeight={'500'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
 
                             <Flex gap={4} flex='1' justify='flex-start' alignItems={'center'}>
@@ -168,7 +188,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'}>
                                     <Icon as={BsArrowRightShort} color='cyan.600' fontSize='18px' />
                                     <Text cursor={'pointer'} color='cyan.600' as={'span'} fontSize={'13px'} href={`/blog/${slug}`}>
-                                        বিস্তারিত পড়ুন
+                                        বিস্তারিত
                                     </Text>
                                 </Flex>
                             </Link>
@@ -178,7 +198,8 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Flex>
                     </Box>
 
-                </Stack>
+                </Box>
+
 
             </Flex>
 

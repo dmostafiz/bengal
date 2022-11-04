@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { AuthModalContext } from '../../Contexts/AuthModalContext';
@@ -10,23 +10,17 @@ import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { CommentContext } from '../../Contexts/CommentContext';
 
 
 const schema = yup.object({
 
-    content: yup.string()
-        // .min(10, 'কমপক্ষে ১০ টি বাক্য লিখুন।')
-        .test('len', 'কমপক্ষে ২ টি বাক্য লিখতে হবে।', val => {
-            const wordsArr = val?.split(' ')
-            return wordsArr?.length >= 2
-            //    console.log(wordsArr)
-        })
-        .required('মন্তব্য লিখতে হবে')
+    content: yup.string().required('মন্তব্য লিখুন')
 
 }).required();
 
 
-export default function CommentInput({ replyTo, id, user }) {
+export default function CommentInput({openOnReply=false, replyTo, id, user }) {
 
     const {
         handleSubmit,
@@ -39,13 +33,13 @@ export default function CommentInput({ replyTo, id, user }) {
         resolver: yupResolver(schema),
     })
 
+    const { editorId, setEditorId, setCommentLoading, commentLoading, setCommentId, currentReplyThread, setCurrentReplyThread, setCommentChildren } = useContext(CommentContext)
+
     const router = useRouter()
     const toast = useToast()
 
     const [content, setContent] = useState('')
     const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
-
-    const editorRef = useRef(null)
 
     const { onOpen, seTitle } = useContext(AuthModalContext)
 
@@ -96,13 +90,24 @@ export default function CommentInput({ replyTo, id, user }) {
         // console.log('Comment Response ', res)
 
         if (res?.data?.ok) {
-            toast({
-                title: 'আপনার মন্তব্যটি সফল হয়েছে!',
-                // description: "ব্লগে আপনাকে স্বাগতম।",
-                status: 'success',
-                position: 'top-right',
-                duration: 9000,
-                isClosable: true,
+            if (openOnReply) {
+                setCommentChildren(id)
+            }
+            setCommentLoading(true)
+            setCommentId(res?.data?.comment?.id)
+
+            // toast({
+            //     title: 'আপনার মন্তব্যটি সফল হয়েছে!',
+            //     // description: "ব্লগে আপনাকে স্বাগতম।",
+            //     status: 'success',
+            //     position: 'top-right',
+            //     duration: 9000,
+            //     isClosable: true,
+            // })
+
+            setCurrentReplyThread({
+                showEditor: false,
+                commentId: null
             })
 
             setContent('')
@@ -110,6 +115,7 @@ export default function CommentInput({ replyTo, id, user }) {
             reset({
                 content: ''
             })
+
         } else {
             toast({
                 title: res?.data?.msg,
@@ -123,6 +129,19 @@ export default function CommentInput({ replyTo, id, user }) {
 
         setLoading(false)
     }
+
+    const editorRef = useRef(null)
+
+    useEffect(() => {
+        console.log('editorRef', editorRef.current)
+
+        if (editorRef.current) {
+
+            editorRef.current.focus()
+
+        }
+
+    }, [currentReplyThread.showEditor])
 
 
 
@@ -140,7 +159,14 @@ export default function CommentInput({ replyTo, id, user }) {
 
                         apiKey='n07kqhwmimi936tsx8nh222m7jrwbweyy7yowcwx8gjtmyol'
 
-                        onInit={(evt, editor) => editorRef.current = editor}
+                        // ref={editorRef}
+
+                        onInit={(evt, editor) => {
+                            editorRef.current = editor
+                            if (currentReplyThread.showEditor) {
+                                editor.focus()
+                            }
+                        }}
 
                         value={value}
 
@@ -150,8 +176,8 @@ export default function CommentInput({ replyTo, id, user }) {
                         }}
 
                         init={{
-                            placeholder: 'আপনার মন্তব্য লিখুন...',
-                            height: 230,
+                            placeholder: replyTo == 'post' ? 'আপনার মন্তব্য লিখুন...' : 'আপনার উত্তর লিখুন...',
+                            height: replyTo == 'post' ? 230 : 150,
                             width: '100%',
                             // resize: true,
                             menubar: false,
@@ -173,13 +199,16 @@ export default function CommentInput({ replyTo, id, user }) {
                             images_file_types: 'jpg,svg,webp,png,jpeg,gif',
                             content_style: 'img { width: 100%; height: auto }',
                             setup: (editor) => {
+                                // editor.on('init', () => {
+                                //     editor.focus()
+                                // })
                                 editor.on('click', () => {
                                     if (!user) {
                                         setRedirectUrl(router.asPath)
                                         onOpen()
                                     } else {
-                                        editor.contentWindow.innerHeight = 200
-                                        console.log('he he he', editor)
+                                        // editor.contentWindow.innerHeight = 200
+                                        // console.log('he he he', editor)
                                     }
                                 });
                             }
@@ -187,24 +216,39 @@ export default function CommentInput({ replyTo, id, user }) {
                     />}
                 />
 
-                <FormErrorMessage>
+                {/* <FormErrorMessage>
                     {errors.content && errors.content.message}
-                </FormErrorMessage>
+                </FormErrorMessage> */}
 
             </FormControl>
 
             <Box my={3} />
 
-            <Button
-                ml={1}
-                onClick={handleSubmit(handleSubmmitComment)}
-                isLoading={loading}
-                size={replyTo == 'post' ? 'md' : 'sm'}
-                rounded={replyTo == 'post' ? 'md' : 'full'}
-                colorScheme={replyTo == 'post' ? 'green' : 'yellow'}
-            >
-                {replyTo == 'post' ? 'মন্তব্য পোস্ট করুন' : 'আপনার উত্তর দিন'}
-            </Button>
+            <Flex gap={1}>
+                <Button
+                    ml={1}
+                    onClick={handleSubmit(handleSubmmitComment)}
+                    isLoading={loading}
+                    size={replyTo == 'post' ? 'md' : 'sm'}
+                    rounded={replyTo == 'post' ? 'md' : 'md'}
+                    colorScheme={replyTo == 'post' ? 'green' : 'blue'}
+                >
+                    {replyTo == 'post' ? 'মন্তব্য পোস্ট করুন' : 'উত্তর পোস্ট করুন'}
+                </Button>
+
+                {replyTo == 'reply' && <Button
+                    ml={1}
+                    onClick={() => setCurrentReplyThread({ showEditor: false, commentId: null })}
+                    size={'sm'}
+                    rounded={'md'}
+                    colorScheme={'gray'}
+                >
+                    বন্ধ করুণ
+                </Button>}
+
+
+            </Flex>
+
         </Box>
     )
 }

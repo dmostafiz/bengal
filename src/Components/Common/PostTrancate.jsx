@@ -5,11 +5,11 @@ import Link from 'next/link'
 import React from 'react'
 import truncate from 'truncate-html';
 
-export default function PostTrancate({ content, slug, lines = 3 }) {
+export default function PostTrancate({ content, slug, char = 270 }) {
     return (
        <Box w='full'>
            <Text as='div' w='full' fontSize={'17px'} dangerouslySetInnerHTML={{
-               __html: truncate(content, 270, {
+               __html: truncate(content, char, {
                    ellipsis: `...`,
                    // byWords: true,
                    keepWhitespaces: true,

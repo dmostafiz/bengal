@@ -43,6 +43,7 @@ export default function LatestBlogPost() {
                                 comment: post?.comments?.length ?? 0,
                                 like: post?.likes?.length ?? 0,
                             }}
+                            categories={post?.categories}
                             author={post?.author}
                         />
                     </Box>)}
