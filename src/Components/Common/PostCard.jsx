@@ -28,13 +28,13 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
 
-               
-                <Flex direction={{ base: 'row', md: 'column', lg: 'column' }} gap={{base:2, lg: 0}} w={{ base: 'full', md: '240px', lg: '240px' }}>
+
+                <Flex direction={{ base: 'row', md: 'column', lg: 'column' }} gap={{ base: 2, lg: 0 }} w={{ base: 'full', md: '240px', lg: '240px' }}>
 
 
                     {image ?
-                        <Box opacity={'.80'} w={{base: '140px', lg: 'full'}} h={{base: '100px', lg: '150px'}} shadow='sm' rounded='md' 
-                         overflow={'hidden'}
+                        <Box opacity={'.80'} w={{ base: '140px', lg: 'full' }} h={{ base: '100px', lg: '150px' }} shadow='sm' rounded='md'
+                            overflow={'hidden'}
                             // bgImage={image}
                             objectFit='cover'
                             bgPos='center' bgSize='cover'>
@@ -50,11 +50,11 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Box>
                         : <></>}
 
-                    <Box flex='1' textAlign={'left'} w='full' bg='.50' p={{base: '0px', lg:1}} mb='2' >
+                    <Box flex='1' textAlign={'left'} w='full' bg='.50' p={{ base: '0px', lg: 1 }} mb='2' >
 
                         <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>
-                                <Title order={3}><Text noOfLines={{base: 1, lg:2}} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
                             </a>
                         </Link>
 
@@ -84,8 +84,8 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 <Box flex='1'>
 
-                    <Box borderTop='px' borderBottom='1px' borderColor='blackAlpha.200' py={1} mb={2} >
-                      
+                    <Box borderTop={{base: '1px', md: '0px'}} borderBottom='1px' borderColor='blackAlpha.200' py={1} mb={2} >
+
                         <Text fontSize={'16px'} letterSpacing='-0.8px' color={'blackAlpha.600'}>
                             {/* <Avatar shadow={'sm'} src={author.image} size={'xs'} name='লিমন লস্কর' /> */}
                             {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
@@ -103,7 +103,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                             </Box>
                                             <Box>
                                                 <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                <Text fontSize={'12px'}>{banglaNumber(7)} টি পোস্ট লিখেছেন</Text>
+                                                <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
                                             </Box>
                                         </Flex>
 
@@ -115,7 +115,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                             <Divider my={1} />
 
                                             <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> জন অনুসরন করছে</Text>
+                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
+                                                    {banglaNumber(author?.followers?.length)}
+                                                </Text> জন অনুসরন করছে</Text>
                                                 <Wrap spacing={2} alignItems='flex-end'>
                                                     <Link href={`/blogger/${author.id}`}>
                                                         <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
