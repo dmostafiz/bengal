@@ -432,7 +432,7 @@ function SingleBlogDetails({ post, ok }) {
                                     />
 
                                     {(comment.childs?.length > 0 && commentChildren == comment.id) && comment.childs.map((comment, index) =>
-                                        <Box pl={{ base: 5, lg: 10 }}>
+                                        <Box key={index} pl={{ base: 5, lg: 10 }}>
                                             <Box key={index}>
                                                 {/* Show 1st children */}
                                                 <BlogCommentThread
