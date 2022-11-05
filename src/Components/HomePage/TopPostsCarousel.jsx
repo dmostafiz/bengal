@@ -71,8 +71,8 @@ export default function TopPostsCarousel() {
 
                             <Box px={1} py={2} textAlign={'left'} w='full' bg='.50' mb='2' >
 
-                                <Link href={`/blog/${item.slug}`}>
-                                    <a href={`/blog/${item.slug}`}>
+                                <Link href={`/blog/${item.id}`}>
+                                    <a href={`/blog/${item.id}`}>
                                         <Title order={3}><Text noOfLines={1} lineHeight='1.3' color='gray.700'>{item.title}</Text></Title>
                                     </a>
                                 </Link>
