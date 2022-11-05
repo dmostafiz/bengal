@@ -9,7 +9,6 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
 
-
     const [hasUser, setHasUser] = useState(false)
 
     const { data, isLoading, isError, error } = useQuery(['authUser'], async () => {

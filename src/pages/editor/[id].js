@@ -31,7 +31,7 @@ const schema = yup.object({
 
   title: yup.string()
     .min(5, 'সর্বনিম্ন ৫ টি ক্যারেক্টার লিখতে পারবেন।')
-    .max(60, 'সর্বোচ্চ ৬০ টি ক্যারেক্টার লিখতে পারবেন।')
+    .max(100, 'সর্বোচ্চ ১০০ টি ক্যারেক্টার লিখতে পারবেন।')
     .required('শিরোনাম লিখতে হবে'),
 
   category: yup.array()
@@ -41,9 +41,9 @@ const schema = yup.object({
 
   content: yup.string()
     // .min(10, 'কমপক্ষে ১০ টি বাক্য লিখুন।')
-    .test('len', 'কমপক্ষে ১০০ টি বাক্য লিখতে হবে।', val => {
+    .test('len', 'কমপক্ষে ৫০ টি বাক্য লিখতে হবে।', val => {
       const wordsArr = val?.split(' ')
-      return wordsArr?.length >= 100
+      return wordsArr?.length >= 50
       //    console.log(wordsArr)
     })
     .required('বিস্তারিত লিখতে হবে')
@@ -252,9 +252,9 @@ export default function write() {
 
     if (res?.data?.ok) {
       toast({
-        title: 'ব্লগটি সফলভাবে পাবলিশ হয়েছে!',
+        title: data.status == 'published' ? 'ব্লগটি সফলভাবে পাবলিশ হয়েছে!' : 'ব্লগটি খসড়াই সংরক্ষিত হয়েছে!',
         // description: "ব্লগে আপনাকে স্বাগতম।",
-        status: 'success',
+        status: data.status == 'published' ? 'success' : 'info',
         position: 'top-right',
         duration: 9000,
         isClosable: true,
@@ -524,12 +524,19 @@ export default function write() {
                             ],
                             toolbar: 'blocks bold underline image media link emoticons',
                             block_formats: 'Paragraph=p; প্যারাগ্রাফ হেডিং=h3',
-                            br_in_pre: true,
                             images_upload_handler: tinny_mce_image_handler,
                             file_picker_types: 'image',
                             block_unsupported_drop: true,
                             images_file_types: 'jpg,svg,webp,png,jpeg,gif',
                             content_style: 'img { width: 100%; height: auto }',
+                            image_caption: true,
+
+                            br_in_pre: true,
+                            forced_root_block: 'div',
+                            force_br_newlines: true,
+                            force_p_newlines: false,
+                            convert_newlines_to_brs: true,
+
                             setup: (editor) => {
                               editor.on('click', () => {
                                 //  onOpen()

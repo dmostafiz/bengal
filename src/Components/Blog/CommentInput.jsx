@@ -81,19 +81,20 @@ export default function CommentInput({openOnReply=false, replyTo, id, user }) {
 
         setLoading(true)
 
+        
         const res = await Axios.post('/post/store_comment', {
             content,
             replyTo,
             id
         })
-
+        
+        setCommentLoading(id)
         // console.log('Comment Response ', res)
 
         if (res?.data?.ok) {
             if (openOnReply) {
                 setCommentChildren(id)
             }
-            setCommentLoading(true)
             setCommentId(res?.data?.comment?.id)
 
             // toast({

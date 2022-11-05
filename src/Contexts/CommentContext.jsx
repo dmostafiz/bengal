@@ -6,7 +6,7 @@ export const CommentContext = createContext()
 const CommentContextProvider = ({ children }) => {
 
 
-    const [commentLoading, setCommentLoading] = useState(false)
+    const [commentLoading, setCommentLoading] = useState(null)
     const [commentId, setCommentId] = useState(null)
 
     const [editorId, setEditorId] = useState(null)

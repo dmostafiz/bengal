@@ -22,13 +22,7 @@ export default function BlogCommentThread({openOnReply=false, showChildrenButton
     return (
         <>
 
-            {(commentLoading && commentId == comment.id) &&
-                <Box>
-                    <Spinner />
-                </Box>
-            }
-
-            <Box id={comment.id} w='full' rounded={'md'} px={3} pt={2} mb={2} border='1px' borderColor='gray.200' bg={bg}>
+            <Box id={comment.id} w='full'  bg={bg}>
                 <Box pb={2}>
                     <Flex gap={2}>
                         <Avatar size={'sm'} name={comment.author.displayName} src={comment.author.avatar} />
@@ -102,7 +96,7 @@ export default function BlogCommentThread({openOnReply=false, showChildrenButton
 
 
 
-            {(currentReplyThread.showEditor && currentReplyThread.commentId == comment.id && shouldReply) && <Box mb={5} px={3}>
+            {(currentReplyThread.showEditor && currentReplyThread.commentId == comment.id && shouldReply) && <Box mb={5} px={1}>
                 <CommentInput key={authUser} openOnReply={openOnReply} replyTo='reply' user={authUser} id={comment.id} />
             </Box>}
 

@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Icon, Image, Show, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Icon, Image, Show, Spinner, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -46,7 +46,7 @@ function SingleBlogDetails({ post, ok }) {
 
     const { authUser, hasUser } = useUser()
 
-    const { setCommentLoading, commentId, commentChildren, currentReplyThread } = useContext(CommentContext)
+    const { setCommentLoading, commentLoading, commentId, commentChildren, currentReplyThread } = useContext(CommentContext)
 
     const [comments, setComments] = useState([])
 
@@ -61,7 +61,7 @@ function SingleBlogDetails({ post, ok }) {
 
     useEffect(() => {
         if (commentQuery?.data) {
-            setCommentLoading(false)
+            setCommentLoading(null)
 
             if (commentId && typeof document != undefined) {
 
@@ -324,8 +324,9 @@ function SingleBlogDetails({ post, ok }) {
                                     <SocialShareButtons link={router.asPath} />
                                 </Flex>
                             </Box>
-                            {post.image ? <Center w={'full'} py={4}>
-                                <Image w='full' maxH='500px' objectFit={'cover'} shadow='sm' src={post.image} alt='name' />
+
+                            {post.image ? <Center w={'full'} py={4} mb={5}>
+                                <Image w='full' maxH='500px' rounded='lg' objectFit={'cover'} shadow='lg' src={post.image} alt='name' />
                             </Center> : <Box my={4} />}
 
                             <Box
@@ -416,11 +417,11 @@ function SingleBlogDetails({ post, ok }) {
                                 </Button>}
                         </Flex>
 
-                        {comments.length > 0 && <Box w='full' px={{ base: 'full', lg: '3' }}>
+                        {comments.length > 0 && <Box w='full'>
 
                             {comments.map((comment, index) => {
 
-                                return <Box key={index} w='full' mb={5}>
+                                return <Box key={index} w='full' mb={5} rounded={'md'} px={3} pt={2} border='1px' borderColor='gray.200'>
 
                                     <BlogCommentThread
                                         openOnReply={true}
@@ -431,33 +432,51 @@ function SingleBlogDetails({ post, ok }) {
                                         comment={comment}
                                     />
 
+                                    {(commentLoading == comment.id) &&
+                                        <Center py={2}>
+                                            <Spinner />
+                                        </Center>
+                                    }
+
                                     {(comment.childs?.length > 0 && commentChildren == comment.id) && comment.childs.map((comment, index) =>
-                                        <Box key={index} pl={{ base: 5, lg: 10 }}>
-                                            <Box key={index}>
-                                                {/* Show 1st children */}
-                                                <BlogCommentThread
-                                                    replyType='comment'
-                                                    shouldReply={true}
-                                                    bg='blue.50'
-                                                    comment={comment}
-                                                />
+                                        <Box key={index} ml={1} rounded={'md'} p={3} mt={1} mb={3} border='1px' borderColor='gray.200' bg='blue.50'>
 
-                                                {comment.childs.length > 0 && comment.childs.map((comment, index) =>
+                                            {/* Show 1st children */}
+                                            <BlogCommentThread
+                                                replyType='comment'
+                                                shouldReply={true}
+                                                comment={comment}
+                                            />
 
-                                                    <Box key={index} w='full' pl={{ base: 5, lg: 10 }}>
+                                            {(commentLoading == comment.id) &&
+                                                <Center py={2}>
+                                                    <Spinner />
+                                                </Center>
+                                            }
 
-                                                        {/* Show 2nd children */}
-                                                        <BlogCommentThread
-                                                            replyType='comment'
-                                                            bg='gray.50'
-                                                            comment={comment}
-                                                        />
 
-                                                    </Box>
-                                                )}
-                                            </Box>
+                                            {comment.childs.length > 0 && comment.childs.map((comment, index) =>
+
+                                                <Box key={index} w='full' ml={1} rounded={'md'} p={3} mt={3} mb={2} border='1px' borderColor='gray.200' bg='whiteAlpha.700'>
+
+                                                    {(commentLoading == comment.id) &&
+                                                        <Box>
+                                                            <Spinner />
+                                                        </Box>
+                                                    }
+
+                                                    {/* Show 2nd children */}
+                                                    <BlogCommentThread
+                                                        replyType='comment'
+                                                        comment={comment}
+                                                    />
+
+                                                </Box>
+                                            )}
+
                                         </Box>
                                     )}
+
                                 </Box>
 
                             })}

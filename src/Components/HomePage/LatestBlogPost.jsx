@@ -9,14 +9,22 @@ import PostCardSkeleton from '../Common/PostCardSkeleton'
 
 export default function LatestBlogPost() {
 
-    const { data, error } = useSWR('/post', async (url) => {
+    // const { data, error } = useSWR('/post', async (url) => {
 
-        const response = await Axios.get(url)
-        // console.log('Response posts ', response?.data)
+    //     const response = await Axios.get(url)
+    //     // console.log('Response posts ', response?.data)
+    //     return response?.data?.posts || []
+
+    // })
+
+
+    const { data, isLoading, isError, error } = useQuery(['users'], async () => {
+
+        const response = await Axios.get('/post')
+        
         return response?.data?.posts || []
 
     })
-
 
     return (
         <>
@@ -37,7 +45,7 @@ export default function LatestBlogPost() {
                             slug={post?.id}
                             image={post?.image}
                             content={post?.content}
-                            createdAt={post?.createdAt}
+                            createdAt={post?.publishedAt}
                             states={{
                                 read: post?.views?.length ?? 0,
                                 comment: post?.comments?.length ?? 0,

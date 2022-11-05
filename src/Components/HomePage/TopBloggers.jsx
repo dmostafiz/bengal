@@ -1,4 +1,4 @@
-import { Button, Avatar, Box, Divider, Flex, Wrap, Text } from '@chakra-ui/react';
+import { Button, Avatar, Box, Divider, Flex, Wrap, Text, Icon } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { createStyles, Paper, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -13,51 +13,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 import { Navigation, Pagination, Scrollbar } from 'swiper';
-
-const data = [
-    {
-        image:
-            'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'অনুবাদঃ সর্বেশ্বর দয়াল সাক্সেনার আরও তিনটি কবিতা',
-        description: 'রূপালী রাতে, স্বপ্নের ও নীল চাদর বিছিয়ে, কষ্টের শীতল আবরন জড়িয়ে আমি আছি, আছি, তোমার স্মৃতিতে ভালবাসার সরল বাধন ছিড়ে, চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে',
-        name: 'লিমন লস্কর',
-    },
-    {
-        image:
-            'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'কিভাবে কিছু প্রাণী ‘কুমারী জন্মদান’ করে: পার্থেনোজেনেসিস- এর ব্যাখ্যা করা হয়েছে',
-        description: 'কিভাবে কিছু প্রাণী ‘কুমারী জন্মদান’ করে: পার্থেনোজেনেসিস- এর ব্যাখ্যা করা হয়েছে',
-        name: 'সবুজ মেহেদী',
-    },
-    {
-        image:
-            'https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'পথে-প্রান্তরে (পর্ব-১২): অসলো (শেষ কিস্তি)',
-        description: 'চলে গেছ এই হৃদয়টাকে ভেঙ্গে তুমি আমি একই শহরে তবুও একাকী ভিন্ন গ্রহে',
-        name: 'হ্রদয় আহসান',
-    },
-    {
-        image:
-            'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'গল্পঃ জীবনের শেষ মুহুর্ত',
-        description: 'গল্পঃ জীবনের শেষ মুহুর্ত',
-        name: 'জিয়ারুল কবির',
-    },
-    {
-        image:
-            'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'বাংলার প্রাচীন মঠ (স্মৃতি-মন্দির) সমগ্র - ০৩',
-        description: 'বাংলার প্রাচীন মঠ (স্মৃতি-মন্দির) সমগ্র',
-        name: 'নওরাজ মোল্লা',
-    },
-    {
-        image:
-            'https://images.unsplash.com/photo-1582721478779-0ae163c05a60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-        title: 'বালিয়াটি জমিদার বাড়ি',
-        description: 'বালিয়াটি জমিদার বাড়ি',
-        name: 'টুটুল খান',
-    },
-];
+import Link from 'next/link';
+import { ArrowForward } from 'tabler-icons-react';
+import Axios from '../../Helpers/axiosHelper';
+import { useQuery } from '@tanstack/react-query';
+import banglaNumber from '../../Helpers/banglaNumber';
 
 export default function TopBloggers() {
 
@@ -94,9 +54,14 @@ export default function TopBloggers() {
     const [bloggers, setBloggers] = useState([])
 
 
-    useEffect(() => {
-        setBloggers(data)
-    }, [])
+    const { data, isLoading, isError, error } = useQuery(['topRanked'], async () => {
+
+        const response = await Axios.get('/user/get_top_ranked/12')
+
+        setBloggers(response?.data?.users)
+        return response?.data?.users || null
+
+    })
 
 
     return (
@@ -120,24 +85,26 @@ export default function TopBloggers() {
                         <Box bg='blue.800' color='whiteAlpha.800' p={3} rounded='xl'>
                             <Flex direction={{ base: 'row', md: 'row' }} gap={{ base: 1, md: 2 }}>
                                 <Box>
-                                    <Avatar size={{ base: 'sm', md: 'md' }} src={item.image} rounded={'full'} shadow name='লিমন লস্কর' />
+                                    <Avatar size={{ base: 'sm', md: 'sm' }} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর' />
                                 </Box>
                                 <Box>
-                                    <Title order={4}><Text noOfLines={1}>{item.name}</Text></Title>
-                                    <Text fontSize={'10px'}>@limon_lashkar</Text>
+                                    <Title order={5}><Text noOfLines={1}>{item.displayName}</Text></Title>
+                                    <Text fontSize={'12px'}>{banglaNumber(item.followers?.length)} জন ফলোয়ার</Text>
                                 </Box>
                             </Flex>
 
                             <Box>
                                 <Box py={2}>
-                                    <Text noOfLines={1} fontSize='12px'>{item.description}</Text>
+                                    <Text noOfLines={1} fontSize='12px'>{item.bio}</Text>
                                 </Box>
 
                                 <Divider my={1} borderColor='whiteAlpha.300' />
 
                                 <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                    <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>১৪</Text> টি পোস্ট লিখেছেন</Text>
-                                    <Button w='full' size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                    <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>{banglaNumber(item.posts?.length)}</Text> টি পোস্ট লিখেছেন</Text>
+                                    <Link href={`/blogger/${item.id}`}>
+                                        <Button w='full' size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                    </Link>
                                 </Box>
                             </Box>
                             {/* <Divider my={1} /> */}
@@ -148,6 +115,15 @@ export default function TopBloggers() {
 
                 {/* <span slot="container-start">Container Start</span> */}
             </Swiper>
+
+            <Box pt={3}>
+                <Link href='/bloggers'>
+                    <Flex cursor={'pointer'} color={'blue.700'}>
+                        <Icon as={ArrowForward} fontSize='24px' />
+                        <Text fontWeight='bold'>সকল ব্লগার প্রোফাইল</Text>
+                    </Flex>
+                </Link>
+            </Box>
         </Box>
     );
 

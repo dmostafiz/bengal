@@ -1,9 +1,9 @@
-import { Avatar, Box, Button, Center, Divider, Flex, Icon, Image, Show, Spacer, Stack, Text, useBreakpoint, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Divider, Flex, Heading, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Show, Spacer, Stack, Text, useBreakpoint, VStack, Wrap } from '@chakra-ui/react'
 import { HoverCard, Title, Tooltip } from '@mantine/core'
 import { IconThumbUp } from '@tabler/icons'
 import Link from 'next/link'
 import React from 'react'
-import { FileLike, Heart, ThumbUp } from 'tabler-icons-react'
+import { ChevronDown, FileLike, Heart, ThumbUp } from 'tabler-icons-react'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
@@ -26,7 +26,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             {/* <Box my={3} /> */}
 
-            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? 3 : 0}>
+            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? { base: 2, md: 3 } : 0}>
 
 
                 <Flex direction={{ base: 'row', md: 'column', lg: 'column' }} gap={{ base: 2, lg: 0 }} w={{ base: 'full', md: '240px', lg: '240px' }}>
@@ -58,17 +58,18 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             </a>
                         </Link>
 
-
-                        <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                        <Text fontSize={'14px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
                             {formatDate(createdAt)}
                         </Text>
 
-                        {categories?.length > 0 && <Box pt={3}>
+
+                        {categories?.length > 0 && <Box pt={2}>
                             <Wrap>
 
                                 {categories.map((cat, index) => <Button
                                     key={index}
                                     size='xs'
+                                    variant={'solid'}
                                 >
 
                                     {cat.name}
@@ -77,6 +78,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                             </Wrap>
                         </Box>}
+
                     </Box>
 
                 </Flex>
@@ -84,54 +86,69 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 <Box flex='1'>
 
-                    <Box borderTop={{base: '1px', md: '0px'}} borderBottom='1px' borderColor='blackAlpha.200' py={1} mb={2} >
+                    <Box mb={3} pb={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
 
-                        <Text fontSize={'16px'} letterSpacing='-0.8px' color={'blackAlpha.600'}>
-                            {/* <Avatar shadow={'sm'} src={author.image} size={'xs'} name='লিমন লস্কর' /> */}
-                            {authorCard ? <> লিখেছেন <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
-                                <HoverCard.Target>
-                                    <Text as='span' color={'blue.500'}>
-                                        {author.displayName}
-                                    </Text>
-                                </HoverCard.Target>
-                                <HoverCard.Dropdown p={10}>
+                        <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
+                            <Box pt={2}>
+                                <Flex alignItems={'end'} gap={1}>
+                                    <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
 
-                                    <Box bg='blackAlpha.5'>
-                                        <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
-                                            <Box>
-                                                <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
+                                    <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+                                        <HoverCard.Target>
+                                            <Heading as='h6' size='xs' color={'gray.600'}>
+                                                {author.displayName}
+                                            </Heading>
+                                        </HoverCard.Target>
+                                        <HoverCard.Dropdown p={10}>
+
+                                            <Box bg='blackAlpha.5'>
+                                                <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
+                                                    <Box>
+                                                        <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
+                                                    </Box>
+                                                    <Box>
+                                                        <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
+                                                        <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
+                                                    </Box>
+                                                </Flex>
+
+                                                <Box>
+                                                    <Box px={0} pt={3}>
+                                                        <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
+                                                    </Box>
+
+                                                    <Divider my={1} />
+
+                                                    <Box bg={'blackAlpha.5'} fontSize={'13px'}>
+                                                        <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
+                                                            {banglaNumber(author?.followers?.length)}
+                                                        </Text> জন অনুসরন করছে</Text>
+                                                        <Wrap spacing={2} alignItems='flex-end'>
+                                                            <Link href={`/blogger/${author.id}`}>
+                                                                <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                            </Link>
+                                                            <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+                                                        </Wrap>
+                                                    </Box>
+                                                </Box>
+                                                {/* <Divider my={1} /> */}
                                             </Box>
-                                            <Box>
-                                                <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
-                                            </Box>
-                                        </Flex>
 
-                                        <Box>
-                                            <Box px={0} pt={3}>
-                                                <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
-                                            </Box>
+                                        </HoverCard.Dropdown>
+                                    </HoverCard>
+                                </Flex>
+                            </Box>
 
-                                            <Divider my={1} />
+                            <Menu>
+                                <MenuButton as={IconButton} icon={<ChevronDown />} color='blackAlpha.500' size='xs' variant='unstyled'>
 
-                                            <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
-                                                    {banglaNumber(author?.followers?.length)}
-                                                </Text> জন অনুসরন করছে</Text>
-                                                <Wrap spacing={2} alignItems='flex-end'>
-                                                    <Link href={`/blogger/${author.id}`}>
-                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
-                                                    </Link>
-                                                    <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                                                </Wrap>
-                                            </Box>
-                                        </Box>
-                                        {/* <Divider my={1} /> */}
-                                    </Box>
-
-                                </HoverCard.Dropdown>
-                            </HoverCard> </> : <> লিখেছেন {author?.displayName} </>}
-                        </Text>
+                                </MenuButton>
+                                <MenuList>
+                                    <MenuItem>রিপোর্ট করুণ</MenuItem>
+                                    {/* <MenuItem>Create a Copy</MenuItem> */}
+                                </MenuList>
+                            </Menu>
+                        </Flex>
                     </Box>
 
                     <Box w='full' pb={2}>
@@ -188,10 +205,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                             <Link href={`/blog/${slug}`}>
                                 <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'}>
-                                    <Icon as={BsArrowRightShort} color='cyan.600' fontSize='18px' />
-                                    <Text cursor={'pointer'} color='cyan.600' as={'span'} fontSize={'13px'} href={`/blog/${slug}`}>
+                                    <Text cursor={'pointer'} color='blue.700' as={'span'} fontSize={'14px'} href={`/blog/${slug}`}>
                                         বিস্তারিত
                                     </Text>
+                                    <Icon as={BsArrowRightShort} color='blue.700' fontSize='18px' />
                                 </Flex>
                             </Link>
 

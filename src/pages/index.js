@@ -64,7 +64,7 @@ export default function Home() {
             },
 
             {
-              title: 'ধারাবাহিক প্রকাশনী',
+              title: 'ধারাবাহিক',
               component: <StepPostsCarousel />
             },
 

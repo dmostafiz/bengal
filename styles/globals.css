@@ -28,6 +28,28 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 article > p{
   margin-bottom: 24px !important;
+  /* font-weight: 600 !important; */
+  color: rgba(0, 0, 0, 0.837);
+
+}
+
+article > p > img, article > img, article > figure > img{
+  width: 100%;
+  margin-bottom: 4px;
+  border-radius: 8px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+article > figure {
+  margin-bottom: 15px;
+}
+
+article > figure > figcaption {
+  /* margin-left: 5px; */
+  text-align: center;
+  font-size: 15px;
+  color: rgb(179, 177, 177);
 }
 
 :root {

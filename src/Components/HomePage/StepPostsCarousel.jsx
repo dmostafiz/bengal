@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex, Icon } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { Button, createStyles, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -14,6 +14,8 @@ import 'swiper/css/scrollbar';
 
 
 import { Navigation, Pagination, Scrollbar } from 'swiper';
+import Link from 'next/link';
+import { ArrowForward } from 'tabler-icons-react';
 
 const data = [
     {
@@ -142,6 +144,15 @@ export default function StepPostsCarousel() {
 
                 {/* <span slot="container-start">Container Start</span> */}
             </Swiper>
+
+            <Box pt={3}>
+                <Link href='/bloggers'>
+                    <Flex cursor={'pointer'} color={'blue.700'}>
+                        <Icon as={ArrowForward} fontSize='24px' />
+                        <Text fontWeight='bold'>সকল ধারাবাহিক পোস্ট দেখুন</Text>
+                    </Flex>
+                </Link>
+            </Box>
         </Box>
     );
 
