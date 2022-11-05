@@ -77,7 +77,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                         <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>
-                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: image ? 1 : 2, lg: image ? 2 : 5 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
                             </a>
                         </Link>
 
