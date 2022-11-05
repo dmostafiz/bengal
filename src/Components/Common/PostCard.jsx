@@ -21,26 +21,90 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box w='full' rounded='md' overflow={'hidden'} mb={3}>
+        <Box border='1px' borderColor={'blackAlpha.200'} shadow='md' py={2} px={3} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
 
             {/* <Box my={3} /> */}
+            <Box mb={3} pb={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
+
+                <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
+                    <Box>
+                        <Flex alignItems={'center'} gap={1}>
+                            <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
+
+                            <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+                                <HoverCard.Target>
+                                    <Heading as='h6' size='xs' color={'gray.600'}>
+                                        {author.displayName}
+                                    </Heading>
+                                </HoverCard.Target>
+                                <HoverCard.Dropdown p={10}>
+
+                                    <Box bg='blackAlpha.5'>
+                                        <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
+                                            <Box>
+                                                <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
+                                            </Box>
+                                            <Box>
+                                                <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
+                                                <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
+                                            </Box>
+                                        </Flex>
+
+                                        <Box>
+                                            <Box px={0} pt={3}>
+                                                <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
+                                            </Box>
+
+                                            <Divider my={1} />
+
+                                            <Box bg={'blackAlpha.5'} fontSize={'13px'}>
+                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
+                                                    {banglaNumber(author?.followers?.length)}
+                                                </Text> জন অনুসরন করছে</Text>
+                                                <Wrap spacing={2} alignItems='flex-end'>
+                                                    <Link href={`/blogger/${author.id}`}>
+                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                                    </Link>
+                                                    <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+                                                </Wrap>
+                                            </Box>
+                                        </Box>
+                                        {/* <Divider my={1} /> */}
+                                    </Box>
+
+                                </HoverCard.Dropdown>
+                            </HoverCard>
+                        </Flex>
+                    </Box>
+
+                    <Menu>
+                        <MenuButton as={IconButton} icon={<ChevronDown />} color='blackAlpha.500' size='xs' variant='unstyled'>
+
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>রিপোর্ট করুণ</MenuItem>
+                            {/* <MenuItem>Create a Copy</MenuItem> */}
+                        </MenuList>
+                    </Menu>
+                </Flex>
+            </Box>
 
             <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? { base: 2, md: 3 } : 0}>
 
 
-                <Flex direction={{ base: 'row', md: 'column', lg: 'column' }} gap={{ base: 2, lg: 0 }} w={{ base: 'full', md: '240px', lg: '240px' }}>
+                <Flex direction={{ base: 'column', md: 'column', lg: 'column' }} gap={{ base: 2, lg: 0 }} w={{ base: 'full', md: '240px', lg: '240px' }}>
 
 
                     {image ?
-                        <Box opacity={'.80'} w={{ base: '140px', lg: 'full' }} h={{ base: '100px', lg: '150px' }} shadow='sm' rounded='md'
+                        <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '150px' }} shadow='md' rounded='md'
                             overflow={'hidden'}
                             // bgImage={image}
                             objectFit='cover'
                             bgPos='center' bgSize='cover'>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
-                                    <Center h='full' w='full'>
+                                    <Center h='full' w='full' >
                                         {/* <Show below={'lg'}> */}
                                         <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
                                         {/* </Show> */}
@@ -86,75 +150,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 <Box flex='1'>
 
-                    <Box mb={3} pb={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
-
-                        <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
-                            <Box pt={2}>
-                                <Flex alignItems={'end'} gap={1}>
-                                    <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
-
-                                    <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
-                                        <HoverCard.Target>
-                                            <Heading as='h6' size='xs' color={'gray.600'}>
-                                                {author.displayName}
-                                            </Heading>
-                                        </HoverCard.Target>
-                                        <HoverCard.Dropdown p={10}>
-
-                                            <Box bg='blackAlpha.5'>
-                                                <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
-                                                    <Box>
-                                                        <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
-                                                    </Box>
-                                                    <Box>
-                                                        <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                        <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
-                                                    </Box>
-                                                </Flex>
-
-                                                <Box>
-                                                    <Box px={0} pt={3}>
-                                                        <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
-                                                    </Box>
-
-                                                    <Divider my={1} />
-
-                                                    <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                                        <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
-                                                            {banglaNumber(author?.followers?.length)}
-                                                        </Text> জন অনুসরন করছে</Text>
-                                                        <Wrap spacing={2} alignItems='flex-end'>
-                                                            <Link href={`/blogger/${author.id}`}>
-                                                                <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
-                                                            </Link>
-                                                            <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                                                        </Wrap>
-                                                    </Box>
-                                                </Box>
-                                                {/* <Divider my={1} /> */}
-                                            </Box>
-
-                                        </HoverCard.Dropdown>
-                                    </HoverCard>
-                                </Flex>
-                            </Box>
-
-                            <Menu>
-                                <MenuButton as={IconButton} icon={<ChevronDown />} color='blackAlpha.500' size='xs' variant='unstyled'>
-
-                                </MenuButton>
-                                <MenuList>
-                                    <MenuItem>রিপোর্ট করুণ</MenuItem>
-                                    {/* <MenuItem>Create a Copy</MenuItem> */}
-                                </MenuList>
-                            </Menu>
-                        </Flex>
-                    </Box>
-
-                    <Box w='full' pb={2}>
-
+                    <Box w='full' pb={1} mt={1}>
                         <PostTrancate
-                            char={350}
+                            char={60}
                             content={content}
                         />
                     </Box>
@@ -212,16 +210,14 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 </Flex>
                             </Link>
 
-
-
                         </Flex>
                     </Box>
+
 
                 </Box>
 
 
             </Flex>
-
 
         </Box>
     )

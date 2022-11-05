@@ -21,7 +21,7 @@ export default function LatestBlogPost() {
     const { data, isLoading, isError, error } = useQuery(['users'], async () => {
 
         const response = await Axios.get('/post')
-        
+
         return response?.data?.posts || []
 
     })
@@ -38,7 +38,7 @@ export default function LatestBlogPost() {
 
                 </>
 
-                : data && <VStack gap={5}>
+                : data && <VStack gap={0}>
                     {data.map((post, index) => <Box key={index}>
                         <PostCard
                             title={post?.title}
