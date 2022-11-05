@@ -17,6 +17,7 @@ import req from '../Helpers/axiosHelper'
 import BlogPanel from '../Components/Common/BlogPanel'
 import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
 import SectionTitle from '../Components/Common/SectionTitle'
+import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
 
 export default function Home() {
 
@@ -59,9 +60,14 @@ export default function Home() {
 
           <TabContainer childrens={[
             {
-              title: 'বাছাইকৃত পোস্ট',
-              component: <SelectedPostsCarousel />
+              title: 'জনপ্রিয় পোস্ট',
+              component: <TopPostsCarousel />
             },
+
+            // {
+            //   title: 'বাছাইকৃত পোস্ট',
+            //   component: <SelectedPostsCarousel />
+            // },
 
             {
               title: 'ধারাবাহিক',
@@ -81,8 +87,8 @@ export default function Home() {
 
         <Box mb={8}>
 
-          <SectionTitle title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
-          
+          <SectionTitle showBorder={false} mb={2} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+
           <LatestBlogPost />
 
         </Box>

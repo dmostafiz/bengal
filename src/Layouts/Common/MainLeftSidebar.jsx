@@ -33,7 +33,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
 
             </Box>}
 
-            <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
+            {/* <Box mb={5} w='full' bg='yellow.100' shadow={'sm'} rounded='sm' overflow={'hidden'}>
                 <Center p={3} bg='yellow.200'>
                     <Title order={5}>নোটিস বোর্ড</Title>
                 </Center>
@@ -43,7 +43,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
                 <Box p={3} color={'yellow.900'} fontWeight='normal'>
                     <Text textAlign={'justify'}>সরকারি চাকরিতে আবেদন ফি বাড়ানো হইছে আজ থেকে সাত দিন পূর্বে । তেরো এবং ষোল গ্রেডের আবেদন ফি দ্বিগুণ করা হয়েছে । এগারো ও বারো গ্রেডে পূর্বে আবেদন ফি নির্ধারণ করা না থাকলে সেটা এখন তিনশো টাকা করা হয়েছে... <a href='#'>বিস্তারিত পড়ুন</a> </Text>
                 </Box>
-            </Box>
+            </Box> */}
 
 
 

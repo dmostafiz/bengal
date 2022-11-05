@@ -7,7 +7,7 @@ export default function TabContainer({ childrens }) {
         <Tabs variant='unstyled' rounded={{base: 'sm', md:'lg'}} overflow='hidden' shadow='sm'>
           
             <TabList border={'none'}>
-                {childrens.map((item, index) => <Tab role="group" _selected={{ rounded: 'none', fontWeight: 'semibold' }} px={{base: 2, md: 3}} key={index}>
+                {childrens.map((item, index) => <Tab role="group" _selected={{ rounded: 'none', fontWeight: 'semibold' }} pl={0} pr={{base: 2, md: 3}} key={index}>
                    <Text as={'h6'} _groupActive={{}} fontSize={{base:'14px', lg: '17px'}}>{item.title}</Text>  
                 </Tab>)}
             </TabList> 

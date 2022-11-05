@@ -11,6 +11,7 @@ import { BsArrowRightShort, BsHandThumbsUp } from 'react-icons/bs'
 import { FcComments, FcReading } from 'react-icons/fc'
 import { AiFillLike } from 'react-icons/ai'
 import { FaLongArrowAltRight } from 'react-icons/fa'
+import AuthorHoverCard from './AuthorHoverCard'
 // import { ThumbUpOff } from 'tableicons-react'
 
 export default function PostCard({ title, image, content, createdAt, states, author, slug, categories, authorCard = true }) {
@@ -21,7 +22,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box border='1px' borderColor={'blackAlpha.200'} shadow='md' py={2} px={3} w='full' rounded='md' overflow={'hidden'} mb={3}>
+        <Box border='1px' borderColor={'blackAlpha.200'} shadow='md' py={2} px={3} w='full' rounded='lg' overflow={'hidden'} mb={3}>
 
 
             {/* <Box my={3} /> */}
@@ -32,49 +33,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         <Flex alignItems={'center'} gap={1}>
                             <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
 
-                            <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
-                                <HoverCard.Target>
-                                    <Heading as='h6' size='xs' color={'gray.600'}>
-                                        {author.displayName}
-                                    </Heading>
-                                </HoverCard.Target>
-                                <HoverCard.Dropdown p={10}>
-
-                                    <Box bg='blackAlpha.5'>
-                                        <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
-                                            <Box>
-                                                <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
-                                            </Box>
-                                            <Box>
-                                                <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>
-                                                <Text fontSize={'12px'}>{banglaNumber(author?.posts?.length)} টি পোস্ট লিখেছেন</Text>
-                                            </Box>
-                                        </Flex>
-
-                                        <Box>
-                                            <Box px={0} pt={3}>
-                                                <Text noOfLines={2} fontSize='13px'>{author.bio}</Text>
-                                            </Box>
-
-                                            <Divider my={1} />
-
-                                            <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                                                <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
-                                                    {banglaNumber(author?.followers?.length)}
-                                                </Text> জন অনুসরন করছে</Text>
-                                                <Wrap spacing={2} alignItems='flex-end'>
-                                                    <Link href={`/blogger/${author.id}`}>
-                                                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
-                                                    </Link>
-                                                    <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                                                </Wrap>
-                                            </Box>
-                                        </Box>
-                                        {/* <Divider my={1} /> */}
-                                    </Box>
-
-                                </HoverCard.Dropdown>
-                            </HoverCard>
+                            <AuthorHoverCard author={author} />
                         </Flex>
                     </Box>
 

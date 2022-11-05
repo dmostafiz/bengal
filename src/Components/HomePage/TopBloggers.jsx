@@ -54,7 +54,7 @@ export default function TopBloggers() {
     const [bloggers, setBloggers] = useState([])
 
 
-    const { data, isLoading, isError, error } = useQuery(['topRanked'], async () => {
+    const { data, isLoading, isError, error } = useQuery(['topBloggers'], async () => {
 
         const response = await Axios.get('/user/get_top_ranked/12')
 
