@@ -22,20 +22,12 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 1, sm: 1, md: 1, lg: 1, xl: 4 }}>
+        <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
 
-            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '240px' }} mt={3}>
-
-                <Box py={2}>
-                    <Link href={`/blog/${slug}`}>
-                        <a href={`/blog/${slug}`}>
-                            <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
-                        </a>
-                    </Link>
-                </Box>
+            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
                 {image ?
-                    <Box mb={2} mt={1} opacity={'.70'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '150px' }} shadow='lg' rounded='md'
+                    <Box mb={2} mt={1} border='1px' borderColor={'blackAlpha.200'} opacity={'.70'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '150px' }} shadow='md' rounded='md'
                         overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
@@ -52,6 +44,14 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     </Box>
                     : <></>}
 
+                <Box pt={2}>
+                    <Link href={`/blog/${slug}`}>
+                        <a href={`/blog/${slug}`}>
+                            <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                        </a>
+                    </Link>
+                </Box>
+
 
                 <Box py={1} w='full'>
                     <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
@@ -59,35 +59,38 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     </Text>
                 </Box>
 
-
-                {categories?.length > 0 && <Box pt={2}>
-                    <Wrap>
-
-                        {categories.map((cat, index) => <Button
-                            key={index}
-                            size='xs'
-                            variant={'solid'}
-                        >
-
-                            {cat.name}
-
-                        </Button>)}
-
-                    </Wrap>
-                </Box>}
-
             </Box>
 
-            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{xl:'md'}} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
+            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
-                <Box mb={2} borderColor={'blackAlpha.100'}>
+                <Box mb={2} pb={2} borderBottom='1px' borderColor='blackAlpha.100'>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
 
-                        <Flex alignItems={'center'} gap={1}>
-                            <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
-                            <AuthorHoverCard author={author} />
+                        <Flex gap={5} alignItems='center'>
+                            <Flex alignItems={'center'} gap={1}>
+                                <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
+                                <AuthorHoverCard author={author} />
+                            </Flex>
+
+                            {categories?.length > 0 && <Wrap>
+                                {categories.map((cat, index) => {
+                                    if (index < 2) {
+                                        return <Button
+                                            key={index}
+                                            size='xs'
+                                            variant={'outline'}
+                                        >
+                                            {cat.name}
+
+                                        </Button>
+
+                                    }
+                                })
+                                }
+
+                            </Wrap>}
                         </Flex>
 
                         <Menu>
@@ -101,12 +104,11 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Menu>
                     </Flex>
 
-
                 </Box>
 
                 <Box>
 
-                    <Box w='full' pb={{base: 1, lg: 3}}>
+                    <Box w='full' pb={{ base: 1, lg: 3 }}>
                         <PostTrancate
                             char={70}
                             content={content}

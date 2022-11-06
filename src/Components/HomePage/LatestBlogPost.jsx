@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import Axios from '../../Helpers/axiosHelper'
 import ComponentLoader from '../Common/ComponentLoader'
 import PostCard from '../Common/PostCard'
-import PostCardSkeleton from '../Common/PostCardSkeleton'
+import PostCardSkeleton from '../Common/Skeletons/PostCardSkeleton'
 
 export default function LatestBlogPost() {
 
@@ -18,7 +18,7 @@ export default function LatestBlogPost() {
     // })
 
 
-    const { data, isLoading, isError, error } = useQuery(['users'], async () => {
+    const { data, isLoading, isError, error } = useQuery(['latestPosts'], async () => {
 
         const response = await Axios.get('/post')
 

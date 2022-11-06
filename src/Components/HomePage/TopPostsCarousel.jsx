@@ -20,6 +20,7 @@ import Axios from '../../Helpers/axiosHelper';
 import { useQuery } from '@tanstack/react-query';
 import formatDate from '../../Helpers/formatDate';
 import AuthorHoverCard from '../Common/AuthorHoverCard';
+import SliderPostCarkSkeleton from '../Common/Skeletons/SliderPostCarkSkeleton';
 
 export default function TopPostsCarousel() {
 
@@ -46,13 +47,13 @@ export default function TopPostsCarousel() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {posts.map((item, index) => (
+                {posts.length ? posts.map((item, index) => (
                     <SwiperSlide key={index}>
 
                         <Box shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >
 
                             {item.image ?
-                                <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '200px' }}  roundedTop='xl'
+                                <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '200px' }} roundedTop='xl'
                                     overflow={'hidden'}
                                     // bgImage={image}
                                     objectFit='cover'
@@ -112,7 +113,15 @@ export default function TopPostsCarousel() {
                         </Box>
 
                     </SwiperSlide>
-                ))}
+                )) : <>
+
+                    <SwiperSlide>
+                       <SliderPostCarkSkeleton />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                       <SliderPostCarkSkeleton />
+                    </SwiperSlide>
+                </>}
 
                 {/* <span slot="container-start">Container Start</span> */}
             </Swiper>

@@ -70,12 +70,12 @@ export default function Home() {
             // },
 
             {
-              title: 'ধারাবাহিক',
+              title: 'ধারাবাহিক পোস্ট',
               component: <StepPostsCarousel />
             },
 
             {
-              title: 'সেরা ব্লগার',
+              title: 'জনপ্রিয় ব্লগার',
               component: <TopBloggers />
             },
 
