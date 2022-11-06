@@ -39,7 +39,7 @@ export default function LatestBlogPost() {
                 </>
 
                 : data && <VStack gap={0}>
-                    {data.map((post, index) => <Box key={index}>
+                    {data.map((post, index) => <Box w='full' key={index}>
                         <PostCard
                             title={post?.title}
                             slug={post?.id}

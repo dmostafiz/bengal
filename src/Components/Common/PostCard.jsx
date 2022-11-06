@@ -22,11 +22,11 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box border='1px' borderColor={'blackAlpha.200'} shadow='md' py={2} px={3} w='full' rounded='lg' overflow={'hidden'} mb={3}>
+        <Box border='1px' borderColor={'blackAlpha.100'} shadow='md' py={2} px={3} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
 
             {/* <Box my={3} /> */}
-            <Box mb={3} pb={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
+            <Box mb={3} borderColor={'blackAlpha.100'}>
 
                 <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
                     <Box>
@@ -49,21 +49,20 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 </Flex>
             </Box>
 
-            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? { base: 2, md: 3 } : 0}>
+            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? { base: 2, md: 4 } : 0}>
 
 
-                <Flex direction={{ base: 'column', md: 'column', lg: 'column' }} gap={{ base: 2, lg: 0 }} w={{ base: 'full', md: '240px', lg: '240px' }}>
-
+                <Box w={{ base: 'full', md: '240px', lg: '240px' }}>
 
                     {image ?
-                        <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '150px' }} shadow='md' rounded='md'
+                        <Box mb={2} mt={1} opacity={'.70'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '150px' }} shadow='lg' rounded='md'
                             overflow={'hidden'}
                             // bgImage={image}
                             objectFit='cover'
                             bgPos='center' bgSize='cover'>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
-                                    <Center h='full' w='full' >
+                                    <Center h='full' w='full'>
                                         {/* <Show below={'lg'}> */}
                                         <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
                                         {/* </Show> */}
@@ -77,7 +76,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                         <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>
-                                <Title order={3}><Text noOfLines={{ base: image ? 1 : 2, lg: image ? 2 : 5 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
                             </a>
                         </Link>
 
@@ -103,32 +102,29 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                         </Box>}
 
                     </Box>
-
-                </Flex>
+                </Box>
 
 
                 <Box flex='1'>
 
-                    <Box w='full' pb={1} mt={1}>
+                    <Box w='full' pb={3}>
                         <PostTrancate
-                            char={60}
+                            char={70}
                             content={content}
                         />
                     </Box>
 
 
-                    <Box w='full' borderTop='1px' borderBottom='0px' borderColor='blackAlpha.200' color='blackAlpha.600' py={1} fontSize='15px' fontWeight={'500'}>
+                    <Box w='full' borderTop='0px' borderBottom='0px' borderColor='blackAlpha.100' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
                         <Flex gap={2} justify='space-between' alignItems={'center'}>
 
-                            <Flex gap={4} flex='1' justify='flex-start' alignItems={'center'}>
+                            <Flex gap={2} flex='1' justify='flex-start' alignItems={'center'}>
 
                                 <Tooltip withArrow color={'purple'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
                                     <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
                                         <FcReading color='' size='18px' />
                                         <Text as={'span'} fontWeight={'black'} fontSize='14px'>
-                                            {banglaNumber(states.read)}
-                                        </Text>
-                                        <Text fontSize={'15px'} fontWeight='normal'> জন</Text>
+                                            {banglaNumber(states.read)} জন</Text>
                                     </Flex>
                                 </Tooltip>
 
@@ -136,23 +132,20 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 <Tooltip withArrow label={`${banglaNumber(states.like)} জন লাইক দিয়েছেন`} color={'orange'}>
                                     <Flex whiteSpace='nowrap' alignItems={'center'} gap={1}>
                                         <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
-                                        <Text>
-                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{banglaNumber(states.like)}</Text> লাইক
+                                        <Text as={'span'} fontSize='14px' fontWeight={'black'}>{banglaNumber(states.like)} লাইক
                                         </Text>
                                     </Flex>
                                 </Tooltip>
 
 
-                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'} color={'gray.500'}>
-                                    <FcComments color='' size='18px' />
+                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'5px'} color={'gray.500'}>
+                                    <FcComments color='' size='16px' />
                                     {states.comment ? <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য পাওয়া গেছে`}>
                                         <Flex gap={'5px'}>
-                                            <Text as={'span'} fontWeight={'black'} fontSize='15px'>
-                                                {banglaNumber(states.comment)}
-                                            </Text>
-                                            <Text fontSize={'15px'} fontWeight='normal'> মন্তব্য</Text>
+                                            <Text as={'span'} fontWeight={'black'} fontSize='14px'>
+                                                {banglaNumber(states.comment)} মন্তব্য</Text>
                                         </Flex>
-                                    </Tooltip> : <Text fontSize={'15px'} fontWeight='normal'> মন্তব্য নেই</Text>}
+                                    </Tooltip> : <Text fontSize={'14px'} fontWeight='black'> মন্তব্য নেই</Text>}
 
                                 </Flex>
 
