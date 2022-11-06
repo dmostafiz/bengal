@@ -78,10 +78,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow='md' py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
+            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{xl:'md'}} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
-                <Box mb={3} borderColor={'blackAlpha.100'}>
+                <Box mb={2} borderColor={'blackAlpha.100'}>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
 
@@ -106,7 +106,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 <Box>
 
-                    <Box w='full' pb={3}>
+                    <Box w='full' pb={{base: 1, lg: 3}}>
                         <PostTrancate
                             char={70}
                             content={content}
