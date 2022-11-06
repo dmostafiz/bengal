@@ -39,7 +39,7 @@ export default function LatestComments() {
                     <Link href={`/blog/${comment.post.id}`}>
 
                         <Box flex={1} cursor='pointer' lineHeight={'20px'}>
-                            <Heading as={'span'} size='xs' color={'facebook.600'}>
+                            <Heading as={'span'} size='xs' color={'facebook.700'}>
                                 <Icon as={BiCommentDetail} fontSize={'18px'} color='facebook.200' />  {comment.post.title} <Text as='span' fontWeight={'normal'} color='blackAlpha.500'>পোস্ট এ মন্তব্য করেছেন</Text>
                             </Heading>
                         </Box>

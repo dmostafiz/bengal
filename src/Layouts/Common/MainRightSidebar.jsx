@@ -28,32 +28,32 @@ export default function MainRightSidebar() {
 
 
                 <Box p={2} color={'gray.700'} fontWeight='normal'>
-                    <Wrap gap={0}>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                    <Wrap spacing={1}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             গল্প
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             উপন্যাস
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             কবিতা
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             চিন্তাধারা
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             বিজ্ঞান-প্রজুক্তি
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             ছবি ব্লগ
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             ভ্রমণ
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             সমসাময়িক
                         </Button>
-                        <Button size={'xs'} variant='outline' colorScheme='gray' rounded={'full'}>
+                        <Button size={'xs'} variant='solid' colorScheme='gray' rounded={'full'}>
                             বই রিভিউ
                         </Button>
 
