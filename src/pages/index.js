@@ -87,7 +87,7 @@ export default function Home() {
 
         <Box mb={8}>
 
-          <SectionTitle showBorder={false} mb={2} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+          <SectionTitle mb={5} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
 
           <LatestBlogPost />
 

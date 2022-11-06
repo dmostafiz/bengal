@@ -205,7 +205,7 @@ export default function DesktopSearchbar() {
                                                 <Box flex='1'>
                                                     <Title order={5}>{post.title}</Title>
                                                     <PostTrancate
-                                                        lines={1}
+                                                        char={14}
                                                         content={post?.content ?? ''}
                                                     // slug={<>... <Link href={`/blog/${slug}`}>
                                                     //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>

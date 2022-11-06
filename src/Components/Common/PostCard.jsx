@@ -22,90 +22,89 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     })
 
     return (
-        <Box border='1px' borderColor={'blackAlpha.100'} shadow='md' py={2} px={3} w='full' rounded='md' overflow={'hidden'} mb={3}>
+        <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 1, sm: 1, md: 1, lg: 1, xl: 4 }}>
 
+            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '240px' }} mt={3}>
 
-            {/* <Box my={3} /> */}
-            <Box mb={3} borderColor={'blackAlpha.100'}>
+                <Box py={2}>
+                    <Link href={`/blog/${slug}`}>
+                        <a href={`/blog/${slug}`}>
+                            <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                        </a>
+                    </Link>
+                </Box>
 
-                <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
-                    <Box>
-                        <Flex alignItems={'center'} gap={1}>
-                            <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
-
-                            <AuthorHoverCard author={author} />
-                        </Flex>
-                    </Box>
-
-                    <Menu>
-                        <MenuButton as={IconButton} icon={<ChevronDown />} color='blackAlpha.500' size='xs' variant='unstyled'>
-
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>রিপোর্ট করুণ</MenuItem>
-                            {/* <MenuItem>Create a Copy</MenuItem> */}
-                        </MenuList>
-                    </Menu>
-                </Flex>
-            </Box>
-
-            <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={image ? { base: 2, md: 4 } : 0}>
-
-
-                <Box w={{ base: 'full', md: '240px', lg: '240px' }}>
-
-                    {image ?
-                        <Box mb={2} mt={1} opacity={'.70'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '150px' }} shadow='lg' rounded='md'
-                            overflow={'hidden'}
-                            // bgImage={image}
-                            objectFit='cover'
-                            bgPos='center' bgSize='cover'>
-                            <Link href={`/blog/${slug}`}>
-                                <a href={`/blog/${slug}`}>
-                                    <Center h='full' w='full'>
-                                        {/* <Show below={'lg'}> */}
-                                        <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
-                                        {/* </Show> */}
-                                    </Center>
-                                </a>
-                            </Link>
-                        </Box>
-                        : <></>}
-
-                    <Box flex='1' textAlign={'left'} w='full' bg='.50' p={{ base: '0px', lg: 1 }} mb='2' >
-
+                {image ?
+                    <Box mb={2} mt={1} opacity={'.70'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '150px' }} shadow='lg' rounded='md'
+                        overflow={'hidden'}
+                        // bgImage={image}
+                        objectFit='cover'
+                        bgPos='center' bgSize='cover'>
                         <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>
-                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Center h='full' w='full'>
+                                    {/* <Show below={'lg'}> */}
+                                    <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
+                                    {/* </Show> */}
+                                </Center>
                             </a>
                         </Link>
-
-                        <Text fontSize={'14px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
-                            {formatDate(createdAt)}
-                        </Text>
-
-
-                        {categories?.length > 0 && <Box pt={2}>
-                            <Wrap>
-
-                                {categories.map((cat, index) => <Button
-                                    key={index}
-                                    size='xs'
-                                    variant={'solid'}
-                                >
-
-                                    {cat.name}
-
-                                </Button>)}
-
-                            </Wrap>
-                        </Box>}
-
                     </Box>
+                    : <></>}
+
+
+                <Box py={1} w='full'>
+                    <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                        {formatDate(createdAt)}
+                    </Text>
                 </Box>
 
 
-                <Box flex='1'>
+                {categories?.length > 0 && <Box pt={2}>
+                    <Wrap>
+
+                        {categories.map((cat, index) => <Button
+                            key={index}
+                            size='xs'
+                            variant={'solid'}
+                        >
+
+                            {cat.name}
+
+                        </Button>)}
+
+                    </Wrap>
+                </Box>}
+
+            </Box>
+
+            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow='md' py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
+
+                {/* <Box my={3} /> */}
+                <Box mb={3} borderColor={'blackAlpha.100'}>
+
+                    <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
+
+                        <Flex alignItems={'center'} gap={1}>
+                            <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar} />
+                            <AuthorHoverCard author={author} />
+                        </Flex>
+
+                        <Menu>
+                            <MenuButton as={IconButton} icon={<ChevronDown />} color='blackAlpha.500' size='xs' variant='unstyled'>
+
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem>রিপোর্ট করুণ</MenuItem>
+                                {/* <MenuItem>Create a Copy</MenuItem> */}
+                            </MenuList>
+                        </Menu>
+                    </Flex>
+
+
+                </Box>
+
+                <Box>
 
                     <Box w='full' pb={3}>
                         <PostTrancate
@@ -167,10 +166,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
 
                 </Box>
-
-
-            </Flex>
-
-        </Box>
+            </Box>
+        </Flex>
     )
 }

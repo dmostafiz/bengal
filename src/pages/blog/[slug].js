@@ -381,7 +381,7 @@ function SingleBlogDetails({ post, ok }) {
                                     {/* <Box w={'60px'} /> */}
 
                                     <Flex justify={'end'} >
-                                        <Button colorScheme={isLiked ? 'gray' : 'blue'} onClick={handleClickLike} isLoading={liking} shadow='sm' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='md' size='md'>
+                                        <Button colorScheme={isLiked ? 'gray' : 'gray'} onClick={handleClickLike} isLoading={liking} shadow='sm' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='md' size='md'>
                                             <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লেখককে উৎসাহিত করুন'}</Text>
                                         </Button>
                                     </Flex>
