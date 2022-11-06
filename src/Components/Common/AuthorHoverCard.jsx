@@ -8,7 +8,7 @@ export default function AuthorHoverCard({author}) {
     return (
         <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
             <HoverCard.Target>
-                <Heading as='h6' size='xs' color={'gray.600'}>
+                <Heading as='h6' fontSize={'13px'}>
                     {author.displayName}
                 </Heading>
             </HoverCard.Target>

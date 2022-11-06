@@ -5,10 +5,10 @@ import Link from 'next/link'
 import React from 'react'
 import truncate from 'truncate-html';
 
-export default function PostTrancate({ content, slug, char = 270 }) {
+export default function PostTrancate({image='', content, slug, char = 270 }) {
     return (
         <Box w='full'>
-            <Text as='div' w='full' align={'justify'} noOfLines={{base:5, xl:8}} fontSize={'17px'} dangerouslySetInnerHTML={{
+            <Text as='div' w='full' align={'justify'} noOfLines={{base:5, xl: image ? 8 : 4 }} fontSize={'17px'} dangerouslySetInnerHTML={{
                 __html: truncate(content, char, {
                     ellipsis: `...`,
                     byWords: true,

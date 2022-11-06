@@ -110,6 +110,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                     <Box w='full' pb={{ base: 1, lg: 3 }}>
                         <PostTrancate
+                            image={image}
                             char={70}
                             content={content}
                         />

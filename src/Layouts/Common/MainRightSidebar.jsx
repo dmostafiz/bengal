@@ -1,6 +1,7 @@
 import { Box, Button, Center, Divider, Tag, TagLabel, Text, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import React from 'react'
+import LatestComments from '../../Components/Common/LatestComments'
 
 export default function MainRightSidebar() {
     return (
@@ -66,6 +67,8 @@ export default function MainRightSidebar() {
                 <Box bg='blackAlpha.50' p={2}>
                     <Title order={5}>সাম্প্রতিক মন্তব্য</Title>
                 </Box>
+
+                <LatestComments />
             </Box>
         </Box>
     )
