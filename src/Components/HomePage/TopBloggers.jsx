@@ -1,4 +1,4 @@
-import { Button, Avatar, Box, Divider, Flex, Wrap, Text, Icon } from '@chakra-ui/react';
+import { Button, Avatar, Box, Divider, Flex, Wrap, Text, Icon, AvatarBadge } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { createStyles, Paper, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -18,20 +18,19 @@ import { ArrowForward } from 'tabler-icons-react';
 import Axios from '../../Helpers/axiosHelper';
 import { useQuery } from '@tanstack/react-query';
 import banglaNumber from '../../Helpers/banglaNumber';
+import useOnlineUser from '../../Hooks/useOnlineUser';
 
 export default function TopBloggers() {
 
     const [bloggers, setBloggers] = useState([])
 
     const { data, isLoading, isError, error } = useQuery(['topBloggers'], async () => {
-
         const response = await Axios.get('/user/get_top_ranked/12')
-
         setBloggers(response?.data?.users)
         return response?.data?.users || null
-
     })
 
+    const {isUserOnline} = useOnlineUser()
 
     return (
         <Box w='full'>
@@ -54,7 +53,9 @@ export default function TopBloggers() {
                         <Box bg='blue.800' color='whiteAlpha.800' p={3} rounded='xl'>
                             <Flex direction={{ base: 'row', md: 'row' }} gap={{ base: 1, md: 2 }}>
                                 <Box>
-                                    <Avatar size={{ base: 'sm', md: 'sm' }} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর' />
+                                    <Avatar size={{ base: 'sm', md: 'sm' }} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর'>
+                                        {isUserOnline(item.id) && <AvatarBadge boxSize='10px' border='1px' bg='green.500' />}
+                                    </Avatar>
                                 </Box>
                                 <Box>
                                     <Title order={5}><Text noOfLines={1}>{item.displayName}</Text></Title>

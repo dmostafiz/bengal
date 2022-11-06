@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Divider, Flex, Image, Show, SimpleGrid, Spacer, Text, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Box, Button, Center, Divider, Flex, Image, Show, SimpleGrid, Spacer, Text, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { ThumbUp } from 'tabler-icons-react'
 import PostCard from '../Components/Common/PostCard'
@@ -22,6 +22,7 @@ import { useQuery } from '@tanstack/react-query'
 import Axios from '../Helpers/axiosHelper'
 import banglaNumber from '../Helpers/banglaNumber'
 import Link from 'next/link'
+import useOnlineUser from '../Hooks/useOnlineUser'
 
 export default function Bloggers() {
 
@@ -37,6 +38,8 @@ export default function Bloggers() {
         return response?.data?.users || null
 
     })
+
+    const { isUserOnline } = useOnlineUser()
 
     return (
         <HomeLayout>
@@ -55,12 +58,14 @@ export default function Bloggers() {
 
                     <SectionTitle mb={5} title='সকল ব্লগার (ক্রমানুসারে)' />
 
-                    <SimpleGrid  columns={{base: 2, xl:3}} spacing={2}>
+                    <SimpleGrid columns={{ base: 2, xl: 3 }} spacing={2}>
                         {bloggers.map((item, index) => (
                             <Box w={'full'} key={index} bg='blue.800' color='whiteAlpha.800' p={3} rounded='xl'>
                                 <Flex direction={{ base: 'row', md: 'row' }} gap={{ base: 1, md: 2 }}>
                                     <Box>
-                                        <Avatar size={{ base: 'sm', md: 'sm' }} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর' />
+                                        <Avatar size={{ base: 'sm', md: 'sm' }} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর'>
+                                            {isUserOnline(item.id) && <AvatarBadge boxSize='10px' border='1px' bg='green.500' />}
+                                        </Avatar>
                                     </Box>
                                     <Box>
                                         <Title order={5}><Text noOfLines={1}>{item.displayName}</Text></Title>

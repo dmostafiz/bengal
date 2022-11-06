@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
-import React, { useContext } from 'react'
+import { Avatar, AvatarBadge, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
+import React, { useContext, useEffect } from 'react'
 import { BellOff, BellRinging, ChevronDown, Heart, Lock, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { FaBell, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
@@ -16,6 +16,8 @@ import MobileSidebarDrawer from '../../Common/MobileSidebarDrawer'
 import SiteLogoMobile from '../../../Components/Common/SiteLogoMobile'
 import { BsPencilSquare } from 'react-icons/bs'
 import useInitialBlogWriting from '../../../Hooks/useInitialBlogWriting'
+import { SocketContext } from '../../../Contexts/SocketContext'
+import useOnlineUser from '../../../Hooks/useOnlineUser'
 
 export default function TopBar() {
 
@@ -36,7 +38,7 @@ export default function TopBar() {
             // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
 
             if (checkDraftedPosts.length > 0) {
-                
+
                 router.push('/editor/drafted_posts')
 
             } else {
@@ -46,14 +48,14 @@ export default function TopBar() {
 
         else {
             setRedirectUrl('/write/new')
-            
+
             seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
-            
+
             onOpen()
         }
     }
 
-
+    const {isUserOnline} = useOnlineUser()
 
     // console.log('Topbar Auth User ', authUser)
 
@@ -87,8 +89,8 @@ export default function TopBar() {
                                                         <FaBell size={20} /> <Show above='lg'><Text>নোটিফিকেশন</Text></Show>
                                                     </Flex>
                                                 </MenuButton>
-                                                <MenuList shadow={'md'} rounded='none' pos={'relative'} top={{base: '6px',md:'9px'}} right={0}>
-                                                    <Box width={{base: '100vw', md: '350px'}}>
+                                                <MenuList shadow={'md'} rounded='none' pos={'relative'} top={{ base: '6px', md: '9px' }} right={0}>
+                                                    <Box width={{ base: '100vw', md: '350px' }}>
                                                         <Center py={5}>
                                                             <Icon as={BellOff} color={'blackAlpha.500'} fontSize={'26px'} />  <Text color={'blackAlpha.500'}>কোন নোটিফিকেশন পাওয়া যায়নি</Text>
                                                         </Center>
@@ -105,9 +107,11 @@ export default function TopBar() {
 
                                             {authUser ? <Menu>
                                                 <MenuButton as={Button} size={{ base: 'sm', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
-                                                    <Avatar size={'xs'} src={authUser.avatar} />
+                                                    <Avatar size={'xs'} src={authUser.avatar} >
+                                                        {isUserOnline(authUser.id) && <AvatarBadge boxSize='1.25em' bg='green.500' />}
+                                                    </Avatar>
                                                 </MenuButton>
-                                                <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{base: '2px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
+                                                <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{ base: '2px', md: '9px' }} width={{ base: '100vw', md: '270px' }}>
                                                     <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                                     <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
                                                     <MenuItem icon={<Heart />}>আমার পছন্দ তালিকা</MenuItem>
@@ -121,7 +125,7 @@ export default function TopBar() {
                                                             <ChevronDown size={16} color='gray' />
                                                         </Flex>
                                                     </MenuButton>
-                                                    <MenuList shadow={'md'} rounded='none' zIndex={9999}pos={'relative'} top={{base: '2px',md:'9px'}}  width={{base: '100vw', md: '270px'}}>
+                                                    <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{ base: '2px', md: '9px' }} width={{ base: '100vw', md: '270px' }}>
                                                         <Link href={'/auth/login'}>
                                                             <MenuItem icon={<Lock />}>লগইন করুন</MenuItem>
                                                         </Link>

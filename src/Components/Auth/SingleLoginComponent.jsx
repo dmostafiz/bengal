@@ -35,7 +35,7 @@ export default function SingleLoginComponent({redirectUrl = null}) {
                         bg={'whiteAlpha.700'}
                         size={'md'}
                         placeholder='ইমেইল এড্রেস / ইউজারনেম'
-                        type='email'
+                        type='text'
                         {...register('email')}
                     />
                     <FormErrorMessage>

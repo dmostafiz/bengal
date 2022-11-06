@@ -14,6 +14,7 @@ import useLogin from '../../Hooks/useLogin'
 import useRegistration from '../../Hooks/useRegistration'
 import FullscreenLoader from '../../Components/Common/FullscreenLoader'
 import ToastSpinnerText from '../../Components/Common/ToastSpinnerText'
+import { SocketContext } from '../../Contexts/SocketContext'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -41,8 +42,6 @@ export default function HomeLayout({ children }) {
             }
         }
 
-        console.log('One Tap Google Response: ', resp)
-
         setRedirectUrl(asPath)
 
         const loginResponse = await responseGoogle(resp, false)
@@ -50,10 +49,9 @@ export default function HomeLayout({ children }) {
         if (loginResponse == false) {
             await register.responseGoogle(resp)
         }
-
         setOneTapLoading(false)
-
     }
+
 
     return (
         <LayoutWrapper>
@@ -68,10 +66,6 @@ export default function HomeLayout({ children }) {
                 />}
 
                 {onTapLoading && <FullscreenLoader spinnerSize='md' />}
-
-
-
-               
 
                 <SectionContainer
                     maxW={'container.xl'}

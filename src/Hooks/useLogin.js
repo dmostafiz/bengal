@@ -87,14 +87,17 @@ export default function useLogin(redirectUrl=null) {
         await submitLoginData('/auth/signIn', values)
     }
 
-
+    
     async function submitLoginData(url, values, errorNotify = true) {
 
         if(redirectUrl){
             setRedirectUrl(redirectUrl)
         }
+        
+        
+        console.log('login values sdsd', values)
 
-        const res = await Axios.post(url, { ...values })
+        const res = await Axios.post(url, values)
 
         console.log('Response ', res?.data)
 
@@ -119,14 +122,14 @@ export default function useLogin(redirectUrl=null) {
                 return
             }
 
-            toast({
-                title: 'স্বাগতম!',
-                // description: "ব্লগে আপনাকে স্বাগতম।",
-                status: 'success',
-                position: 'top-right',
-                duration: 9000,
-                isClosable: true,
-            })
+            // toast({
+            //     title: 'স্বাগতম!',
+            //     // description: "ব্লগে আপনাকে স্বাগতম।",
+            //     status: 'success',
+            //     position: 'top-right',
+            //     duration: 9000,
+            //     isClosable: true,
+            // })
 
             setAccessToken(res?.data?.accessToken)
 

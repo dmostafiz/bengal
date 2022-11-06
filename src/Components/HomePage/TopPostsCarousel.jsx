@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Flex, Icon, Image, Text, Wrap } from '@chakra-ui/react';
+import { Avatar, AvatarBadge, Box, Button, Center, Flex, Icon, Image, Text, Wrap } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { createStyles, Paper, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -21,6 +21,7 @@ import { useQuery } from '@tanstack/react-query';
 import formatDate from '../../Helpers/formatDate';
 import AuthorHoverCard from '../Common/AuthorHoverCard';
 import SliderPostCarkSkeleton from '../Common/Skeletons/SliderPostCarkSkeleton';
+import useOnlineUser from '../../Hooks/useOnlineUser';
 
 export default function TopPostsCarousel() {
 
@@ -32,6 +33,9 @@ export default function TopPostsCarousel() {
         setPosts(response?.data?.posts)
         return response?.data?.posts || null
     })
+
+
+    const {isUserOnline} = useOnlineUser()
 
     return (
         <Box w='full'>
@@ -84,7 +88,9 @@ export default function TopPostsCarousel() {
 
                                 <Box pt={2}>
                                     <Flex alignItems={'center'} gap={2}>
-                                        <Avatar opacity={.7} size={'xs'} name={item.author.displayName} src={item.author.avatar} />
+                                        <Avatar opacity={.7} size={'xs'} name={item.author.displayName} src={item.author.avatar} >
+                                            {isUserOnline(item.author.id) && <AvatarBadge boxSize='1.25em' bg='green.500' />}
+                                        </Avatar>
                                         <AuthorHoverCard author={item.author} />
                                     </Flex>
 
@@ -116,10 +122,11 @@ export default function TopPostsCarousel() {
                 )) : <>
 
                     <SwiperSlide>
-                       <SliderPostCarkSkeleton />
+                        <SliderPostCarkSkeleton />
                     </SwiperSlide>
+
                     <SwiperSlide>
-                       <SliderPostCarkSkeleton />
+                        <SliderPostCarkSkeleton />
                     </SwiperSlide>
                 </>}
 

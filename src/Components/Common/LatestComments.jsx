@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Box, Flex, Heading, Icon, Image, Text } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -7,11 +7,15 @@ import Axios from '../../Helpers/axiosHelper'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import AuthorHoverCard from './AuthorHoverCard'
-import {BiCommentDetail} from 'react-icons/bi'
+import { BiCommentDetail } from 'react-icons/bi'
+import LatestCommentsSkeleton from './Skeletons/LatestCommentsSkeleton'
+import useOnlineUser from '../../Hooks/useOnlineUser'
 
 export default function LatestComments() {
 
     const [comments, setComments] = useState([])
+
+    const {isUserOnline} = useOnlineUser()
 
     const { data, isLoading, isError, error } = useQuery(['latesComments'], async () => {
 
@@ -28,7 +32,9 @@ export default function LatestComments() {
             {comments.length ? comments.map((comment, index) => <Box key={index} mt={3} pb={3} borderBottom='1px' borderColor={'blackAlpha.200'}>
 
                 <Flex alignItems={'start'} gap={2}>
-                    <Avatar size={'xs'} name={comment.author.name} src={comment.author.avatar} />
+                    <Avatar size={'xs'} name={comment.author.name} src={comment.author.avatar}>
+                        {isUserOnline(comment.author.id) && <AvatarBadge boxSize='1.25em' bg='green.400' />}
+                    </Avatar>
                     <Box>
                         <AuthorHoverCard author={comment.author} />
                         <Text fontSize={'12px'} color='blackAlpha.500'>{formatDate(comment.createdAt)}</Text>
@@ -44,7 +50,7 @@ export default function LatestComments() {
                             </Heading>
                         </Box>
 
-                    </Link>  
+                    </Link>
                 </Box>
 
                 <Box p={2} bg='facebook.50' rounded={'lg'}>
@@ -64,6 +70,17 @@ export default function LatestComments() {
 
             </Box>)
                 : <>
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+                    <LatestCommentsSkeleton />
+
                 </>}
         </Flex>
     )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, Badge, Box, Center, Divider, Flex, Hide, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Badge, Box, Center, Divider, Flex, Hide, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
@@ -11,12 +11,16 @@ import IconText from '../../Components/Common/IconText'
 import formatDate from '../../Helpers/formatDate'
 import SectionTitle from '../../Components/Common/SectionTitle'
 import banglaNumber from '../../Helpers/banglaNumber'
+import useOnlineUser from '../../Hooks/useOnlineUser'
 
 export default function categoryPosts() {
 
     const router = useRouter()
 
     const [user, setUser] = useState(null)
+
+
+    const {isUserOnline} = useOnlineUser()
 
     const [loading, setLoading] = useState(true)
 
@@ -52,12 +56,13 @@ export default function categoryPosts() {
 
                     leftSide={<>
 
-
                         <Hide below='md'>
                             <Box w='full' px={{ md: 1, lg: 5 }} mb='5' bg={'white'}>
                                 <>
                                     <Flex direction={{ md: 'column', lg: 'row' }} alignItems={{ md: 'start', lg: 'start' }} gap={3} mb={1}>
-                                        <Avatar rounded={'sm'} bg='transparent' size='lg' src={user?.avatar} name={user?.displayName} />
+                                        <Avatar rounded={'sm'} bg='transparent' size='lg' src={user?.avatar} name={user?.displayName}>
+                                            {isUserOnline(user?.id) && <AvatarBadge boxSize='22px' bg='green.400' />}
+                                        </Avatar>
                                         <Box>
                                             <Title order={3}>{user?.displayName}</Title>
                                             <Text fontSize={'14px'} ml={1} color='blackAlpha.500'>নিবন্ধ - {formatDate(user?.createdAt, 'LL')}</Text>
@@ -134,7 +139,7 @@ export default function categoryPosts() {
                     </>}
 
                     rightSide={<></>}
-                    // rightColumnWidth={30}
+                // rightColumnWidth={30}
                 // rightSide={<MainRightSidebar />}
 
                 >
@@ -194,7 +199,7 @@ export default function categoryPosts() {
                             }
 
                             {!user?.posts?.length && <>
-                               <IconText py={5} />
+                                <IconText py={5} />
                             </>}
 
                             <PostCard

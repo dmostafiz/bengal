@@ -1,21 +1,26 @@
-import { Box, Button, Center, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Show, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Box, Button, Center, Divider, Flex, FormControl, FormHelperText, FormLabel, Heading, Input, Show, Spacer, Stat, StatHelpText, StatLabel, StatNumber, Text } from '@chakra-ui/react'
 import { NavLink, Title } from '@mantine/core'
 import { IconActivity, IconBook, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import { useEffect } from 'react'
 import { FaBlog, FaMicroblog } from 'react-icons/fa'
 import { MdOutlineForum } from 'react-icons/md'
 import { Book, BookDownload, ListDetails } from 'tabler-icons-react'
 import AuthComponent from '../../Components/Common/AuthComponent'
+import AuthorHoverCard from '../../Components/Common/AuthorHoverCard'
 import BlogPanel from '../../Components/Common/BlogPanel'
 import { AuthContext } from '../../Contexts/AuthContext'
+import { SocketContext } from '../../Contexts/SocketContext'
+import banglaNumber from '../../Helpers/banglaNumber'
+import useOnlineUser from '../../Hooks/useOnlineUser'
 import useUser from '../../Hooks/useUser'
 
 export default function MainLeftSidebar({ authpanel = true }) {
 
     const { authUser, isLoading, isError, error } = useUser()
 
-    // console.log('Leftside auth: ', authUser)
+    const {onlineUsers, onlineBloggers, onlineReaders} = useOnlineUser()
 
     return (
         <Box>
@@ -44,6 +49,44 @@ export default function MainLeftSidebar({ authpanel = true }) {
                     <Text textAlign={'justify'}>সরকারি চাকরিতে আবেদন ফি বাড়ানো হইছে আজ থেকে সাত দিন পূর্বে । তেরো এবং ষোল গ্রেডের আবেদন ফি দ্বিগুণ করা হয়েছে । এগারো ও বারো গ্রেডে পূর্বে আবেদন ফি নির্ধারণ করা না থাকলে সেটা এখন তিনশো টাকা করা হয়েছে... <a href='#'>বিস্তারিত পড়ুন</a> </Text>
                 </Box>
             </Box> */}
+
+            <Box w='full' bg='' mb={5}>
+
+                <Box bg='blackAlpha.50' p={2}>
+                    <Title order={6}>{onlineUsers.length
+                        ? <> অনলাইনে আছেন {banglaNumber(onlineUsers.length)} জন </>
+                        : <>কেউ অনলাইনে নেই</>}</Title>
+                </Box>
+
+                <Box p={2}>
+                    <Flex alignItems={'center'} gap={3}>
+                        <Text as={'h6'} size='sm' my={2}>
+                            {banglaNumber(onlineReaders.length)} জন পাঠক
+                        </Text>
+                        <Divider height={'20px'} borderColor='blackAlpha.300' orientation='vertical' />
+                        <Text as={'h6'} size='sm' my={2}>
+                            {banglaNumber(onlineBloggers.length)} জন ব্লগার
+                        </Text>
+                    </Flex>
+
+                    <Divider mb={2} borderColor='blackAlpha.300' />
+
+                    <Box>
+                        {onlineBloggers.map((user, index) => <Box key={index} py={2} borderBottom='1px' borderColor='blackAlpha.200'>
+                            <Flex alignItems={'center'} gap={2}>
+                                <Avatar size={'xs'} src={user.avatar} name={user.displayName}>
+                                    <AvatarBadge boxSize='1.25em' bg='green.500' />
+                                </Avatar>
+                                <AuthorHoverCard author={user} />
+
+                            </Flex>
+                        </Box>
+                        )}
+                    </Box>
+
+                </Box>
+
+            </Box>
 
 
 

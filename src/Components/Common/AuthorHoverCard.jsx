@@ -1,10 +1,14 @@
-import { Avatar, Box, Button, Divider, Flex, Heading, Text, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Box, Button, Divider, Flex, Heading, Text, Wrap } from '@chakra-ui/react'
 import { HoverCard, Title } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
 import banglaNumber from '../../Helpers/banglaNumber'
+import useOnlineUser from '../../Hooks/useOnlineUser'
 
-export default function AuthorHoverCard({author}) {
+export default function AuthorHoverCard({ author }) {
+
+    const {isUserOnline} = useOnlineUser()
+
     return (
         <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
             <HoverCard.Target>
@@ -17,7 +21,9 @@ export default function AuthorHoverCard({author}) {
                 <Box bg='blackAlpha.5'>
                     <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
                         <Box>
-                            <Avatar size='md' shadow src={author.avatar} name={author.displayName} />
+                            <Avatar size='md' shadow src={author.avatar} name={author.displayName}>
+                                {isUserOnline(author.id) && <AvatarBadge boxSize='20px' bg='green.500' />}
+                            </Avatar>
                         </Box>
                         <Box>
                             <Title order={4}><Text noOfLines={1}>{author.displayName}</Text></Title>

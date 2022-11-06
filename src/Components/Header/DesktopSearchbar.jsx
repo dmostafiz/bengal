@@ -96,8 +96,13 @@ export default function DesktopSearchbar() {
         <Box ref={ref} position={'relative'} w='full'>
 
             <Box
-                border='1px'
-                borderColor='gray.300'
+                borderTop='1px'
+                borderLeft='1px'
+                borderRight='1px'
+                borderBottom={isOpen? '0px' : '1px'}
+
+                // bg='facebook.10'
+                borderColor='facebook.200'
                 roundedTop={isOpen ? 'xl' : '3xl'}
                 roundedBottom={isOpen ? 'none' : '3xl'}
                 py={'2px'}
@@ -140,7 +145,7 @@ export default function DesktopSearchbar() {
                             onClick={() => setSearchFor('blogger')}
                             as={User}
                             fontSize={18}
-                            color={searchFor == 'blogger' ? 'yellow.400' : 'blackAlpha.400'}
+                            color={searchFor == 'blogger' ? 'facebook.700' : 'facebook.200'}
                         // _hover={{
                         //     color: 'blackAlpha.600'
                         // }}
@@ -151,7 +156,7 @@ export default function DesktopSearchbar() {
                             onClick={() => setSearchFor('blog')}
                             as={AlignRight}
                             fontSize={20}
-                            color={searchFor == 'blog' ? 'yellow.400' : 'blackAlpha.400'}
+                            color={searchFor == 'blog' ? 'facebook.700' : 'facebook.200'}
                             title='dfdfd'
                         // _hover={{
                         //     color: 'blackAlpha.600'
@@ -182,8 +187,8 @@ export default function DesktopSearchbar() {
                         overflow='hidden'
                     >
 
-                        <Box px={4} py={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
-                            <Title order={5}>{`${searchFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান`} - {query}</Title>
+                        <Box px={4} pb={2} borderBottom='1px' borderColor={'blackAlpha.200'}>
+                            <Title order={5}>{`${searchFor == 'blog' ? 'ব্লগ পোস্ট' : 'ব্লগার'} অনুসন্ধান`}</Title>
                             {/* <Text fontSize={'13px'}>৩ জন ব্লগার, ১৫ টি ব্লগ পোস্ট পাওয়া গেছে</Text> */}
                             {searchData.length > 0 && <Text mb={2} fontSize='13px'>মোট {banglaNumber(searchData.length)} টি রেজাল্ট পাওয়া গেছে</Text>}
                         </Box>
