@@ -7,6 +7,8 @@ import useUser from '../../Hooks/useUser'
 import { Heart, Logout, Pencil, Power, User } from 'tabler-icons-react'
 import Link from 'next/link'
 import UserPanel from './UserPanel'
+import TranslatorWidget from 'react-translate-widget';
+
 
 export default function BlogPanel() {
 
@@ -15,6 +17,7 @@ export default function BlogPanel() {
     return (
         <Box mb={5} bg=''>
 
+            {/* <TranslatorWidget sourceLanguageCode="bn" className="translator" /> */}
 
             <UserPanel />
 

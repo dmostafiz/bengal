@@ -10,7 +10,7 @@ export default function AuthorHoverCard({ author, color='' }) {
     const { isUserOnline } = useOnlineUser()
 
     return (
-        <HoverCard zIndex={999999999999} width={320} shadow="lg" withArrow openDelay={0} position='bottom' closeDelay={400}>
+        <HoverCard zIndex={999999999999} width={250} shadow="lg" withArrow openDelay={0} position='bottom' closeDelay={400}>
             <HoverCard.Target>
                 <Heading as='h6' fontSize={'13px'} color={color}>
                     {author.displayName}
@@ -18,7 +18,7 @@ export default function AuthorHoverCard({ author, color='' }) {
             </HoverCard.Target>
 
             <HoverCard.Dropdown p={0}>
-                <Box p={5} bg='white'>
+                <Box p={2} bg='white'>
                     <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
                         <Box>
                             <Avatar size='md' shadow src={author.avatar} name={author.displayName}>

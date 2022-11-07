@@ -81,7 +81,7 @@ export default function useInitialBlogWriting() {
 
         const postId = await generateNewBlogId()
 
-        return `/write/${postId}`
+        return `/editor/${postId}`
     }
 
     return { draftedPosts, generateNewBlogId, redirectToNewPostEditor, getRedirectingUrl, editingPost, editingPostLoading }

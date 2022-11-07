@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Badge, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
 import React, { useContext, useEffect } from 'react'
 import { BellOff, BellRinging, ChevronDown, Heart, Lock, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
@@ -18,6 +18,8 @@ import { BsPencilSquare } from 'react-icons/bs'
 import useInitialBlogWriting from '../../../Hooks/useInitialBlogWriting'
 import { SocketContext } from '../../../Contexts/SocketContext'
 import useOnlineUser from '../../../Hooks/useOnlineUser'
+import banglaNumber from '../../../Helpers/banglaNumber'
+import NotificationPanel from '../../Common/NotificationPanel'
 
 export default function TopBar() {
 
@@ -55,7 +57,7 @@ export default function TopBar() {
         }
     }
 
-    const {isUserOnline} = useOnlineUser()
+    const { isUserOnline } = useOnlineUser()
 
     // console.log('Topbar Auth User ', authUser)
 
@@ -83,20 +85,8 @@ export default function TopBar() {
                                     <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 3, md: 5 }}>
 
                                         <Flex alignItems={'center'} gap={{ base: 0, md: 2 }}>
-                                            <Menu>
-                                                <MenuButton size={{ base: 'sm', md: 'md' }} as={Button} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
-                                                    <Flex alignItems={'center'} gap={1}>
-                                                        <FaBell size={20} /> <Show above='lg'><Text>নোটিফিকেশন</Text></Show>
-                                                    </Flex>
-                                                </MenuButton>
-                                                <MenuList shadow={'md'} rounded='none' pos={'relative'} top={{ base: '6px', md: '9px' }} right={0}>
-                                                    <Box width={{ base: '100vw', md: '350px' }}>
-                                                        <Center py={5}>
-                                                            <Icon as={BellOff} color={'blackAlpha.500'} fontSize={'26px'} />  <Text color={'blackAlpha.500'}>কোন নোটিফিকেশন পাওয়া যায়নি</Text>
-                                                        </Center>
-                                                    </Box>
-                                                </MenuList>
-                                            </Menu>
+                                           
+                                            <NotificationPanel />
 
                                             <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
                                                 <Flex alignItems={'center'} gap={1}>

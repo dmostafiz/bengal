@@ -52,11 +52,9 @@ function SingleBlogDetails({ post, ok }) {
 
 
     const commentQuery = useQuery(['getComments', commentId], async () => {
-
         const response = await Axios.get(`/post/get_post_comments/${post.id}`)
         setComments(response?.data?.comments)
         return response?.data?.comments
-
     })
 
     useEffect(() => {
@@ -250,56 +248,34 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
 
-                            <SidebarPostCard
-                                title="বান্দুরা রানী পবিত্র জপমালা গীর্জা"
-                                image='https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
-                                content='ঢাকা থেকে মাত্র ১ ঘন্টা ৩০ মিনিটের দূরর্ত্বে নবাবগঞ্জে খ্রীষ্টান আদিনিবাস। এই নাবাগঞ্জে রয়েছে ধর্মীয় বিচিত্রতা ও সহবস্থান। রয়েছে প্রায় চারশ বছরের পুরান ভাঙ্গা মসজিদ ও প্রায় ২৪০ বছরের পূরান  "রানী পবিত্র জপমালা গীর্জা" যা বান্দুরা গীর্জা নামেও বহুল পরিচিত...'
-                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                                states={{
-                                    read: 5,
-                                    comment: 3,
-                                    like: 3
-                                }}
-                                author={{
-                                    name: 'লিমন লস্কর',
-                                    image: ''
-                                }}
-                            />
+                            {post.author?.posts?.length > 1 ?
+                                post.author?.posts.map((item, index) => {
+                                    if (item.id != post.id) {
+                                        return <SidebarPostCard
+                                            key={index}
+                                            title={item.title}
+                                            image={item.image}
+                                            content={item.content}
+                                            createdAt={item.publishedAt}
+                                            slug={item.id}
+                                            states={{
+                                                read: item.views?.length,
+                                                comment: item.comments?.length,
+                                                like: item.likes?.length
+                                            }}
+                                            author={{
+                                                name: 'লিমন লস্কর',
+                                                image: ''
+                                            }}
+                                        />
+                                    }
+                                }) : <Center py={3}>
+                                    <Text>আর পাওয়া যায়নি</Text>
+                                </Center>}
 
 
-                            <SidebarPostCard
-                                title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
-                                image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
-                                content='পর্দায় যেমনই থাকুক না কেন, বাস্তব জীবনে হিরোর ভূমিকায় দেখা গেছে তাকে। বিভিন্ন সময়ে ডিপজলের সেবামূলক কাজের কথাও উঠে আসে। তবে তিনি তার মাকে প্রচন্ড ভালোবাসতেন। তার কাছের অনেকেই এমন কথা বলেন। কমেডি অভিনেতা জ্যাকি আলমগীর জানালেন, ডিপজল সাহেব প্রচন্ড মা ভক্ত। মায়ের প্রতি ডিপজলের ভালোবাসার কথা জানিয়ে জ্যাকি...'
-                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                                states={{
-                                    read: 5,
-                                    comment: 3,
-                                    like: 3
-                                }}
-                                author={{
-                                    name: 'লিমন লস্কর',
-                                    image: ''
-                                }}
-                            />
-
-
-                            <SidebarPostCard
-                                title="জনপ্রতিনিধিদের জবাবদিহিতাহীন এই সংস্কৃতি আরও কত বছর চলবে?"
-                                image='https://s3.amazonaws.com/somewherein/pictures/SabbirShakil666/SabbirShakil666-1664873600-089caf6_xlarge.jpg'
-                                content='এদেশের কনস্টিটিউশন অনুযায়ী পাঁচ বছর পরপর ভোটের মাধ্যমে জনপ্রতিনিধি, সরকার গঠন করার নিয়ম । কিন্তু পুরো পাঁচ বছর কেটে গেলেও এদেশের সব এলাকাতে জনপ্রতিনিধি আর জনতার মুখোমুখি কোনো সেমিনার/সিম্পোজিয়াম/প্রোগ্রাম করা হয়? সোজাসাপ্টা উত্তর আসবে, ‘না’ । কোনো জবাবদিহিতা আছে? উত্তর হবে, ‘না’ । ...'
-                                createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                                states={{
-                                    read: 5,
-                                    comment: 3,
-                                    like: 3
-                                }}
-                                author={{
-                                    name: 'লিমন লস্কর',
-                                    image: ''
-                                }}
-                            />
                         </Box>
+
 
                     </Box>}
                     rightColumnWidth={15}
@@ -401,11 +377,11 @@ function SingleBlogDetails({ post, ok }) {
                         </Show>
 
                         <Flex id='scroll-tot-comment' pt={5} gap='5' alignItems={'center'} mb={4}>
-                            <SectionTitle showBorder={false} icon={<FcComments color='' size='24px' />} py={0} mb={0} title={!comments.length ? 'কোন মন্তব্য নেই' : `${banglaNumber(comments.length)} টি মন্তব্য`} />
-                            {comments.length > 5 &&
+                            <SectionTitle showBorder={false} icon={<FcComments color='' size='24px' />} py={0} mb={0} title={!comments?.length ? 'কোন মন্তব্য নেই' : `${banglaNumber(comments?.length)} টি মন্তব্য`} />
+                            {comments?.length > 5 &&
                                 <Button
                                     onClick={() => {
-                                        document.getElementById('main-comment-editor').scrollIntoView({
+                                        document?.getElementById('main-comment-editor').scrollIntoView({
                                             behavior: 'smooth',
                                             block: 'center',
                                             inline: 'center'
@@ -417,7 +393,7 @@ function SingleBlogDetails({ post, ok }) {
                                 </Button>}
                         </Flex>
 
-                        {comments.length > 0 && <Box w='full'>
+                        {comments?.length > 0 && <Box w='full'>
 
                             {comments.map((comment, index) => {
 
@@ -483,10 +459,10 @@ function SingleBlogDetails({ post, ok }) {
 
                         </Box>}
 
-                        <Box pb={10} pt={comments.length ? 10 : 0}>
+                        <Box pb={10} pt={comments?.length ? 10 : 0}>
 
-                            {comments.length > 0 && <Box p={1}>
-                                <SectionTitle mb={1} showBorder={false} icon={<Edit size='24px' />} py={0} title={!comments.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'} />
+                            {comments?.length > 0 && <Box p={1}>
+                                <SectionTitle mb={1} showBorder={false} icon={<Edit size='24px' />} py={0} title={!comments?.length ? 'প্রথম মন্তব্যটি করুন' : 'মন্তব্য করুন'} />
                             </Box>}
 
                             <Box mb={2} id='main-comment-editor'>
