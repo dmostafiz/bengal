@@ -7,18 +7,19 @@ import useOnlineUser from '../../Hooks/useOnlineUser'
 
 export default function AuthorHoverCard({ author }) {
 
-    const {isUserOnline} = useOnlineUser()
+    const { isUserOnline } = useOnlineUser()
 
     return (
-        <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+        <HoverCard zIndex={'999'} width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+            
             <HoverCard.Target>
                 <Heading as='h6' fontSize={'13px'}>
                     {author.displayName}
                 </Heading>
             </HoverCard.Target>
-            <HoverCard.Dropdown p={10}>
 
-                <Box bg='blackAlpha.5'>
+            <HoverCard.Dropdown p={10} zIndex={999999999999}>
+                <Box bg='white' zIndex={'999'}>
                     <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
                         <Box>
                             <Avatar size='md' shadow src={author.avatar} name={author.displayName}>
@@ -54,6 +55,7 @@ export default function AuthorHoverCard({ author }) {
                 </Box>
 
             </HoverCard.Dropdown>
+
         </HoverCard>
     )
 }

@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Box, Button, Center, Flex, Icon, Image, Text, Wrap } from '@chakra-ui/react';
+import { Avatar, AvatarBadge, Box, Button, Center, Flex, Icon, Image, Text, Tooltip, Wrap } from '@chakra-ui/react';
 import { Carousel } from '@mantine/carousel';
 import { createStyles, Paper, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -35,16 +35,16 @@ export default function TopPostsCarousel() {
     })
 
 
-    const {isUserOnline} = useOnlineUser()
+    const { isUserOnline } = useOnlineUser()
 
     return (
         <Box w='full'>
             <Swiper
                 spaceBetween={12}
                 slidesPerView={useBreakpointValue({
-                    base: 1,
-                    md: 1,
-                    lg: 2
+                    base: 2,
+                    md: 2,
+                    lg: 3
                 })}
                 navigation
                 onSlideChange={() => console.log('slide change')}
@@ -57,7 +57,7 @@ export default function TopPostsCarousel() {
                         <Box shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >
 
                             {item.image ?
-                                <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '220px', lg: '200px' }} roundedTop='xl'
+                                <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '140px', lg: '140px' }} roundedTop='xl'
                                     overflow={'hidden'}
                                     // bgImage={image}
                                     objectFit='cover'
@@ -78,11 +78,13 @@ export default function TopPostsCarousel() {
 
                                 <Link href={`/blog/${item.id}`}>
                                     <a href={`/blog/${item.id}`}>
-                                        <Title order={3}><Text noOfLines={1} lineHeight='1.3' color='gray.700'>{item.title}</Text></Title>
+                                        <Tooltip hasArrow label={item.title}>
+                                            <Title order={4}><Text noOfLines={1} lineHeight='1.3' color='gray.700'>{item.title}</Text></Title>
+                                        </Tooltip>
                                     </a>
                                 </Link>
 
-                                <Text fontSize={'14px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                                <Text fontSize={'12px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
                                     {formatDate(item.createdAt)}
                                 </Text>
 
@@ -128,6 +130,11 @@ export default function TopPostsCarousel() {
                     <SwiperSlide>
                         <SliderPostCarkSkeleton />
                     </SwiperSlide>
+
+                    <SwiperSlide>
+                        <SliderPostCarkSkeleton />
+                    </SwiperSlide>
+
                 </>}
 
                 {/* <span slot="container-start">Container Start</span> */}

@@ -5,7 +5,7 @@ export default function SliderPostCarkSkeleton() {
     return (
         <Box w='full' mb={10} spacing={3} shadow='md'>
             <Flex mt={4} direction={'column'} gap={2} w={'full'}>
-                <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='160px' roundedTop={'xl'} fadeDuration={3} />
+                <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='130px' roundedTop={'xl'} fadeDuration={3} />
 
                 <Flex direction={'column'} gap={2} p={2}>
                     <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='30px' width='100%' fadeDuration={3} />

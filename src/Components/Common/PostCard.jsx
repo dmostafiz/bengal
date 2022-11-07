@@ -24,7 +24,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
         md: true
     })
 
-    const {isUserOnline} = useOnlineUser()
+    const { isUserOnline } = useOnlineUser()
 
     return (
         <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
@@ -52,7 +52,9 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 <Box pt={2}>
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
-                            <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                            <Tooltip withArrow label={title}>
+                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                            </Tooltip>
                         </a>
                     </Link>
                 </Box>
@@ -72,42 +74,47 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 <Box mb={2} borderColor='blackAlpha.100'>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
-
-                        <Flex gap={5} alignItems='center'>
-                            <Flex alignItems={'center'} gap={1}>
-                                <Avatar opacity={.7} size={'xs'} name={author.displayName} src={author.avatar}>
-                                    {isUserOnline(author.id) &&  <AvatarBadge boxSize='1.25em' bg='green.500' />}
-                                </Avatar>
-                                <AuthorHoverCard author={author} />
-                            </Flex>
-
-                            {categories?.length > 0 && <Wrap>
-                                {categories.map((cat, index) => {
-                                    if (index < 2) {
-                                        return <Button
-                                            key={index}
-                                            size='xs'
-                                            variant={'solid'}
-                                            rounded='full'
-                                        >
-                                            {cat.name}
-                                        </Button>
-                                    }
-                                })
-                                }
-
-                            </Wrap>}
+                        <Flex gap={1} alignItems='center'>
+                            <Text color='gray.500' fontSize={'14px'}>লিখেছেন</Text> 
+                            <AuthorHoverCard author={author} />
                         </Flex>
 
-                        <Menu>
-                            <MenuButton as={IconButton} icon={<HiChevronDown size={'24'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
-                            <MenuList fontSize={'14px'} shadow='lg'>
-                                <MenuItem icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>
-                                <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>
+                        <Flex alignItems={'center'} gap={1}>
 
-                                {/* <MenuItem>Create a Copy</MenuItem> */}
-                            </MenuList>
-                        </Menu>
+                            <Flex gap={5} alignItems='center'>
+
+                                {categories?.length > 0 && <Wrap spacing={1}>
+                                    {categories.map((cat, index) => {
+                                        if (index < 2) {
+                                            return <Button
+                                                key={index}
+                                                size='xs'
+                                                variant={'outline'}
+                                                rounded='full'
+                                            >
+                                                {cat.name}
+                                            </Button>
+                                        }
+                                    })
+                                    }
+
+                                </Wrap>}
+                            </Flex>
+
+                            <Menu>
+                                <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
+                                <MenuList fontSize={'14px'} shadow='lg'>
+                                    <MenuItem icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>
+                                    <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>
+
+                                    {/* <MenuItem>Create a Copy</MenuItem> */}
+                                </MenuList>
+                            </Menu>
+
+                        </Flex>
+
+
+
                     </Flex>
 
                 </Box>
