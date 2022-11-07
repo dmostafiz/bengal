@@ -54,19 +54,21 @@ export default function TopPostsCarousel() {
                 {posts.length ? posts.map((item, index) => (
                     <SwiperSlide key={index}>
 
-                        <Box shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >
+                        <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >
 
                             {item.image ?
-                                <Box opacity={'.80'} w={{ base: 'full', lg: 'full' }} h={{ base: '140px', lg: '140px' }} roundedTop='xl'
+                                <Box
+                                    w={{ base: 'full', lg: 'full' }}
+                                    h={{ base: '140px', lg: '140px' }} 
+                                    roundedTop='xl'
                                     overflow={'hidden'}
-                                    // bgImage={image}
-                                    objectFit='cover'
-                                    bgPos='center' bgSize='cover'>
-                                    <Link href={`/blog/${item.id}`}>
+                                    bgPos='center' bgSize='cover'
+                                >
+                                    <Link zIndex='0' href={`/blog/${item.id}`}>
                                         <a href={`/blog/${item.id}`}>
-                                            <Center h='full' w='full' >
+                                            <Center zIndex={0} h='full' w='full' >
                                                 {/* <Show below={'lg'}> */}
-                                                <Image title={item.title} w='full' minH={'full'} objectFit={'cover'} src={item.image} alt='image' />
+                                                <Image zIndex={0} title={item.title} w='full' minH={'full'} objectFit={'cover'} src={item.image} alt='image' />
                                                 {/* </Show> */}
                                             </Center>
                                         </a>

@@ -60,14 +60,14 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 </Box>
 
 
-                <Wrap  mt={1} spacingY={0} spacingX={2} alignItems='center'>
+                <Wrap  mt={2} spacingY={0} spacingX={2} alignItems='center'>
                     <Flex gap={1} alignItems='center'>
-                        <Text color='gray.700' fontSize={'14px'}>লিখেছেন</Text>
+                        <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
                         <AuthorHoverCard color='gray.500' author={author} />
                     </Flex>
 
                     <Box >
-                        <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                        <Text fontSize={'13px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
                             {formatDate(createdAt)}
                         </Text>
                     </Box>
@@ -75,10 +75,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
+            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
-                <Box borderColor='blackAlpha.100'>
+                <Box borderColor='blackAlpha.100' mb={2}>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
 
@@ -92,6 +92,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                                 size='xs'
                                                 variant={'outline'}
                                                 rounded='full'
+                                                fontWeight={'light'}
                                             >
                                                 {cat.name}
                                             </Button>
@@ -127,10 +128,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     </Box>
 
 
-                    <Box w='full' borderTop='0px' borderBottom='0px' borderColor='blackAlpha.100' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
+                    <Box w='full' pb={{base:2, xl: 0}} borderTop={{base:'1px', xl: '0px'}} borderBottom={{base:'1px', xl: '0px'}} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
                         <Flex gap={10} justify='space-between' alignItems={'center'}>
 
-                            <Flex gap={2} flex='1' justify='flex-start' alignItems={'center'}>
+                            <Flex gap={4} flex='1' justify='flex-start' alignItems={'center'}>
 
                                 <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
                                     <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
@@ -157,7 +158,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                             <Text as={'span'} color='facebook.500' fontWeight={'black'} fontSize='14px'>
                                                 {banglaNumber(states.comment)} মন্তব্য</Text>
                                         </Flex>
-                                    </Tooltip> : <Text color='facebook.500' fontSize={'14px'} fontWeight='black'> মন্তব্য নেই</Text>}
+                                    </Tooltip> : <Text color='facebook.500' fontSize={'14px'} fontWeight='normal'> মন্তব্য নেই</Text>}
 
                                 </Flex>
 
@@ -166,7 +167,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
 
                             <Link href={`/blog/${slug}`}>
-                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'} fontWeight='bold'>
+                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'} fontWeight='normal'>
                                     <Text cursor={'pointer'} color='blue.700' as={'span'} fontSize={'14px'} href={`/blog/${slug}`}>
                                         বিস্তারিত
                                     </Text>

@@ -9,22 +9,23 @@ export const SocketContext = createContext()
 const SocketContextProvider = ({ children }) => {
 
     const socket = useRef(null)
-    
+
     const [onlineUsers, setOnlineUsers] = useState([])
 
     const { isLoading, authUser } = useUser()
 
     useEffect(() => {
-      socket.current = io(process.env.SERVER_HOST)
+        socket.current = io(process.env.SERVER_HOST)
     }, [])
 
     useEffect(() => {
+
         if (!isLoading && authUser) {
             socket?.current?.emit('addUser', authUser)
-        }else if(!isLoading && !authUser){
+        } else if (!isLoading && !authUser) {
             socket?.current?.emit('addUser', {})
+        }
 
-        } 
     }, [authUser])
 
 
@@ -34,12 +35,12 @@ const SocketContextProvider = ({ children }) => {
                 // console.log('Online Users: ', data);
                 setOnlineUsers(data)
             })
-            
+
         })
     }, socket.current)
 
     return <SocketContext.Provider value={{
-        socket: socket.current, 
+        socket: socket.current,
         onlineUsers
     }}>
         {children}

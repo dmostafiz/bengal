@@ -94,8 +94,7 @@ export default function useLogin(redirectUrl=null) {
             setRedirectUrl(redirectUrl)
         }
         
-        
-        console.log('login values sdsd', values)
+        // console.log('login values sdsd', values)
 
         const res = await Axios.post(url, values)
 
@@ -133,7 +132,7 @@ export default function useLogin(redirectUrl=null) {
 
             setAccessToken(res?.data?.accessToken)
 
-            setFlashMessage('success', "ব্লগে আপনাকে স্বাগতম!", "")
+            // setFlashMessage('success', "ব্লগে আপনাকে স্বাগতম!", "")
 
             const redirectUrl = getRedirectUrl()
 
