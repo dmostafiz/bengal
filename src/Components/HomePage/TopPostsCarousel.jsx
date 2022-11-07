@@ -25,13 +25,9 @@ import useOnlineUser from '../../Hooks/useOnlineUser';
 
 export default function TopPostsCarousel() {
 
-    const [posts, setPosts] = useState([])
-
     const { data, isLoading, isError, error } = useQuery(['topPosts'], async () => {
         const response = await Axios.get('/post/get_top_posts/12')
-        console.log('top posts', response)
-        setPosts(response?.data?.posts)
-        return response?.data?.posts || null
+        return response?.data?.posts || []
     })
 
 
@@ -51,7 +47,7 @@ export default function TopPostsCarousel() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {posts.length ? posts.map((item, index) => (
+                {!isLoading && data.length ? data.map((item, index) => (
                     <SwiperSlide key={index}>
 
                         <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >

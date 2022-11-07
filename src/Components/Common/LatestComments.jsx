@@ -13,23 +13,21 @@ import useOnlineUser from '../../Hooks/useOnlineUser'
 
 export default function LatestComments() {
 
-    const [comments, setComments] = useState([])
-
     const {isUserOnline} = useOnlineUser()
 
     const { data, isLoading, isError, error } = useQuery(['latesComments'], async () => {
 
         const response = await Axios.get('/post/latest_comments/12')
 
-        console.log('latest comments: ', response?.data?.comments)
-        setComments(response?.data?.comments)
-        return response?.data?.comments || null
+        // console.log('latest comments: ', response?.data?.comments)
+        // setComments(response?.data?.comments)
+        return response?.data?.comments || []
 
     })
 
     return (
         <Flex direction='column' w={'full'}>
-            {comments.length ? comments.map((comment, index) => <Box key={index} mt={3} pb={3} borderBottom='1px' borderColor={'blackAlpha.200'}>
+            {!isLoading && data.length ? data.map((comment, index) => <Box key={index} mt={3} pb={3} borderBottom='1px' borderColor={'blackAlpha.200'}>
 
                 <Flex alignItems={'start'} gap={2}>
                     <Avatar size={'xs'} name={comment.author.name} src={comment.author.avatar}>
