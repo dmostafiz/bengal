@@ -5,15 +5,15 @@ import React from 'react'
 import banglaNumber from '../../Helpers/banglaNumber'
 import useOnlineUser from '../../Hooks/useOnlineUser'
 
-export default function AuthorHoverCard({ author }) {
+export default function AuthorHoverCard({ author, color='' }) {
 
     const { isUserOnline } = useOnlineUser()
 
     return (
-        <HoverCard zIndex={'999'} width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
+        <HoverCard width={320} shadow="md" withArrow openDelay={0} closeDelay={400}>
             
             <HoverCard.Target>
-                <Heading as='h6' fontSize={'13px'}>
+                <Heading as='h6' fontSize={'13px'} color={color}>
                     {author.displayName}
                 </Heading>
             </HoverCard.Target>

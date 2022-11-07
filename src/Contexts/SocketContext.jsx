@@ -29,9 +29,12 @@ const SocketContextProvider = ({ children }) => {
 
 
     useEffect(() => {
-        socket?.current?.on('socketUsers', (data) => {
-            // console.log('Online Users: ', data);
-            setOnlineUsers(data)
+        socket?.current?.on('connect', () => {
+            socket?.current?.on('socketUsers', (data) => {
+                // console.log('Online Users: ', data);
+                setOnlineUsers(data)
+            })
+            
         })
     }, socket.current)
 

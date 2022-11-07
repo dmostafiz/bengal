@@ -27,7 +27,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     const { isUserOnline } = useOnlineUser()
 
     return (
-        <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
+        <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
 
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
@@ -60,26 +60,27 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                 </Box>
 
 
-                <Box py={1} w='full'>
-                    <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
-                        {formatDate(createdAt)}
-                    </Text>
-                </Box>
+                <Wrap  mt={1} spacingY={0} spacingX={2} alignItems='center'>
+                    <Flex gap={1} alignItems='center'>
+                        <Text color='gray.700' fontSize={'14px'}>লিখেছেন</Text>
+                        <AuthorHoverCard color='gray.500' author={author} />
+                    </Flex>
+
+                    <Box >
+                        <Text fontSize={'15px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                            {formatDate(createdAt)}
+                        </Text>
+                    </Box>
+                </Wrap>
 
             </Box>
 
             <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
-                <Box mb={2} borderColor='blackAlpha.100'>
+                <Box borderColor='blackAlpha.100'>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
-                        <Flex gap={1} alignItems='center'>
-                            <Text color='gray.500' fontSize={'14px'}>লিখেছেন</Text> 
-                            <AuthorHoverCard author={author} />
-                        </Flex>
-
-                        <Flex alignItems={'center'} gap={1}>
 
                             <Flex gap={5} alignItems='center'>
 
@@ -111,10 +112,6 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                 </MenuList>
                             </Menu>
 
-                        </Flex>
-
-
-
                     </Flex>
 
                 </Box>
@@ -124,7 +121,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Box color={'gray.600'} lineHeight='22px' w='full' pb={{ base: 1, lg: 3 }}>
                         <PostTrancate
                             image={image}
-                            char={70}
+                            char={100}
                             content={content}
                         />
                     </Box>
