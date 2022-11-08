@@ -1,16 +1,13 @@
-import { Avatar, AvatarBadge, Box, Button, Center, Divider, Flex, Heading, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Show, Spacer, Stack, Text, useBreakpoint, VStack, Wrap } from '@chakra-ui/react'
-import { HoverCard, Title, Tooltip } from '@mantine/core'
-import { IconThumbUp } from '@tabler/icons'
+import { Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
+import { Title, Tooltip } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
-import { ChevronDown, FileLike, Heart, ThumbUp } from 'tabler-icons-react'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import PostTrancate from './PostTrancate'
-import { BsArrowRightShort, BsHandThumbsUp, BsSave2 } from 'react-icons/bs'
+import { BsArrowRightShort, BsSave2 } from 'react-icons/bs'
 import { VscReport } from 'react-icons/vsc'
-import { FcComments, FcReading } from 'react-icons/fc'
-import { AiFillLike } from 'react-icons/ai'
+import { FcReading } from 'react-icons/fc'
 import { HiChevronDown } from 'react-icons/hi'
 import AuthorHoverCard from './AuthorHoverCard'
 import { BiCommentDetail, BiLike } from 'react-icons/bi'
@@ -119,7 +116,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 <Box>
 
-                    <Box color={'gray.600'} lineHeight='22px' w='full' pb={{ base: 1, lg: 3 }}>
+                    <Box color={'gray.600'} lineHeight='22px' fontWeight={900} fontSize={'18px'} w='full' pb={{ base: 1, lg: 3 }}>
                         <PostTrancate
                             image={image}
                             char={100}

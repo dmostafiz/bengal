@@ -16,7 +16,7 @@ export default function Navigation() {
 
     return (
         <SectionContainer maxW='full' px={{ base: 2, lg: 0 }}>
-            <Box zIndex={999999999} py={2} color={'gray.900'}>
+            <Box zIndex={999999999} py={0} color={'gray.900'}>
                 <Carousel
                     // withIndicators
                     slideSize="px"

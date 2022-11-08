@@ -18,11 +18,10 @@ export default function UserPanel({ logout = false }) {
                     description={<Text as='' fontSize={'12px'} color='blackAlpha.600'><strong>{banglaNumber(authUser.followers.length)} জন অনুসারন করছে </strong></Text>}
                     icon={<Avatar size={'md'} src={authUser.avatar} />}
                     rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                    // active
-                    // variant="filled"
-                    
+
                     variant="light"
                     color={'light'}
+                    childrenOffset={50}
                 >
                     <NavLink icon={<User />} label="প্রোফাইল" />
                     <NavLink icon={<Pencil />} label="আমার লিখাসমূহ" />

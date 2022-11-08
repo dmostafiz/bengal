@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Icon, 
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { FaFacebook, FaRegHandPeace, FaTwitter } from 'react-icons/fa'
 import { BiBookReader } from 'react-icons/bi'
 import { FacebookShareButton, FacebookShareCount } from 'react-share'
@@ -33,6 +33,9 @@ import BlogCommentThread from '../../Components/Blog/BlogCommentThread'
 import { useQuery } from '@tanstack/react-query'
 import { CommentContext } from '../../Contexts/CommentContext'
 import { IconPencilPlus } from '@tabler/icons'
+import Link from 'next/link'
+import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
+import truncate from 'truncate-html'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -180,7 +183,20 @@ function SingleBlogDetails({ post, ok }) {
 
     }
 
+    useEffect(() => {
 
+        setTimeout(() => {
+            const commentBox = document?.getElementById(router.query.comment)
+            // console.log('commentBox', commentBox)
+            commentBox?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            })
+
+        }, 1000)
+
+    }, [router.query.comment])
 
     function postWritter() {
         return <Box>
@@ -207,7 +223,10 @@ function SingleBlogDetails({ post, ok }) {
                     </Text>}
                     <Wrap spacing={2} alignItems='flex-end'>
                         <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-                        <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
+
+                        <Link href={`/blogger/${post.author.id}`}>
+                            <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
+                        </Link>
                     </Wrap>
                 </Box>
             </Box>
@@ -216,7 +235,14 @@ function SingleBlogDetails({ post, ok }) {
     }
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            title={post.title + ' - ' + siteName}
+            image={post.image || imageUrl}
+            url={siteUrl+router.asPath}
+            description={truncate(post.content, 270, {
+                stripTags: true,
+            })}
+        >
 
             {ok ?
 

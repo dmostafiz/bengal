@@ -35,9 +35,15 @@ export default function NotificationPanel() {
     })
 
 
-    async function sendNotificationRequest(notId, link) {
-        await Axios.post(`/user/seen_notification/${notId}`)
-        router.push(link)
+    async function sendNotificationRequest(not, link) {
+
+        await Axios.post(`/user/seen_notification/${not.id}`)
+
+        router.push({
+            pathname: link,
+            query: { comment: not.commentId },
+        })
+
     }
 
 
@@ -67,7 +73,7 @@ export default function NotificationPanel() {
 
                                 return <Box w={'full'} key={index}>
 
-                                    <Box onClick={() => sendNotificationRequest(item.id, item.link)} cursor={'pointer'} _hover={{ bg: 'blackAlpha.50' }} my={0} w='full' p={2}>
+                                    <Box onClick={() => sendNotificationRequest(item, item.link)} cursor={'pointer'} _hover={{ bg: 'blackAlpha.50' }} my={0} w='full' p={2}>
                                         <Flex justify={'space-between'}>
                                             <Flex alignItems={'center'} gap={2}>
                                                 <Avatar size={'xs'} name={item.sender.displayName} src={item.sender.avatar}>

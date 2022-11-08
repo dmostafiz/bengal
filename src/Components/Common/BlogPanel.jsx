@@ -1,10 +1,10 @@
 import React from 'react'
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
 import { NavLink } from '@mantine/core'
-import { IconBook, IconChevronRight, IconListCheck, IconListDetails } from '@tabler/icons'
-import { MdOutlineForum } from 'react-icons/md'
+import {  IconListCheck, IconListDetails } from '@tabler/icons'
+import { BsArrowRight } from 'react-icons/bs'
 import useUser from '../../Hooks/useUser'
-import { Heart, Logout, Pencil, Power, User } from 'tabler-icons-react'
+import { ArrowRight, ArrowsExchange2, Heart, Logout, Pencil, Power, User } from 'tabler-icons-react'
 import Link from 'next/link'
 import UserPanel from './UserPanel'
 import TranslatorWidget from 'react-translate-widget';
@@ -26,7 +26,7 @@ export default function BlogPanel() {
                     <NavLink
                         label={<Text fontSize={'17px'} fontWeight={500}>বেঙ্গলরিড প্রচ্ছদ</Text>}
                         // description={'সকল পোস্ট দেখুন'}
-                        icon={<IconListDetails size={32} stroke={2} color='#385898' />}
+                        icon={<IconListDetails size={28} stroke={2} color='#385898' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}
                         // active
                         variant="subtle"
@@ -35,22 +35,9 @@ export default function BlogPanel() {
                 </Link>
 
             </Box>
+
+
             {/* 
-            <Box>
-                <Link href='/selected_posts'>
-                    <NavLink
-                        label={<Text fontSize={'17px'} fontWeight={500}>বাছাইকৃত পোস্ট</Text>}
-                        // description={'নির্বাচিত পোস্ট গুলো দেখুন'}
-                        icon={<IconListCheck size={32} stroke={2} />}
-                        // rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                        active
-                        variant="subtle"
-                        color={'dark'}
-                    />
-                </Link>
-
-            </Box> */}
-
             <Box>
                 <Link href='/selected_posts'>
                     <NavLink
@@ -64,7 +51,30 @@ export default function BlogPanel() {
                     />
                 </Link>
 
+            </Box> */}
+
+
+
+            <Box>
+                <NavLink
+
+                    label={<Flex gap={1} alignItems='center'>
+                        <Text fontSize={'17px'}>প্লাটফর্ম পরিচিতি</Text>
+                    </Flex>}
+                    // description={'কমিউনিটি ডিসকাশন প্যানেল এ অন্যান্য ব্লগারদের সাথে বিষয় ভিত্তিক আলোচনা করুন...'}
+                    icon={<IconListCheck size={28} color='#385898' />}
+                    // rightSection={<IconChevronRight size={12} stroke={1.5} />}
+                    // active
+                    variant="subtle"
+                    color={'dark'}
+                    childrenOffset={40}
+                >
+                    <NavLink py={2} icon={<BsArrowRight />} label="নীতিমালা" />
+                    <NavLink py={2} icon={<BsArrowRight />} label="পোস্ট র‍্যাঙ্কিং পদ্ধতি" />
+                    <NavLink py={2} icon={<BsArrowRight />} label="ব্লগার র‍্যাঙ্কিং পদ্ধতি" />
+                </NavLink>
             </Box>
+
 
             {/* <Box>
                 <NavLink
