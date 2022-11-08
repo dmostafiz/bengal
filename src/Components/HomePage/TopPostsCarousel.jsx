@@ -22,6 +22,7 @@ import formatDate from '../../Helpers/formatDate';
 import AuthorHoverCard from '../Common/AuthorHoverCard';
 import SliderPostCarkSkeleton from '../Common/Skeletons/SliderPostCarkSkeleton';
 import useOnlineUser from '../../Hooks/useOnlineUser';
+import truncate from 'truncate-html';
 
 export default function TopPostsCarousel() {
 
@@ -50,7 +51,7 @@ export default function TopPostsCarousel() {
                 {!isLoading && data.length ? data.map((item, index) => (
                     <SwiperSlide key={index}>
 
-                        <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl' >
+                        <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl'>
 
                             {item.image ?
                                 <Box
@@ -70,7 +71,11 @@ export default function TopPostsCarousel() {
                                         </a>
                                     </Link>
                                 </Box>
-                                : <></>}
+                                :<Box roundedTop='xl' h={{ base: '140px', lg: '140px' }} overflow='hidden' fontSize={'15px'} p={3} bg='facebook.900' color={'whiteAlpha.700'}>
+                                {truncate(item.content, 120, {
+                                    stripTags: true,
+                                })}
+                            </Box>}
 
                             <Box px={1} py={2} textAlign={'left'} w='full' bg='.50' mb='2' >
 

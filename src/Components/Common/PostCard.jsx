@@ -72,7 +72,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
+            <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '0px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
                 <Box borderColor='blackAlpha.100' mb={2}>
