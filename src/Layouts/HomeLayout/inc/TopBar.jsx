@@ -82,7 +82,7 @@ export default function TopBar() {
 
                                     </Show>
 
-                                    <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 3, md: 5 }}>
+                                    <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 0, md: 5 }}>
 
                                         <Flex alignItems={'center'} gap={{ base: 0, md: 2 }}>
                                            
