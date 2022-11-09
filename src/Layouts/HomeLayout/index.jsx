@@ -141,7 +141,7 @@ export default function HomeLayout({
 
 
                     <Center py='5'>
-                        <Text>2022 @ bengalread.com all rights reserved</Text>
+                        <Text>2022 @ shamantorik.com all rights reserved</Text>
                     </Center>
 
                 </SectionContainer>
