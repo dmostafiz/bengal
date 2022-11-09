@@ -1,6 +1,6 @@
 import { Avatar, AvatarBadge, Badge, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
 import React, { useContext, useEffect } from 'react'
-import { BellOff, BellRinging, ChevronDown, Heart, Lock, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
+import { BellOff, BellRinging, ChevronDown, Heart, Lock, LockOpen, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { FaBell, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
 import { Affix } from '@mantine/core'
@@ -85,7 +85,7 @@ export default function TopBar() {
                                     <Flex alignItems={'center'} justify={'space-between'} gap={{ base: 0, md: 5 }}>
 
                                         <Flex alignItems={'center'} gap={{ base: 0, md: 2 }}>
-                                           
+
                                             <NotificationPanel />
 
                                             <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
@@ -102,9 +102,20 @@ export default function TopBar() {
                                                     </Avatar>
                                                 </MenuButton>
                                                 <MenuList shadow={'md'} rounded='none' zIndex={9999} pos={'relative'} top={{ base: '2px', md: '9px' }} width={{ base: '100vw', md: '270px' }}>
-                                                    <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
-                                                    <MenuItem icon={<Pencil />}>আমার লিখাসমূহ</MenuItem>
-                                                    <MenuItem icon={<Heart />}>আমার পছন্দ তালিকা</MenuItem>
+                                                    <Link href='/user/profile'>
+                                                        <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
+                                                    </Link>
+                                                    <Link href='/user/post_list'>
+                                                        <MenuItem icon={<Pencil />}>ব্লগপোস্ট তালিকা</MenuItem>
+                                                    </Link>
+
+                                                    <Link href='/user/saved_posts'>
+                                                        <MenuItem icon={<Heart />}>সংরক্ষিত পোস্টসমূহ</MenuItem>
+                                                    </Link>
+
+                                                    <Link href='/user/change_password'>
+                                                        <MenuItem icon={<LockOpen />}>পাসওয়ার্ড পরিবর্তন</MenuItem>
+                                                    </Link>
                                                     <MenuItem onClick={logoutUser} icon={<Power />}>লগ-আউট করুন</MenuItem>
                                                 </MenuList>
                                             </Menu>

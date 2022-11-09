@@ -18,6 +18,7 @@ import BlogPanel from '../Components/Common/BlogPanel'
 import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
 import SectionTitle from '../Components/Common/SectionTitle'
 import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
+import UserPanel from '../Components/Common/UserPanel'
 
 export default function Home() {
 
@@ -53,7 +54,7 @@ export default function Home() {
 
 
         <Show below='md'>
-          <BlogPanel />
+          {/* <UserPanel /> */}
         </Show>
 
         <Box mb={8} w='full' overflow={'hidden'}>

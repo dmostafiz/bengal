@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Box, Button, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Icon, Input, Text, useDisclosure } from "@chakra-ui/react"
 import { BellOff, Menu2, Power } from "tabler-icons-react"
 import UserPanel from "../../Components/Common/UserPanel"
@@ -9,11 +9,18 @@ import useUser from "../../Hooks/useUser"
 import Link from "next/link"
 import { IconChevronRight } from "@tabler/icons"
 import { NavLink } from "@mantine/core"
+import DesktopSearchbar from "../../Components/Header/DesktopSearchbar"
+import NotificationPanel from "./NotificationPanel"
+import BlogPanel from "../../Components/Common/BlogPanel"
+import { useRouter } from "next/router"
 
 export default function MobileSidebarDrawer() {
+    const router = useRouter()
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const { authUser, isLoading } = useUser()
+    useEffect(() => {
+        onClose()
+    }, [router])
 
     return (
         <>
@@ -30,39 +37,21 @@ export default function MobileSidebarDrawer() {
                 <DrawerOverlay />
                 <DrawerContent h={'100vh'}>
                     <DrawerCloseButton />
-                    <DrawerHeader py={0} borderBottom={'1px'} borderColor='blackAlpha.200'>
+                    <DrawerHeader px={3} pt={0} pb={3} borderBottom={'1px'} borderColor='blackAlpha.200'>
                         <SiteLogoDesktop />
+
+                        <DesktopSearchbar mobile={true} />
+
                     </DrawerHeader>
 
 
-                    <UserPanel logout/>
+                   
 
-                    <DrawerBody borderTop='1px'  borderColor='blackAlpha.200'>
+                    <DrawerBody px={0} borderTop='1px'  borderColor='blackAlpha.200'>
                         {/* <Input placeholder='Type here...' /> */}
-
-                        <NavLink
-                            label={<Text fontSize={'17px'} fontWeight={500}>নোটিফিকেশন</Text>}
-                            // description={<Text as='' fontSize={'12px'} color='blackAlpha.600'><strong>@{authUser.userName}</strong> ( {authUser.followers.length} জন অনুসারন করছে )</Text>}
-                            icon={<FaBell />}
-                            rightSection={<IconChevronRight size={12} stroke={1.5} />}
-                            // active
-                            // variant="filled"
-
-                            variant="light"
-                            color={'light'}
-                        >
-                            <Box width={'full'}>
-                                <Flex py={5}>
-                                    <Icon as={BellOff} color={'blackAlpha.500'} fontSize={'26px'} />  <Text color={'blackAlpha.500'}>কোন নোটিফিকেশন পাওয়া যায়নি</Text>
-                                </Flex>
-                            </Box>
-
-                            {/* <NavLink icon={<User />} label="প্রোফাইল" />
-                            <NavLink icon={<Pencil />} label="আমার লিখাসমূহ" />
-                            <NavLink icon={<Heart />} label="আমার পছন্দ তালিকা" /> */}
-                            {/* {logout && <NavLink onClick={logoutUser} icon={<Power />} label="লগ-আউট" />} */}
-                        </NavLink>
-
+                        <UserPanel logout isMobile={true}/>
+                        <BlogPanel userPanel={false} />
+                    
 
                     </DrawerBody>
 

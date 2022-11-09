@@ -12,7 +12,7 @@ import banglaNumber from '../../Helpers/banglaNumber'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function DesktopSearchbar() {
+export default function DesktopSearchbar({mobile=false}) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -102,7 +102,7 @@ export default function DesktopSearchbar() {
                 borderBottom={isOpen? '0px' : '1px'}
 
                 // bg='facebook.10'
-                borderColor='facebook.200'
+                borderColor='facebook.100'
                 roundedTop={isOpen ? 'xl' : '3xl'}
                 roundedBottom={isOpen ? 'none' : '3xl'}
                 py={'2px'}
@@ -210,12 +210,8 @@ export default function DesktopSearchbar() {
                                                 <Box flex='1'>
                                                     <Title order={5}>{post.title}</Title>
                                                     <PostTrancate
-                                                        char={14}
+                                                        char={mobile ? 4 : 14}
                                                         content={post?.content ?? ''}
-                                                    // slug={<>... <Link href={`/blog/${slug}`}>
-                                                    //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
-                                                    // </Link></>
-                                                    // }
                                                     />
                                                 </Box>
                                             </Flex>

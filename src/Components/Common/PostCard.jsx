@@ -29,7 +29,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
                 {image ?
-                    <Box mb={2} mt={1} border='1px' borderColor={'blackAlpha.200'} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '150px' }} shadow='md' rounded='md'
+                    <Box mb={0} border='1px' borderColor={'blackAlpha.200'} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow='md' rounded='md'
                         overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
@@ -38,7 +38,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             <a href={`/blog/${slug}`}>
                                 <Center h='full' w='full'>
                                     {/* <Show below={'lg'}> */}
-                                    <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt='image' />
+                                    <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
                                     {/* </Show> */}
                                 </Center>
                             </a>
@@ -50,7 +50,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
-                                <Title order={3}><Text noOfLines={{ base: 1, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
                             </Tooltip>
                         </a>
                     </Link>

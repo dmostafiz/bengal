@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarBadge, Badge, Box, Center, Divider, Flex, Heading, Hide, Icon, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Badge, Box, Button, Center, Divider, Flex, Heading, Hide, Icon, Image, Show, Spacer, Spinner, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
@@ -18,14 +18,27 @@ import { BiCommentDetail } from 'react-icons/bi'
 import Link from 'next/link'
 import AuthorHoverCard from '../../Components/Common/AuthorHoverCard'
 import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
+import { useQuery } from '@tanstack/react-query'
 
-const blogger = ({ user, ok }) => {
+export default function AccountWrapper({ children, getUser, title = 'প্রোফাইল' }) {
 
     const router = useRouter()
 
     const { isUserOnline } = useOnlineUser()
 
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
+
+    const { data, isLoading } = useQuery(['userAccount'], async () => {
+        const res = await Axios.get('/user/user_account')
+        console.log('user account res ', res.data)
+        return res?.data?.user
+    })
+
+    useEffect(() => {
+        setUser(data)
+        getUser(data)
+    }, [data])
+
 
     const userInfo = () => {
         return <Box w='full' px={{ md: 1, lg: 3 }} mb='5' bg={'white'}>
@@ -53,7 +66,7 @@ const blogger = ({ user, ok }) => {
 
     return (
         <HomeLayout
-            title={user?.displayName + ' - ' + siteName}
+            title={title + ' - ' + siteName}
             image={user?.avatar || imageUrl}
             url={siteUrl + router.asPath}
             description={truncate(user?.bio, 270, {
@@ -61,7 +74,7 @@ const blogger = ({ user, ok }) => {
             })}
         >
 
-            {user ? <LayoutColumn
+            {!isLoading && user ? <LayoutColumn
 
                 leftSide={
                     <Box>
@@ -81,7 +94,7 @@ const blogger = ({ user, ok }) => {
                                         </Tr>
                                         <Tr>
                                             <Td>জন্মস্থান</Td>
-                                            <Td isNumeric>{user?.birthPlace}</Td>
+                                            <Td isNumeric></Td>
                                         </Tr>
                                         <Tr>
                                             <Td>জন্ম তারিখ</Td>
@@ -225,60 +238,37 @@ const blogger = ({ user, ok }) => {
                         {userInfo()}
                     </Show>
 
+                    <Box>
+                        <Wrap>
+                            <Link href='/user/profile'>
+                                <Button colorScheme={router.asPath.includes('profile') ? 'facebook' : 'gray'} size={'sm'}>প্রোফাইল</Button>
+                            </Link>
+                            <Link href='/user/post_list'>
+                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={'sm'}>ব্লগ পোস্ট তালিকা</Button>
+                            </Link>
+                            <Link href='/user/saved_posts'>
+                                <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={'sm'}>সংরক্ষিত পোস্টসমূহ</Button>
+                            </Link>
+                            <Link href='/user/change_password'>
+                                <Button colorScheme={router.asPath.includes('change_password') ? 'facebook' : 'gray'} size={'sm'}>পাসওয়ার্ড পরিবর্তন</Button>
+                            </Link>
+                        </Wrap>
+                    </Box>
 
-                    <SectionTitle mb={{ base: 0, lg: 5 }} title={`${user?.displayName} এর সকল পোস্ট ( ক্রমানুসারে )`} />
-
-                    <VStack gap={0}>
-
-                        {user?.posts?.length > 0 && user?.posts?.map((post, index) => {
-                            return <Box w='full' key={index}>
-                                <PostCard
-                                    title={post?.title}
-                                    slug={post?.id}
-                                    image={post?.image}
-                                    content={post?.content}
-                                    categories={post?.categories}
-                                    createdAt={post?.publishedAt}
-                                    states={{
-                                        read: 5,
-                                        comment: 3,
-                                        like: 3
-                                    }}
-                                    author={user}
-                                    authorCard={false}
-                                />
-                            </Box>
-
-                        })
-                        }
-
-                        {!user?.posts?.length && <>
-                            <IconText py={5} />
-                        </>}
-
-                    </VStack>
-
+                    {children}
 
                 </Box>
 
 
             </LayoutColumn>
 
-                : <IconText height={'75vh'} py='200' text='ব্লগার পাওয়া যায়নি' />
+                : isLoading ? <Center h={'76vh'}>
+                    <ComponentLoader />
+                </Center>
+
+                    : <IconText height={'75vh'} py='200' text='ব্লগার পাওয়া যায়নি' />
             }
 
         </HomeLayout>
     )
 }
-
-blogger.getInitialProps = async (ctx) => {
-
-    const response = await Axios.get(`/user/blogger/${ctx.query.slug}`)
-
-    return {
-        user: response?.data?.user,
-        ok: response?.data?.ok
-    }
-}
-
-export default blogger

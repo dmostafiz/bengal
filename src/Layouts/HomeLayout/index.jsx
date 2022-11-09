@@ -92,12 +92,10 @@ export default function HomeLayout({
                 <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
 
-
                 <link rel="image_src" href="https://s3.amazonaws.com/somewherein/assets/images/logo21.jpg" />
             </Head>
 
-            <Box bg={{ base: 'white', md: 'gray.200' }} minH='100vh'>
-
+            <Box bg={{ base: 'white', md: 'facebook.200' }} minH='100vh'>
 
                 {(!isLoading && !authUser && !onTapLoading) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
@@ -110,20 +108,21 @@ export default function HomeLayout({
                 <SectionContainer
                     maxW={'container.xl'}
                     px={{ base: 0, md: '10px' }}
-                    bg='gray.50'
-                    backdropFilter='auto'
+                    bg='gray.100'
+                    // backdropFilter='auto'
                 // backdropBlur='2px'
                 >
 
                     <TopBar />
 
                     {/* <ToastSpinnerText text='পোস্টটি সেভ হচ্ছে...' /> */}
-                    {/* <ImageBanner src='/banner.jpg' /> */}
 
                     <Navigation />
+                    
+                    {/* <ImageBanner src='/banner.jpg' /> */}
 
                     <Box
-                        bg={{ base: 'white', md: 'whiteAlpha.800' }}
+                        bg={{ base: 'white', md: 'whiteAlpha.900' }}
                         // roundedTop={{ base: 'none', md: '4xl' }}
                         roundedBottom='md'
                         overflow={'hidden'}

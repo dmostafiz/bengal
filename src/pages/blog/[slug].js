@@ -328,7 +328,7 @@ function SingleBlogDetails({ post, ok }) {
                             </Box>
 
                             {post.image ? <Center w={'full'} py={4} mb={5}>
-                                <Image w='full' maxH='500px' rounded='lg' objectFit={'cover'} shadow='lg' src={post.image} alt='name' />
+                                <Image w='full' maxH='500px' rounded='lg' objectFit={'cover'} shadow='lg' src={post.image} alt={post?.title} />
                             </Center> : <Box my={4} />}
 
                             <Box
