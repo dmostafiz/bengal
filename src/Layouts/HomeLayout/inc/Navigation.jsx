@@ -39,17 +39,7 @@ export default function Navigation() {
                         }
                     }}
                 >
-                    <Carousel.Slide gap={16}>
-                        <Link href='/'>
-                            <Button
-                                size={'sm'}
-                                rounded={'full'}
-                                variant='unstyled'
-                            >
-                                ব্লগ প্রচ্ছদ
-                            </Button>
-
-                        </Link>
+                    <Carousel.Slide gap={0}>
                     </Carousel.Slide>
 
                     {categories()?.map((cat, index) => {

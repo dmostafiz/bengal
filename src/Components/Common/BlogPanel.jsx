@@ -22,7 +22,7 @@ export default function BlogPanel({ userPanel = true }) {
             <Box borderBottom={'1px'} borderColor='blackAlpha.200' _hover={{ bg: 'blackAlpha.200' }}>
                 <Link href='/'>
                     <NavLink
-                        label={<Text fontSize={'17px'} fontWeight={500}>বেঙ্গলরিড প্রচ্ছদ</Text>}
+                        label={<Text fontSize={'17px'} fontWeight={500}>সামন্তরিক প্রচ্ছদ</Text>}
                         // description={'সকল পোস্ট দেখুন'}
                         icon={<IconListDetails size={24} stroke={2} color='#44578D' />}
                         // rightSection={<IconChevronRight size={12} stroke={1.5} />}

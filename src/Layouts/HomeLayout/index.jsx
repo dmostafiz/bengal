@@ -22,10 +22,10 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({
     children,
-    title = `${siteName} - Bengalread Bangla blog`,
+    title = `${siteName} - Shamantorik Bangla blog`,
     image = 'https://s3.amazonaws.com/somewherein/pictures/logo.jpg',
     url = 'http://www.bengalread.vercel.app/',
-    description = 'Bengalread Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page displaying all the incoming posts and the group blog service. since the simple start 16th december 2022, Bengalread Bangla blog has grown to become the trend setter for bangla blogging.'
+    description = 'Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page displaying all the incoming posts and the group blog service. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.'
 }) {
 
     const { asPath } = useRouter()
@@ -74,7 +74,7 @@ export default function HomeLayout({
 
                 <meta name="description" content={description} />
                 <meta property="og:description" content={description} />
-                <meta name="keywords" content="bengal read, bangla, blog, বাংলা ব্লগ,bangladesh, dhaka, bangla blog, group blog, bengali, news,  বাংলা,  বাংলাদেশ, ঢাকা, খবর, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
+                <meta name="keywords" content="shamantorik, bangla, blog, বাংলা ব্লগ,bangladesh, dhaka, bangla blog, group blog, bengali, news,  বাংলা,  বাংলাদেশ, ঢাকা, খবর, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
 
                 <meta property="fb:app_id" content="1545167315695654" />
                 <meta property="og:site_name" content="বেঙ্গলরিড বাংলা ব্লগ" />
