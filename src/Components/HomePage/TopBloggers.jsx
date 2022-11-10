@@ -22,12 +22,12 @@ import useOnlineUser from '../../Hooks/useOnlineUser';
 
 export default function TopBloggers() {
 
-    const [bloggers, setBloggers] = useState([])
+    // const [bloggers, setBloggers] = useState([])
 
     const { data, isLoading, isError, error } = useQuery(['topBloggers'], async () => {
         const response = await Axios.get('/user/get_top_ranked/12')
-        setBloggers(response?.data?.users)
-        return response?.data?.users || null
+        // setBloggers(response?.data?.users)
+        return response?.data?.users || []
     })
 
     const {isUserOnline} = useOnlineUser()
@@ -47,7 +47,7 @@ export default function TopBloggers() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {bloggers.map((item, index) => (
+                {data?.map((item, index) => (
                     <SwiperSlide key={index}>
 
                         <Box bg='blue.800' color='whiteAlpha.800' p={3} rounded='xl'>

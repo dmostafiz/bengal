@@ -83,9 +83,8 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                             {categories?.length > 0 && <Wrap spacing={1}>
                                 {categories.map((cat, index) => {
-                                    if (index < 2) {
-                                        return <Button
-                                            key={index}
+                                    return <Link key={index} href={`/category/${cat.id}`}>
+                                        <Button
                                             size='xs'
                                             variant={'outline'}
                                             rounded='full'
@@ -93,7 +92,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                         >
                                             {cat.name}
                                         </Button>
-                                    }
+                                    </Link>
                                 })
                                 }
 

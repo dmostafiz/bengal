@@ -18,6 +18,8 @@ import { BiCommentDetail } from 'react-icons/bi'
 import Link from 'next/link'
 import AuthorHoverCard from '../../Components/Common/AuthorHoverCard'
 import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
+import usePaginatingQuery from '../../Hooks/usePaginatingQuery'
+import PostCardSkeleton from '../../Components/Common/Skeletons/PostCardSkeleton'
 
 const blogger = ({ user, ok }) => {
 
@@ -26,6 +28,9 @@ const blogger = ({ user, ok }) => {
     const { isUserOnline } = useOnlineUser()
 
     const [loading, setLoading] = useState(true)
+
+    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/user/blogger/posts/${user?.id}`, 3)
+
 
     const userInfo = () => {
         return <Box w='full' px={{ md: 1, lg: 3 }} mb='5' bg={'white'}>
@@ -53,7 +58,7 @@ const blogger = ({ user, ok }) => {
 
     return (
         <HomeLayout
-            title={user?.displayName + ' - ' + siteName}
+            title={user ? `${user.id ? user.displayName + ' - ' : ''}${siteName} - Shamantorik Bangla blog` : `${siteName} - Shamantorik Bangla blog`}
             image={user?.avatar || imageUrl}
             url={siteUrl + router.asPath}
             description={truncate(user?.bio, 270, {
@@ -228,35 +233,56 @@ const blogger = ({ user, ok }) => {
 
                     <SectionTitle mb={{ base: 0, lg: 5 }} title={`${user?.displayName} এর সকল পোস্ট ( ক্রমানুসারে )`} />
 
-                    <VStack gap={0}>
+                    <>
+                        {isFetching && !items.length
 
-                        {user?.posts?.length > 0 && user?.posts?.map((post, index) => {
-                            return <Box w='full' key={index}>
-                                <PostCard
-                                    title={post?.title}
-                                    slug={post?.id}
-                                    image={post?.image}
-                                    content={post?.content}
-                                    categories={post?.categories}
-                                    createdAt={post?.publishedAt}
-                                    states={{
-                                        read: 5,
-                                        comment: 3,
-                                        like: 3
-                                    }}
-                                    author={user}
-                                    authorCard={false}
-                                />
-                            </Box>
+                            ? <>
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
 
-                        })
+                            </>
+
+                            : !isFetching && !items.length ? 
+
+                            <>
+                               <IconText text='পোস্ট পাওয়া যায়নি' />
+                            </>
+
+                            : items.length > 0 && <VStack gap={0}>
+                                {items.map((post, index) => <Box w='full' key={index}>
+                                    <PostCard
+                                        title={post?.title}
+                                        slug={post?.id}
+                                        image={post?.image}
+                                        content={post?.content}
+                                        createdAt={post?.publishedAt}
+                                        states={{
+                                            read: post?.views?.length ?? 0,
+                                            comment: post?.comments?.length ?? 0,
+                                            like: post?.likes?.length ?? 0,
+                                        }}
+                                        categories={post?.categories}
+                                        author={post?.author}
+                                    />
+                                </Box>)}
+
+                            </VStack>
+
                         }
 
-                        {!user?.posts?.length && <>
-                            <IconText py={5} />
+                        {isFetchingNextPage && <>
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+
                         </>}
 
-                    </VStack>
+                        {loadMoreButton()}
+
+                    </>
 
 
                 </Box>

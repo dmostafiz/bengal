@@ -12,122 +12,105 @@ import ImageBanner from '../../Layouts/HomeLayout/inc/ImageBanner'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import { useRouter } from 'next/router'
 import PostCard from '../../Components/Common/PostCard'
+import PostCardSkeleton from '../../Components/Common/Skeletons/PostCardSkeleton'
+import IconText from '../../Components/Common/IconText'
+import usePaginatingQuery from '../../Hooks/usePaginatingQuery'
+import Axios from '../../Helpers/axiosHelper'
+import { siteName } from '../../Helpers/config'
 
-export default function categoryPosts() {
+const categoryPosts = ({ category, ok }) => {
 
-    const router = useRouter()
+    // const router = useRouter()
+    // console.log('category ssr', category)
 
-    const [category, setCategory] = useState(null)
-
-    useEffect(()=>{
-        setCategory(router.query.slug)
-    }, [router])
+    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/category/posts/${category?.id}`, 1)
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            title={category ? `${category.id ? category.name + ' - ' : ''}${siteName} - Shamantorik Bangla blog` : `${siteName} - Shamantorik Bangla blog`}
+        >
 
-            <LayoutColumn
+            {category ? <LayoutColumn
 
                 leftSide={<MainLeftSidebar />}
 
                 rightSide={<MainRightSidebar />}
 
             >
-
                 <Box mb={8}>
-                    <Box py={3} mb='10' bg={''} fontWeight='bold' borderBottom={'1px'} borderColor='blackAlpha.100' rounded='sm'>
-                        <Title order={3}>ক্যাটাগরি - {category}</Title>
+                    <Box py={3} mb='5' bg={''} fontWeight='bold' borderBottom={'1px'} borderColor='blackAlpha.100' rounded='sm'>
+                        <Title order={3}>ক্যাটাগরি - {category?.name}</Title>
                     </Box>
 
-                    <VStack gap={1}>
-                        <PostCard
-                            title="ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল"
-                            image='https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
-                            content='পর্দায় যেমনই থাকুক না কেন, বাস্তব জীবনে হিরোর ভূমিকায় দেখা গেছে তাকে। বিভিন্ন সময়ে ডিপজলের সেবামূলক কাজের কথাও উঠে আসে। তবে তিনি তার মাকে প্রচন্ড ভালোবাসতেন। তার কাছের অনেকেই এমন কথা বলেন। কমেডি অভিনেতা জ্যাকি আলমগীর জানালেন, ডিপজল সাহেব প্রচন্ড মা ভক্ত। মায়ের প্রতি ডিপজলের ভালোবাসার কথা জানিয়ে জ্যাকি...'
-                            createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                            states={{
-                                read: 5,
-                                comment: 3,
-                                like: 3
-                            }}
-                            author={{
-                                name: 'লিমন লস্কর',
-                                image: ''
-                            }}
-                        />
+                    <>
+                        {isFetching && !items.length
 
-                        <PostCard
-                            title="বান্দুরা রানী পবিত্র জপমালা গীর্জা"
-                            image='https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
-                            content='ঢাকা থেকে মাত্র ১ ঘন্টা ৩০ মিনিটের দূরর্ত্বে নবাবগঞ্জে খ্রীষ্টান আদিনিবাস। এই নাবাগঞ্জে রয়েছে ধর্মীয় বিচিত্রতা ও সহবস্থান। রয়েছে প্রায় চারশ বছরের পুরান ভাঙ্গা মসজিদ ও প্রায় ২৪০ বছরের পূরান  "রানী পবিত্র জপমালা গীর্জা" যা বান্দুরা গীর্জা নামেও বহুল পরিচিত...'
-                            createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                            states={{
-                                read: 5,
-                                comment: 3,
-                                like: 3
-                            }}
-                            author={{
-                                name: 'লিমন লস্কর',
-                                image: ''
-                            }}
-                        />
+                            ? <>
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
+                                <PostCardSkeleton />
 
+                            </>
 
-                        <PostCard
-                            title="বয়স শেষ করা বিদ্যালয়ে আমরা..../"
-                            // image='https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
-                            content='মাত্র এগারো বছর বয়সে ইনভেস্ট শুরু করে সতের বছর বয়সে ৪২ লাখ টাকার মালিক ওয়ারেন বাফেট টাইপ হতে হলে ২৫ বছরে বাপের টাকায় গ্রাজুয়েট কমপ্লিট করে ৩০ বছর পর্যন্ত সরকারি চাকরির পিছনে দৌড়ে হওন যাইবো না,...'
-                            createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                            states={{
-                                read: 5,
-                                comment: 3,
-                                like: 3
-                            }}
-                            author={{
-                                name: 'লিমন লস্কর',
-                                image: ''
-                            }}
-                        />
+                            : !isFetching && !items.length ?
 
-                        <PostCard
-                            title="রাম ও কৃষ্ণ - মানুষের কাছে পাঠানো নবী ছিলেন?"
-                            image='https://s3.amazonaws.com/somewherein/pictures/shaiyan/shaiyan-1664874752-d595450_xlarge.jpg'
-                            content='যদি প্রমাণ করা যায় যে- রাম ও কৃষ্ণ ছিলেন মানুষের কাছে প্রেরিত ১ লক্ষ ২৪ হাজার নবীদের মাঝে দুইজন নবী, তাহলে আমাদের মাঝে ঐক্য ফিরে আসবে না? তাতে বাধা কোথায়? ভারতবর্ষের অনেক ইসলামী ব্যক্তিত্ব মনে করেন যে- রাম, কৃষ্ণ এবং শিব ইসলামের প্রেরিত পুরুষ ছিলেন। তেমনই একজন ইসলামী...'
-                            createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                            states={{
-                                read: 5,
-                                comment: 3,
-                                like: 3
-                            }}
-                            author={{
-                                name: 'লিমন লস্কর',
-                                image: ''
-                            }}
-                        />
+                                <>
+                                    <IconText text='পোস্ট পাওয়া যায়নি' />
+                                </>
 
-                        <PostCard
-                            title="জনপ্রতিনিধিদের জবাবদিহিতাহীন এই সংস্কৃতি আরও কত বছর চলবে?"
-                            image='https://s3.amazonaws.com/somewherein/pictures/SabbirShakil666/SabbirShakil666-1664873600-089caf6_xlarge.jpg'
-                            content='এদেশের কনস্টিটিউশন অনুযায়ী পাঁচ বছর পরপর ভোটের মাধ্যমে জনপ্রতিনিধি, সরকার গঠন করার নিয়ম । কিন্তু পুরো পাঁচ বছর কেটে গেলেও এদেশের সব এলাকাতে জনপ্রতিনিধি আর জনতার মুখোমুখি কোনো সেমিনার/সিম্পোজিয়াম/প্রোগ্রাম করা হয়? সোজাসাপ্টা উত্তর আসবে, ‘না’ । কোনো জবাবদিহিতা আছে? উত্তর হবে, ‘না’ । ...'
-                            createdAt='০৪ ঠা অক্টোবর, ২০২২ বিকাল ৫:৩৩'
-                            states={{
-                                read: 5,
-                                comment: 3,
-                                like: 3
-                            }}
-                            author={{
-                                name: 'লিমন লস্কর',
-                                image: ''
-                            }}
-                        />
-                    </VStack>
+                                : items.length && <VStack gap={0}>
+                                    {items.map((post, index) => <Box w='full' key={index}>
+                                        <PostCard
+                                            title={post?.title}
+                                            slug={post?.id}
+                                            image={post?.image}
+                                            content={post?.content}
+                                            createdAt={post?.publishedAt}
+                                            states={{
+                                                read: post?.views?.length ?? 0,
+                                                comment: post?.comments?.length ?? 0,
+                                                like: post?.likes?.length ?? 0,
+                                            }}
+                                            categories={post?.categories}
+                                            author={post?.author}
+                                        />
+                                    </Box>)}
 
+                                </VStack>
+
+                        }
+
+                        {isFetchingNextPage && <>
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+                            <PostCardSkeleton />
+
+                        </>}
+
+                        {loadMore()}
+
+                    </>
 
                 </Box>
 
 
             </LayoutColumn>
+                : <IconText height={'75vh'} py='200' text='ক্যাটাগরি পাওয়া যায়নি' />
+            }
 
         </HomeLayout>
     )
 }
+
+categoryPosts.getInitialProps = async (ctx) => {
+
+    const response = await Axios.get(`/category/single/${ctx.query.slug}`)
+    return {
+        category: response?.data?.category,
+        ok: response?.data?.ok
+    }
+}
+
+export default categoryPosts

@@ -5,7 +5,7 @@ export default function PostCardSkeleton() {
     return (
         <Stack mb={10} spacing={3}>
             <Flex direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
-                <Flex mt={4} direction={'column'} gap={2} w={{ base: 'full', lg: '40%' }}>
+                <Flex mt={4} direction={'column'} gap={2} w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }}>
                     <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='full' rounded={'lg'} fadeDuration={3} />
                     <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='30px' width='100%' fadeDuration={3} />
                     <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='30px' width='80%' fadeDuration={3} />

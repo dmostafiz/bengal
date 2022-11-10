@@ -2,7 +2,6 @@ import { Box, Button, Flex, Text, Wrap } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { Carousel } from '@mantine/carousel';
-import NextLink from 'next/link';
 // import useCategory from '../../../Hooks/categories';
 import categories from '../../../Hooks/categories';
 import Link from 'next/link';
@@ -45,7 +44,7 @@ export default function Navigation() {
                     {categories()?.map((cat, index) => {
                         return <Carousel.Slide key={index} gap={16}>
 
-                            <Link href={`/category/${cat.name}`}>
+                            <Link href={`/category/${cat.id}`}>
                                 <Button
                                     size={'sm'}
                                     rounded={'full'}

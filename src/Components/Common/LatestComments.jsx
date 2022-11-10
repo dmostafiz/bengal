@@ -27,7 +27,7 @@ export default function LatestComments() {
 
     return (
         <Flex direction='column' w={'full'}>
-            {!isLoading && data.length ? data.map((comment, index) => <Box key={index} mt={3} pb={3} borderBottom='1px' borderColor={'blackAlpha.200'}>
+            {!isLoading && data.length ? data?.map((comment, index) => <Box key={index} mt={3} pb={3} borderBottom='1px' borderColor={'blackAlpha.200'}>
 
                 <Flex alignItems={'start'} gap={2}>
                     <Avatar size={'xs'} name={comment.author.name} src={comment.author.avatar}>

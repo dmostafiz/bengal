@@ -48,7 +48,7 @@ export default function TopPostsCarousel() {
                 onSwiper={(swiper) => console.log(swiper)}
                 modules={[Navigation, Scrollbar]}
             >
-                {!isLoading && data.length ? data.map((item, index) => (
+                {!isLoading && data.length ? data?.map((item, index) => (
                     <SwiperSlide key={index}>
 
                         <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl'>
