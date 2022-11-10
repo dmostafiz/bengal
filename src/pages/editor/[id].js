@@ -585,6 +585,7 @@ export default function write() {
                         rules={{ required: true }}
                         render={({ field: { onChange, onBlur, value, ref } }) =>
                           <MultiSelect
+                            zIndex={99999999}
                             data={cats}
                             searchable
                             nothingFound="কোনকিছু পাওয়া যায়নি"
@@ -612,7 +613,7 @@ export default function write() {
                   </Box>
 
 
-                  <Box mb={10}>
+                  <Box mb={48}>
                     <Flex gap={3}>
                       <Button
                         isLoading={drafting}

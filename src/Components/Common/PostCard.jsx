@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
+import { Badge, Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
 import { Title, Tooltip } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
@@ -72,26 +72,31 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '0px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
+            <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
-                <Box borderColor='blackAlpha.100' mb={2}>
+                <Box borderBottom='0px' borderColor='blackAlpha.200' mb={2} pb={1}>
 
                     <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
 
                         <Flex gap={5} alignItems='center'>
 
-                            {categories?.length > 0 && <Wrap spacing={1}>
+                            {categories?.length > 0 && <Wrap spacing={2}>
                                 {categories.map((cat, index) => {
                                     return <Link key={index} href={`/category/${cat.id}`}>
-                                        <Button
+                                        <Badge
                                             size='xs'
-                                            variant={'outline'}
+                                            cursor={'pointer'}
+                                            variant={'subtle'}
+                                            colorScheme='facebook'
                                             rounded='full'
-                                            fontWeight={'light'}
+                                            px={2}
+                                            py='1.8px'
+                                            shadow={'sm'}
+                                            // fontWeight={'light'}
                                         >
                                             {cat.name}
-                                        </Button>
+                                        </Badge>
                                     </Link>
                                 })
                                 }
@@ -113,7 +118,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 </Box>
 
-                <Box color={'gray.600'} lineHeight='22px' fontWeight={900} fontSize={'18px'} w='full' pb={{ base: 1, lg: 3 }}>
+                <Box color={'gray.600'} lineHeight='22px' fontWeight={900} fontSize={'16px'} w='full' pb={{ base: 1, lg: 3 }}>
                     <PostTrancate
                         image={image}
                         char={100}
