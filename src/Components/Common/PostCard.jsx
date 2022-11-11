@@ -24,12 +24,12 @@ export default function PostCard({ title, image, content, createdAt, states, aut
     const { isUserOnline } = useOnlineUser()
 
     return (
-        <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 3, sm: 3, md: 3, lg: 3, xl: 4 }}>
+        <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 2, sm: 3, md: 3, lg: 3, xl: 4 }}>
 
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
                 {image ?
-                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow='lg' rounded='xl'
+                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{base:'sm',md:'lg'}} rounded='xl'
                         overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
@@ -50,7 +50,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
-                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight='1.3' color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{base: 1.2, lg: 1.3}} color='gray.700'>{title}</Text></Title>
                             </Tooltip>
                         </a>
                     </Link>
@@ -118,7 +118,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                 </Box>
 
-                <Box color={'gray.600'} lineHeight='22px' fontWeight={900} fontSize={'16px'} w='full' pb={{ base: 1, lg: 3 }}>
+                <Box color={{base: 'blackAlpha.600', md: 'gray.600'}} lineHeight={{base: '19px', md: '22px'}} fontSize={{base: '15px', md: '16px'}} w='full' pb={{ base: 2, lg: 3 }}>
                     <PostTrancate
                         image={image}
                         char={100}
