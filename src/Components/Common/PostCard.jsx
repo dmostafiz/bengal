@@ -115,7 +115,7 @@ export default function PostCard({id, title, image, content, createdAt, postType
                                 <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
                                     {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
                                         if(stepPost.id != id){
-                                        return <Link href={`/blog/${stepPost.id}`}>
+                                        return <Link key={index} href={`/blog/${stepPost.id}`}>
                                             <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
                                         </Link>
                                         }

@@ -106,11 +106,11 @@ export default function TopBar() {
                                                         <MenuItem icon={<User />}>প্রোফাইল</MenuItem>
                                                     </Link>
                                                     <Link href='/user/post_list'>
-                                                        <MenuItem icon={<Pencil />}>ব্লগপোস্ট তালিকা</MenuItem>
+                                                        <MenuItem icon={<Pencil />}>আমার ব্লগিং</MenuItem>
                                                     </Link>
 
                                                     <Link href='/user/saved_posts'>
-                                                        <MenuItem icon={<Heart />}>সংরক্ষিত পোস্টসমূহ</MenuItem>
+                                                        <MenuItem icon={<Heart />}>সংরক্ষিত পোস্ট</MenuItem>
                                                     </Link>
 
                                                     <Link href='/user/change_password'>

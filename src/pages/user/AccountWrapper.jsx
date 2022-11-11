@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Avatar, AvatarBadge, Badge, Box, Button, Center, Divider, Flex, Heading, Hide, Icon, Image, Show, Spacer, Spinner, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
-import { Title } from '@mantine/core'
+import { Spoiler, Title } from '@mantine/core'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import { useRouter } from 'next/router'
@@ -56,9 +56,12 @@ export default function AccountWrapper({ children, getUser, title = 'প্র�
             </Flex>
 
             <Box py={5} mb={1}>
-                {/* <Blockquote px={0}> */}
-                <Text fontSize={'15px'} color={'blackAlpha.800'}>{user?.bio}</Text>
-                {/* </Blockquote> */}
+
+                <Spoiler maxHeight={45} showLabel="আরও দেখুন" hideLabel="সংক্ষিপ্ত">
+                    {/* <Blockquote px={0}> */}
+                    <Text fontSize={'15px'} color={'blackAlpha.800'}>{user?.bio}</Text>
+                    {/* </Blockquote> */}
+                </Spoiler>
             </Box>
         </Box>
     }
@@ -244,10 +247,10 @@ export default function AccountWrapper({ children, getUser, title = 'প্র�
                                 <Button colorScheme={router.asPath.includes('profile') ? 'facebook' : 'gray'} size={'sm'}>প্রোফাইল</Button>
                             </Link>
                             <Link href='/user/post_list'>
-                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={'sm'}>ব্লগ পোস্ট তালিকা</Button>
+                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={'sm'}>আমার ব্লগিন</Button>
                             </Link>
                             <Link href='/user/saved_posts'>
-                                <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={'sm'}>সংরক্ষিত পোস্টসমূহ</Button>
+                                <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={'sm'}>সংরক্ষিত পোস্ট</Button>
                             </Link>
                             <Link href='/user/change_password'>
                                 <Button colorScheme={router.asPath.includes('change_password') ? 'facebook' : 'gray'} size={'sm'}>পাসওয়ার্ড পরিবর্তন</Button>

@@ -28,10 +28,10 @@ export default function UserPanel({ isMobile = false, logout = false }) {
                         <NavLink py={2} icon={<User size={16} />} label="প্রোফাইল" />
                     </Link>
                     <Link href='/user/post_list'>
-                        <NavLink py={2} icon={<Pencil size={16} />} label="ব্লগ পোস্ট তালিকা" />
+                        <NavLink py={2} icon={<Pencil size={16} />} label="আমার ব্লগিং" />
                     </Link>
                     <Link href='/user/saved_posts'>
-                        <NavLink py={2} icon={<Heart size={16} />} label="সংরক্ষিত পোস্টসমূহ" />
+                        <NavLink py={2} icon={<Heart size={16} />} label="সংরক্ষিত পোস্ট" />
                     </Link>
                     {logout && <NavLink py={2} onClick={logoutUser} icon={<Power />} label="লগ-আউট" />}
                 </NavLink>
