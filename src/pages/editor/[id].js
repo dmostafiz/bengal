@@ -259,6 +259,10 @@ export default function write() {
         duration: 9000,
         isClosable: true,
       })
+
+      if(data.status == 'published'){
+        router.push(`/blog/${res?.data?.post?.id}`)
+      }
     }
 
     setFile(null)

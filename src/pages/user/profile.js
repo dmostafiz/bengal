@@ -27,6 +27,10 @@ const schema = yup.object({
 
     birthPlace: yup.string()
         .required('আপনার জন্মস্থান নির্ধারণ করুন।'),
+
+    profession: yup.string()
+        .required('আপনার পেশা নির্ধারণ করুন।'),
+
     bio: yup.string()
         // .min(10, 'কমপক্ষে ১০ টি বাক্য লিখুন।')
         .test('len', 'কমপক্ষে ৬ টি বাক্য লিখতে হবে।', val => {
@@ -39,21 +43,21 @@ const schema = yup.object({
     email: yup.string()
         .email("দুঃখিত! ইমেইলটি ঠিকানাটি সঠিক নয়!")
         .required('ইমেইল ঠিকানাটি আবশ্যক!')
-        // .test(
-        //     'checkEmailUnique',
-        //     'দুঃখিত! ইমেইলটি আগে থেকে নিবন্ধিত!',
-        //     async (value) => {
-        //         const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
-        //             withCredentials: true,
-        //         })
+    // .test(
+    //     'checkEmailUnique',
+    //     'দুঃখিত! ইমেইলটি আগে থেকে নিবন্ধিত!',
+    //     async (value) => {
+    //         const res = await Axios.post(`/user/check_user_exists`, { by: 'email', value }, {
+    //             withCredentials: true,
+    //         })
 
-        //         if (res?.data?.ok === true) {
-        //             return false
-        //         }
+    //         if (res?.data?.ok === true) {
+    //             return false
+    //         }
 
-        //         return true
-        //     }
-        // ),
+    //         return true
+    //     }
+    // ),
 
 }).required();
 
@@ -92,6 +96,7 @@ export default function profile() {
             displayName: user?.displayName,
             gender: user?.gender,
             birthDate: user?.birthDate,
+            profession: user?.profession, 
             birthPlace: user?.birthPlace,
             bio: user?.bio,
             email: user?.email
@@ -257,6 +262,31 @@ export default function profile() {
                         <Flex gap={4}>
                             <Box flex='1' mb={{ base: 3, md: 3 }}>
                                 <Box mb={1} px={0}>
+                                    <Title order={6}>পেশা</Title>
+                                </Box>
+
+                                <FormControl isInvalid={errors.profession}>
+                                    <Select {...register('profession')} size={'sm'} placeholder='আপনার পেশা নির্ধারণ করুন'>
+                                        <option value='শিক্ষার্থী'>শিক্ষার্থী</option>
+                                        <option value='লেখক / ব্লগার'>লেখক / ব্লগার</option>
+                                        <option value='মেডিয়া / সাংবাদিক'>মেডিয়া / সাংবাদিক</option>
+                                        <option value='ডাক্তার'>ডাক্তার</option>
+                                        <option value='ইঞ্জিনিয়ার'>ইঞ্জিনিয়ার</option>
+                                        <option value='ব্যবসায়ী'>ব্যবসায়ী</option>
+                                        <option value='চাকরিজীবী'>চাকরিজীবী</option>
+                                        <option value='কৃষক / উদ্যোক্তা'>কৃষক / উদ্যোক্তা</option>
+                                        <option value='সরকারী-কর্মকর্তা / প্রশাসন'>সরকারী-কর্মকর্তা / প্রশাসন</option>
+                                        <option value='প্রবাসী / অন্যান্য'>প্রবাসী / অন্যান্য</option>
+                                    </Select>
+                                    <FormErrorMessage>
+                                        {errors.profession && errors.profession.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                            </Box>
+
+                            <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                <Box mb={1} px={0}>
                                     <Title order={6}>লিঙ্গ</Title>
                                 </Box>
 
@@ -271,6 +301,24 @@ export default function profile() {
                                     </FormErrorMessage>
                                 </FormControl>
 
+                            </Box>
+                        </Flex>
+
+                        <Flex gap={4}>
+                            <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                <Box mb={1} px={0}>
+                                    <Title order={6}>জন্ম ন্থান</Title>
+                                </Box>
+                                <FormControl isInvalid={errors.birthPlace}>
+                                    <Select {...register('birthPlace')} _selected='' size={'sm'} placeholder='আপনার জন্মস্থান নির্ধারণ করুন'>
+                                        {districts.map((dist, index) => <option key={index} value={dist.bn_name}>
+                                            {dist.bn_name}
+                                        </option>)}
+                                    </Select>
+                                    <FormErrorMessage>
+                                        {errors.birthPlace && errors.birthPlace.message}
+                                    </FormErrorMessage>
+                                </FormControl>
                             </Box>
 
                             <Box flex='1' mb={{ base: 3, md: 3 }}>
@@ -296,28 +344,7 @@ export default function profile() {
                                 </FormControl>
 
                             </Box>
-                        </Flex>
 
-                        <Flex gap={4}>
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>জন্ম ন্থান</Title>
-                                </Box>
-                                <FormControl isInvalid={errors.birthPlace}>
-                                    <Select {...register('birthPlace')} _selected='' size={'sm'} placeholder='আপনার জন্মস্থান নির্ধারণ করুন'>
-                                        {districts.map((dist, index) => <option key={index} value={dist.bn_name}>
-                                            {dist.bn_name}
-                                        </option>)}
-                                    </Select>
-                                    <FormErrorMessage>
-                                        {errors.birthPlace && errors.birthPlace.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-                            </Box>
-
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-
-                            </Box>
                         </Flex>
 
                     </Box>
@@ -361,7 +388,7 @@ export default function profile() {
                                     _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
                                     bg={'whiteAlpha.700'}
                                     size={'sm'}
-                                    placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
+                                    placeholder='আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
                                     rightSide='dfd'
                                     type='text'
                                     {...register('email')}
@@ -385,7 +412,7 @@ export default function profile() {
                                     _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
                                     bg={'whiteAlpha.700'}
                                     size={'sm'}
-                                    placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
+                                    placeholder='যে নামে সবাই আপনাকে দেখবে'
                                     rightSide='dfd'
                                     type='text'
                                     value={user?.userName}

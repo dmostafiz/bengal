@@ -238,7 +238,7 @@ function SingleBlogDetails({ post, ok }) {
         <HomeLayout
             title={post.title + ' - ' + siteName}
             image={post.image || imageUrl}
-            url={siteUrl+router.asPath}
+            url={siteUrl + router.asPath}
             description={truncate(post.content, 270, {
                 stripTags: true,
             })}
@@ -344,47 +344,53 @@ function SingleBlogDetails({ post, ok }) {
                             >
                             </Box>
 
-                            <Box my={0} />
+                            <Box my={8} />
+
+                            <Box px={0} py={1}>
+                                <Flex alignItems={'center'} justify='space-between'>
+                                    <Text whiteSpace={'nowrap'} fontSize={'14px'} letterSpacing='-.2px' color={'gray.400'} fontWeight='normal'>সর্বশেষ এডিট  - {formatDate(post.createdAt)}</Text>
+
+                                    {authUser?.id == post.author.id && <Link href={`/editor/${post.id}?editorStatus=update`}>
+                                        <Text whiteSpace={'nowrap'} mr={2} cursor='pointer' fontSize={'13px'} letterSpacing='-.2px' color={'blue.300'} fontWeight='normal'>এডিট করুন</Text>
+                                    </Link>}
+                                </Flex>
+                            </Box>
+
+
+                            <Divider borderColor={'gray.200'} />
+
 
                             <Box px={0} py={5} bg='blacAlpha.50'>
 
-                                <Flex gap={{ base: 2, lg: 5 }} direction={{ base: 'column', lg: 'row' }} justify='space-between' alignItems={{ base: 'start', lg: 'center' }}>
+                                <Flex gap={5} direction={{ base: 'column', lg: 'row' }} justify='space-between' alignItems={'start'}>
 
-                                    <Flex direction={'column'}>
 
-                                        <Box px={0} py={1}>
-                                            <Text whiteSpace={'nowrap'} fontSize={'13px'} letterSpacing='-.2px' color={'gray.400'} fontWeight='black'>সর্বশেষ এডিট  - {formatDate(post.createdAt)}</Text>
-                                        </Box>
-
-                                        <Divider borderColor={'gray.300'} />
-
-                                        <Flex gap={3} justify='flex-start' alignItems={'start'}>
-                                            <Flex whiteSpace={'nowrap'} alignItems={'center'} gap={1} color={'gray.500'}>
-                                                <FcReading color='' size='18px' />
-                                                <Text as={'span'} fontWeight={'black'} fontSize='16px'>
-                                                    {banglaNumber(post.views.length)}
-                                                </Text>
-                                                <Text fontSize={'15px'} fontWeight='black'>জন পড়েছেন</Text>
-                                            </Flex>
-
-                                            <Divider orientation='vertical' borderColor={'gray.300'} h='25px' />
-
-                                            <Flex alignItems={'center'} gap={1} color={'linkedin.700'}>
-                                                <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
-                                                <Text as={'span'} fontSize='16px' fontWeight={'black'}>
-                                                    {banglaNumber(likesCount)}
-                                                </Text>
-                                                <Text fontSize={'15px'} fontWeight='black'>লাইক</Text>
-                                            </Flex>
+                                    <Flex gap={3} justify='flex-start' alignItems={'start'}>
+                                        <Flex whiteSpace={'nowrap'} alignItems={'center'} gap={1} color={'gray.500'}>
+                                            <FcReading color='' size='18px' />
+                                            <Text as={'span'} fontWeight={'black'} fontSize='16px'>
+                                                {banglaNumber(post.views.length)}
+                                            </Text>
+                                            <Text fontSize={'15px'} fontWeight='black'>জন পড়েছেন</Text>
                                         </Flex>
 
+                                        <Divider orientation='vertical' borderColor={'gray.300'} h='25px' />
+
+                                        <Flex alignItems={'center'} gap={1} color={'linkedin.700'}>
+                                            <Icon as={AiFillLike} color='orange.300' fontSize='18px' />
+                                            <Text as={'span'} fontSize='16px' fontWeight={'black'}>
+                                                {banglaNumber(likesCount)}
+                                            </Text>
+                                            <Text fontSize={'15px'} fontWeight='black'>লাইক</Text>
+                                        </Flex>
                                     </Flex>
+
 
                                     {/* <Box w={'60px'} /> */}
 
                                     <Flex justify={'end'} >
-                                        <Button colorScheme={isLiked ? 'gray' : 'gray'} onClick={handleClickLike} isLoading={liking} shadow='sm' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='md' size='md'>
-                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লেখককে উৎসাহিত করুন'}</Text>
+                                        <Button colorScheme={isLiked ? 'gray' : 'gray'} onClick={handleClickLike} isLoading={liking} shadow='md' leftIcon={isLiked ? <BsHandThumbsDown size={20} /> : <BsHandThumbsUp size={20} />} rounded='md' size='md'>
+                                            <Text as={'span'} fontSize='16px' fontWeight={'normal'}>{isLiked ? 'আন লাইক ' : 'লাইক দিন'}</Text>
                                         </Button>
                                     </Flex>
 

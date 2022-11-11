@@ -89,7 +89,7 @@ export default function TopBar() {
                                             <NotificationPanel />
 
                                             <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
-                                                <Flex alignItems={'center'} gap={1}>
+                                                <Flex alignItems={'center'} gap={2}>
                                                     <BsPencilSquare size={20} /> <Show above='md'><Text>সামন্তরিকে লিখুন</Text></Show>
                                                 </Flex>
                                             </Button>

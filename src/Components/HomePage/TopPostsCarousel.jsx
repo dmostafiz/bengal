@@ -58,6 +58,7 @@ export default function TopPostsCarousel() {
                                     w={{ base: 'full', lg: 'full' }}
                                     h={{ base: '140px', lg: '140px' }} 
                                     roundedTop='xl'
+                                    roundedBottom=''
                                     overflow={'hidden'}
                                     bgPos='center' bgSize='cover'
                                 >
@@ -71,7 +72,7 @@ export default function TopPostsCarousel() {
                                         </a>
                                     </Link>
                                 </Box>
-                                :<Box roundedTop='xl' h={{ base: '140px', lg: '140px' }} overflow='hidden' fontSize={'15px'} p={3} bgGradient='linear(to-r, facebook.700, blue.600)'  color={'whiteAlpha.700'}>
+                                :<Box roundedTop='xl' roundedBottom='' h={{ base: '140px', lg: '140px' }} overflow='hidden' fontSize={'15px'} p={3} bgGradient='linear(to-r, facebook.700, blue.600)'  color={'whiteAlpha.700'}>
                                 {truncate(item.content, 120, {
                                     stripTags: true,
                                 })}

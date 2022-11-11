@@ -85,6 +85,10 @@ const blogger = ({ user, ok }) => {
                                             <Td isNumeric>{user?.gender == 'male' ? 'পুরুষ' : user?.gender == 'female' ? 'নারী' : 'অন্যান্য'}</Td>
                                         </Tr>
                                         <Tr>
+                                            <Td>পেশা</Td>
+                                            <Td isNumeric>{user?.profession}</Td>
+                                        </Tr>
+                                        <Tr>
                                             <Td>জন্মস্থান</Td>
                                             <Td isNumeric>{user?.birthPlace}</Td>
                                         </Tr>
@@ -92,6 +96,7 @@ const blogger = ({ user, ok }) => {
                                             <Td>জন্ম তারিখ</Td>
                                             <Td isNumeric>{formatDate(user?.birthDate, 'LL')}</Td>
                                         </Tr>
+                                
                                     </Tbody>
 
                                 </Table>
@@ -244,31 +249,31 @@ const blogger = ({ user, ok }) => {
 
                             </>
 
-                            : !isFetching && !items.length ? 
+                            : !isFetching && !items.length ?
 
-                            <>
-                               <IconText text='পোস্ট পাওয়া যায়নি' />
-                            </>
+                                <>
+                                    <IconText text='পোস্ট পাওয়া যায়নি' />
+                                </>
 
-                            : items.length > 0 && <VStack gap={0}>
-                                {items.map((post, index) => <Box w='full' key={index}>
-                                    <PostCard
-                                        title={post?.title}
-                                        slug={post?.id}
-                                        image={post?.image}
-                                        content={post?.content}
-                                        createdAt={post?.publishedAt}
-                                        states={{
-                                            read: post?.views?.length ?? 0,
-                                            comment: post?.comments?.length ?? 0,
-                                            like: post?.likes?.length ?? 0,
-                                        }}
-                                        categories={post?.categories}
-                                        author={post?.author}
-                                    />
-                                </Box>)}
+                                : items.length > 0 && <VStack gap={0}>
+                                    {items.map((post, index) => <Box w='full' key={index}>
+                                        <PostCard
+                                            title={post?.title}
+                                            slug={post?.id}
+                                            image={post?.image}
+                                            content={post?.content}
+                                            createdAt={post?.publishedAt}
+                                            states={{
+                                                read: post?.views?.length ?? 0,
+                                                comment: post?.comments?.length ?? 0,
+                                                like: post?.likes?.length ?? 0,
+                                            }}
+                                            categories={post?.categories}
+                                            author={post?.author}
+                                        />
+                                    </Box>)}
 
-                            </VStack>
+                                </VStack>
 
                         }
 

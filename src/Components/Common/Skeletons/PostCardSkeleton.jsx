@@ -21,8 +21,10 @@ export default function PostCardSkeleton() {
                 <Box flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} py={2} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='md' overflow={'hidden'} mb={3}>
                     <Stack>
                         <Flex alignItems='center' gap={3}>
-                            <SkeletonCircle startColor='blackAlpha.100' endColor='blackAlpha.300' size='8' fadeDuration={3} />
-                            <Skeleton startColor='blackAlpha.100' endColor='blackAlpha.300' height='15px' width='120px' fadeDuration={3} />
+                            {/* <SkeletonCircle startColor='blackAlpha.100' endColor='blackAlpha.300' size='8' fadeDuration={3} /> */}
+                            <Skeleton startColor='blackAlpha.100' endColor='blackAlpha.300' height='20px' width='40px' fadeDuration={3} rounded='full' />
+                            <Skeleton startColor='blackAlpha.100' endColor='blackAlpha.300' height='20px' width='55px' fadeDuration={3} rounded='full' />
+
                         </Flex>
 
                         <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.100' height='12px' fadeDuration={3}  width='70%' />

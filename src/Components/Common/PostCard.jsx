@@ -29,7 +29,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
                 {image ?
-                    <Box mb={0} border='1px' borderColor={'blackAlpha.200'} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow='md' rounded='md'
+                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow='lg' rounded='xl'
                         overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
@@ -72,7 +72,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
             </Box>
 
-            <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 3 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
+            <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 1 }} px={{ base: 0, md: 1, lg: 1, xl: 2 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
 
                 {/* <Box my={3} /> */}
                 <Box borderBottom='0px' borderColor='blackAlpha.200' mb={2} pb={1}>
@@ -166,10 +166,10 @@ export default function PostCard({ title, image, content, createdAt, states, aut
 
                         <Link href={`/blog/${slug}`}>
                             <Flex whiteSpace='nowrap' alignItems={'center'} gap={'2px'} fontWeight='normal'>
-                                <Text cursor={'pointer'} color='blue.700' as={'span'} fontSize={'14px'} href={`/blog/${slug}`}>
+                                <Text cursor={'pointer'} color='gray.400' as={'span'} fontSize={'14px'} href={`/blog/${slug}`}>
                                     বিস্তারিত
                                 </Text>
-                                <Icon as={BsArrowRightShort} color='blue.700' fontSize='18px' />
+                                <Icon as={BsArrowRightShort} color='gray.400' fontSize='18px' />
                             </Flex>
                         </Link>
 

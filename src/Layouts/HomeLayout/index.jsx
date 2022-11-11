@@ -77,7 +77,7 @@ export default function HomeLayout({
                 <meta name="keywords" content="shamantorik, bangla, blog, বাংলা ব্লগ,bangladesh, dhaka, bangla blog, group blog, bengali, news,  বাংলা,  বাংলাদেশ, ঢাকা, খবর, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
 
                 <meta property="fb:app_id" content="1545167315695654" />
-                <meta property="og:site_name" content="বেঙ্গলরিড বাংলা ব্লগ" />
+                <meta property="og:site_name" content={siteName} />
                 <meta property="og:image" content={image} />
                 <meta property="og:url" content={url} />
 
@@ -89,7 +89,7 @@ export default function HomeLayout({
                 <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
 
-                <link rel="image_src" href="https://s3.amazonaws.com/somewherein/assets/images/logo21.jpg" />
+                <link rel="image_src" href="/logo-big.png" />
             </Head>
 
             <Box bg={{ base: 'white', md: 'gray.700' }} minH='100vh'>
