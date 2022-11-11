@@ -312,7 +312,7 @@ function SingleBlogDetails({ post, ok }) {
                         <Box >
 
                             <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
-                                <Title order={2}>{post?.title}</Title>
+                                <Title order={2}>{post?.title} {post.postType == 'multiStep' && `(পর্ব-${banglaNumber(post?.part || 1)})`}</Title>
                             </Box>
 
                             <Box py={2} mb='2'>

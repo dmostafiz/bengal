@@ -286,8 +286,6 @@ export default function write() {
 
       >
 
-
-
         <AuthWrapper loading={true} component={<AuthWrapperLoginFrom redirectUrl={router.asPath} />}>
 
           {
@@ -306,141 +304,6 @@ export default function write() {
                   </Box>
 
                   <Divider mb={4} />
-
-                  <Flex mb={10} direction={{ base: 'column', md: 'row' }} gap={5}>
-                    <Box>
-                      <Box mb={1} px={0}>
-                        <Title order={5}>পোস্ট এর ধরন</Title>
-                        {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
-                      </Box>
-
-
-                      <SegmentedControl
-                        value={blogType}
-                        onChange={setBlogTyple}
-                        data={[
-                          { label: 'সাধারণ', value: 'normal' },
-                          { label: 'ধারাবাহিক', value: 'multiStep' }
-                        ]}
-                      />
-
-                    </Box>
-
-
-                    {blogType == 'multiStep' && <Box>
-
-                      <Box mb={1} px={0}>
-                        <Title order={5}>স্ট্যাটাস</Title>
-                        {/* <Text fontSize={'13px'} color='blackAlpha.700'>সর্বনিম্ন ১টি এবং সর্বোচ্চ ৩ টি ক্যাটাগরি নির্বাচন করতে পারবেন</Text> */}
-                      </Box>
-
-
-                      <SegmentedControl
-                        value={stepPosts.length ? stepStatus : 'new'}
-                        onChange={setStepStatus}
-                        data={[
-                          { label: 'প্রথম পর্ব', value: 'new' },
-                          { label: 'চলমান পোস্ট', value: 'old' }
-                        ]}
-                      />
-                    </Box>}
-
-                  </Flex>
-
-
-
-                  {(blogType == 'multiStep' && stepStatus == 'old' && !selectedStepPost) && <Box mb={10}>
-                    <Box w='full' py={{ base: 2, md: 2 }} px={{ base: 2, md: 3 }} bg='blackAlpha.50'>
-                      <Box py={2}>
-                        <Title order={5}>যে পোস্ট টি চলমান থাকবে <Text as={'span'} fontSize={'12px'}>(সিলেক্ট করুন)</Text></Title>
-                      </Box>
-                      <InputGroup>
-                        <Input
-                          border={'1px'}
-                          borderColor='blackAlpha.200'
-                          _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                          _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                          bg={'whiteAlpha.700'}
-                          size={'md'}
-                          placeholder='অনুসন্ধান করুন'
-                          rightSide='dfd'
-                          type='email'
-                        />
-
-                        <InputRightElement>
-                          <Search />
-                        </InputRightElement>
-
-                      </InputGroup>
-
-                      <Box py={3}>
-                        <Box maxH={'250px'} overflowY={'auto'}>
-
-                          {stepPosts.length ? stepPosts.map((post, index) => <Flex
-                            key={index}
-                            cursor='pointer'
-                            onClick={() => setSelectedStepPost(post)}
-                            _hover={{
-                              bg: 'gray.100'
-                            }}
-
-                            p={2}
-                            mb={1}
-                            alignItems={'center'}
-                            gap={2}
-                            bg='white'
-                          >
-                            <Box w='70px'>
-                              <Image src={post.image} />
-                            </Box>
-                            <Box flex={1}>
-                              <Title order={6}><Text noOfLines={1}>{post.title}</Text></Title>
-                              <Text as='span' fontSize={{ base: '11px', md: '14px' }}>৭ পর্ব লেখা হয়েছে</Text>
-                            </Box>
-
-                          </Flex>
-                          ) : <Center py={5}>
-                            <VStack>
-                              <Text>কোন ধারাবাহিক পোস্ট পাওয়া যায়নি</Text>
-                            </VStack>
-                          </Center>}
-                        </Box>
-
-
-                      </Box>
-
-
-                    </Box>
-                  </Box>
-                  }
-
-
-                  {selectedStepPost && <Box mb={10}>
-
-                    <Box py={2}>
-                      <Title order={5}>যে পোস্ট টি চলমান থাকবে</Title>
-                    </Box>
-
-                    <Flex
-                      p={2}
-                      mb={2}
-                      alignItems={'center'}
-                      gap={2}
-                      bg='blackAlpha.50'
-                    >
-                      <Box w='70px' h='70px' bgImage={selectedStepPost.image} bgSize='cover' bgRepeat={'no-repeat'} bgPos='center'>
-                      </Box>
-
-                      <Box flex={1}>
-                        <Title order={6}><Text noOfLines={1}>{selectedStepPost.title}</Text></Title>
-                        <Text as='span' fontSize={{ base: '11px', md: '14px' }}>৭ পর্ব লেখা হয়েছে | সর্বশেষ আপডেট ~ ১২ ই অক্টোবর</Text>
-                      </Box>
-                      <Box w={{ base: 5, md: 10 }}>
-                        <X cursor={'pointer'} onClick={() => setSelectedStepPost(null)} color='red' fontSize={{ base: '16px', md: '24px' }} />
-                      </Box>
-                    </Flex>
-                  </Box>}
-
 
                   <Box mb={10}>
                     <Box mb={1} px={0}>
@@ -472,12 +335,8 @@ export default function write() {
                               onChange(e.target.value)
                             }
                             }
-                          // value={selectedStepPost ? selectedStepPost.title : value}
-                          // {...register('title')}
                           />
-                          {blogType == 'multiStep' && <InputRightElement width={'100px'} >
-                            <Text fontWeight={'bold'} whiteSpace={'nowrap'}>পর্ব - {stepStatus == 'new' ? banglaNumber(postPart) : banglaNumber(24)}</Text>
-                          </InputRightElement>}
+                    
                         </InputGroup>}
                       />
 

@@ -12,14 +12,17 @@ import { HiChevronDown } from 'react-icons/hi'
 import AuthorHoverCard from './AuthorHoverCard'
 import { BiCommentDetail, BiLike } from 'react-icons/bi'
 import useOnlineUser from '../../Hooks/useOnlineUser'
+import { AlignJustified } from 'tabler-icons-react'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({ title, image, content, createdAt, states, author, slug, categories, authorCard = true }) {
+export default function PostCard({id, title, image, content, createdAt, postType, parent, postPart, childs, states, author, slug, categories, authorCard = true }) {
 
     const imgBreakPoints = useBreakpoint({
         base: false,
         md: true
     })
+
+    // console.log('Publishes Step post parent ', parent)
 
     const { isUserOnline } = useOnlineUser()
 
@@ -29,7 +32,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
 
                 {image ?
-                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{base:'sm',md:'lg'}} rounded='xl'
+                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{ base: 'sm', md: 'lg' }} rounded='xl'
                         overflow={'hidden'}
                         // bgImage={image}
                         objectFit='cover'
@@ -50,7 +53,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
-                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{base: 1.2, lg: 1.3}} color='gray.700'>{title}</Text></Title>
+                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{ base: 1.2, lg: 1.3 }} color='gray.700'>{title}</Text></Title>
                             </Tooltip>
                         </a>
                     </Link>
@@ -93,7 +96,7 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                                             px={2}
                                             py='1.8px'
                                             shadow={'sm'}
-                                            // fontWeight={'light'}
+                                        // fontWeight={'light'}
                                         >
                                             {cat.name}
                                         </Badge>
@@ -104,21 +107,40 @@ export default function PostCard({ title, image, content, createdAt, states, aut
                             </Wrap>}
                         </Flex>
 
-                        <Menu>
-                            <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
-                            <MenuList fontSize={'14px'} shadow='lg'>
-                                <MenuItem icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>
-                                <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>
+                        <Flex gap={3} alignItems='center'>
+                            {postType == 'multiStep' && <Menu>
+                                <MenuButton as={Button} leftIcon={<AlignJustified size={'18'} />} rounded='full' colorScheme='red' size='xs' variant='outline'>
+                                   পর্ব - {banglaNumber(postPart)}
+                                </MenuButton>
+                                <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
+                                    {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
+                                        if(stepPost.id != id){
+                                        return <Link href={`/blog/${stepPost.id}`}>
+                                            <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
+                                        </Link>
+                                        }
+                                    })}
 
-                                {/* <MenuItem>Create a Copy</MenuItem> */}
-                            </MenuList>
-                        </Menu>
+                                    {/* <MenuItem>Create a Copy</MenuItem> */}
+                                </MenuList>
+                            </Menu>
+                            }
+                            <Menu>
+                                <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
+                                <MenuList fontSize={'14px'} shadow='lg'>
+                                    <MenuItem icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>
+                                    <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>
+
+                                    {/* <MenuItem>Create a Copy</MenuItem> */}
+                                </MenuList>
+                            </Menu>
+                        </Flex>
 
                     </Flex>
 
                 </Box>
 
-                <Box color={{base: 'blackAlpha.600', md: 'gray.600'}} lineHeight={{base: '19px', md: '22px'}} fontSize={{base: '15px', md: '16px'}} w='full' pb={{ base: 2, lg: 3 }}>
+                <Box color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '19px', md: '22px' }} fontSize={{ base: '15px', md: '16px' }} w='full' pb={{ base: 2, lg: 3 }}>
                     <PostTrancate
                         image={image}
                         char={100}

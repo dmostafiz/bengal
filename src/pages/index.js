@@ -70,13 +70,13 @@ export default function Home() {
             //   component: <SelectedPostsCarousel />
             // },
 
-            {
-              title: 'ধারাবাহিক পোস্ট',
-              component: <StepPostsCarousel />
-            },
+            // {
+            //   title: 'ধারাবাহিক পোস্ট',
+            //   component: <StepPostsCarousel />
+            // },
 
             {
-              title: 'জনপ্রিয় ব্লগার',
+              title: 'টপ ব্লগার',
               component: <TopBloggers />
             },
 

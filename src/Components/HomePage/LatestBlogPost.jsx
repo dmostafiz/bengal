@@ -80,11 +80,16 @@ export default function LatestBlogPost() {
                     : items.length && <VStack gap={0}>
                         {items.map((post, index) => <Box w='full' key={index}>
                             <PostCard
+                                id={post?.id}
                                 title={post?.title}
                                 slug={post?.id}
                                 image={post?.image}
                                 content={post?.content}
                                 createdAt={post?.publishedAt}
+                                postType={post?.postType}
+                                parent={post?.parent}
+                                childs={post?.childs}
+                                postPart={post?.part}
                                 states={{
                                     read: post?.views?.length ?? 0,
                                     comment: post?.comments?.length ?? 0,
