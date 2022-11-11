@@ -81,7 +81,7 @@ export default function HomeLayout({
                 <meta property="og:image" content={image} />
                 <meta property="og:url" content={url} />
                 <meta property="og:title" content={title} />
-                <meta property="og:type" content={'blog.article'} />
+                <meta property="og:type" content={'article:author'} />
                 <meta property="og:locale" content="bn_BD" />
 
 
