@@ -14,7 +14,7 @@ import useLogin from '../../Hooks/useLogin'
 import useRegistration from '../../Hooks/useRegistration'
 import FullscreenLoader from '../../Components/Common/FullscreenLoader'
 import Head from 'next/head'
-import { siteName } from '../../Helpers/config'
+import { siteName, siteSlogun } from '../../Helpers/config'
 
 const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: false })
 // import GoogleOneTapLogin from 'react-google-one-tap-login';
@@ -22,8 +22,8 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 // #303030
 export default function HomeLayout({
     children,
-    title = `${siteName}-${siteSlogun}`,
-    image = 'https://www.shamantorik.com/logo-big.png"',
+    title = `${siteName} | ${siteSlogun}`,
+    image = 'https://www.shamantorik.com/logo-big.jpg"',
     url = 'https://www.shamantorik.com',
     description = 'Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page of the blog displaying all the incoming posts from bengali bloggers from various states of Bangladesh and India. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.'
 }) {
