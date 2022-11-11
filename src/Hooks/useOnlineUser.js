@@ -9,7 +9,6 @@ export default function useOnlineUser() {
 
     const { onlineUsers } = useContext(SocketContext)
 
-
     const [onlineBloggers, setOnlineBloggers] = useState([])
     const [onlineReaders, setOnlineReaders] = useState([])
 
@@ -17,17 +16,25 @@ export default function useOnlineUser() {
 
     useEffect(() => {
 
-        const bloggers = onlineUsers?.filter(usr => usr?.posts?.length > 0)
+        const bloggers = onlineUsers?.filter(usr => usr?.posts?.length > 0 )
 
-        // console.log('online bloggers', bloggers)
+        function getUniqueBloggersArray(arr, key) {
+            return [...new Map(arr.map(item => [item[key], item])).values()]
+        }
+        const uniqueBloggers = getUniqueBloggersArray(bloggers, 'id')
+        setOnlineBloggers(uniqueBloggers)
 
-        setOnlineBloggers(bloggers)
 
         const readers = onlineUsers?.filter(usr => usr?.posts?.length == 0 || !usr.id)
-        setOnlineReaders(readers)
+        
+        function getUniqueReadersArray(arr, key) {
+            return [...new Map(arr.map(item => [item[key], item])).values()]
+        }
+        const uniqueReaders = getUniqueReadersArray(readers, 'id')
+        setOnlineReaders(uniqueReaders)
 
     }, [onlineUsers])
-    
+
 
     const isUserOnline = (userId) => {
 
@@ -38,5 +45,5 @@ export default function useOnlineUser() {
         return user ? true : false
     }
 
-    return {onlineUsers, isUserOnline, onlineBloggers, onlineReaders}
+    return {  onlineUsers: onlineBloggers.concat(onlineReaders), isUserOnline, onlineBloggers, onlineReaders }
 }

@@ -92,7 +92,7 @@ export default function HomeLayout({
                 <link rel="image_src" href="/logo-big.png" />
             </Head>
 
-            <Box bg={{ base: 'white', md: 'gray.700' }} minH='100vh'>
+            <Box bg={{ base: 'white', md: 'gray.300' }} minH='100vh'>
 
                 {(!isLoading && !authUser && !onTapLoading) && <GoogleOneTapLogin
                     onError={(error) => console.log(error)}
