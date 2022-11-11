@@ -17,7 +17,7 @@ import truncate from 'truncate-html'
 import { BiCommentDetail } from 'react-icons/bi'
 import Link from 'next/link'
 import AuthorHoverCard from '../../Components/Common/AuthorHoverCard'
-import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
+import { imageUrl, siteName, siteSlogun, siteUrl } from '../../Helpers/config'
 import usePaginatingQuery from '../../Hooks/usePaginatingQuery'
 import PostCardSkeleton from '../../Components/Common/Skeletons/PostCardSkeleton'
 
@@ -58,7 +58,7 @@ const blogger = ({ user, ok }) => {
 
     return (
         <HomeLayout
-            title={user ? `${user.id ? user.displayName + ' - ' : ''}${siteName} - Shamantorik Bangla blog` : `${siteName} - Shamantorik Bangla blog`}
+            title={user ? `${user.id ? user.displayName + ' - ' : ''}${siteName} | ${siteSlogun}` : `${siteName} | ${siteSlogun}`}
             image={user?.avatar || imageUrl}
             url={siteUrl + router.asPath}
             description={truncate(user?.bio, 270, {
