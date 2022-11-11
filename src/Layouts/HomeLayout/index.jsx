@@ -23,7 +23,7 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 export default function HomeLayout({
     children,
     title = `${siteName} - Shamantorik Bangla blog`,
-    image = 'https://s3.amazonaws.com/somewherein/pictures/logo.jpg',
+    image = '/logo-big.png"',
     url = 'http://www.bengalread.vercel.app/',
     description = 'Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page displaying all the incoming posts and the group blog service. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.'
 }) {
@@ -89,7 +89,7 @@ export default function HomeLayout({
                 <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
 
-                <link rel="image_src" href="/logo-big.png" />
+                <link rel="image_src" href={image} />
             </Head>
 
             <Box bg={{ base: 'white', md: 'gray.300' }} minH='100vh'>
