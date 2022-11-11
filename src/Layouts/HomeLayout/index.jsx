@@ -23,9 +23,9 @@ const GoogleOneTapLogin = dynamic(import('react-google-one-tap-login'), { ssr: f
 export default function HomeLayout({
     children,
     title = `${siteName} - Shamantorik Bangla blog`,
-    image = '/logo-big.png"',
-    url = 'http://www.bengalread.vercel.app/',
-    description = 'Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page displaying all the incoming posts and the group blog service. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.'
+    image = 'https://www.shamantorik.com/logo-big.png"',
+    url = 'https://www.shamantorik.com/',
+    description = 'Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page of the blog displaying all the incoming posts from bengali bloggers from various states of Bangladesh and India. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.'
 }) {
 
     const { asPath } = useRouter()
