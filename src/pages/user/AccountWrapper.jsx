@@ -242,18 +242,18 @@ export default function AccountWrapper({ children, getUser, title = 'প্র�
                     </Show>
 
                     <Box>
-                        <Wrap>
+                        <Wrap spacing={{base: 1, md: 2}}>
                             <Link href='/user/profile'>
-                                <Button colorScheme={router.asPath.includes('profile') ? 'facebook' : 'gray'} size={'sm'}>প্রোফাইল</Button>
+                                <Button colorScheme={router.asPath.includes('profile') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>প্রোফাইল</Button>
                             </Link>
                             <Link href='/user/post_list'>
-                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={'sm'}>আমার ব্লগিন</Button>
+                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>আমার ব্লগিন</Button>
                             </Link>
                             <Link href='/user/saved_posts'>
-                                <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={'sm'}>সংরক্ষিত পোস্ট</Button>
+                                <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>সংরক্ষিত পোস্ট</Button>
                             </Link>
                             <Link href='/user/change_password'>
-                                <Button colorScheme={router.asPath.includes('change_password') ? 'facebook' : 'gray'} size={'sm'}>পাসওয়ার্ড পরিবর্তন</Button>
+                                <Button colorScheme={router.asPath.includes('change_password') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>পাসওয়ার্ড পরিবর্তন</Button>
                             </Link>
                         </Wrap>
                     </Box>
