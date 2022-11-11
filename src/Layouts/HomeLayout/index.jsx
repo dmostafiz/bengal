@@ -80,6 +80,10 @@ export default function HomeLayout({
                 <meta property="og:site_name" content={siteName} />
                 <meta property="og:image" content={image} />
                 <meta property="og:url" content={url} />
+                <meta property="og:title" content={title} />
+                <meta property="og:type" content={'blog.article'} />
+                <meta property="og:locale" content="bn_BD" />
+
 
                 <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
 
