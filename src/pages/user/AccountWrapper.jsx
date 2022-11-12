@@ -96,8 +96,12 @@ export default function AccountWrapper({ children, getUser, title = 'প্র�
                                             <Td isNumeric>{user?.gender == 'male' ? 'পুরুষ' : user?.gender == 'female' ? 'নারী' : 'অন্যান্য'}</Td>
                                         </Tr>
                                         <Tr>
+                                            <Td>পেশা</Td>
+                                            <Td isNumeric>{user?.profession}</Td>
+                                        </Tr>
+                                        <Tr>
                                             <Td>জন্মস্থান</Td>
-                                            <Td isNumeric></Td>
+                                            <Td isNumeric>{user?.birthPlace}</Td>
                                         </Tr>
                                         <Tr>
                                             <Td>জন্ম তারিখ</Td>
