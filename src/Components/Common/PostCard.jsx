@@ -12,8 +12,9 @@ import { HiChevronDown } from 'react-icons/hi'
 import AuthorHoverCard from './AuthorHoverCard'
 import { BiCommentDetail, BiLike } from 'react-icons/bi'
 import useOnlineUser from '../../Hooks/useOnlineUser'
-import { AlignJustified } from 'tabler-icons-react'
+import { AlignJustified, Pencil } from 'tabler-icons-react'
 import usePostAction from '../../Hooks/usePostAction'
+import useUser from '../../Hooks/useUser'
 // import { ThumbUpOff } from 'tableicons-react'
 
 export default function PostCard({id, title, image, content, createdAt, postType, parent, postPart, childs, states, author, slug, categories, authorCard = true }) {
@@ -28,6 +29,8 @@ export default function PostCard({id, title, image, content, createdAt, postType
     const { isUserOnline } = useOnlineUser()
 
     const { trashPost, deletePost, restorPost, savePost,  removeSavePost, isPostSaved} = usePostAction()
+
+    const {authUser} = useUser()
 
     return (
         <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 2, sm: 3, md: 3, lg: 3, xl: 4 }}>
@@ -131,8 +134,13 @@ export default function PostCard({id, title, image, content, createdAt, postType
                             <Menu>
                                 <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
                                 <MenuList fontSize={'14px'} shadow='lg'>
-                                    {!isPostSaved(id) &&  <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
-                                    <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>
+                                  
+                                    {(!isPostSaved(id) && author.id != authUser?.id ) &&  <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
+                                    
+                                    { author.id == authUser?.id  && <Link href={`/editor/${id}?editorStatus=update`}>
+                                     <MenuItem  icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
+                                  
+                                    {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
 
                                     {/* <MenuItem>Create a Copy</MenuItem> */}
                                 </MenuList>
