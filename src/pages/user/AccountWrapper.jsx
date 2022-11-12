@@ -247,7 +247,7 @@ export default function AccountWrapper({ children, getUser, title = 'প্র�
                                 <Button colorScheme={router.asPath.includes('profile') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>প্রোফাইল</Button>
                             </Link>
                             <Link href='/user/post_list'>
-                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>আমার ব্লগিন</Button>
+                                <Button colorScheme={router.asPath.includes('post_list') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>আমার ব্লগিং</Button>
                             </Link>
                             <Link href='/user/saved_posts'>
                                 <Button colorScheme={router.asPath.includes('saved_posts') ? 'facebook' : 'gray'} size={{base: 'xs',lg:'sm'}}>সংরক্ষিত পোস্ট</Button>

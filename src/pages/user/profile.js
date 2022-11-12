@@ -10,6 +10,8 @@ import CustomButton from '../../Components/Common/CustomButton';
 import SectionTitle from '../../Components/Common/SectionTitle';
 import districts from '../../Helpers/districts';
 import Axios from '../../Helpers/axiosHelper';
+import AuthWrapper from '../../Wrappers/AuthWrapper';
+import AuthWrapperLoginFrom from '../../Components/Auth/AuthWrapperLoginFrom';
 
 const schema = yup.object({
     fullName: yup.string()
@@ -63,6 +65,8 @@ const schema = yup.object({
 
 export default function profile() {
 
+    const router = useRouter()
+
     const {
         handleSubmit,
         register,
@@ -80,7 +84,6 @@ export default function profile() {
 
     const [user, setUser] = useState(null)
 
-    const router = useRouter()
     const toast = useToast()
 
     const [file, setFile] = useState(null)
@@ -96,7 +99,7 @@ export default function profile() {
             displayName: user?.displayName,
             gender: user?.gender,
             birthDate: user?.birthDate,
-            profession: user?.profession, 
+            profession: user?.profession,
             birthPlace: user?.birthPlace,
             bio: user?.bio,
             email: user?.email
@@ -172,269 +175,272 @@ export default function profile() {
 
 
     return (
-        <AccountWrapper
-            title='প্রোফাইল'
-            getUser={setUser}
-        >
 
 
-            <Box my={10}>
+        <AuthWrapper loading={true} component={<AuthWrapperLoginFrom redirectUrl={router.asPath} />}>
+            <AccountWrapper
+                title='প্রোফাইল'
+                getUser={setUser}
+            >
 
-                <SectionTitle title={'প্রোফাইল ইনফরমেশন'} />
 
-                <Flex direction={{ base: 'column', md: 'row' }} mb={8} gap={{ base: 5, md: 5 }}>
-                    <Flex w='170px' h='180px' direction={{ base: 'column' }} gap={0} shadow='sm' rounded='lg' overflow={'hidden'}>
-                        <Box
-                            roundedTop='lg'
-                            flex='1'
-                            w='full'
-                            shadow={'sm'}
-                            backgroundSize={'cover'}
-                            bgPos='center'
-                            bgRepeat='no-repeat'
-                            backgroundImage={preview ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
-                        >
+                <Box my={10}>
+
+                    <SectionTitle title={'প্রোফাইল ইনফরমেশন'} />
+
+                    <Flex direction={{ base: 'column', md: 'row' }} mb={8} gap={{ base: 5, md: 5 }}>
+                        <Flex w='170px' h='180px' direction={{ base: 'column' }} gap={0} shadow='sm' rounded='lg' overflow={'hidden'}>
+                            <Box
+                                roundedTop='lg'
+                                flex='1'
+                                w='full'
+                                shadow={'sm'}
+                                backgroundSize={'cover'}
+                                bgPos='center'
+                                bgRepeat='no-repeat'
+                                backgroundImage={preview ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
+                            >
+
+                            </Box>
+
+                            {!file && <FileButton onChange={setFile} accept="image/png,image/jpeg">
+                                {(props) => <Button {...props} colorScheme='teal' roundedBottom='lg' fontSize={'12px'} rounded={0} size={'xs'}>ছবি আপলোড করুন</Button>}
+                            </FileButton>}
+
+                            {file && <Button onClick={() => {
+                                setFile(null); setPreview(null)
+                            }} colorScheme='red' roundedBottom='lg' fontSize={'12px'} rounded={0} size={'xs'}>ছবি সরান</Button>}
+
+                        </Flex>
+
+
+                        <Box w='full' flex='1'>
+
+                            <Flex gap={4}>
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>আপনার নাম ( বাংলা )</Title>
+                                    </Box>
+                                    <FormControl isInvalid={errors.fullName}>
+                                        <Input
+                                            border={'1px'}
+                                            borderColor='blackAlpha.200'
+                                            _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                            _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                            bg={'whiteAlpha.700'}
+                                            size={'sm'}
+                                            placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
+                                            rightSide='dfd'
+                                            type='text'
+                                            {...register('fullName')}
+                                        />
+                                        <FormErrorMessage>
+                                            {errors.fullName && errors.fullName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+                                </Box>
+
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>প্রদর্শন নাম ( বাংলা )</Title>
+                                    </Box>
+                                    <FormControl isInvalid={errors.displayName}>
+                                        <Input
+                                            border={'1px'}
+                                            borderColor='blackAlpha.200'
+                                            _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                            _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                            bg={'whiteAlpha.700'}
+                                            size={'sm'}
+                                            placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
+                                            rightSide='dfd'
+                                            type='text'
+                                            {...register('displayName')}
+                                        />
+                                        <FormErrorMessage>
+                                            {errors.displayName && errors.displayName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+                                </Box>
+                            </Flex>
+
+
+                            <Flex gap={4}>
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>পেশা</Title>
+                                    </Box>
+
+                                    <FormControl isInvalid={errors.profession}>
+                                        <Select {...register('profession')} size={'sm'} placeholder='আপনার পেশা নির্ধারণ করুন'>
+                                            <option value='শিক্ষার্থী'>শিক্ষার্থী</option>
+                                            <option value='লেখক / ব্লগার'>লেখক / ব্লগার</option>
+                                            <option value='মেডিয়া / সাংবাদিক'>মেডিয়া / সাংবাদিক</option>
+                                            <option value='ডাক্তার'>ডাক্তার</option>
+                                            <option value='ইঞ্জিনিয়ার'>ইঞ্জিনিয়ার</option>
+                                            <option value='ব্যবসায়ী'>ব্যবসায়ী</option>
+                                            <option value='চাকরিজীবী'>চাকরিজীবী</option>
+                                            <option value='কৃষক / উদ্যোক্তা'>কৃষক / উদ্যোক্তা</option>
+                                            <option value='সরকারী-কর্মকর্তা / প্রশাসন'>সরকারী-কর্মকর্তা / প্রশাসন</option>
+                                            <option value='প্রবাসী / অন্যান্য'>প্রবাসী / অন্যান্য</option>
+                                        </Select>
+                                        <FormErrorMessage>
+                                            {errors.profession && errors.profession.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                </Box>
+
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>লিঙ্গ</Title>
+                                    </Box>
+
+                                    <FormControl isInvalid={errors.gender}>
+                                        <Select {...register('gender')} size={'sm'} placeholder='আপনার লিঙ্গ নির্ধারণ করুন'>
+                                            <option value='male'>পুরুষ</option>
+                                            <option value='female'>নারী</option>
+                                            <option value='custom'>অন্য</option>
+                                        </Select>
+                                        <FormErrorMessage>
+                                            {errors.gender && errors.gender.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                </Box>
+                            </Flex>
+
+                            <Flex gap={4}>
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>জন্ম ন্থান</Title>
+                                    </Box>
+                                    <FormControl isInvalid={errors.birthPlace}>
+                                        <Select {...register('birthPlace')} _selected='' size={'sm'} placeholder='আপনার জন্মস্থান নির্ধারণ করুন'>
+                                            {districts.map((dist, index) => <option key={index} value={dist.bn_name}>
+                                                {dist.bn_name}
+                                            </option>)}
+                                        </Select>
+                                        <FormErrorMessage>
+                                            {errors.birthPlace && errors.birthPlace.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+                                </Box>
+
+                                <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                    <Box mb={1} px={0}>
+                                        <Title order={6}>জন্ম তারিখ</Title>
+                                    </Box>
+
+                                    <FormControl isInvalid={errors.birthDate}>
+                                        <Input
+                                            border={'1px'}
+                                            borderColor='blackAlpha.200'
+                                            _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                            _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                            bg={'whiteAlpha.700'}
+                                            size={'sm'}
+                                            placeholder='আপনার জন্ম তারিখ'
+                                            type='date'
+                                            {...register('birthDate')}
+                                        />
+                                        <FormErrorMessage>
+                                            {errors.birthDate && errors.birthDate.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                </Box>
+
+                            </Flex>
 
                         </Box>
-
-                        {!file && <FileButton onChange={setFile} accept="image/png,image/jpeg">
-                            {(props) => <Button {...props} colorScheme='teal' roundedBottom='lg' fontSize={'12px'} rounded={0} size={'xs'}>ছবি আপলোড করুন</Button>}
-                        </FileButton>}
-
-                        {file && <Button onClick={() => {
-                            setFile(null); setPreview(null)
-                        }} colorScheme='red' roundedBottom='lg' fontSize={'12px'} rounded={0} size={'xs'}>ছবি সরান</Button>}
 
                     </Flex>
 
+                    <Box flex='1' mb={3}>
+                        <Box mb={1} px={0}>
+                            <Title order={6}>আপনার সম্পর্কে</Title>
+                        </Box>
 
-                    <Box w='full' flex='1'>
-
-                        <Flex gap={4}>
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>আপনার নাম ( বাংলা )</Title>
-                                </Box>
-                                <FormControl isInvalid={errors.fullName}>
-                                    <Input
-                                        border={'1px'}
-                                        borderColor='blackAlpha.200'
-                                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                                        bg={'whiteAlpha.700'}
-                                        size={'sm'}
-                                        placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
-                                        rightSide='dfd'
-                                        type='text'
-                                        {...register('fullName')}
-                                    />
-                                    <FormErrorMessage>
-                                        {errors.fullName && errors.fullName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-                            </Box>
-
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>প্রদর্শন নাম ( বাংলা )</Title>
-                                </Box>
-                                <FormControl isInvalid={errors.displayName}>
-                                    <Input
-                                        border={'1px'}
-                                        borderColor='blackAlpha.200'
-                                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                                        bg={'whiteAlpha.700'}
-                                        size={'sm'}
-                                        placeholder='এখানে আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
-                                        rightSide='dfd'
-                                        type='text'
-                                        {...register('displayName')}
-                                    />
-                                    <FormErrorMessage>
-                                        {errors.displayName && errors.displayName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-                            </Box>
-                        </Flex>
-
-
-                        <Flex gap={4}>
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>পেশা</Title>
-                                </Box>
-
-                                <FormControl isInvalid={errors.profession}>
-                                    <Select {...register('profession')} size={'sm'} placeholder='আপনার পেশা নির্ধারণ করুন'>
-                                        <option value='শিক্ষার্থী'>শিক্ষার্থী</option>
-                                        <option value='লেখক / ব্লগার'>লেখক / ব্লগার</option>
-                                        <option value='মেডিয়া / সাংবাদিক'>মেডিয়া / সাংবাদিক</option>
-                                        <option value='ডাক্তার'>ডাক্তার</option>
-                                        <option value='ইঞ্জিনিয়ার'>ইঞ্জিনিয়ার</option>
-                                        <option value='ব্যবসায়ী'>ব্যবসায়ী</option>
-                                        <option value='চাকরিজীবী'>চাকরিজীবী</option>
-                                        <option value='কৃষক / উদ্যোক্তা'>কৃষক / উদ্যোক্তা</option>
-                                        <option value='সরকারী-কর্মকর্তা / প্রশাসন'>সরকারী-কর্মকর্তা / প্রশাসন</option>
-                                        <option value='প্রবাসী / অন্যান্য'>প্রবাসী / অন্যান্য</option>
-                                    </Select>
-                                    <FormErrorMessage>
-                                        {errors.profession && errors.profession.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                            </Box>
-
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>লিঙ্গ</Title>
-                                </Box>
-
-                                <FormControl isInvalid={errors.gender}>
-                                    <Select {...register('gender')} size={'sm'} placeholder='আপনার লিঙ্গ নির্ধারণ করুন'>
-                                        <option value='male'>পুরুষ</option>
-                                        <option value='female'>নারী</option>
-                                        <option value='custom'>অন্য</option>
-                                    </Select>
-                                    <FormErrorMessage>
-                                        {errors.gender && errors.gender.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                            </Box>
-                        </Flex>
-
-                        <Flex gap={4}>
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>জন্ম ন্থান</Title>
-                                </Box>
-                                <FormControl isInvalid={errors.birthPlace}>
-                                    <Select {...register('birthPlace')} _selected='' size={'sm'} placeholder='আপনার জন্মস্থান নির্ধারণ করুন'>
-                                        {districts.map((dist, index) => <option key={index} value={dist.bn_name}>
-                                            {dist.bn_name}
-                                        </option>)}
-                                    </Select>
-                                    <FormErrorMessage>
-                                        {errors.birthPlace && errors.birthPlace.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-                            </Box>
-
-                            <Box flex='1' mb={{ base: 3, md: 3 }}>
-                                <Box mb={1} px={0}>
-                                    <Title order={6}>জন্ম তারিখ</Title>
-                                </Box>
-
-                                <FormControl isInvalid={errors.birthDate}>
-                                    <Input
-                                        border={'1px'}
-                                        borderColor='blackAlpha.200'
-                                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                                        bg={'whiteAlpha.700'}
-                                        size={'sm'}
-                                        placeholder='আপনার জন্ম তারিখ'
-                                        type='date'
-                                        {...register('birthDate')}
-                                    />
-                                    <FormErrorMessage>
-                                        {errors.birthDate && errors.birthDate.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                            </Box>
-
-                        </Flex>
+                        <FormControl isInvalid={errors.bio}>
+                            <Textarea
+                                border={'1px'}
+                                borderColor='blackAlpha.200'
+                                _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                bg={'whiteAlpha.700'}
+                                placeholder='আপনার সম্পর্কে কিছু লিখুন'
+                                {...register('bio')}
+                            />
+                            <FormErrorMessage>
+                                {errors.bio && errors.bio.message}
+                            </FormErrorMessage>
+                        </FormControl>
 
                     </Box>
 
-                </Flex>
+                    <Box mb={10}>
+                        <SectionTitle title={'লগইন'} />
+                        <Flex gap={4}>
+                            <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                <Box mb={1} px={0}>
+                                    <Title order={6}>ইমেইল এড্রেস</Title>
+                                </Box>
+                                <FormControl isInvalid={errors.email}>
+                                    <Input
+                                        border={'1px'}
+                                        borderColor='blackAlpha.200'
+                                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                        bg={'whiteAlpha.700'}
+                                        size={'sm'}
+                                        placeholder='আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
+                                        rightSide='dfd'
+                                        type='text'
+                                        {...register('email')}
+                                    />
+                                    <FormErrorMessage>
+                                        {errors.email && errors.email.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+                            </Box>
 
-                <Box flex='1' mb={3}>
-                    <Box mb={1} px={0}>
-                        <Title order={6}>আপনার সম্পর্কে</Title>
+                            <Box flex='1' mb={{ base: 3, md: 3 }}>
+                                <Box mb={1} px={0}>
+                                    <Title order={6}>লগইন নাম</Title>
+                                </Box>
+                                <FormControl>
+                                    <Input
+                                        disabled
+                                        border={'1px'}
+                                        borderColor='blackAlpha.200'
+                                        _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
+                                        _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
+                                        bg={'whiteAlpha.700'}
+                                        size={'sm'}
+                                        placeholder='যে নামে সবাই আপনাকে দেখবে'
+                                        rightSide='dfd'
+                                        type='text'
+                                        value={user?.userName}
+                                    />
+                                </FormControl>
+                            </Box>
+                        </Flex>
                     </Box>
 
-                    <FormControl isInvalid={errors.bio}>
-                        <Textarea
-                            border={'1px'}
-                            borderColor='blackAlpha.200'
-                            _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                            _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                            bg={'whiteAlpha.700'}
-                            placeholder='আপনার সম্পর্কে কিছু লিখুন'
-                            {...register('bio')}
-                        />
-                        <FormErrorMessage>
-                            {errors.bio && errors.bio.message}
-                        </FormErrorMessage>
-                    </FormControl>
-
-                </Box>
-
-                <Box mb={10}>
-                    <SectionTitle title={'লগইন'} />
-                    <Flex gap={4}>
-                        <Box flex='1' mb={{ base: 3, md: 3 }}>
-                            <Box mb={1} px={0}>
-                                <Title order={6}>ইমেইল এড্রেস</Title>
-                            </Box>
-                            <FormControl isInvalid={errors.email}>
-                                <Input
-                                    border={'1px'}
-                                    borderColor='blackAlpha.200'
-                                    _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                                    _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                                    bg={'whiteAlpha.700'}
-                                    size={'sm'}
-                                    placeholder='আপনার সম্পূর্ণ নামটি বাংলাই লিখুন'
-                                    rightSide='dfd'
-                                    type='text'
-                                    {...register('email')}
-                                />
-                                <FormErrorMessage>
-                                    {errors.email && errors.email.message}
-                                </FormErrorMessage>
-                            </FormControl>
-                        </Box>
-
-                        <Box flex='1' mb={{ base: 3, md: 3 }}>
-                            <Box mb={1} px={0}>
-                                <Title order={6}>লগইন নাম</Title>
-                            </Box>
-                            <FormControl>
-                                <Input
-                                    disabled
-                                    border={'1px'}
-                                    borderColor='blackAlpha.200'
-                                    _focus={{ ring: '0', border: '1px', borderColor: 'blackAlpha.300' }}
-                                    _hover={{ ring: '0', border: '1px', borderColor: 'blackAlpha.200' }}
-                                    bg={'whiteAlpha.700'}
-                                    size={'sm'}
-                                    placeholder='যে নামে সবাই আপনাকে দেখবে'
-                                    rightSide='dfd'
-                                    type='text'
-                                    value={user?.userName}
-                                />
-                            </FormControl>
-                        </Box>
-                    </Flex>
-                </Box>
-
-                <CustomButton
-                    // disabled={errors.email && true}
-                    isLoading={isSubmitting}
-                    onClick={handleSubmit(updateProfileInfo)}
-                    colorScheme={'green'}
-                >
-                    প্রোফাইল আপডেট করুন
-                </CustomButton>
+                    <CustomButton
+                        // disabled={errors.email && true}
+                        isLoading={isSubmitting}
+                        onClick={handleSubmit(updateProfileInfo)}
+                        colorScheme={'green'}
+                    >
+                        প্রোফাইল আপডেট করুন
+                    </CustomButton>
 
 
-                {/* <Divider /> */}
+                    {/* <Divider /> */}
 
-                {/* <Box mb={8} mt={5}>
+                    {/* <Box mb={8} mt={5}>
     <Box mb={1} px={0}>
         <Title order={6}>লগইন ইউজারনেম ( ইংরেজি )</Title>
     </Box>
@@ -491,9 +497,12 @@ export default function profile() {
     </InputGroup>
 </Box> */}
 
-            </Box>
+                </Box>
 
 
-        </AccountWrapper>
+            </AccountWrapper>
+
+        </AuthWrapper>
+
     )
 }

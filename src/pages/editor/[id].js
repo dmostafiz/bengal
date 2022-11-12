@@ -138,8 +138,8 @@ export default function write() {
             const post = res?.data?.post
 
             reset({
-              title: post?.title,
-              content: post?.content,
+              title: post?.title || '',
+              content: post?.content || '',
               category: post?.categoryIDs
             })
 

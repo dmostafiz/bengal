@@ -15,29 +15,6 @@ import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
 import AuthWrapper from '../../Wrappers/AuthWrapper'
 
 
-const draftPosts = [
-    {
-        title: "ফলের নাম না বলায় পুরো বাজারের ফল ট্রাক ভরে মায়ের জন্য নিয়ে এলেন ডিপজল",
-        image: 'https://s3.amazonaws.com/somewherein/pictures/balchirabongal/balchirabongal-1664883109-9202d32_xlarge.jpg'
-    },
-
-    {
-        title: "বান্দুরা রানী পবিত্র জপমালা গীর্জা",
-        image: 'https://s3.amazonaws.com/somewherein/pictures/ayena/ayena-1664876247-6f7b737_xlarge.jpg'
-    },
-    {
-        title: "রাম ও কৃষ্ণ - মানুষের কাছে পাঠানো নবী ছিলেন?",
-        image: 'https://s3.amazonaws.com/somewherein/pictures/sherzatapon/sherzatapon-1665287090-be03f99_xlarge.jpg'
-    },
-    {
-        title: "জনপ্রতিনিধিদের জবাবদিহিতাহীন এই সংস্কৃতি আরও কত বছর চলবে?",
-        image: 'https://s3.amazonaws.com/somewherein/pictures/SabbirShakil666/SabbirShakil666-1664873600-089caf6_xlarge.jpg'
-    },
-];
-
-
-
-
 export default function drafted_posts() {
 
     const router = useRouter()

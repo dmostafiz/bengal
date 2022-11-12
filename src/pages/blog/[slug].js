@@ -236,10 +236,10 @@ function SingleBlogDetails({ post, ok }) {
 
     return (
         <HomeLayout
-            title={post.title + ' - ' + siteName}
-            image={post.image || imageUrl}
+            title={post ? post.title + ' - ' + siteName : 'পোষ্ট পাওয়া যায়নি!'}
+            image={post?.image || imageUrl}
             url={siteUrl + router.asPath}
-            description={truncate(post.content, 270, {
+            description={post && truncate(post.content, 270, {
                 stripTags: true,
             })}
         >

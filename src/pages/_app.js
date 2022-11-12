@@ -8,6 +8,7 @@ import AuthContextProvider from '../Contexts/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CommentContextProvider from '../Contexts/CommentContext';
 import SocketContextProvider from '../Contexts/SocketContext';
+import AppContextProvider from '../Contexts/AppContext';
 
 const queryClient = new QueryClient()
 
@@ -40,11 +41,15 @@ function MyApp({ Component, pageProps }) {
 
               <SocketContextProvider>
 
+                <AppContextProvider>
+
                 <CommentContextProvider>
 
                   <Component {...pageProps} />
 
                 </CommentContextProvider>
+
+                </AppContextProvider>
 
               </SocketContextProvider>
 
