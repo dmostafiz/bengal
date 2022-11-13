@@ -1,6 +1,8 @@
-/** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
 
-const nextConfig = {
+const nextConfig = withPWA({
   reactStrictMode: false,
   swcMinify: true,
   env: {
@@ -14,6 +16,6 @@ const nextConfig = {
     domains: ['res.cloudinary.com'],
   },
 
-}
+})
 
 module.exports = nextConfig
