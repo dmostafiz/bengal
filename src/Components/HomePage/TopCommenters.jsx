@@ -96,7 +96,12 @@ export default function TopCommenters() {
                     <SwiperSlide>
                         <TopCommentersSkeleton />
                     </SwiperSlide>
-
+                    <SwiperSlide>
+                        <TopCommentersSkeleton />
+                    </SwiperSlide>  
+                    <SwiperSlide>
+                        <TopCommentersSkeleton />
+                    </SwiperSlide>
                 </>}
 
                 {/* <span slot="container-start">Container Start</span> */}
