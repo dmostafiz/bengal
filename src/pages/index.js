@@ -19,6 +19,7 @@ import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
 import SectionTitle from '../Components/Common/SectionTitle'
 import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
 import UserPanel from '../Components/Common/UserPanel'
+import TopCommenters from '../Components/HomePage/TopCommenters'
 
 export default function Home() {
 
@@ -88,7 +89,15 @@ export default function Home() {
 
         <Box mb={8}>
 
-          <SectionTitle mb={5} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+          <SectionTitle showBorder={false} py={0} mb={0} title='সর্বোচ্চ মন্তব্যকারী' />
+
+          <TopCommenters />
+
+        </Box>
+
+        <Box mb={8}>
+
+          <SectionTitle mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
 
           <LatestBlogPost />
 
