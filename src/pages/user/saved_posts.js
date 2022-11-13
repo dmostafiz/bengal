@@ -42,7 +42,7 @@ export default function saved_posts() {
 
                     {isLoading && <ComponentLoader py='3' />}
 
-                    {(!isLoading && data?.length) ? data?.map((saved, index) => {
+                    {(!isLoading && data?.length > 0) && data?.map((saved, index) => {
 
                         if (
                             saved?.post?.id
@@ -105,7 +105,9 @@ export default function saved_posts() {
                     }
 
 
-                    ) : <Center py={5}>
+                    ) }
+                    
+                    {(!isLoading && !data?.length) && <Center py={5}>
                         <VStack>
                             <Text>সংরক্ষিত পোস্ট পাওয়া যায়নি</Text>
                         </VStack>
