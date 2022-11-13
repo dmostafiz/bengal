@@ -12,7 +12,7 @@ import banglaNumber from '../../Helpers/banglaNumber'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function DesktopSearchbar({mobile=false}) {
+export default function DesktopSearchbar({ mobile = false }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -64,7 +64,7 @@ export default function DesktopSearchbar({mobile=false}) {
 
         var isMounted = true
 
-        async function getSearchData(){
+        async function getSearchData() {
             setLoading(true)
 
             const response = await Axios.get(`/system/search/${searchFor}/${query}`)
@@ -78,7 +78,7 @@ export default function DesktopSearchbar({mobile=false}) {
             setLoading(false)
         }
 
-        if(isMounted && value){
+        if (isMounted && value) {
             getSearchData()
         }
 
@@ -99,7 +99,7 @@ export default function DesktopSearchbar({mobile=false}) {
                 borderTop='1px'
                 borderLeft='1px'
                 borderRight='1px'
-                borderBottom={isOpen? '0px' : '1px'}
+                borderBottom={isOpen ? '0px' : '1px'}
 
                 // bg='facebook.10'
                 borderColor='facebook.100'
@@ -209,10 +209,12 @@ export default function DesktopSearchbar({mobile=false}) {
                                                 </Box>}
                                                 <Box flex='1'>
                                                     <Title order={5}>{post.title}</Title>
-                                                    <PostTrancate
-                                                        char={mobile ? 4 : 14}
-                                                        content={post?.content ?? ''}
-                                                    />
+                                                    <Box fontSize={'14px'} fontWeight='normal'>
+                                                        <PostTrancate
+                                                            char={mobile ? 4 : 14}
+                                                            content={post?.content ?? ''}
+                                                        />
+                                                    </Box>
                                                 </Box>
                                             </Flex>
                                         </Link>
@@ -227,14 +229,13 @@ export default function DesktopSearchbar({mobile=false}) {
                                                 </Box>}
                                                 <Box flex='1'>
                                                     <Title order={5}>{user.displayName}</Title>
-                                                    <PostTrancate
-                                                        lines={1}
-                                                        content={user?.bio ?? ''}
-                                                    // slug={<>... <Link href={`/blog/${slug}`}>
-                                                    //     <a href={`/blog/${slug}`}>বাকিটুকু পড়ুন</a>
-                                                    // </Link></>
-                                                    // }
-                                                    />
+                                                    <Box fontSize={'14px'} fontWeight='normal'>
+                                                        <PostTrancate
+                                                            lines={1}
+                                                            content={user?.bio ?? ''}
+
+                                                        />
+                                                    </Box>
                                                 </Box>
                                             </Flex>
                                         </Link>
