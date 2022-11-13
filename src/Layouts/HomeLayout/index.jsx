@@ -65,7 +65,7 @@ export default function HomeLayout({
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <title>{title}</title>
-                <meta name="google-site-verification" content="Su1LHtlWhtyXKF84ppDt_GnYxxzRcoeTWFiA1-8AJzE" />
+                <meta name="google-site-verification" content="4NNSBM2fl5AIyprId53IZZTtyqZ1cLHuvxwsYgot9xM" />
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />
                 <meta name="description" content={description} />
                 <meta property="og:description" content={description} />
