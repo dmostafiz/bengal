@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /user/
+Allow /
+
+Sitemap: https://www.shamantorik.com/sitemap.xml
