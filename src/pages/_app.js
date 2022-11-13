@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CommentContextProvider from '../Contexts/CommentContext';
 import SocketContextProvider from '../Contexts/SocketContext';
 import AppContextProvider from '../Contexts/AppContext';
+import Script from 'next/script';
 
 const queryClient = new QueryClient()
 
@@ -43,11 +44,16 @@ function MyApp({ Component, pageProps }) {
 
                 <AppContextProvider>
 
-                <CommentContextProvider>
+                  <CommentContextProvider>
 
-                  <Component {...pageProps} />
+                    <Script
+                      src="https://www.googletagmanager.com/gtag/js?id=G-BS6TEWCZBX"
+                      strategy="afterInteractive"
+                    />
 
-                </CommentContextProvider>
+                    <Component {...pageProps} />
+
+                  </CommentContextProvider>
 
                 </AppContextProvider>
 
