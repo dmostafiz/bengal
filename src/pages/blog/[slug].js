@@ -194,9 +194,9 @@ function SingleBlogDetails({ post, ok }) {
                 inline: 'center'
             })
 
-        }, 1000)
+        }, 1500)
 
-    }, [router.query.comment])
+    }, [router.asPath])
 
     function postWritter() {
         return <Box>

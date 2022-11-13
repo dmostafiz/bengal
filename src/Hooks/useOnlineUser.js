@@ -11,6 +11,8 @@ export default function useOnlineUser() {
 
     const [onlineBloggers, setOnlineBloggers] = useState([])
     const [onlineReaders, setOnlineReaders] = useState([])
+    const [onlineRegisteredReaders, setOnlineRegisteredReaders] = useState([])
+
 
     // console.log('Leftside auth: ', authUser)
 
@@ -23,6 +25,14 @@ export default function useOnlineUser() {
         }
         const uniqueBloggers = getUniqueBloggersArray(bloggers, 'id')
         setOnlineBloggers(uniqueBloggers)
+
+        const registeredUsers = onlineUsers?.filter(usr => usr?.posts?.length < 1 )
+
+        function getUniqueRegisteredUsers(arr, key) {
+            return [...new Map(arr.map(item => [item[key], item])).values()]
+        }
+        const uniqueRegisteredUsers = getUniqueRegisteredUsers(registeredUsers, 'id')
+        setOnlineRegisteredReaders(uniqueRegisteredUsers)
 
 
         const readers = onlineUsers?.filter(usr => usr?.posts?.length == 0 || !usr.id)
@@ -45,5 +55,5 @@ export default function useOnlineUser() {
         return user ? true : false
     }
 
-    return {  onlineUsers: onlineBloggers.concat(onlineReaders), isUserOnline, onlineBloggers, onlineReaders }
+    return {  onlineUsers: onlineBloggers.concat(onlineReaders), isUserOnline, onlineBloggers, onlineReaders, onlineRegisteredReaders }
 }

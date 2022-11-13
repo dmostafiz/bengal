@@ -12,7 +12,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
 
     const { authUser, isLoading, isError, error } = useUser()
 
-    const {onlineUsers, onlineBloggers, onlineReaders} = useOnlineUser()
+    const {onlineUsers, onlineBloggers, onlineReaders, onlineRegisteredReaders} = useOnlineUser()
 
     return (
         <Box>
@@ -71,6 +71,18 @@ export default function MainLeftSidebar({ authpanel = true }) {
                                 </Avatar>
                                 <AuthorHoverCard author={user} />
 
+                            </Flex>
+                        </Box>
+                        )}
+                    </Box>
+
+                    <Box>
+                        {onlineRegisteredReaders.map((user, index) => <Box key={index} py={2} borderBottom='1px' borderColor='blackAlpha.200'>
+                            <Flex alignItems={'center'} gap={2}>
+                                <Avatar size={'xs'} src={user.avatar} name={user.displayName}>
+                                    <AvatarBadge boxSize='1.25em' bg='green.500' />
+                                </Avatar>
+                                <AuthorHoverCard author={user} />
                             </Flex>
                         </Box>
                         )}

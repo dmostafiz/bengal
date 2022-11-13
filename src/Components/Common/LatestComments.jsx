@@ -40,7 +40,7 @@ export default function LatestComments() {
                 </Flex>
 
                 <Box>
-                    <Link href={`/blog/${comment.post.id}`}>
+                    <Link href={`/blog/${comment.post.id}?comment=${comment.id}`}>
 
                         <Box flex={1} cursor='pointer' lineHeight={'20px'}>
                             <Heading as={'span'} size='xs' color={'facebook.700'}>
