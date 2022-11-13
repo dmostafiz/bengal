@@ -89,7 +89,7 @@ export default function TopPostsCarousel() {
                                 </Link>
 
                                 <Text fontSize={'12px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
-                                    {formatDate(item.createdAt)}
+                                    {formatDate(item.publishedAt)}
                                 </Text>
 
                                 <Box pt={2}>
