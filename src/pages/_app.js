@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
                   <CommentContextProvider>
 
                     <Script
-                      src="https://www.googletagmanager.com/gtag/js?id=G-65P5YVSH3H"
+                      src="https://www.googletagmanager.com/gtag/js?id=G-BS6TEWCZBX"
                       strategy="afterInteractive"
                     />
 
@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }) {
                         function gtag(){window.dataLayer.push(arguments);}
                         gtag('js', new Date());
 
-                        gtag('config', 'G-65P5YVSH3H');
+                        gtag('config', 'G-BS6TEWCZBX');
                       `}
                     </Script>
 
