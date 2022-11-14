@@ -1,9 +1,9 @@
 import { Box, Flex, Skeleton, SkeletonCircle, Stack } from '@chakra-ui/react'
 import React from 'react'
 
-export default function SliderPostCarkSkeleton() {
+export default function SliderPostCarkSkeleton({mb=10}) {
     return (
-        <Box w='full' mb={10} spacing={3} shadow='md'>
+        <Box w='full' mb={mb} spacing={3} shadow='md'>
             <Flex mt={4} direction={'column'} gap={2} w={'full'}>
                 <Skeleton startColor='blackAlpha.50' endColor='blackAlpha.200' height='130px' roundedTop={'xl'} fadeDuration={3} />
 

@@ -144,7 +144,7 @@ export default function TopPostsCarousel() {
                 {/* <span slot="container-start">Container Start</span> */}
             </Swiper>
             <Box pt={3}>
-                <Link href='/bloggers'>
+                <Link href='/top_posts'>
                     <Flex cursor={'pointer'} color={'blue.700'} gap={1}>
                         <Icon as={ArrowForward} fontSize='16px' />
                         <Text fontSize={'13px'} fontWeight='bold'>সকল জনপ্রিয় পোস্ট</Text>
