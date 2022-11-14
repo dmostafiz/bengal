@@ -72,9 +72,10 @@ export default function BlogPanel({ userPanel = true }) {
                     childrenOffset={35}
                     defaultOpened
                 >
-                    <NavLink py={2} icon={<BsArrowRightSquare />} label="ব্লগ নীতিমালা" />
-                    <NavLink py={2} icon={<BsArrowRightSquare />} label="পোস্ট র‍্যাঙ্কিং পদ্ধতি" />
-                    <NavLink py={2} icon={<BsArrowRightSquare />} label="ব্লগার র‍্যাঙ্কিং পদ্ধতি" />
+                    <Link href='/tos'>
+                        <NavLink py={2} icon={<BsArrowRightSquare />} label="সামান্তরিক নীতিমালা" />
+                    </Link>
+                    <NavLink py={2} icon={<BsArrowRightSquare />} label="র‍্যাঙ্কিং এলগরিদম" />
                 </NavLink>
             </Box>
 
