@@ -336,7 +336,7 @@ function SingleBlogDetails({ post, ok }) {
                                 as='article'
                                 color={'gray.700'}
                                 textAlign={'justify'}
-                                fontSize={{ base: '17px', md: '19px' }}
+                                fontSize={{ base: '18px', md: '19px' }}
                                 lineHeight={{ base: '25px', md: '27px' }}
                                 // fontWeight={'semibo'}
                                 letterSpacing='-.2px'
