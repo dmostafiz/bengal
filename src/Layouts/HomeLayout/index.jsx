@@ -76,10 +76,10 @@ export default function HomeLayout({
                 <meta name="apple-mobile-web-app-title" content="PWA App" />
                 <meta name="format-detection" content="telephone=no" />
                 <meta name="mobile-web-app-capable" content="yes" />
-                <meta name="msapplication-config" content="/icons/browserconfig.xml" />
                 <meta name="msapplication-TileColor" content="#2B5797" />
                 <meta name="msapplication-tap-highlight" content="no" />
                 <meta name="theme-color" content="#000000" />
+
 
                 <meta name="google-site-verification" content="4NNSBM2fl5AIyprId53IZZTtyqZ1cLHuvxwsYgot9xM" />
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />

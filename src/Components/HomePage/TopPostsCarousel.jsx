@@ -66,7 +66,7 @@ export default function TopPostsCarousel() {
                                         <a href={`/blog/${item.id}`}>
                                             <Center zIndex={0} h='full' w='full' >
                                                 {/* <Show below={'lg'}> */}
-                                                <Image zIndex={0} title={item.title} w='full' minH={'full'} objectFit={'cover'} src={item.image} alt='image' />
+                                                <Image zIndex={111} title={item.title} w='full' minH={'full'} objectFit={'cover'} src={item.image} alt='image' />
                                                 {/* </Show> */}
                                             </Center>
                                         </a>

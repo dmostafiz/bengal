@@ -44,7 +44,7 @@ export default function AuthorHoverCard({ author, color='' }) {
                             </Text> জন অনুসরন করছে</Text>
                             <Wrap spacing={2} alignItems='flex-end'>
                                 <Link href={`/blogger/${author.id}`}>
-                                    <Button size='xs' rounded={'none'} colorScheme={'yellow'}>সকল পোস্ট দেখুন</Button>
+                                    <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
                                 </Link>
                                 <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
                             </Wrap>
