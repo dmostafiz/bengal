@@ -3,11 +3,17 @@ import { HoverCard, Title } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
 import banglaNumber from '../../Helpers/banglaNumber'
+import useFollowing from '../../Hooks/useFollowing'
 import useOnlineUser from '../../Hooks/useOnlineUser'
+import useUser from '../../Hooks/useUser'
 
-export default function AuthorHoverCard({ author, color='' }) {
+export default function AuthorHoverCard({ author, color = '', showFollowers=true }) {
 
     const { isUserOnline } = useOnlineUser()
+
+    const { followUser, unFollowUser, isFollowing, isLoading } = useFollowing()
+
+    const {authUser} = useUser()
 
     return (
         <HoverCard zIndex={999999999999} width={250} shadow="lg" withArrow openDelay={0} position='bottom' closeDelay={400}>
@@ -39,14 +45,25 @@ export default function AuthorHoverCard({ author, color='' }) {
                         <Divider my={1} />
 
                         <Box bg={'blackAlpha.5'} fontSize={'13px'}>
-                            <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
+                            {showFollowers && <Text mb={2}><Text as='span' fontSize={'16px'} fontWeight='bold'>
                                 {banglaNumber(author?.followers?.length)}
-                            </Text> জন অনুসরন করছে</Text>
+                            </Text> জন অনুসরন করছে</Text>}
                             <Wrap spacing={2} alignItems='flex-end'>
                                 <Link href={`/blogger/${author.id}`}>
                                     <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
                                 </Link>
-                                <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
+
+                                {(author.id != authUser?.id ) &&
+                                 <>
+                                 { isFollowing(author.id)
+                                    ? <Button isLoading={isLoading} onClick={() => unFollowUser(author.id)} size='xs' rounded={'none'} colorScheme={'gray'}>
+                                        আনফলো করুণ
+                                    </Button>
+                                    : <Button isLoading={isLoading} onClick={() => followUser(author.id)} size='xs' rounded={'none'} colorScheme={'blackAlpha'}>
+                                        অনুসরণ করুন
+                                    </Button> }
+                                 </>
+                                }
                             </Wrap>
                         </Box>
                     </Box>

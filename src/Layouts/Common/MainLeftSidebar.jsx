@@ -69,7 +69,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
                                 <Avatar size={'xs'} src={user.avatar} name={user.displayName}>
                                     <AvatarBadge boxSize='1.25em' bg='green.500' />
                                 </Avatar>
-                                <AuthorHoverCard author={user} />
+                                <AuthorHoverCard author={user} showFollowers={false} />
 
                             </Flex>
                         </Box>
@@ -82,7 +82,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
                                 <Avatar size={'xs'} src={user.avatar} name={user.displayName}>
                                     <AvatarBadge boxSize='1.25em' bg='green.500' />
                                 </Avatar>
-                                <AuthorHoverCard author={user} />
+                                <AuthorHoverCard author={user} showFollowers={false}/>
                             </Flex>
                         </Box>
                         )}
