@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }) {
       theme={{
         /** Put your mantine theme override here */
         colorScheme: 'light',
+        fontFamily: 'SolaimanLipi'
       }}
     >
       <ChakraProvider>
