@@ -1,9 +1,9 @@
 {
-    "theme_color": "#F0D351",
+    "theme_color": "#fbfbfb",
     "background_color": "#fbfbfb",
     "scope": "/",
-    "name": "Shamantorik Bangla Blog",
-    "short_name": "Shamantorik Blog",
+    "name": "সামান্তরিক ব্লগ - বাংলা ভাষায় হৃদয়ের স্পন্দন",
+    "short_name": "সামান্তরিক ব্লগ",
     "description": "Shamantorik Bangla blog, is the first modern bangla blog community in Bangladesh and India-kolkata. the front page of the blog displaying all the incoming posts from bengali bloggers from various states of Bangladesh and India. since the simple start 16th december 2022, Shamantorik Bangla blog has grown to become the trend setter for bangla blogging.",
     "start_url": "/",
     "display": "standalone",
