@@ -24,7 +24,8 @@ main,
 nav,
 section,
 summary {
-  display: block
+  display: block;
+  font-family: 'SolaimanLipi', Arial, sans-serif !important;
 }
 
 article>p {
@@ -53,6 +54,7 @@ article>figure>figcaption {
   text-align: center;
   font-size: 15px;
   color: rgb(179, 177, 177);
+  font-family: 'SolaimanLipi', Arial, sans-serif !important;
 }
 
 :root {
