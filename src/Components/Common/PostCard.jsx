@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
+import { Badge, Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Show, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
 import { Title, Tooltip } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
@@ -17,45 +17,38 @@ import usePostAction from '../../Hooks/usePostAction'
 import useUser from '../../Hooks/useUser'
 // import { ThumbUpOff } from 'tableicons-react'
 
-export default function PostCard({id, title, image, content, createdAt, postType, parent, postPart, childs, states, author, slug, categories, authorCard = true }) {
+export default function PostCard({ id, title, image, content, createdAt, postType, parent, postPart, childs, states, author, slug, categories, authorCard = true }) {
 
-    const imgBreakPoints = useBreakpoint({
-        base: false,
-        md: true
-    })
+    const { savePost, isPostSaved } = usePostAction()
 
-    // console.log('Publishes Step post parent ', parent)
-
-    const { isUserOnline } = useOnlineUser()
-
-    const { trashPost, deletePost, restorPost, savePost,  removeSavePost, isPostSaved} = usePostAction()
-
-    const {authUser} = useUser()
+    const { authUser } = useUser()
 
     return (
         <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 2, sm: 3, md: 3, lg: 3, xl: 4 }}>
 
-            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={3}>
+            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={{lg:3}}>
 
                 {image ?
-                    <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{ base: 'sm', md: 'lg' }} rounded='xl'
-                        overflow={'hidden'}
-                        // bgImage={image}
-                        objectFit='cover'
-                        bgPos='center' bgSize='cover'>
-                        <Link href={`/blog/${slug}`}>
-                            <a href={`/blog/${slug}`}>
-                                <Center h='full' w='full'>
-                                    {/* <Show below={'lg'}> */}
-                                    <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
-                                    {/* </Show> */}
-                                </Center>
-                            </a>
-                        </Link>
-                    </Box>
+                    <Show above='lg'>
+                        <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{ base: 'sm', md: 'lg' }} rounded='xl'
+                            overflow={'hidden'}
+                            // bgImage={image}
+                            objectFit='cover'
+                            bgPos='center' bgSize='cover'>
+                            <Link href={`/blog/${slug}`}>
+                                <a href={`/blog/${slug}`}>
+                                    <Center h='full' w='full'>
+                                        {/* <Show below={'lg'}> */}
+                                        <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
+                                        {/* </Show> */}
+                                    </Center>
+                                </a>
+                            </Link>
+                        </Box>
+                    </Show>
                     : <></>}
 
-                <Box pt={2}>
+                <Box pt={{lg:2}}>
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
@@ -116,14 +109,14 @@ export default function PostCard({id, title, image, content, createdAt, postType
                         <Flex gap={3} alignItems='center'>
                             {postType == 'multiStep' && <Menu>
                                 <MenuButton as={Button} leftIcon={<AlignJustified size={'18'} />} rounded='full' colorScheme='red' size='xs' variant='outline'>
-                                   পর্ব - {banglaNumber(postPart)}
+                                    পর্ব - {banglaNumber(postPart)}
                                 </MenuButton>
                                 <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
                                     {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
-                                        if(stepPost.id != id){
-                                        return <Link key={index} href={`/blog/${stepPost.id}`}>
-                                            <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
-                                        </Link>
+                                        if (stepPost.id != id) {
+                                            return <Link key={index} href={`/blog/${stepPost.id}`}>
+                                                <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
+                                            </Link>
                                         }
                                     })}
 
@@ -134,12 +127,12 @@ export default function PostCard({id, title, image, content, createdAt, postType
                             <Menu>
                                 <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
                                 <MenuList fontSize={'14px'} shadow='lg'>
-                                  
-                                    {(!isPostSaved(id) && author.id != authUser?.id ) &&  <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
-                                    
-                                    { author.id == authUser?.id  && <Link href={`/editor/${id}?editorStatus=update`}>
-                                     <MenuItem  icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
-                                  
+
+                                    {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
+
+                                    {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
+                                        <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
+
                                     {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
 
                                     {/* <MenuItem>Create a Copy</MenuItem> */}
