@@ -64,7 +64,23 @@ export default function HomeLayout({
             <Head>
                 <meta charSet="utf-8" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                <meta
+                    name='viewport'
+                    content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+                />
                 <title>{title}</title>
+
+                <meta name="application-name" content="PWA App" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                <meta name="apple-mobile-web-app-title" content="PWA App" />
+                <meta name="format-detection" content="telephone=no" />
+                <meta name="mobile-web-app-capable" content="yes" />
+                <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+                <meta name="msapplication-TileColor" content="#2B5797" />
+                <meta name="msapplication-tap-highlight" content="no" />
+                <meta name="theme-color" content="#000000" />
+
                 <meta name="google-site-verification" content="4NNSBM2fl5AIyprId53IZZTtyqZ1cLHuvxwsYgot9xM" />
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />
                 <meta name="description" content={description} />
@@ -100,7 +116,7 @@ export default function HomeLayout({
                     maxW={'container.xl'}
                     px={{ base: 0, md: '10px' }}
                     bg='gray.100'
-                    // backdropFilter='auto'
+                // backdropFilter='auto'
                 // backdropBlur='2px'
                 >
 
@@ -109,7 +125,7 @@ export default function HomeLayout({
                     {/* <ToastSpinnerText text='পোস্টটি সেভ হচ্ছে...' /> */}
 
                     <Navigation />
-                    
+
                     {/* <ImageBanner src='/banner.jpg' /> */}
 
                     <Box
