@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, HStack, Icon, Image, Show, Spinner, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarGroup, Box, Button, Center, Divider, Flex, Heading, HStack, Icon, Image, Show, Spinner, Text, Tooltip, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -312,7 +312,7 @@ function SingleBlogDetails({ post, ok }) {
                         <Box >
 
                             <Box py={2} fontWeight='bold' rounded='sm' borderBottom={'2px'} borderColor='blackAlpha.100'>
-                                <Title order={2}>{post?.title} {post.postType == 'multiStep' && `(পর্ব-${banglaNumber(post?.part || 1)})`}</Title>
+                                <Heading as={'h1'} size='lg' fontWeight={'black'}>{post?.title} {post.postType == 'multiStep' && `(পর্ব-${banglaNumber(post?.part || 1)})`}</Heading>
                             </Box>
 
                             <Box py={2} mb='2'>
@@ -336,9 +336,9 @@ function SingleBlogDetails({ post, ok }) {
                                 as='article'
                                 color={'gray.700'}
                                 textAlign={'justify'}
-                                fontSize={{ base: '17px', md: '17px' }}
-                                lineHeight={{ base: '25px', md: '26px' }}
-                                fontWeight={500}
+                                fontSize={{ base: '17px', md: '19px' }}
+                                lineHeight={{ base: '25px', md: '27px' }}
+                                // fontWeight={'semibo'}
                                 letterSpacing='-.2px'
                                 dangerouslySetInnerHTML={{ __html: post?.content }}
                             >

@@ -100,6 +100,7 @@ export default function HomeLayout({
                 <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="image_src" href={image} />
+                <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet" />
             </Head>
 
             <Box bg={{ base: 'white', md: 'gray.300' }} minH='100vh'>

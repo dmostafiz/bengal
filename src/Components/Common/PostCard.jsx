@@ -144,7 +144,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
                 </Box>
 
-                <Box color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '19px', md: '22px' }} fontSize={{ base: '15px', md: '16px' }} w='full' pb={{ base: 2, lg: 3 }}>
+                <Box color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '22px', md: '23px' }} fontSize={{ base: '17px', md: '18px' }} w='full' pb={{ base: 2, lg: 3 }}>
                     <PostTrancate
                         image={image}
                         char={100}
