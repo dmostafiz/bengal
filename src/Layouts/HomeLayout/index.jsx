@@ -62,8 +62,8 @@ export default function HomeLayout({
     return (
         <LayoutWrapper>
             <Head>
-                <meta charset="utf-8" />
-                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta charSet="utf-8" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <title>{title}</title>
                 <meta name="google-site-verification" content="4NNSBM2fl5AIyprId53IZZTtyqZ1cLHuvxwsYgot9xM" />
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />
