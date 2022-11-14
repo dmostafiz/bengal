@@ -50,7 +50,7 @@ export default function NotificationPanel() {
 
     return (
         <Menu>
-            <MenuButton size={{ base: 'sm', md: 'md' }} as={Button} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
+            <MenuButton size={{ base: 'xs', md: 'md' }} as={Button} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.100' } }} roundedLeft={{ base: 'lg', md: 'full' }} roundedRight={{ base: 'none', md: 'full' }} >
                 <Flex alignItems={'center'} gap={1}>
                     <Box position={'relative'}>
                         <Icon position={'relative'} as={FaBell} fontSize={20} />

@@ -45,8 +45,6 @@ export default function MobileSidebarDrawer() {
                     </DrawerHeader>
 
 
-                   
-
                     <DrawerBody px={0} borderTop='1px'  borderColor='blackAlpha.200'>
                         {/* <Input placeholder='Type here...' /> */}
                         <UserPanel logout isMobile={true}/>

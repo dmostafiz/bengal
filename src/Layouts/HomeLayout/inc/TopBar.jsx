@@ -88,7 +88,7 @@ export default function TopBar() {
 
                                             <NotificationPanel />
 
-                                            <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'sm', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
+                                            <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'xs', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
                                                 <Flex alignItems={'center'} gap={2}>
                                                     <BsPencilSquare size={20} /> <Show above='md'><Text>সামান্তরিকে লিখুন</Text></Show>
                                                 </Flex>
@@ -96,7 +96,7 @@ export default function TopBar() {
 
 
                                             {authUser ? <Menu>
-                                                <MenuButton as={Button} size={{ base: 'sm', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
+                                                <MenuButton as={Button} size={{ base: 'xs', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'} rightIcon={<ChevronDown size={16} />} gap={0}>
                                                     <Avatar size={'xs'} src={authUser.avatar} >
                                                         {isUserOnline(authUser.id) && <AvatarBadge boxSize='1.25em' bg='green.500' />}
                                                     </Avatar>
@@ -120,7 +120,7 @@ export default function TopBar() {
                                                 </MenuList>
                                             </Menu>
                                                 : !isLoading && <Menu>
-                                                    <MenuButton as={Button} size={{ base: 'md', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'}>
+                                                    <MenuButton as={Button} size={{ base: 'xs', md: 'md' }} px={20} bg={{ base: 'transparent', md: 'transparent' }} _hover={{ bg: { md: 'transparent' } }} _active={{ bg: { md: 'blackAlpha.50' } }} roundedLeft={{ base: 'none', md: 'full' }} roundedRight={{ base: 'lg', md: 'full' }} colorScheme={'gray'}>
                                                         <Flex alignItems={'center'} gap={'0px'}>
                                                             <Icon as={UserCircle} fontSize={24} color='gray.700' />
                                                             <ChevronDown size={16} color='gray' />
