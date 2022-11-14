@@ -29,7 +29,7 @@ const blogger = ({ user, ok }) => {
 
     const [loading, setLoading] = useState(true)
 
-    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/user/blogger/posts/${user?.id}`, 1)
+    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/user/blogger/posts/${user?.id}`, 20)
 
 
     const userInfo = () => {

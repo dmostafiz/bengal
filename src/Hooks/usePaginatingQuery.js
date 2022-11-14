@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useRef } from 'react'
 import Axios from '../Helpers/axiosHelper'
 
-export default function usePaginatingQuery(url, limit = 5, type = 'posts') {
+export default function usePaginatingQuery(url, limit = 20, type = 'posts') {
 
     const router = useRouter()
 

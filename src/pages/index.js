@@ -87,17 +87,12 @@ export default function Home() {
         </Box>
 
 
-        <Box mb={8}>
 
-          <SectionTitle showBorder={false} py={0} mb={0} title='সর্বোচ্চ মন্তব্যকারী' />
-
-          <TopCommenters />
-
-        </Box>
+        <TopCommenters />
 
         <Box mb={8}>
 
-          <SectionTitle mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+          <SectionTitle bg='blackAlpha.50' showBorder={false} py={2} px={3} mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
 
           <LatestBlogPost />
 

@@ -106,10 +106,6 @@ export default function LatestBlogPost() {
 
             {isFetchingNextPage && <>
                 <PostCardSkeleton />
-                <PostCardSkeleton />
-                <PostCardSkeleton />
-                <PostCardSkeleton />
-
             </>}
 
             {loadMore()}

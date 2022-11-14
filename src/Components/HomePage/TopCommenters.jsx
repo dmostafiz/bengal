@@ -20,8 +20,17 @@ import { useQuery } from '@tanstack/react-query';
 import banglaNumber from '../../Helpers/banglaNumber';
 import useOnlineUser from '../../Hooks/useOnlineUser';
 import TopCommentersSkeleton from '../Common/Skeletons/TopCommentersSkeleton';
+import SectionTitle from '../Common/SectionTitle';
 
 export default function TopCommenters() {
+
+    const breakPoints = useBreakpointValue({
+        base: 3,
+        sm: 4,
+        md: 4,
+        lg: 5,
+        xl: 5
+    })
 
     const { data, isLoading } = useQuery(['topCommenters'], async () => {
         const res = await Axios.get('/user/top_commenters')
@@ -33,39 +42,35 @@ export default function TopCommenters() {
 
 
     return (
-        <Box w='full'>
-            {/* <Text mb={3} order={5}>মাসের সেরা ব্লগার নির্ধারইত হয় ব্লগারের পোষ্ট, মন্তব্য, পোস্ট এর লাইক ও কতিপয় বিষয়ের উপর ভিত্তি করে। এটি এই ব্লগের একটি স্বয়ংক্রিয় সিস্টেম।</Text> */}
-            <Swiper
-                spaceBetween={8}
-                slidesPerView={useBreakpointValue({
-                    base: 3,
-                    sm: 4,
-                    md: 4,
-                    lg: 5,
-                    xl: 5
-                })}
-                navigation
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-                modules={[Navigation, Scrollbar]}
-            >
-                {data?.map((item, index) => (
-                    <SwiperSlide key={index}>
-                        <Box py={2}>
-                            <Link href={`/blogger/${item.id}`}>
-                                <Box bg='white' _hover={{ bg: 'blackAlpha.50' }} cursor='pointer' border={'1px'} borderColor='blackAlpha.200' color='blackAlpha.800' px={1} py={2} shadow='md' rounded='xl'>
-                                    <Flex direction={'column'} alignItems='center' gap={{ base: 1, md: 2 }}>
-                                        <Box>
-                                            <Avatar size={'md'} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর'>
-                                                {isUserOnline(item.id) && <AvatarBadge boxSize='10px' border='1px' bg='green.500' />}
-                                            </Avatar>
-                                        </Box>
-                                        <Box textAlign={'center'}>
-                                            <Title order={6}><Text noOfLines={1}>{item.displayName}</Text></Title>
-                                            <Text fontSize={'12px'}>{banglaNumber(item.postComments?.length)} টি মন্তব্য</Text>
-                                        </Box>
-                                    </Flex>
-                                    {/* <Box>
+        <Box>
+          {!isLoading && data?.length > 0 &&  <Box w='full' mb={8}>
+                <SectionTitle showBorder={false} py={0} mb={0} title='এই মাসের সর্বোচ্চ মন্তব্যকারী' />
+                {/* <Text mb={3} order={5}>মাসের সেরা ব্লগার নির্ধারইত হয় ব্লগারের পোষ্ট, মন্তব্য, পোস্ট এর লাইক ও কতিপয় বিষয়ের উপর ভিত্তি করে। এটি এই ব্লগের একটি স্বয়ংক্রিয় সিস্টেম।</Text> */}
+                <Swiper
+                    spaceBetween={8}
+                    slidesPerView={breakPoints}
+                    navigation
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                    modules={[Navigation, Scrollbar]}
+                >
+                    {data?.map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <Box py={2}>
+                                <Link href={`/blogger/${item.id}`}>
+                                    <Box bg='white' _hover={{ bg: 'blackAlpha.50' }} cursor='pointer' border={'1px'} borderColor='blackAlpha.200' color='blackAlpha.800' px={1} py={2} shadow='md' rounded='xl'>
+                                        <Flex direction={'column'} alignItems='center' gap={{ base: 1, md: 2 }}>
+                                            <Box>
+                                                <Avatar size={'md'} src={item.avatar} rounded={'full'} shadow name='লিমন লস্কর'>
+                                                    {isUserOnline(item.id) && <AvatarBadge boxSize='10px' border='1px' bg='green.500' />}
+                                                </Avatar>
+                                            </Box>
+                                            <Box textAlign={'center'}>
+                                                <Title order={6}><Text noOfLines={1}>{item.displayName}</Text></Title>
+                                                <Text fontSize={'12px'}>{banglaNumber(item.postComments?.length)} টি মন্তব্য</Text>
+                                            </Box>
+                                        </Flex>
+                                        {/* <Box>
 
                                     <Divider my={1} borderColor='whiteAlpha.300' />
 
@@ -75,39 +80,39 @@ export default function TopCommenters() {
                                         </Link>
                                     </Box>
                                       </Box> */}
-                                    {/* <Divider my={1} /> */}
-                                </Box>
-                            </Link>
-                        </Box>
+                                        {/* <Divider my={1} /> */}
+                                    </Box>
+                                </Link>
+                            </Box>
 
-                    </SwiperSlide>
-                ))}
+                        </SwiperSlide>
+                    ))}
 
-                {isLoading && <>
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>  
-                    <SwiperSlide>
-                        <TopCommentersSkeleton />
-                    </SwiperSlide>
-                </>}
+                    {isLoading && <>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <TopCommentersSkeleton />
+                        </SwiperSlide>
+                    </>}
 
-                {/* <span slot="container-start">Container Start</span> */}
-            </Swiper>
+                    {/* <span slot="container-start">Container Start</span> */}
+                </Swiper>
 
-            {/* <Box pt={3}>
+                {/* <Box pt={3}>
                 <Link href='/bloggers'>
                     <Flex cursor={'pointer'} color={'blue.700'}>
                         <Icon as={ArrowForward} fontSize='24px' />
@@ -115,6 +120,7 @@ export default function TopCommenters() {
                     </Flex>
                 </Link>
             </Box> */}
-        </Box >
+            </Box >}
+        </Box>
     )
 }

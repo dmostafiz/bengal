@@ -145,9 +145,9 @@ export default function TopPostsCarousel() {
             </Swiper>
             <Box pt={3}>
                 <Link href='/bloggers'>
-                    <Flex cursor={'pointer'} color={'blue.700'}>
-                        <Icon as={ArrowForward} fontSize='24px' />
-                        <Text fontWeight='bold'>সকল জনপ্রিয় পোস্ট দেখুন</Text>
+                    <Flex cursor={'pointer'} color={'blue.700'} gap={1}>
+                        <Icon as={ArrowForward} fontSize='16px' />
+                        <Text fontSize={'13px'} fontWeight='bold'>সকল জনপ্রিয় পোস্ট</Text>
                     </Flex>
                 </Link>
             </Box>
