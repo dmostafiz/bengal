@@ -61,7 +61,7 @@ export default function top_posts() {
 
                         {!isLoading && data.length ? data?.map((item, index) => (
 
-                            <Box zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl'>
+                            <Box key={index} zIndex={0} shadow='md' borderColor={'blackAlpha.200'} p={0} w={'full'} rounded='xl'>
 
                                 {item.image ?
                                     <Box
