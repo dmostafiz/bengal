@@ -236,7 +236,7 @@ function SingleBlogDetails({ post, ok }) {
 
     return (
         <HomeLayout
-            title={post ? post.title + ' - ' + siteName : 'পোষ্ট পাওয়া যায়নি!'}
+            title={post ? post.title + ' | ' + siteName : 'পোষ্ট পাওয়া যায়নি!'}
             image={post?.image || imageUrl}
             url={siteUrl + router.asPath}
             description={post && truncate(post.content, 270, {

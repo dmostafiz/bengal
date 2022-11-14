@@ -58,7 +58,7 @@ const blogger = ({ user, ok }) => {
 
     return (
         <HomeLayout
-            title={user ? `${user.id ? user.displayName + ' - ' : ''}${siteName}` : `${siteName} | ${siteSlogun}`}
+            title={user ? `${user.id ? user.displayName + ' | ' : ''}${siteName}` : `${siteName}`}
             image={user?.avatar || imageUrl}
             url={siteUrl + router.asPath}
             description={truncate(user?.bio, 270, {
