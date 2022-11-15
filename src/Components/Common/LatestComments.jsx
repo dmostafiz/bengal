@@ -17,7 +17,7 @@ export default function LatestComments() {
 
     const { data, isLoading, isError, error } = useQuery(['latesComments'], async () => {
 
-        const response = await Axios.get('/post/latest_comments/12')
+        const response = await Axios.get('/post/latest_comments/20')
 
         // console.log('latest comments: ', response?.data?.comments)
         // setComments(response?.data?.comments)

@@ -23,7 +23,7 @@ const categoryPosts = ({ category, ok }) => {
     // const router = useRouter()
     // console.log('category ssr', category)
 
-    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/category/posts/${category?.id}`, 1)
+    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/category/posts/${category?.id}`, 20)
 
     return (
         <HomeLayout

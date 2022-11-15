@@ -53,7 +53,7 @@ export default function LatestBlogPost() {
 
     // }, [entry?.isIntersecting])
 
-    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery('/post', 3)
+    const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery('/post', 20)
 
     // useEffect(() => {
     //     console.log('data', data)

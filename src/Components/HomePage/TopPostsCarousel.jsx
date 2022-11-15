@@ -27,7 +27,7 @@ import truncate from 'truncate-html';
 export default function TopPostsCarousel() {
 
     const { data, isLoading, isError, error } = useQuery(['topPosts'], async () => {
-        const response = await Axios.get('/post/get_top_posts/12')
+        const response = await Axios.get('/post/get_top_posts/9')
         return response?.data?.posts || []
     })
 
