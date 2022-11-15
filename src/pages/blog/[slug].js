@@ -36,6 +36,7 @@ import { IconPencilPlus } from '@tabler/icons'
 import Link from 'next/link'
 import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
 import truncate from 'truncate-html'
+import useFollowing from '../../Hooks/useFollowing'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -198,6 +199,9 @@ function SingleBlogDetails({ post, ok }) {
 
     }, [router.asPath])
 
+    const { followUser, unFollowUser, isFollowing, isLoading } = useFollowing()
+
+
     function postWritter() {
         return <Box>
             <Flex direction={{ base: 'row', md: 'row' }} gap={3}>
@@ -222,8 +226,17 @@ function SingleBlogDetails({ post, ok }) {
                         <Text as='span' fontSize={'16px'} fontWeight='bold'>{banglaNumber(post.author.followers.length)}</Text> জন অনুসরন করছে
                     </Text>}
                     <Wrap spacing={2} alignItems='flex-end'>
-                        <Button size='xs' rounded={'none'} colorScheme={'blackAlpha'}>অনুসরণ করুন</Button>
-
+                        {(post.author.id != authUser?.id) &&
+                            <>
+                                {isFollowing(post.author.id)
+                                    ? <Button isLoading={isLoading} onClick={() => unFollowUser(post.author.id)} size='xs' rounded={'none'} colorScheme={'gray'}>
+                                        আনফলো করুণ
+                                    </Button>
+                                    : <Button isLoading={isLoading} onClick={() => followUser(post.author.id)} size='xs' rounded={'none'} colorScheme={'blackAlpha'}>
+                                        অনুসরণ করুন
+                                    </Button>}
+                            </>
+                        }
                         <Link href={`/blogger/${post.author.id}`}>
                             <Button size='xs' rounded={'none'} colorScheme={'yellow'}>প্রোফাইল দেখুন</Button>
                         </Link>

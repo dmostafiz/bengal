@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarBadge, Badge, Box, Center, Divider, Flex, Heading, Hide, Icon, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Badge, Box, Button, Center, Divider, Flex, Heading, Hide, Icon, Image, Show, Spacer, Table, TableContainer, Tbody, Td, Text, Tr, VStack, Wrap } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import HomeLayout from '../../Layouts/HomeLayout'
 import LayoutColumn from '../../Layouts/HomeLayout/LayoutColumn'
@@ -20,6 +20,8 @@ import AuthorHoverCard from '../../Components/Common/AuthorHoverCard'
 import { imageUrl, siteName, siteSlogun, siteUrl } from '../../Helpers/config'
 import usePaginatingQuery from '../../Hooks/usePaginatingQuery'
 import PostCardSkeleton from '../../Components/Common/Skeletons/PostCardSkeleton'
+import useFollowing from '../../Hooks/useFollowing'
+import useUser from '../../Hooks/useUser'
 
 const blogger = ({ user, ok }) => {
 
@@ -31,6 +33,9 @@ const blogger = ({ user, ok }) => {
 
     const { items, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, ref, loadMoreButton, loadMoreInfinite, loadMore } = usePaginatingQuery(`/user/blogger/posts/${user?.id}`, 20)
 
+    const { authUser, hasUser } = useUser()
+
+    const { followUser, unFollowUser, isFollowing, isLoading } = useFollowing()
 
     const userInfo = () => {
         return <Box w='full' px={{ md: 1, lg: 3 }} mb='5' bg={'white'}>
@@ -43,6 +48,20 @@ const blogger = ({ user, ok }) => {
                     <Text fontSize={'14px'} ml={1} color='blackAlpha.500'>নিবন্ধ - {formatDate(user?.createdAt, 'LL')}</Text>
 
                     <Badge bg={'green.400'} variant='solid'>{banglaNumber(user?.followers.length)} জন অনুসরন করছে</Badge>
+
+                    <br />
+
+                    {(user.id != authUser?.id) &&
+                        <>
+                            {isFollowing(user.id)
+                                ? <Button isLoading={isLoading} onClick={() => unFollowUser(user.id)} size='xs' rounded={'none'} colorScheme={'gray'}>
+                                    আনফলো করুণ
+                                </Button>
+                                : <Button isLoading={isLoading} onClick={() => followUser(user.id)} size='xs' rounded={'none'} colorScheme={'blackAlpha'}>
+                                    অনুসরণ করুন
+                                </Button>}
+                        </>
+                    }
 
                 </Box>
             </Flex>
@@ -96,7 +115,7 @@ const blogger = ({ user, ok }) => {
                                             <Td>জন্ম তারিখ</Td>
                                             <Td isNumeric>{formatDate(user?.birthDate, 'LL')}</Td>
                                         </Tr>
-                                
+
                                     </Tbody>
 
                                 </Table>
