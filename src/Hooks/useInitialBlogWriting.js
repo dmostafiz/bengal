@@ -6,9 +6,7 @@ import { getAccessToken } from '../Helpers/cookieHelper'
 export default function useInitialBlogWriting() {
 
     const router = useRouter()
-
     const [editingPost, setEditingPost] = useState(null)
-
     const [editingPostLoading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -48,7 +46,6 @@ export default function useInitialBlogWriting() {
     }
 
     const generateNewBlogId = async () => {
-
         const post = await Axios.post('/post', {}, {
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`

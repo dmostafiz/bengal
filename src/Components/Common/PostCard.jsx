@@ -26,7 +26,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     return (
         <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 2, sm: 3, md: 3, lg: 3, xl: 4 }}>
 
-            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={{lg:3}}>
+            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={{ lg: 3 }}>
 
                 {image ?
                     <Show above='lg'>
@@ -48,7 +48,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                     </Show>
                     : <></>}
 
-                <Box pt={{lg:2}}>
+                <Box pt={{ lg: 2 }}>
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
@@ -159,32 +159,32 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
                             <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
                                 <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
-                                    <FcReading color='' size='18px' />
+                                    <FcReading color='' size='16px' />
                                     <Text color='facebook.500' as={'span'} fontWeight={'black'} fontSize='14px'>
-                                        {banglaNumber(states.read)} জন</Text>
+                                        {banglaNumber(states.read)}</Text>
                                 </Flex>
                             </Tooltip>
 
 
                             <Tooltip withArrow label={`${banglaNumber(states.like)} জন লাইক দিয়েছেন`} color={'black'}>
                                 <Flex whiteSpace='nowrap' alignItems={'center'} gap={1}>
-                                    <Icon as={BiLike} color='facebook.300' fontSize='18px' />
-                                    <Text as={'span'} color='facebook.500' fontSize='14px' fontWeight={'black'}>{banglaNumber(states.like)} লাইক
+                                    <Icon as={BiLike} color='facebook.300' fontSize='16px' />
+                                    <Text as={'span'} color='facebook.500' fontSize='14px' fontWeight={'black'}>{banglaNumber(states.like)}
                                     </Text>
                                 </Flex>
                             </Tooltip>
 
 
-                            <Flex whiteSpace='nowrap' alignItems={'center'} gap={'5px'} color={'gray.500'}>
-                                <Icon withArrow as={BiCommentDetail} color='facebook.300' fontSize='16px' />
-                                {states.comment ? <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য পাওয়া গেছে`}>
+                            <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য`}>
+                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'5px'} color={'gray.500'}>
+                                    <Icon withArrow as={BiCommentDetail} color='facebook.300' fontSize='15px' />
                                     <Flex gap={'5px'}>
                                         <Text as={'span'} color='facebook.500' fontWeight={'black'} fontSize='14px'>
-                                            {banglaNumber(states.comment)} মন্তব্য</Text>
+                                            {banglaNumber(states.comment)}</Text>
                                     </Flex>
-                                </Tooltip> : <Text color='facebook.500' fontSize={'14px'} fontWeight='normal'> মন্তব্য নেই</Text>}
+                                </Flex>
+                            </Tooltip>
 
-                            </Flex>
 
                         </Flex>
 

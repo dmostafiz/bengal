@@ -183,7 +183,6 @@ export default function profile() {
                 getUser={setUser}
             >
 
-
                 <Box my={10}>
 
                     <SectionTitle title={'প্রোফাইল ইনফরমেশন'} />
@@ -273,16 +272,18 @@ export default function profile() {
 
                                     <FormControl isInvalid={errors.profession}>
                                         <Select {...register('profession')} size={'sm'} placeholder='আপনার পেশা নির্ধারণ করুন'>
-                                            <option value='শিক্ষার্থী'>শিক্ষার্থী</option>
+                                            <option value='শিক্ষক'>শিক্ষক</option>
                                             <option value='লেখক / ব্লগার'>লেখক / ব্লগার</option>
                                             <option value='মেডিয়া / সাংবাদিক'>মেডিয়া / সাংবাদিক</option>
                                             <option value='ডাক্তার'>ডাক্তার</option>
-                                            <option value='ইঞ্জিনিয়ার'>ইঞ্জিনিয়ার</option>
+                                            <option value='ইঞ্জিনিয়ার / আই-টি'>ইঞ্জিনিয়ার / আই-টি</option>
                                             <option value='ব্যবসায়ী'>ব্যবসায়ী</option>
                                             <option value='চাকরিজীবী'>চাকরিজীবী</option>
                                             <option value='কৃষক / উদ্যোক্তা'>কৃষক / উদ্যোক্তা</option>
-                                            <option value='সরকারী-কর্মকর্তা / প্রশাসন'>সরকারী-কর্মকর্তা / প্রশাসন</option>
-                                            <option value='প্রবাসী / অন্যান্য'>প্রবাসী / অন্যান্য</option>
+                                            <option value='ফ্যাশন ডিজাইনার'>ফ্যাশন ডিজাইনার</option>
+                                            <option value='প্রশাসন'>প্রশাসন</option>
+                                            <option value='শিক্ষার্থী'>শিক্ষানবিস</option>
+                                            <option value='প্রবাসী'>প্রবাসী</option>
                                         </Select>
                                         <FormErrorMessage>
                                             {errors.profession && errors.profession.message}

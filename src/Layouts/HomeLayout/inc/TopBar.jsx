@@ -1,66 +1,22 @@
-import { Avatar, AvatarBadge, Badge, Box, Button, Center, Flex, Hide, Icon, Image, Input, Menu, MenuButton, MenuItem, MenuList, Show, Text } from '@chakra-ui/react'
-import React, { useContext, useEffect } from 'react'
-import { BellOff, BellRinging, ChevronDown, Heart, Lock, LockOpen, Login, Logout, Menu2, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
+import { Avatar, AvatarBadge, Box, Button, Center, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Show } from '@chakra-ui/react'
+import React from 'react'
+import { ChevronDown, Heart, Lock, LockOpen, Login, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
-import { FaBell, FaEnvelope, FaPencilAlt } from 'react-icons/fa'
 import { Affix } from '@mantine/core'
-import { AuthModalContext } from '../../../Contexts/AuthModalContext'
-import { AuthContext } from '../../../Contexts/AuthContext'
-import { useRouter } from 'next/router'
 import DesktopSearchbar from '../../../Components/Header/DesktopSearchbar'
 import SiteLogoDesktop from '../../../Components/Common/SiteLogoDesktop'
-import { setRedirectUrl } from '../../../Helpers/cookieHelper'
 import useUser from '../../../Hooks/useUser'
 import Link from 'next/link'
 import MobileSidebarDrawer from '../../Common/MobileSidebarDrawer'
-import SiteLogoMobile from '../../../Components/Common/SiteLogoMobile'
-import { BsPencilSquare } from 'react-icons/bs'
-import useInitialBlogWriting from '../../../Hooks/useInitialBlogWriting'
-import { SocketContext } from '../../../Contexts/SocketContext'
 import useOnlineUser from '../../../Hooks/useOnlineUser'
-import banglaNumber from '../../../Helpers/banglaNumber'
 import NotificationPanel from '../../Common/NotificationPanel'
 import WritePost from '../../../Components/Header/WritePost'
 
 export default function TopBar() {
 
-    const router = useRouter()
-
-    const { onOpen, seTitle } = useContext(AuthModalContext)
-
     const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
 
-    const { draftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
-
-    // const handleClickWriteBlog = async () => {
-
-    //     if (authUser) {
-
-    //         const checkDraftedPosts = await draftedPosts()
-
-    //         // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
-
-    //         if (checkDraftedPosts.length > 0) {
-
-    //             router.push('/editor/drafted_posts')
-
-    //         } else {
-    //             await redirectToNewPostEditor()
-    //         }
-    //     }
-
-    //     else {
-    //         setRedirectUrl('/write/new')
-
-    //         seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
-
-    //         onOpen()
-    //     }
-    // }
-
     const { isUserOnline } = useOnlineUser()
-
-    // console.log('Topbar Auth User ', authUser)
 
     return (
 

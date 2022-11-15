@@ -41,6 +41,32 @@ export default function WritePost() {
     }
 
 
+    const handleClickSerialPostWrite = async () => {
+
+        if (authUser) {
+
+            const checkDraftedPosts = await draftedPosts()
+
+            // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
+
+            if (checkDraftedPosts.length > 0) {
+
+                router.push('/editor/drafted_posts')
+
+            } else {
+                await redirectToNewPostEditor()
+            }
+        }
+
+        else {
+            setRedirectUrl('/write/new')
+
+            seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
+
+            onOpen()
+        }
+    }
+
     return (
         <>
 
@@ -70,13 +96,13 @@ export default function WritePost() {
                         <PopoverCloseButton />
                         <PopoverBody borderColor='yellow.500'>
                             <Flex direction={'column'}>
-                                <Button isDisabled={router.asPath.startsWith('/write')} size={'sm'} onClick={handleClickWriteBlog} fontWeight='light' variant='unstyled'>
+                                <Button isDisabled={router.asPath.startsWith('/editor')} size={'sm'} onClick={handleClickWriteBlog} fontWeight='light' variant='unstyled'>
                                     <Flex alignItems={'center'} gap={2}>
                                         <BsPencilSquare size={18} /><Text fontSize={'17px'}>সাধারন পোস্ট লিখুন</Text>
                                     </Flex>
                                 </Button>
 
-                                <Button isDisabled={true} size={'sm'} onClick={handleClickWriteBlog} fontWeight='light' variant='unstyled'>
+                                <Button isDisabled={false} size={'sm'} onClick={handleClickSerialPostWrite} fontWeight='light' variant='unstyled'>
                                     <Flex alignItems={'center'} gap={2}>
                                         <BsPencilSquare size={18} /><Text fontSize={'17px'}>ধারাবাহিক পোস্ট লিখুন</Text>
                                     </Flex>

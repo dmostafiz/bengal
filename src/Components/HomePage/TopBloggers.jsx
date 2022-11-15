@@ -88,7 +88,7 @@ export default function TopBloggers() {
 
             <Box pt={3}>
                 <Link href='/bloggers'>
-                    <Flex cursor={'pointer'} color={'blue.700'} gap={1}>
+                    <Flex cursor={'pointer'} color={'blue.700'} gap={0}>
                         <Icon as={ArrowForward} fontSize='16px'/>
                         <Text fontSize={'13px'} fontWeight='bold'>সকল ব্লগার প্রোফাইল</Text>
                     </Flex>
