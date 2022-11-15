@@ -56,9 +56,9 @@ export default function PublishedPosts() {
                             {/* <Td>{banglaNumber(index + 1)}</Td> */}
                             <Td>
                                 <Flex gap={1}>
-                                    <Box w={'80px'} h={'50px'}>
+                                    {post.image && <Box w={'80px'} h={'50px'}>
                                         <Image w='full' h='full' objectFit={'cover'} rounded='md' shadow='md' src={post.image} />
-                                    </Box>
+                                    </Box>}
                                     <Box flex='1'>
                                         <Heading noOfLines={2} as='h6' size={'xs'} whiteSpace='pre-wrap'>
                                             {post.title}
