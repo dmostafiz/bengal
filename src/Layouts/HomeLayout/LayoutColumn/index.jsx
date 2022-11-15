@@ -1,12 +1,10 @@
-import { Box, Center, Divider, Flex, Show, Text, useToast } from '@chakra-ui/react'
-import { Title } from '@mantine/core'
+import { Box, Flex, Show, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { getFlashMessage } from '../../../Helpers/cookieHelper'
 
 export default function LayoutColumn({ children, pageTopSection ='', leftSide = '', rightSide = '', leftColumnWidth = 30, rightColumnWidth = 20 }) {
-
 
     const middleColumnWisdth = 100 - leftColumnWidth
     const mainColumnWidth = 100 - rightColumnWidth

@@ -106,6 +106,7 @@ export default function HomeLayout({
             <Box bg={{ base: 'white', md: 'gray.300' }} minH='100vh'>
 
                 {(!isLoading && !authUser && !onTapLoading) && <GoogleOneTapLogin
+                    disabled={!isLoading && !authUser && !onTapLoading}
                     onError={(error) => console.log(error)}
                     onSuccess={(response) => tryToLoginOrSignup(response)}
                     googleAccountConfigs={{ client_id: process.env.GOOGLE_CLIENT_ID, auto_select: false }}

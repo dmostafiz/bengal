@@ -1,18 +1,12 @@
 import React from 'react'
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
+import {Box, Flex, Text } from '@chakra-ui/react'
 import { NavLink } from '@mantine/core'
 import { IconListCheck, IconListDetails } from '@tabler/icons'
-import { BsArrowRight, BsArrowRightSquare } from 'react-icons/bs'
-import useUser from '../../Hooks/useUser'
-import { ArrowRight, ArrowsExchange2, Heart, Logout, Pencil, Power, User } from 'tabler-icons-react'
+import { BsArrowRightSquare } from 'react-icons/bs'
 import Link from 'next/link'
 import UserPanel from './UserPanel'
-import TranslatorWidget from 'react-translate-widget';
-
 
 export default function BlogPanel({ userPanel = true }) {
-
-    const { isLoading, authUser, logoutUser } = useUser()
 
     return (
         <Box mb={5} bg=''>

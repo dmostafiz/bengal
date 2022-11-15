@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Text, Wrap } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Button} from '@chakra-ui/react'
+import React from 'react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { Carousel } from '@mantine/carousel';
 // import useCategory from '../../../Hooks/categories';

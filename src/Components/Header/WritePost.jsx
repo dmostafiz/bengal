@@ -11,7 +11,7 @@ export default function WritePost() {
 
     const router = useRouter()
     const { onOpen, seTitle } = useContext(AuthModalContext)
-    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
+    const { authUser } = useUser()
     const { draftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
 
     const handleClickWriteBlog = async () => {

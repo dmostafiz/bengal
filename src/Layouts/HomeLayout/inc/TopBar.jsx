@@ -14,8 +14,7 @@ import WritePost from '../../../Components/Header/WritePost'
 
 export default function TopBar() {
 
-    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
-
+    const { authUser, isLoading, logoutUser } = useUser()
     const { isUserOnline } = useOnlineUser()
 
     return (

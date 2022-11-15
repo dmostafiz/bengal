@@ -24,7 +24,6 @@ export default function CommentInput({ openOnReply = false, replyTo, id, user })
 
     const {
         handleSubmit,
-        register,
         control,
         formState: { errors, isSubmitting },
         reset
@@ -33,14 +32,12 @@ export default function CommentInput({ openOnReply = false, replyTo, id, user })
         resolver: yupResolver(schema),
     })
 
-    const { editorId, setEditorId, setCommentLoading, commentLoading, setCommentId, currentReplyThread, setCurrentReplyThread, setCommentChildren } = useContext(CommentContext)
+    const {setCommentLoading, setCommentId, currentReplyThread, setCurrentReplyThread, setCommentChildren } = useContext(CommentContext)
 
     const router = useRouter()
     const toast = useToast()
 
     const [content, setContent] = useState('')
-    const { authUser, isLoading, hasUser, isError, error, logoutUser } = useUser()
-
     const { onOpen, seTitle } = useContext(AuthModalContext)
 
     const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
@@ -74,13 +71,11 @@ export default function CommentInput({ openOnReply = false, replyTo, id, user })
 
     });
 
-
     const [loading, setLoading] = useState(false)
 
     const handleSubmmitComment = async (value) => {
 
         setLoading(true)
-
 
         const res = await Axios.post('/post/store_comment', {
             content,
