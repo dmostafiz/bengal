@@ -102,7 +102,7 @@ export default function WritePost() {
                                     </Flex>
                                 </Button>
 
-                                <Button isDisabled={false} size={'sm'} onClick={handleClickSerialPostWrite} fontWeight='light' variant='unstyled'>
+                                <Button isDisabled={true} size={'sm'} onClick={handleClickSerialPostWrite} fontWeight='light' variant='unstyled'>
                                     <Flex alignItems={'center'} gap={2}>
                                         <BsPencilSquare size={18} /><Text fontSize={'17px'}>ধারাবাহিক পোস্ট লিখুন</Text>
                                     </Flex>
