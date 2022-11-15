@@ -20,7 +20,7 @@ const schema = yup.object({
 }).required();
 
 
-export default function CommentInput({openOnReply=false, replyTo, id, user }) {
+export default function CommentInput({ openOnReply = false, replyTo, id, user }) {
 
     const {
         handleSubmit,
@@ -81,13 +81,13 @@ export default function CommentInput({openOnReply=false, replyTo, id, user }) {
 
         setLoading(true)
 
-        
+
         const res = await Axios.post('/post/store_comment', {
             content,
             replyTo,
             id
         })
-        
+
         setCommentLoading(id)
         // console.log('Comment Response ', res)
 
@@ -134,12 +134,10 @@ export default function CommentInput({openOnReply=false, replyTo, id, user }) {
     const editorRef = useRef(null)
 
     useEffect(() => {
-        console.log('editorRef', editorRef.current)
+        // console.log('editorRef', editorRef.current)
 
         if (editorRef.current) {
-
             editorRef.current.focus()
-
         }
 
     }, [currentReplyThread.showEditor])
@@ -172,8 +170,15 @@ export default function CommentInput({openOnReply=false, replyTo, id, user }) {
                         value={value}
 
                         onEditorChange={val => {
-                            setContent(val)
-                            onChange(val)
+
+                            if (!user) {
+                                setRedirectUrl(router.asPath)
+                                return onOpen()
+                            }else{
+                                setContent(val)
+                                onChange(val)
+                            }
+
                         }}
 
                         init={{
@@ -206,7 +211,7 @@ export default function CommentInput({openOnReply=false, replyTo, id, user }) {
                                 editor.on('click', () => {
                                     if (!user) {
                                         setRedirectUrl(router.asPath)
-                                        onOpen()
+                                        return onOpen()
                                     } else {
                                         // editor.contentWindow.innerHeight = 200
                                         // console.log('he he he', editor)

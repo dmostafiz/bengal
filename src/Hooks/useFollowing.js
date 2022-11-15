@@ -52,7 +52,7 @@ export default function useFollowing() {
 
         if (!authUser) {
             setRedirectUrl(router.asPath)
-            authModal?.seTitle('আনফলো করতে করতে নিবন্ধিত সদস্য হতে হবে')
+            authModal?.seTitle('আনফলো করতে নিবন্ধিত সদস্য হতে হবে')
             return authModal?.onOpen()
         }
 

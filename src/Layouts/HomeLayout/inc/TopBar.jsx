@@ -20,6 +20,7 @@ import { SocketContext } from '../../../Contexts/SocketContext'
 import useOnlineUser from '../../../Hooks/useOnlineUser'
 import banglaNumber from '../../../Helpers/banglaNumber'
 import NotificationPanel from '../../Common/NotificationPanel'
+import WritePost from '../../../Components/Header/WritePost'
 
 export default function TopBar() {
 
@@ -31,31 +32,31 @@ export default function TopBar() {
 
     const { draftedPosts, redirectToNewPostEditor, getRedirectingUrl } = useInitialBlogWriting()
 
-    const handleClickWriteBlog = async () => {
+    // const handleClickWriteBlog = async () => {
 
-        if (authUser) {
+    //     if (authUser) {
 
-            const checkDraftedPosts = await draftedPosts()
+    //         const checkDraftedPosts = await draftedPosts()
 
-            // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
+    //         // console.log( 'checking draftedPosts().length ', checkDraftedPosts.length)
 
-            if (checkDraftedPosts.length > 0) {
+    //         if (checkDraftedPosts.length > 0) {
 
-                router.push('/editor/drafted_posts')
+    //             router.push('/editor/drafted_posts')
 
-            } else {
-                await redirectToNewPostEditor()
-            }
-        }
+    //         } else {
+    //             await redirectToNewPostEditor()
+    //         }
+    //     }
 
-        else {
-            setRedirectUrl('/write/new')
+    //     else {
+    //         setRedirectUrl('/write/new')
 
-            seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
+    //         seTitle('ব্লগ লিখতে নিবন্ধিত সদস্য হতে হবে')
 
-            onOpen()
-        }
-    }
+    //         onOpen()
+    //     }
+    // }
 
     const { isUserOnline } = useOnlineUser()
 
@@ -88,11 +89,8 @@ export default function TopBar() {
 
                                             <NotificationPanel />
 
-                                            <Button isDisabled={router.asPath.startsWith('/write')} size={{ base: 'xs', md: 'md' }} onClick={handleClickWriteBlog} rounded={{ base: 'none', md: 'full' }} bg={{ base: 'transparent', md: 'yellow.400' }} color={'blackAlpha.900'} colorScheme={{ base: 'blackAlpha', md: 'yellow' }}>
-                                                <Flex alignItems={'center'} gap={2}>
-                                                    <BsPencilSquare size={20} /> <Show above='md'><Text>সামান্তরিকে লিখুন</Text></Show>
-                                                </Flex>
-                                            </Button>
+                                            <WritePost />
+
 
 
                                             {authUser ? <Menu>
