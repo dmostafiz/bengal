@@ -44,7 +44,7 @@ export default function WritePost() {
     return (
         <>
 
-            <Popover>
+            <Popover variant={''}>
                 <PopoverTrigger>
                     <Button
                         // onClick={() => {
@@ -64,21 +64,21 @@ export default function WritePost() {
                     </Button>
                 </PopoverTrigger>
                 <Portal>
-                    <PopoverContent mt={4} shadow='lg'>
-                        <PopoverArrow />
-                        <PopoverHeader>সামান্তরিক পোর্টাল</PopoverHeader>
+                    <PopoverContent bg='yellow.400' borderColor='yellow.400' arrow mt={5} shadow='lg'>
+                        <PopoverArrow  bg='yellow.400' />
+                        <PopoverHeader borderColor='blackAlpha.100'>সামান্তরিক পোর্টাল</PopoverHeader>
                         <PopoverCloseButton />
-                        <PopoverBody>
+                        <PopoverBody borderColor='yellow.500'>
                             <Flex direction={'column'}>
-                                <Button isDisabled={router.asPath.startsWith('/write')} size={'sm'} onClick={handleClickWriteBlog} variant='unstyled'>
+                                <Button isDisabled={router.asPath.startsWith('/write')} size={'sm'} onClick={handleClickWriteBlog} fontWeight='light' variant='unstyled'>
                                     <Flex alignItems={'center'} gap={2}>
-                                        <BsPencilSquare size={20} /><Text>সাধারন পোস্ট লিখুন</Text>
+                                        <BsPencilSquare size={18} /><Text fontSize={'17px'}>সাধারন পোস্ট লিখুন</Text>
                                     </Flex>
                                 </Button>
 
-                                <Button isDisabled={router.asPath.startsWith('/write')} size={'sm'} onClick={handleClickWriteBlog} variant='unstyled'>
+                                <Button isDisabled={true} size={'sm'} onClick={handleClickWriteBlog} fontWeight='light' variant='unstyled'>
                                     <Flex alignItems={'center'} gap={2}>
-                                        <BsPencilSquare size={20} /><Text>ধারাবাহিক পোস্ট লিখুন</Text>
+                                        <BsPencilSquare size={18} /><Text fontSize={'17px'}>ধারাবাহিক পোস্ট লিখুন</Text>
                                     </Flex>
                                 </Button>
 

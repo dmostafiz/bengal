@@ -133,7 +133,6 @@ export default function HomeLayout({
                         bg={{ base: 'white', md: 'whiteAlpha.900' }}
                         // roundedTop={{ base: 'none', md: '4xl' }}
                         roundedBottom='md'
-                        overflow={'hidden'}
                         border='1px'
                         borderColor={'blackAlpha.200'}
                         shadow='sm'
@@ -149,7 +148,7 @@ export default function HomeLayout({
 
 
                     <Center py='5'>
-                        <Text>2022 @ shamantorik.com all rights reserved</Text>
+                        <Text>২০২২ @ "সামান্তরিক বাংলা ব্লগ" সকল স্বত্ব বহন করে</Text>
                     </Center>
 
                 </SectionContainer>
