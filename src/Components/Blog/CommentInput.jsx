@@ -133,16 +133,6 @@ export default function CommentInput({ openOnReply = false, replyTo, id, user })
 
     const editorRef = useRef(null)
 
-    useEffect(() => {
-        // console.log('editorRef', editorRef.current)
-
-        if (editorRef.current) {
-            editorRef.current.focus()
-        }
-
-    }, [currentReplyThread.showEditor])
-
-
 
     return (
         <Box pb={0}>
