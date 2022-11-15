@@ -42,7 +42,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
                 </Box>
             </Box> */}
 
-            <Box w='full' bg='' mb={5}>
+           {onlineUsers.length > 0 && <Box w='full' bg='' mb={5}>
 
                 <Box bg='blackAlpha.50' p={2}>
                     <Title order={6}>{onlineUsers.length
@@ -90,7 +90,7 @@ export default function MainLeftSidebar({ authpanel = true }) {
 
                 </Box>
 
-            </Box>
+            </Box>}
 
 
 
