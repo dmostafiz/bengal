@@ -64,7 +64,7 @@ export default function WritePost() {
                     </Button>
                 </PopoverTrigger>
                 <Portal>
-                    <PopoverContent bg='yellow.400' borderColor='yellow.400' arrow mt={5} shadow='lg'>
+                    <PopoverContent bg='yellow.400' borderColor='yellow.400' arrow mt={5} mr={3} shadow='lg'>
                         <PopoverArrow  bg='yellow.400' />
                         <PopoverHeader borderColor='blackAlpha.100'>সামান্তরিক পোর্টাল</PopoverHeader>
                         <PopoverCloseButton />
