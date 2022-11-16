@@ -195,6 +195,8 @@ export default function CommentInput({ openOnReply = false, replyTo, id, user })
                                 // })
                                 editor.on('click', () => {
                                     if (!user) {
+                                        seTitle('মন্তব্য করতে লগইন করুণ!')
+
                                         setRedirectUrl(router.asPath)
                                         return onOpen()
                                     } else {

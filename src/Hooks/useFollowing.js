@@ -20,7 +20,7 @@ export default function useFollowing() {
         if(authUser?.id){
             const res = await Axios.get('/user/get_followings')
     
-            console.log('My following list', res)
+            // console.log('My following list', res)
             return res.data.followings || []
         }
 
@@ -33,7 +33,7 @@ export default function useFollowing() {
 
         if (!authUser) {
             setRedirectUrl(router.asPath)
-            authModal?.seTitle('অনুসরন করতে করতে নিবন্ধিত সদস্য হতে হবে')
+            authModal?.seTitle('অনুসরন করতে নিবন্ধিত সদস্য হতে হবে')
             return authModal?.onOpen()
         }
 
@@ -77,12 +77,12 @@ export default function useFollowing() {
 
     const isFollowing = (userId) => {
 
-        console.log('following id ******* ', userId)
+        // console.log('following id ******* ', userId)
 
 
         const following = data?.find(flw => flw == userId)
 
-        console.log('following ###### ', following)
+        // console.log('following ###### ', following)
 
         if (following && following != undefined) return true
 
