@@ -83,7 +83,7 @@ export default function HomeLayout({
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />
                 <meta name="description" content={description} />
                 <meta property="og:description" content={description} />
-                <meta name="keywords" content="shamantorik,সামান্তরিক, সামান্তরিক বাংলা ব্লগ, bangla, blog, বাংলা ব্লগ, bangladesh, bangla blog, group blog, bengali,  বাংলা,  বাংলাদেশ, ঢাকা, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
+                <meta name="keywords" content="shamantorik,সামান্তরিক, সামান্তরিক বাংলা ব্লগ, bangla, blog, বাংলা ব্লগ, bangladesh, bangla blog, group blog, bengali,  বাংলা,  বাংলাদেশ, ঢাকা, দেশ, উপন্যাস, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
                 <meta property="fb:app_id" content="1545167315695654" />
                 <meta property="og:site_name" content={siteName} />
                 <meta property="og:image" content={image} />
