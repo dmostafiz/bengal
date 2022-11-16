@@ -1,4 +1,4 @@
-import { Avatar, Box, Center, Divider, Flex, Image, Show, Spacer, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Center, Divider, Flex, Heading, Image, Show, Spacer, Text, VisuallyHidden, VStack } from '@chakra-ui/react'
 import { Title } from '@mantine/core'
 import { ThumbUp } from 'tabler-icons-react'
 import PostCard from '../Components/Common/PostCard'
@@ -21,7 +21,7 @@ import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
 import UserPanel from '../Components/Common/UserPanel'
 import TopCommenters from '../Components/HomePage/TopCommenters'
 
-export default function Home() {
+const Home = () => {
 
 
   // useEffect(() => {
@@ -52,6 +52,11 @@ export default function Home() {
         {/* <ImageBanner src='/banner.png' /> */}
 
         {/* <Box mb={8}></Box> */}
+
+        <VisuallyHidden>
+          <Heading as='h1'>সামান্তরিক বাংলা ব্লগ</Heading>
+          <Text>সামান্তরিক বাংলা ব্লগ! বাংলাদেশ এর বৃহৎ একটি বাংলা ব্লগিং ওয়েব পোর্টাল. এটি মূলত বাংলাদেশ এবং ভারত-কলকাতা এবং অন্যান্য অঞ্চলের বাঙ্গালী অধিবাসীদের জন্য জনপ্রিয় একটি মাধ্যম। তাছাড়া বাংলা ভাষায় সাহিত্য চর্চা, গল্প, কবিতা, উপন্যাস, ধারাবাহিক গল্প লেখার জন্য সামান্তরিক ব্লগ একটি সময়পযোগি মাধ্যম যেখানে প্রতিনিয়তই হাজারও লেখক-পাঠকের সমাগম হয়। সামান্তরিক বাংলা ব্লগ প্রতিষ্ঠিত হয়েছে ১০ই নভেম্বর ২০২২ এ মোস্তাফিজুর রহমান এর হাত ধরে</Text>
+        </VisuallyHidden>
 
 
         <Show below='md'>
@@ -104,3 +109,10 @@ export default function Home() {
     </HomeLayout>
   )
 }
+
+Home.getInitialProps = async (ctx) => {
+
+  return {}
+}
+
+export default Home

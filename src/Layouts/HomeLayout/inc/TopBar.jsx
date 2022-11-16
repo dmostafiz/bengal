@@ -29,9 +29,6 @@ export default function TopBar() {
 
                                     <Box>
                                         <SiteLogoDesktop />
-                                        <VisuallyHidden>
-                                            <Heading as='h1'>সামান্তরিক বাংলা ব্লগ</Heading>
-                                        </VisuallyHidden>
                                     </Box>
 
 
