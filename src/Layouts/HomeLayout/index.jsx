@@ -63,29 +63,27 @@ export default function HomeLayout({
         <LayoutWrapper>
             <Head>
                 <meta charSet="utf-8" />
+                <meta property="languge" content="bn_BD" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name='viewport'
                     content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
                 />
                 <title>{title}</title>
-
-                <meta name="application-name" content="PWA App" />
+                <meta name="application-name" content="সামান্তরিক বাংলা ব্লগ" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-                <meta name="apple-mobile-web-app-title" content="PWA App" />
+                <meta name="apple-mobile-web-app-title" content="সামান্তরিক বাংলা ব্লগ" />
                 <meta name="format-detection" content="telephone=no" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="msapplication-TileColor" content="#2B5797" />
                 <meta name="msapplication-tap-highlight" content="no" />
                 <meta name="theme-color" content="#000000" />
-
-
                 <meta name="google-site-verification" content="4NNSBM2fl5AIyprId53IZZTtyqZ1cLHuvxwsYgot9xM" />
                 <meta name="alexaVerifyID" content="u9oVtocbFKf_wzTOQl3KphJWLT8" />
                 <meta name="description" content={description} />
                 <meta property="og:description" content={description} />
-                <meta name="keywords" content="shamantorik, bangla, blog, বাংলা ব্লগ,bangladesh, dhaka, bangla blog, group blog, bengali, news,  বাংলা,  বাংলাদেশ, ঢাকা, খবর, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
+                <meta name="keywords" content="shamantorik,সামান্তরিক, সামান্তরিক বাংলা ব্লগ, bangla, blog, বাংলা ব্লগ, bangladesh, bangla blog, group blog, bengali,  বাংলা,  বাংলাদেশ, ঢাকা, দেশ, নারী, কবিতা, গল্প, জীবন, মুক্তিযুদ্ধ" />
                 <meta property="fb:app_id" content="1545167315695654" />
                 <meta property="og:site_name" content={siteName} />
                 <meta property="og:image" content={image} />
