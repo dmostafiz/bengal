@@ -9,9 +9,12 @@ import Axios from '../../Helpers/axiosHelper'
 import banglaNumber from '../../Helpers/banglaNumber'
 import formatDate from '../../Helpers/formatDate'
 import useOnlineUser from '../../Hooks/useOnlineUser'
+import useUser from '../../Hooks/useUser'
 
 export default function NotificationPanel() {
     const router = useRouter()
+
+    const { authUser } = useUser()
 
     const [notifications, setNotifications] = useState([])
 
@@ -20,15 +23,16 @@ export default function NotificationPanel() {
 
     useQuery(['getNotifications', router.asPath], async () => {
 
-        const response = await Axios.get('/user/notifications')
+        if (authUser?.id) {
+            const response = await Axios.get('/user/notifications')
 
-        if (response?.data?.ok) {
             setNotifications(response?.data?.notifications)
 
             return response?.data?.notifications
+
         }
 
-        return null
+        return []
 
     })
 

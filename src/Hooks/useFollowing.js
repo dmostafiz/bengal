@@ -17,10 +17,14 @@ export default function useFollowing() {
     const authModal = useContext(AuthModalContext)
 
     const { data } = useQuery(['getFollowings'], async () => {
-        const res = await Axios.get('/user/get_followings')
+        if(authUser?.id){
+            const res = await Axios.get('/user/get_followings')
+    
+            console.log('My following list', res)
+            return res.data.followings || []
+        }
 
-        console.log('My following list', res)
-        return res.data.followings || []
+        return []
     })
 
     const [isLoading, setIsLoading] = useState(false)
