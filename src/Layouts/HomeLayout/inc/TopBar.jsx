@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Box, Button, Center, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Show } from '@chakra-ui/react'
+import { Avatar, Heading, AvatarBadge, Box, Button, Center, Flex, Icon, Menu, MenuButton, MenuItem, MenuList, Show, VisuallyHidden } from '@chakra-ui/react'
 import React from 'react'
 import { ChevronDown, Heart, Lock, LockOpen, Login, Pencil, Power, User, UserCircle } from 'tabler-icons-react'
 import SectionContainer from '../../../Components/Common/SectionContainer'
@@ -29,6 +29,9 @@ export default function TopBar() {
 
                                     <Box>
                                         <SiteLogoDesktop />
+                                        <VisuallyHidden>
+                                            <Heading as='h1'>সামান্তরিক বাংলা ব্লগ</Heading>
+                                        </VisuallyHidden>
                                     </Box>
 
 
