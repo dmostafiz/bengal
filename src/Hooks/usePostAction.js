@@ -22,8 +22,12 @@ export default function usePostAction() {
     const queryClient = useQueryClient()
 
     const { data } = useQuery(['allSavedPost'], async () => {
-        const res = await Axios.get('/user/saved_posts')
-        return res.data.posts || []
+        if(authUser?.id){
+            const res = await Axios.get('/user/saved_posts')
+            return res.data.posts || []
+        }
+       
+        return []
     })
 
 
