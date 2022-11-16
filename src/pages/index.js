@@ -20,6 +20,7 @@ import SectionTitle from '../Components/Common/SectionTitle'
 import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
 import UserPanel from '../Components/Common/UserPanel'
 import TopCommenters from '../Components/HomePage/TopCommenters'
+import { siteDesc } from '../Helpers/config'
 
 const Home = () => {
 
@@ -55,7 +56,7 @@ const Home = () => {
 
         <VisuallyHidden>
           <Heading as='h1'>সামান্তরিক বাংলা ব্লগ</Heading>
-          <Text>সামান্তরিক বাংলা ব্লগ! বাংলাদেশ এর বৃহৎ একটি বাংলা ব্লগিং ওয়েব পোর্টাল. এটি মূলত বাংলাদেশ এবং ভারত-কলকাতা এবং অন্যান্য অঞ্চলের বাঙ্গালী অধিবাসীদের জন্য জনপ্রিয় একটি মাধ্যম। তাছাড়া বাংলা ভাষায় সাহিত্য চর্চা, গল্প, কবিতা, উপন্যাস, ধারাবাহিক গল্প লেখার জন্য সামান্তরিক ব্লগ একটি সময়পযোগি মাধ্যম যেখানে প্রতিনিয়তই হাজারও লেখক-পাঠকের সমাগম হয়। সামান্তরিক বাংলা ব্লগ প্রতিষ্ঠিত হয়েছে ১০ই নভেম্বর ২০২২ এ মোস্তাফিজুর রহমান এর হাত ধরে</Text>
+          <Text>{siteDesc}</Text>
         </VisuallyHidden>
 
 
