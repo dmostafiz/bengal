@@ -64,8 +64,8 @@ export default function update_profile_information() {
 
 
     useEffect(() => {
-        console.log('Social Avatar ', avatar)
-        setPreview(avatar)
+        // console.log('Social Avatar ', avatar)
+        setPreview(avatar || null)
     }, [avatar])
 
 
@@ -181,7 +181,7 @@ export default function update_profile_information() {
                                     backgroundSize={'cover'}
                                     bgPos='center'
                                     bgRepeat='no-repeat'
-                                    backgroundImage={preview ??  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
+                                    bgImage={preview ??  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSjFKAL4_hBfc12CUM2QqIK-D75TTU2NKgIg&usqp=CAU'}
                                 >
 
                                 </Box>

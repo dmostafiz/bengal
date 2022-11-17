@@ -92,8 +92,6 @@ const Home = () => {
 
         </Box>
 
-
-
         <TopCommenters />
 
         <Box mb={8}>

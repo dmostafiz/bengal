@@ -1,7 +1,7 @@
-import { Center, Spinner, Text } from '@chakra-ui/react'
+import { Center } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { authorizeUpdateToken, getUpdateToken } from '../Helpers/cookieHelper'
+import { authorizeUpdateToken } from '../Helpers/cookieHelper'
 
 export default function LayoutWrapper({ children }) {
   const router = useRouter()
