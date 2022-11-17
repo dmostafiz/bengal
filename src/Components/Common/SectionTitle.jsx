@@ -6,7 +6,7 @@ export default function SectionTitle({component='', color='blackAlpha.800', icon
     return (
         <Box py={py} px={px} borderBottom={showBorder ? '2px' : '0px'} borderColor={'blackAlpha.200'} bg={bg} mb={mb} fontWeight='bold' rounded='none'>
           <Flex gap={3} direction={{base: 'column', xl: 'row'}} alignItems={{base: 'start', xl: 'center'}} justify='space-between'>
-            <Heading as={'h2'} size='md'>
+            <Heading as={'h2'} size='sm'>
                 <Flex alignItems={'center'} gap={1}>
                     {icon && icon}
                     <Text fontWeight={'bold'} color={color}>{title}</Text>

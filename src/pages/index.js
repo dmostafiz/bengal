@@ -98,7 +98,7 @@ const Home = () => {
 
         <Box mb={8}>
 
-          <SectionTitle bg='blackAlpha.50' showBorder={false} py={2} px={3} mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
+          <SectionTitle showBorder={true} mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
 
           <LatestBlogPost />
 
