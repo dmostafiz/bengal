@@ -24,170 +24,170 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} gap={{ base: 2, sm: 3, md: 3, lg: 3, xl: 4 }}>
+        <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 1 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
 
-            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '210px' }} mt={{ lg: 3 }}>
+            {/*  Card Header  */}
+            <Box borderBottom='1px' borderColor='blackAlpha.200' mb={2} pb={2}>
 
-                {image ?
-                    <Show above='lg'>
-                        <Box mb={0} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }} shadow={{ base: 'sm', md: 'lg' }} rounded='xl'
-                            overflow={'hidden'}
-                            // bgImage={image}
-                            objectFit='cover'
-                            bgPos='center' bgSize='cover'>
+                <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
+
+                    <Flex gap={5} alignItems='center'>
+
+                        <Box pt={{ lg: 2 }}>
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
-                                    <Center h='full' w='full'>
-                                        {/* <Show below={'lg'}> */}
-                                        <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
-                                        {/* </Show> */}
-                                    </Center>
+                                    <Tooltip withArrow label={title}>
+                                        <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{ base: 1.2, lg: 1.3 }} color='gray.700'>{title}</Text></Title>
+                                    </Tooltip>
                                 </a>
                             </Link>
                         </Box>
-                    </Show>
-                    : <></>}
-
-                <Box pt={{ lg: 2 }}>
-                    <Link href={`/blog/${slug}`}>
-                        <a href={`/blog/${slug}`}>
-                            <Tooltip withArrow label={title}>
-                                <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{ base: 1.2, lg: 1.3 }} color='gray.700'>{title}</Text></Title>
-                            </Tooltip>
-                        </a>
-                    </Link>
-                </Box>
-
-
-                <Wrap mt={2} spacingY={0} spacingX={2} alignItems='center'>
-                    <Flex gap={1} alignItems='center'>
-                        <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
-                        <AuthorHoverCard color='gray.500' author={author} />
                     </Flex>
 
-                    <Box >
-                        <Text fontSize={'13px'} letterSpacing='-0.8px' color={'blackAlpha.600'} >
-                            {formatDate(createdAt)}
-                        </Text>
-                    </Box>
-                </Wrap>
+                    <Flex gap={3} alignItems='center'>
+                        {postType == 'multiStep' && <Menu>
+                            <MenuButton as={Button} leftIcon={<AlignJustified size={'18'} />} rounded='full' colorScheme='red' size='xs' variant='outline'>
+                                পর্ব - {banglaNumber(postPart)}
+                            </MenuButton>
+                            <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
+                                {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
+                                    if (stepPost.id != id) {
+                                        return <Link key={index} href={`/blog/${stepPost.id}`}>
+                                            <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
+                                        </Link>
+                                    }
+                                })}
+
+                                {/* <MenuItem>Create a Copy</MenuItem> */}
+                            </MenuList>
+                        </Menu>
+                        }
+                        <Menu>
+                            <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
+                            <MenuList fontSize={'14px'} shadow='lg'>
+
+                                {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
+
+                                {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
+                                    <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
+
+                                {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
+
+                                {/* <MenuItem>Create a Copy</MenuItem> */}
+                            </MenuList>
+                        </Menu>
+                    </Flex>
+
+                </Flex>
 
             </Box>
 
-            <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 1 }} px={{ base: 0, md: 1, lg: 1, xl: 2 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
+            <Flex gap={{base:0, xl:5}} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
 
-                {/* <Box my={3} /> */}
-                <Box borderBottom='0px' borderColor='blackAlpha.200' mb={2} pb={1}>
+                <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '190px' }} >
 
-                    <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
+                    {image ?
+                        <Show above='lg'>
+                            <Box mb={3} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '120px' }} shadow={{ base: 'sm', md: 'md' }} rounded='xl'
+                                overflow={'hidden'}
+                                // bgImage={image}
+                                objectFit='cover'
+                                bgPos='center' bgSize='cover'>
+                                <Link href={`/blog/${slug}`}>
+                                    <a href={`/blog/${slug}`}>
+                                        <Center h='full' w='full'>
+                                            {/* <Show below={'lg'}> */}
+                                            <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
+                                            {/* </Show> */}
+                                        </Center>
+                                    </a>
+                                </Link>
+                            </Box>
+                        </Show>
+                        : <></>}
 
-                        <Flex gap={5} alignItems='center'>
 
-                            {categories?.length > 0 && <Wrap spacing={2}>
-                                {categories.map((cat, index) => {
-                                    return <Link key={index} href={`/category/${cat.id}`}>
-                                        <Badge
-                                            size='xs'
-                                            cursor={'pointer'}
-                                            variant={'subtle'}
-                                            colorScheme='facebook'
-                                            rounded='full'
-                                            px={2}
-                                            py='1.8px'
-                                            shadow={'sm'}
-                                        // fontWeight={'light'}
-                                        >
-                                            {cat.name}
-                                        </Badge>
-                                    </Link>
-                                })
-                                }
-
-                            </Wrap>}
+                    <Wrap mt={2} spacingY={0} spacingX={2} alignItems='center' mb={2}>
+                        <Flex gap={1} alignItems='center'>
+                            <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
+                            <AuthorHoverCard color='gray.500' author={author} />
                         </Flex>
 
-                        <Flex gap={3} alignItems='center'>
-                            {postType == 'multiStep' && <Menu>
-                                <MenuButton as={Button} leftIcon={<AlignJustified size={'18'} />} rounded='full' colorScheme='red' size='xs' variant='outline'>
-                                    পর্ব - {banglaNumber(postPart)}
-                                </MenuButton>
-                                <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
-                                    {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
-                                        if (stepPost.id != id) {
-                                            return <Link key={index} href={`/blog/${stepPost.id}`}>
-                                                <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
-                                            </Link>
-                                        }
-                                    })}
-
-                                    {/* <MenuItem>Create a Copy</MenuItem> */}
-                                </MenuList>
-                            </Menu>
-                            }
-                            <Menu>
-                                <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
-                                <MenuList fontSize={'14px'} shadow='lg'>
-
-                                    {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
-
-                                    {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
-                                        <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
-
-                                    {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
-
-                                    {/* <MenuItem>Create a Copy</MenuItem> */}
-                                </MenuList>
-                            </Menu>
-                        </Flex>
-
-                    </Flex>
+                        <Box >
+                            <Text fontSize={{base: '15px', xl: '13px'}} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                                {formatDate(createdAt)}
+                            </Text>
+                        </Box>
+                    </Wrap>
 
                 </Box>
 
-                <Box color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '22px', md: '23px' }} fontSize={{ base: '17px', md: '18px' }} w='full' pb={{ base: 2, lg: 3 }}>
+                <Box flex='1' color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '22px', md: '23px' }} fontSize={{ base: '17px', md: '18px' }} w='full' pb={{ base: 2, lg: 3 }}>
                     <PostTrancate
                         image={image}
-                        char={100}
+                        char={65}
                         content={content}
                     />
                 </Box>
 
-                <Box w='full' pb={{ base: 2, xl: 0 }} borderTop={{ base: '1px', xl: '0px' }} borderBottom={{ base: '1px', xl: '0px' }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
-                    <Flex gap={10} justify='space-between' alignItems={'center'}>
+            </Flex>
 
-                        <Flex gap={4} flex='1' justify='flex-start' alignItems={'center'}>
 
-                            <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
-                                <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
-                                    <FcReading color='' size='16px' />
-                                    <Text color='facebook.500' as={'span'} fontWeight={'black'} fontSize='14px'>
-                                        {banglaNumber(states.read)}</Text>
+            {/* Card Footer  */}
+            <Box w='full' pb={{ base: 2, xl: 0 }} borderTop={'1px'} borderBottom={{ base: '1px', xl: '0px' }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
+                <Flex gap={10} alignItems={'center'} justify='space-between'>
+
+                    {categories?.length > 0 && <Wrap spacing={2}>
+                        {categories.map((cat, index) => {
+                            return <Link key={index} href={`/category/${cat.id}`}>
+                                <Badge
+                                    size='xs'
+                                    cursor={'pointer'}
+                                    variant={'subtle'}
+                                    colorScheme='facebook'
+                                    rounded='full'
+                                    px={2}
+                                    py='1.8px'
+                                    shadow={'sm'}
+                                // fontWeight={'light'}
+                                >
+                                    {cat.name}
+                                </Badge>
+                            </Link>
+                        })
+                        }
+
+                    </Wrap>}
+
+                    <Flex gap={4} alignItems={'center'}>
+
+                        <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
+                            <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
+                                <FcReading color='' size='16px' />
+                                <Text color='facebook.500' as={'span'} fontWeight={'black'} fontSize='14px'>
+                                    {banglaNumber(states.read)}</Text>
+                            </Flex>
+                        </Tooltip>
+
+
+                        <Tooltip withArrow label={`${banglaNumber(states.like)} জন লাইক দিয়েছেন`} color={'black'}>
+                            <Flex whiteSpace='nowrap' alignItems={'center'} gap={1}>
+                                <Icon as={BiLike} color='facebook.300' fontSize='16px' />
+                                <Text as={'span'} color='facebook.500' fontSize='14px' fontWeight={'black'}>{banglaNumber(states.like)}
+                                </Text>
+                            </Flex>
+                        </Tooltip>
+
+
+                        <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য`}>
+                            <Flex whiteSpace='nowrap' alignItems={'center'} gap={'5px'} color={'gray.500'}>
+                                <Icon withArrow as={BiCommentDetail} color='facebook.300' fontSize='15px' />
+                                <Flex gap={'5px'}>
+                                    <Text as={'span'} color='facebook.500' fontWeight={'black'} fontSize='14px'>
+                                        {banglaNumber(states.comment)}</Text>
                                 </Flex>
-                            </Tooltip>
-
-
-                            <Tooltip withArrow label={`${banglaNumber(states.like)} জন লাইক দিয়েছেন`} color={'black'}>
-                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={1}>
-                                    <Icon as={BiLike} color='facebook.300' fontSize='16px' />
-                                    <Text as={'span'} color='facebook.500' fontSize='14px' fontWeight={'black'}>{banglaNumber(states.like)}
-                                    </Text>
-                                </Flex>
-                            </Tooltip>
-
-
-                            <Tooltip label={`${banglaNumber(states.comment)} টি মন্তব্য`}>
-                                <Flex whiteSpace='nowrap' alignItems={'center'} gap={'5px'} color={'gray.500'}>
-                                    <Icon withArrow as={BiCommentDetail} color='facebook.300' fontSize='15px' />
-                                    <Flex gap={'5px'}>
-                                        <Text as={'span'} color='facebook.500' fontWeight={'black'} fontSize='14px'>
-                                            {banglaNumber(states.comment)}</Text>
-                                    </Flex>
-                                </Flex>
-                            </Tooltip>
-
-
-                        </Flex>
-
+                            </Flex>
+                        </Tooltip>
 
 
                         <Link href={`/blog/${slug}`}>
@@ -198,10 +198,10 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                                 <Icon as={BsArrowRightShort} color='gray.400' fontSize='18px' />
                             </Flex>
                         </Link>
-
                     </Flex>
-                </Box>
-            </Flex>
+
+                </Flex>
+            </Box>
         </Flex>
     )
 }
