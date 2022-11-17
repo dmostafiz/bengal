@@ -37,7 +37,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                             <Link href={`/blog/${slug}`}>
                                 <a href={`/blog/${slug}`}>
                                     <Tooltip withArrow label={title}>
-                                        <Title order={3}><Text noOfLines={{ base: 3, lg: 2 }} lineHeight={{ base: 1.2, lg: 1.3 }} color='gray.700'>{title}</Text></Title>
+                                        <Title order={3}><Text noOfLines={1} lineHeight={{ base: 1.2, lg: 1.3 }} color='gray.700'>{title}</Text></Title>
                                     </Tooltip>
                                 </a>
                             </Link>
@@ -82,7 +82,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
             </Box>
 
-            <Flex gap={{base:0, xl:5}} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
+            <Flex gap={{ base: 0, xl: 5 }} py={{xl:2}} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
 
                 <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '190px' }} >
 
@@ -107,17 +107,15 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                         : <></>}
 
 
-                    <Wrap mt={2} spacingY={0} spacingX={2} alignItems='center' mb={2}>
+                    <Wrap mt={2} spacingY={-1} spacingX={2} alignItems='center' mb={2}>
                         <Flex gap={1} alignItems='center'>
                             <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
                             <AuthorHoverCard color='gray.500' author={author} />
                         </Flex>
 
-                        <Box >
-                            <Text fontSize={{base: '15px', xl: '13px'}} letterSpacing='-0.8px' color={'blackAlpha.600'} >
-                                {formatDate(createdAt)}
-                            </Text>
-                        </Box>
+                        <Text fontSize={{ base: '15px', xl: '13px' }} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                            {formatDate(createdAt)}
+                        </Text>
                     </Wrap>
 
                 </Box>
@@ -134,7 +132,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
 
             {/* Card Footer  */}
-            <Box w='full' pb={{ base: 2, xl: 0 }} borderTop={'1px'} borderBottom={{ base: '1px', xl: '0px' }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
+            <Box w='full' pb={{ base: 2, xl: 1 }} borderTop={'1px'} borderBottom={{ base: '1px', xl: '0px' }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
                 <Flex gap={10} alignItems={'center'} justify='space-between'>
 
                     {categories?.length > 0 && <Wrap spacing={2}>
