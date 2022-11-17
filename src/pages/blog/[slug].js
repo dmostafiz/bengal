@@ -334,14 +334,13 @@ function SingleBlogDetails({ post, ok }) {
 
                             <Box p={2} bg='blackAlpha.50'>
                                 <Flex direction={{ base: 'column', lg: 'row' }} gap={3} alignItems={{ base: 'start', lg: 'center' }}>
-
                                     <Text color='blackAlpha.500'>পোস্টটি শেয়ার করুন </Text>
                                     <SocialShareButtons link={router.asPath} />
                                 </Flex>
                             </Box>
 
-                            {post.image ? <Center w={'full'} py={4} mb={5}>
-                                <Image w='full' maxH='500px' rounded='lg' objectFit={'cover'} shadow='lg' src={post.image} alt={post?.title} />
+                            {post.image ? <Center w={'full'} py={4} mb={1}>
+                                <Image w='full' maxH='500px' rounded='lg' objectFit={'cover'} shadow='md' src={post.image} alt={post?.title} />
                             </Center> : <Box my={4} />}
 
                             <Box

@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Show, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
+import { Avatar, Badge, Box, Button, Center, Flex, Icon, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Show, Stack, Text, useBreakpoint, Wrap } from '@chakra-ui/react'
 import { Title, Tooltip } from '@mantine/core'
 import Link from 'next/link'
 import React from 'react'
@@ -24,7 +24,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 1 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' overflow={'hidden'} mb={3}>
+        <Flex direction={'column'} justify='space-between' flex={1} border={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} py={{ base: 0, md: 1, lg: 1, xl: 1 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl'  mb={3}>
 
             {/*  Card Header  */}
             <Box borderBottom='1px' borderColor='blackAlpha.200' mb={2} pb={2}>
@@ -82,41 +82,65 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
             </Box>
 
-            <Flex gap={{ base: 0, xl: 5 }} py={{xl:2}} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
+            <Flex gap={{ base: 0, xl: 5 }} justifyItems='center' py={{ xl: 2 }} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
 
                 <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '190px' }} >
 
-                    {image ?
+                    {image && <>
                         <Show above='lg'>
-                            <Box mb={3} opacity={'.99'} w={{ base: 'full', lg: 'full' }} h={{ base: '250px', sm: '350px', md: '350px', xl: '120px' }} shadow={{ base: 'sm', md: 'md' }} rounded='xl'
-                                overflow={'hidden'}
-                                // bgImage={image}
-                                objectFit='cover'
-                                bgPos='center' bgSize='cover'>
-                                <Link href={`/blog/${slug}`}>
-                                    <a href={`/blog/${slug}`}>
-                                        <Center h='full' w='full'>
-                                            {/* <Show below={'lg'}> */}
-                                            <Image title={title} w='full' minH={'full'} objectFit={'cover'} src={image} alt={title} />
-                                            {/* </Show> */}
-                                        </Center>
-                                    </a>
-                                </Link>
-                            </Box>
+                            <Flex
+                                direction={'column'}
+                                mb={3}
+                                bgImage={image}
+                                w={{ base: 'full', lg: 'full' }}
+                                h={{ base: '250px', sm: '350px', md: '350px', xl: '140px' }}
+                                rounded='xl'
+                                bgPos='center'
+                                bgSize='cover'
+                                justify={'end'}
+                            >
+                                <Box px={2} py={'1px'} h={'45px'} bg='whiteAlpha.700' roundedBottom={'lg'} backdropFilter='auto' backdropBlur='5px'>
+                                    <Wrap mt={2} spacingY={0} spacingX={2} alignItems='center' mb={2}>
+                                        <Flex gap={2} alignItems='start'>
+                                            {/* <Avatar size='xs' src={author?.avatar} /> */}
+                                            <Stack direction={'column'} spacing={-1}>
+                                                <AuthorHoverCard color='blackAlpha.900' author={author} />
+                                                <Text fontSize={{ base: '15px', xl: '13px' }} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                                                    {formatDate(createdAt)}
+                                                </Text>
+                                            </Stack>
+                                        </Flex>
+                                    </Wrap>
+                                </Box>
+                            </Flex>
                         </Show>
-                        : <></>}
+                        <Show below='sm'>
+                            <Wrap mt={2} spacingY={-1} spacingX={2} alignItems='center' mb={2}>
+                                <Flex gap={1} alignItems='center'>
+                                    <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
+                                    <AuthorHoverCard color='gray.500' author={author} />
+                                </Flex>
+                                <Text
+                                    fontSize={{ base: '15px', xl: '13px' }}
+                                    letterSpacing='-0.8px'
+                                    color={'blackAlpha.600'} >
+                                    {formatDate(createdAt)}
+                                </Text>
+                            </Wrap>
+                        </Show>
+                    </>
+                    }
 
-
-                    <Wrap mt={2} spacingY={-1} spacingX={2} alignItems='center' mb={2}>
+                    {!image && <Wrap mt={2} spacingY={0} spacingX={2} alignItems='center' mb={2}>
                         <Flex gap={1} alignItems='center'>
-                            <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text>
+                            {/* <Text color='gray.700' fontSize={'15px'}>লিখেছেন</Text> */}
                             <AuthorHoverCard color='gray.500' author={author} />
                         </Flex>
 
-                        <Text fontSize={{ base: '15px', xl: '13px' }} letterSpacing='-0.8px' color={'blackAlpha.600'} >
+                        <Text fontSize={{ base: '15px', xl: '13px' }} letterSpacing='-0.8px' color={'blackAlpha.500'} >
                             {formatDate(createdAt)}
                         </Text>
-                    </Wrap>
+                    </Wrap>}
 
                 </Box>
 
