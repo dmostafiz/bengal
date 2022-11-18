@@ -1,41 +1,18 @@
-import { Avatar, Box, Center, Divider, Flex, Heading, Image, Show, Spacer, Text, VisuallyHidden, VStack } from '@chakra-ui/react'
-import { Title } from '@mantine/core'
-import { ThumbUp } from 'tabler-icons-react'
-import PostCard from '../Components/Common/PostCard'
-import SectionContainer from '../Components/Common/SectionContainer'
+import { Box, Heading, Text, VisuallyHidden } from '@chakra-ui/react'
 import TabContainer from '../Components/HomePage/TabContainer'
 import MainLeftSidebar from '../Layouts/Common/MainLeftSidebar'
 import MainRightSidebar from '../Layouts/Common/MainRightSidebar'
-import SelectedPostsCarousel from '../Components/HomePage/SelectedPostsCarousel'
 import HomeLayout from '../Layouts/HomeLayout'
-import ImageBanner from '../Layouts/HomeLayout/inc/ImageBanner'
 import LayoutColumn from '../Layouts/HomeLayout/LayoutColumn'
 import TopBloggers from '../Components/HomePage/TopBloggers'
-import StepPostsCarousel from '../Components/HomePage/StepPostsCarousel'
-import { useEffect } from 'react'
-import req from '../Helpers/axiosHelper'
-import BlogPanel from '../Components/Common/BlogPanel'
 import LatestBlogPost from '../Components/HomePage/LatestBlogPost'
 import SectionTitle from '../Components/Common/SectionTitle'
 import TopPostsCarousel from '../Components/HomePage/TopPostsCarousel'
-import UserPanel from '../Components/Common/UserPanel'
 import TopCommenters from '../Components/HomePage/TopCommenters'
 import { siteDesc } from '../Helpers/config'
 
 const Home = () => {
 
-
-  // useEffect(() => {
-
-  //   (
-  //     async () => {
-
-  //       const  {data} = await req.get('/auth')
-  //       console.log('Requested User: ', data)
-  //     }
-  //   )()
-
-  // }, [])
 
   return (
     <HomeLayout>
@@ -50,22 +27,12 @@ const Home = () => {
 
       >
 
-        {/* <ImageBanner src='/banner.png' /> */}
-
-        {/* <Box mb={8}></Box> */}
-
         <VisuallyHidden>
           <Heading as='h1'>সামান্তরিক বাংলা ব্লগ</Heading>
           <Text>{siteDesc}</Text>
         </VisuallyHidden>
 
-
-        <Show below='md'>
-          {/* <UserPanel /> */}
-        </Show>
-
         <Box mb={8} w='full' overflow={'hidden'}>
-
           <TabContainer childrens={[
             {
               title: 'জনপ্রিয় পোস্ট',
@@ -95,13 +62,9 @@ const Home = () => {
         <TopCommenters />
 
         <Box mb={8}>
-
-          <SectionTitle showBorder={true} mb={4} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
-
+          <SectionTitle showBorder={false} mb={2} title='সাম্প্রতিক পোস্ট (ক্রমানুসারে)' />
           <LatestBlogPost />
-
         </Box>
-
 
       </LayoutColumn>
 
