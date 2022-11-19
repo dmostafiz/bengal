@@ -458,7 +458,7 @@ function SingleBlogDetails({ post, ok }) {
                                         </Center>
                                     }
 
-                                    {(comment.childs?.length > 0 && commentChildren == comment.id) && comment.childs.map((comment, index) =>
+                                    { comment.childs.map((comment, index) =>
                                         <Box key={index} ml={1} rounded={'md'} p={3} mt={1} mb={3} border='1px' borderColor='gray.200' bg='blue.50'>
 
                                             {/* Show 1st children */}

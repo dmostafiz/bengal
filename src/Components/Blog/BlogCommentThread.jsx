@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Box, Button, Divider, Flex, Icon, Spinner, Text } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, Badge, Box, Button, Divider, Flex, Icon, Spinner, Text } from '@chakra-ui/react'
 import { Spoiler, Title } from '@mantine/core'
 import React, { useState } from 'react'
 import { useContext } from 'react'
@@ -59,23 +59,25 @@ export default function BlogCommentThread({ openOnReply = false, showChildrenBut
                         {shouldReply &&
                             <Flex justify={'end'} alignItems='center' gap={3}>
 
-                                {(comment.childs.length > 0 && showChildrenButton) && <Button
-                                    size='xs'
-                                    onClick={() => setCommentChildren(() => {
-                                        if (comment.id == commentChildren) {
-                                            return null
-                                        } else {
-                                            return comment.id
-                                        }
-                                    })}
+                                {(comment.childs.length > 0 && showChildrenButton) && <Badge
+                                    // size='xs'
+                                    // onClick={() => setCommentChildren(() => {
+                                    //     if (comment.id == commentChildren) {
+                                    //         return null
+                                    //     } else {
+                                    //         return comment.id
+                                    //     }
+                                    // })}
                                     fontWeight={'bold'}
                                     colorScheme='gray'
                                     variant='outline'
                                     rounded='full'
-                                    rightIcon={commentChildren == comment.id ? <AiOutlineArrowUp fontSize='18px' /> : <AiOutlineArrowDown fontSize='18px' />}
+                                    px='8px'
+                                    py='1px'
+                                    // rightIcon={commentChildren == comment.id ? <AiOutlineArrowUp fontSize='18px' /> : <AiOutlineArrowDown fontSize='18px' />}
                                 >
                                     {banglaNumber(comment.childs.length)} টি উত্তর
-                                </Button>}
+                                </Badge>}
 
                                 <Button
                                     size='xs'
