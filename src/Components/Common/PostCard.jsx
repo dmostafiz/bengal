@@ -24,69 +24,23 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex direction={'column'} justify='space-between' flex={1} borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} pb={1} w='full' rounded='xl' mb={3}>
+        <Flex direction={'column'} justify='space-between' flex={1} borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} pt={3} w='full' rounded='xl' mb={3}>
 
-            {/*  Card Header  */}
-            <Box mb={3} px={{ base: 0, md: 1, lg: 1, xl: 3 }} borderBottom='1px' borderColor='blackAlpha.100' pb={1}>
-
-                <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
-
-                    <Flex gap={5} alignItems='center'>
-
-                        <Box pt={{ lg: 2 }}>
-                            <Link href={`/blog/${slug}`}>
-                                <a href={`/blog/${slug}`}>
-                                    <Tooltip withArrow label={title}>
-                                        <Heading as={'h3'} fontSize='22px' fontWeight={'bold'} noOfLines={1} lineHeight={{ base: 1.2, lg: 1.3 }} color='facebook.700'>
-                                            {title}
-                                        </Heading>
-                                    </Tooltip>
-                                </a>
-                            </Link>
-                        </Box>
-                    </Flex>
-
-                    <Flex gap={3} alignItems='center'>
-                        {postType == 'multiStep' && <Menu>
-                            <MenuButton as={Button} leftIcon={<AlignJustified size={'18'} />} rounded='full' colorScheme='red' size='xs' variant='outline'>
-                                পর্ব - {banglaNumber(postPart)}
-                            </MenuButton>
-                            <MenuList fontSize={'14px'} shadow='lg' w={'50px'}>
-                                {parent?.childs?.length > 0 && parent?.childs?.map((stepPost, index) => {
-                                    if (stepPost.id != id) {
-                                        return <Link key={index} href={`/blog/${stepPost.id}`}>
-                                            <MenuItem disabled={stepPost.id == id}>পর্ব - {banglaNumber(stepPost.part)}</MenuItem>
-                                        </Link>
-                                    }
-                                })}
-
-                                {/* <MenuItem>Create a Copy</MenuItem> */}
-                            </MenuList>
-                        </Menu>
-                        }
-                        <Menu>
-                            <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
-                            <MenuList fontSize={'14px'} shadow='lg'>
-
-                                {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
-
-                                {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
-                                    <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
-
-                                {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
-
-                                {/* <MenuItem>Create a Copy</MenuItem> */}
-                            </MenuList>
-                        </Menu>
-                    </Flex>
-
-                </Flex>
-
-            </Box>
-
-            <Flex gap={{ base: 0, xl: 5 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} alignItems={image && 'center'} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
+            <Flex gap={{ base: 0, xl: 5 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
 
                 <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '220px' }} >
+
+                    <Box mb={2}>
+                        <Link href={`/blog/${slug}`}>
+                            <a href={`/blog/${slug}`}>
+                                <Tooltip withArrow label={title}>
+                                    <Heading as={'h3'} fontSize='22px' fontWeight={'bold'} noOfLines={2} lineHeight={{ base: 1.2, lg: 1.1 }} color='facebook.800'>
+                                        {title}
+                                    </Heading>
+                                </Tooltip>
+                            </a>
+                        </Link>
+                    </Box>
 
                     {image && <>
                         <Show above='lg'>
@@ -148,39 +102,55 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                 <Box flex='1' color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '22px', md: '23px' }} fontSize={{ base: '17px', md: '18px' }} w='full' pb={{ base: 2, lg: 3 }}>
                     <PostTrancate
                         image={image}
-                        char={65}
+                        char={100}
                         content={content}
                     />
                 </Box>
 
             </Flex>
 
-
             {/* Card Footer  */}
             <Box px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' pb={{ base: 2, xl: 1 }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
                 <Flex alignItems={'center'} justify='space-between'>
+                    <Flex gap={5} alignItems={'center'}>
+                        <Menu>
+                            <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='unstyled' rounded='sm' />
+                            <MenuList fontSize={'14px'} shadow='lg'>
 
-                    {categories?.length > 0 && <Wrap spacing={2}>
-                        {categories.map((cat, index) => {
-                            return <Link key={index} href={`/category/${cat.id}`}>
-                                <Badge
-                                    size='xs'
-                                    cursor={'pointer'}
-                                    // variant={'subtle'}
-                                    // colorScheme='facebook'
-                                    rounded='full'
-                                    px={2}
+                                {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
+
+                                {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
+                                    <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
+
+                                {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
+
+                                {/* <MenuItem>Create a Copy</MenuItem> */}
+                            </MenuList>
+                        </Menu>
+
+                        {categories?.length > 0 && <Wrap spacing={2}>
+                            {categories.map((cat, index) => {
+                                return <Link key={index} href={`/category/${cat.id}`}>
+                                    <Badge
+                                        size='xs'
+                                        cursor={'pointer'}
+                                        // variant={'subtle'}
+                                        // colorScheme='facebook'
+                                        rounded='full'
+                                        px={2}
                                     // py='1.8px'
                                     // shadow={'sm'}
-                                // fontWeight={'light'}
-                                >
-                                    {cat.name}
-                                </Badge>
-                            </Link>
-                        })
-                        }
+                                    // fontWeight={'light'}
+                                    >
+                                        {cat.name}
+                                    </Badge>
+                                </Link>
+                            })
+                            }
 
-                    </Wrap>}
+                        </Wrap>}
+                    </Flex>
+
 
                     <Flex gap={5} alignItems={'center'}>
                         <Flex gap={3} alignItems={'center'}>
