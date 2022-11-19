@@ -24,10 +24,10 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex direction={'column'} justify='space-between' flex={1} borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} pb={1} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' mb={3}>
+        <Flex direction={'column'} justify='space-between' flex={1} borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'md' }} pb={1} px={{ base: 0, md: 1, lg: 1, xl: 3 }} w='full' rounded='xl' mb={3}>
 
             {/*  Card Header  */}
-            <Box borderBottom='1px' borderColor='blackAlpha.200' mb={2} pb={1}>
+            <Box mb={3} borderBottom='1px' borderColor='blackAlpha.100' pb={1}>
 
                 <Flex justify={'space-between'} alignItems='center' borderColor='blackAlpha.200'>
 
@@ -82,7 +82,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
             </Box>
 
-            <Flex gap={{ base: 0, xl: 5 }} alignItems={image && 'center'} py={{ xl: 1 }} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
+            <Flex gap={{ base: 0, xl: 5 }} alignItems={image && 'center'} w='full' direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} >
 
                 <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '220px' }} >
 
@@ -155,7 +155,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
 
             {/* Card Footer  */}
-            <Box w='full' pb={{ base: 2, xl: 1 }} borderTop={'1px'} borderBottom={{ base: '1px', xl: '0px' }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
+            <Box w='full' pb={{ base: 2, xl: 1 }} borderColor='blackAlpha.200' color='blackAlpha.600' pt={2} fontSize='15px' fontWeight={'500'}>
                 <Flex gap={10} alignItems={'center'} justify='space-between'>
 
                     {categories?.length > 0 && <Wrap spacing={2}>
