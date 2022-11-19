@@ -383,9 +383,9 @@ export default function write() {
                             plugins: [
                               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                               'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'emoticons'
+                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'paste', 'emoticons'
                             ],
-                            toolbar: 'blocks bold underline image media link emoticons',
+                            toolbar: 'blocks bold underline image media link paste emoticons',
                             block_formats: 'Paragraph=p; প্যারাগ্রাফ হেডিং=h3',
                             images_upload_handler: tinny_mce_image_handler,
                             file_picker_types: 'image',
@@ -399,6 +399,8 @@ export default function write() {
                             force_br_newlines: true,
                             force_p_newlines: false,
                             convert_newlines_to_brs: true,
+
+                            paste_as_text: true,
 
                             setup: (editor) => {
                               editor.on('click', () => {
