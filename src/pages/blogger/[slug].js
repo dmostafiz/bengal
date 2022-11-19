@@ -45,7 +45,7 @@ const blogger = ({ user, ok }) => {
                 </Avatar>
                 <Box>
                     <Title order={3}>{user?.displayName}</Title>
-                    <Text fontSize={'14px'} ml={1} color='blackAlpha.500'>নিবন্ধ - {formatDate(user?.createdAt, 'LL')}</Text>
+                    <Text fontSize={'14px'} ml={1} color='blackAlpha.500'>নিবন্ধন - {formatDate(user?.createdAt, 'LL')}</Text>
 
                     <Badge bg={'green.400'} variant='solid'>{banglaNumber(user?.followers.length)} জন অনুসরন করছে</Badge>
 
