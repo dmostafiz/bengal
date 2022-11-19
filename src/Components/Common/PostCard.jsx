@@ -34,9 +34,9 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                         <Link href={`/blog/${slug}`}>
                             <a href={`/blog/${slug}`}>
                                 <Tooltip withArrow label={title}>
-                                    <Heading as={'h3'} fontSize='20px' fontWeight={'bold'} noOfLines={2} lineHeight={{ base: 1.2, lg: 1.1 }} color='gray.800'>
+                                    <Text as={'h3'} fontSize='24px' fontWeight={'bold'} noOfLines={2} lineHeight={{ base: 1.2, lg: 1.1 }} color='gray.700'>
                                         {title}
-                                    </Heading>
+                                    </Text>
                                 </Tooltip>
                             </a>
                         </Link>
