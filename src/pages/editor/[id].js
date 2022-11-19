@@ -260,7 +260,7 @@ export default function write() {
         isClosable: true,
       })
 
-      if(data.status == 'published'){
+      if (data.status == 'published') {
         router.push(`/blog/${res?.data?.post?.id}`)
       }
     }
@@ -336,7 +336,7 @@ export default function write() {
                             }
                             }
                           />
-                    
+
                         </InputGroup>}
                       />
 
@@ -380,12 +380,17 @@ export default function write() {
                             //   'preview', 'image', 'media', 'link', 'code', 'bullist', 'numlist'
                             // ],
                             // toolbar: 'bold italic underline alignleft aligncenter bullist numlist link image media ',
+
+                    
                             plugins: [
                               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                               'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'paste', 'emoticons'
+                              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'emoticons'
                             ],
-                            toolbar: 'blocks bold underline image media link paste emoticons',
+
+                            toolbar: 'blocks bold underline image media link emoticons',
+                            contextmenu: false,
+
                             block_formats: 'Paragraph=p; প্যারাগ্রাফ হেডিং=h3',
                             images_upload_handler: tinny_mce_image_handler,
                             file_picker_types: 'image',
@@ -400,7 +405,8 @@ export default function write() {
                             force_p_newlines: false,
                             convert_newlines_to_brs: true,
 
-                            paste_as_text: true,
+                            // paste_as_text: true,
+                            paste_block_drop: true,
 
                             setup: (editor) => {
                               editor.on('click', () => {
