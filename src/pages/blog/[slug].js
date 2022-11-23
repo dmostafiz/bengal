@@ -37,6 +37,7 @@ import Link from 'next/link'
 import { imageUrl, siteName, siteUrl } from '../../Helpers/config'
 import truncate from 'truncate-html'
 import useFollowing from '../../Hooks/useFollowing'
+import ComponentLoader from '../../Components/Common/ComponentLoader'
 
 // import CommentInput from '../../Components/Blog/CommentInput'
 const CommentInput = dynamic(import('../../Components/Blog/CommentInput'), { ssr: false })
@@ -436,6 +437,8 @@ function SingleBlogDetails({ post, ok }) {
                                     মন্তব্য করুন
                                 </Button>}
                         </Flex>
+
+                        {commentQuery.isLoading && <ComponentLoader py={5} />}
 
                         {comments?.length > 0 && <Box w='full'>
 
