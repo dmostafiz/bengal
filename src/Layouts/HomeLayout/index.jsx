@@ -147,7 +147,7 @@ export default function HomeLayout({
 
 
                     <Center py='5'>
-                        <Text>২০২২ @ "সামান্তরিক বাংলা ব্লগ" সকল স্বত্ব বহন করে</Text>
+                        <Text>২০২২ @ "সামান্তরিক বাংলা ব্লগ"</Text>
                     </Center>
 
                 </SectionContainer>

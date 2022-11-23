@@ -1,10 +1,11 @@
 import { Box, Flex, Show, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
+import AlertNotice from '../../../Components/Common/AlertNotice'
 import SectionContainer from '../../../Components/Common/SectionContainer'
 import { getFlashMessage } from '../../../Helpers/cookieHelper'
 
-export default function LayoutColumn({ children, pageTopSection ='', leftSide = '', rightSide = '', leftColumnWidth = 30, rightColumnWidth = 20 }) {
+export default function LayoutColumn({ children, pageTopSection = '', leftSide = '', rightSide = '', leftColumnWidth = 30, rightColumnWidth = 20 }) {
 
     const middleColumnWisdth = 100 - leftColumnWidth
     const mainColumnWidth = 100 - rightColumnWidth
@@ -55,20 +56,27 @@ export default function LayoutColumn({ children, pageTopSection ='', leftSide = 
                             </Show>
                         </Box>}
 
+
                         <Box
                             flex='1'
                             minH={'100vh'}
                             maxW={{ base: '100%', md: leftSide ? middleColumnWisdth + '%' : '100%' }}
-                            px={{ base: 0, md: 4, lg: 4 }}
-                            pr={{ base: 0, md: 10, lg: 4 }}
                             bg={{ base: 'white', md: 'white' }}
-                            pt={{ base: 1, lg: 3 }}
                             borderLeft={leftSide ? { base: 'none', md: '1px' } : 'none'}
                             borderRight={rightSide ? { base: 'none', md: '1px' } : 'none'}
                             borderColor={{ base: 'none', md: 'blackAlpha.100' }}
                         >
+                            <AlertNotice />
 
-                            {children}
+
+                            <Box
+                                px={{ base: 0, md: 4, lg: 4 }}
+                                pr={{ base: 0, md: 10, lg: 4 }}
+                                pt={{ base: 1, lg: 3 }}
+                            >
+
+                                {children}
+                            </Box>
 
                         </Box>
 
