@@ -12,6 +12,7 @@ import CommentInput from './CommentInput'
 import { ArrowAutofitLeft, ArrowAutofitRight } from 'tabler-icons-react'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 import useOnlineUser from '../../Hooks/useOnlineUser'
+import AuthorHoverCard from '../Common/AuthorHoverCard'
 
 export default function BlogCommentThread({ openOnReply = false, showChildrenButton = false, replyType = 'post', bg = '', comment, shouldReply = false }) {
 
@@ -30,10 +31,11 @@ export default function BlogCommentThread({ openOnReply = false, showChildrenBut
                         <Avatar size={'sm'} name={comment.author.displayName} src={comment.author.avatar} >
                             {isUserOnline(comment.author.id) && <AvatarBadge boxSize='1.25em' bg='green.400' /> }
                         </Avatar>
-                        <Flex w='full' direction={'column'} gap={0}>
-                            <Title order={6}>{comment.author.displayName}</Title>
+                        <Box w='full' direction={'column'} gap={0}>
+                            {/* <Title order={6}>{comment.author.displayName}</Title> */}
+                            <AuthorHoverCard author={comment.author} />
                             <Text fontSize={'13px'} color='gray.500'>{formatDate(comment.createdAt, '', true)} {replyType == 'post' ? ' মন্তব্য করেছেন' : 'উত্তর দিয়েছেন'}</Text>
-                        </Flex>
+                        </Box>
 
                     </Flex>
 
