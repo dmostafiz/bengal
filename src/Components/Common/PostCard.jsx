@@ -35,9 +35,11 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                                 <Image
                                     w={{ base: 'full', lg: 'full' }}
                                     h={{ base: '250px', sm: '350px', md: '350px', xl: '160px' }}
-                                    rounded={'lg'}
+                                    rounded={'2xl'}
                                     mb={2}
+                                    objectFit='cover'
                                     src={image}
+                                    shadow='lg'
                                 />
                             </a>
                         </Link>
@@ -45,7 +47,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
                 }
 
-                <Box mb={3}>
+                <Box mb={3} mt={3}>
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
@@ -60,16 +62,16 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                 <Flex direction={{ xl: 'column' }} gap={{ base: 2, xl: 0 }} mb={2}>
                     <Flex gap={1} alignItems='center'>
                         {/* <Text color3='gray.700' fontSize={'15px'}>লিখেছেন</Text> */}
-                        <AuthorHoverCard color='gray.600' author={author} />
+                        <AuthorHoverCard color='gray.500' author={author} />
                     </Flex>
 
-                    <Text fontSize={{ base: '15px', xl: '14px' }} letterSpacing='-0.8px' color={'blackAlpha.400'} >
+                    <Text fontSize={{ base: '15px', xl: '13px' }} letterSpacing='-0.8px' color={'blackAlpha.400'} >
                         {formatDate(createdAt)}
                     </Text>
                 </Flex>
 
 
-                {categories?.length > 0 && <Wrap spacing={2}>
+                {/* {categories?.length > 0 && <Wrap spacing={2}>
                     {categories.map((cat, index) => {
                         return <Link key={index} href={`/category/${cat.id}`}>
                             <Badge
@@ -89,7 +91,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                     })
                     }
 
-                </Wrap>}
+                </Wrap>} */}
 
             </Box>
 
@@ -100,7 +102,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                     content={content}
                 />
 
-                <Flex w='full' gap={5} justify='space-between' mt={5} alignItems={'center'}>
+                <Flex w='full' gap={5} justify='space-between' mt={2} alignItems={'center'}>
                     <Flex gap={3} alignItems={'center'}>
 
                         <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>

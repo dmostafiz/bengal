@@ -18,7 +18,7 @@ export default function AuthorHoverCard({ author, color = '', showFollowers=true
     return (
         <HoverCard  zIndex={999999999999} width={250} shadow="lg" withArrow openDelay={0} position='bottom' closeDelay={400}>
             <HoverCard.Target>
-                <Heading as='h6' fontSize={'14px'} color={color}>
+                <Heading as='h6' fontSize={'13px'} color={color}>
                     {author.displayName}
                 </Heading>
             </HoverCard.Target>

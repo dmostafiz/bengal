@@ -5,7 +5,7 @@ import truncate from 'truncate-html';
 export default function PostTrancate({image='', content, slug, char = 270 }) {
     return (
         <Box w='full'>
-            <Text as='div' w='full' align={'justify'} noOfLines={{base:6, xl: image ? 12 : 8 }} dangerouslySetInnerHTML={{
+            <Text as='div' w='full' align={'justify'} noOfLines={{base:6, xl: image ? 10 : 8 }} dangerouslySetInnerHTML={{
                 __html: truncate(content, char, {
                     ellipsis: `...`,
                     byWords: true,
