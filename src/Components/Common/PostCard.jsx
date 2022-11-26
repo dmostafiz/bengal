@@ -74,44 +74,6 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
             <Box flex='1' color={{ base: 'blackAlpha.600', md: 'gray.600' }} lineHeight={{ base: '22px', md: '23px' }} fontSize={{ base: '17px', md: '17px' }} w='full' pb={2}>
 
-                <Flex alignItems={'center'} gap={4} mb={2} justify='space-between'>
-                    {categories?.length > 0 && <Wrap spacing={2}>
-
-                        {categories.map((cat, index) => {
-                            return <Link key={index} href={`/category/${cat.id}`}>
-                                <Badge
-                                    size='xs'
-                                    cursor={'pointer'}
-                                    variant={'subtle'}
-                                    colorScheme='facebook'
-                                    rounded='xl'
-                                    px={2}
-                                    shadow={'sm'}
-                                    fontWeight={'light'}
-                                >
-                                    {cat.name}
-                                </Badge>
-                            </Link>
-                        })
-                        }
-                    </Wrap>}
-
-                    <Menu>
-                        <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='outline' colorScheme='gray' rounded='xl' />
-                        <MenuList fontSize={'14px'} shadow='lg'>
-
-                            {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
-
-                            {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
-                                <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
-
-                            {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
-
-                            {/* <MenuItem>Create a Copy</MenuItem> */}
-                        </MenuList>
-                    </Menu>
-                </Flex>
-
                 <PostTrancate
                     image={image}
                     char={100}
@@ -120,6 +82,21 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
                 <Flex w='full' gap={5} justify='space-between' mt={3} alignItems={'center'}>
                     <Flex gap={3} alignItems={'center'}>
+
+                        <Menu>
+                            <MenuButton as={IconButton} icon={<HiChevronDown size={'18'} />} color='blackAlpha.700' size='xs' variant='outline' colorScheme='gray' rounded='xl' />
+                            <MenuList fontSize={'14px'} shadow='lg'>
+
+                                {(!isPostSaved(id) && author.id != authUser?.id) && <MenuItem onClick={() => savePost(id)} icon={<BsSave2 size={14} />}>সংরক্ষণে রাখুন</MenuItem>}
+
+                                {author.id == authUser?.id && <Link href={`/editor/${id}?editorStatus=update`}>
+                                    <MenuItem icon={<Pencil size={14} />}>এডিট করুন</MenuItem></Link>}
+
+                                {author.id != authUser?.id && <MenuItem icon={<VscReport size={14} />}>রিপোর্ট করুণ</MenuItem>}
+
+                                {/* <MenuItem>Create a Copy</MenuItem> */}
+                            </MenuList>
+                        </Menu>
 
                         <Tooltip withArrow color={'black'} label={`${banglaNumber(states.read)} জন ব্লগটি পড়েছেন`}>
                             <Flex alignItems={'center'} gap={'2px'} color={'gray.500'}>
