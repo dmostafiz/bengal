@@ -24,7 +24,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} pt={4} w='full' rounded='lg' gap={{ base: 0, xl: 6 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} mb={2}>
+        <Flex borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} pt={4} w='full' rounded='lg' gap={{ base: 0, xl: 6 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }}>
 
             <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '220px' }} mb={1}>
 
