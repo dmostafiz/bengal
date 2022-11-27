@@ -24,9 +24,9 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
     const { authUser } = useUser()
 
     return (
-        <Flex borderTop={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '0px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} pt={4} w='full' rounded='lg' gap={{ base: 0, xl: 6 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }}>
+        <Flex borderTop={{ base: '1px', md: '0px', lg: '0px', xl: '1px' }} borderBottom={{ base: '1px', md: '0px', lg: '0px', xl: '1px' }} borderColor={{ base: 'blackAlpha.100', sm: 'blackAlpha.100', md: 'blackAlpha.100', lg: 'blackAlpha.100', xl: 'blackAlpha.100' }} shadow={{ xl: 'sm' }} pt={{xl:4}} w='full' rounded='lg' gap={{ base: 0, xl: 6 }} px={{ base: 0, md: 1, lg: 1, xl: 3 }} direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row' }} mb={0}>
 
-            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '220px' }} mb={1}>
+            <Box w={{ base: 'full', md: 'full', lg: 'full', xl: '220px' }}>
 
                 {image &&
                     <Show above='lg'>
@@ -47,7 +47,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
 
                 }
 
-                <Box mb={3} mt={3}>
+                <Box mb={2} mt={3}>
                     <Link href={`/blog/${slug}`}>
                         <a href={`/blog/${slug}`}>
                             <Tooltip withArrow label={title}>
@@ -59,7 +59,7 @@ export default function PostCard({ id, title, image, content, createdAt, postTyp
                     </Link>
                 </Box>
 
-                <Flex direction={{ xl: 'column' }} gap={{ base: 2, xl: 0 }} mb={2}>
+                <Flex direction={{ xl: 'column' }} gap={{ base: 2, xl: 0 }} mb={{base: 1, xl:2}}>
                     <Flex gap={1} alignItems='center'>
                         {/* <Text color3='gray.700' fontSize={'15px'}>লিখেছেন</Text> */}
                         <AuthorHoverCard color='gray.500' author={author} />
